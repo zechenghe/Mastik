@@ -1,9 +1,5 @@
 LIB=libmastik.a
-<<<<<<< HEAD
 LIBSRCS=vlist.c l3.c timestats.c l1.c l1i.c fr.c util.c pda.c symbol.c ff.c symbol_bfd.c
-=======
-LIBSRCS=vlist.c l3.c timestats.c l1.c l1i.c fr.c util.c pda.c symbol.c ff.c symbol_mach.c
->>>>>>> 1641ac23e7dce4236a1e8d5fd168dacff2d848a0
 LIBOBJS=${LIBSRCS:.c=.o}
 VERSION=$(shell cut -f 1 -d \  ../VERSION)
 
