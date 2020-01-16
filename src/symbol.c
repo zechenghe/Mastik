@@ -102,4 +102,3 @@ uint64_t sym_debuglineoffset(const char *file, const char *src, int lineno) {
   return ~0ULL;
 }
 #endif
-

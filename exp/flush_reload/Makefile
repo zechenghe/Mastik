@@ -3,16 +3,12 @@ TARGETS=$(FILES:.c=)
 OBJS=${FILES:.c=.o}
 CFLAGS=-g -std=gnu99 -I../src
 LDFLAGS=-L../src/ -g
-<<<<<<< HEAD
-LDLIBS=-lmastik -ldwarf -lelf -lbfd 
-=======
-LDLIBS=-lmastik 
->>>>>>> 1641ac23e7dce4236a1e8d5fd168dacff2d848a0
+LDLIBS=-lmastik
 
 
 all: ${TARGETS}
 
-${TARGETS}: %: %.o 
+${TARGETS}: %: %.o
 	${CC} ${LDFLAGS} -o $@ $@.o ${LDLIBS}
 
 
