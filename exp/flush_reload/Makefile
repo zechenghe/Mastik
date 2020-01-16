@@ -1,7 +1,7 @@
 FILES=$(wildcard *.c)
 TARGETS=$(FILES:.c=)
 OBJS=${FILES:.c=.o}
-CFLAGS=-g -std=gnu99 -I../src
+CFLAGS=-g -std=gnu99 -I../../src
 LDFLAGS=-L../src/ -g
 LDLIBS=-lmastik
 
