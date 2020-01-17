@@ -63,13 +63,15 @@ int main(int ac, char **av) {
     res[i] = 1;
   fr_probe(fr, res);
 
-  int l;
+  int l=0;
   while(1){
-    l = fr_trace(fr, SAMPLES, res, SLOT, THRESHOLD, 500);
-    for (int i = 0; i < l; i++) {
-      for (int j = 0; j < nmonitor; j++)
-        printf("%d ", res[i * nmonitor + j]);
-      putchar('\n');
+    fr_trace(fr, SAMPLES, res, SLOT, THRESHOLD, 500);
+    printf("Gpg running %d\n",l);
+    l += 1;
+//    for (int i = 0; i < l; i++) {
+//      for (int j = 0; j < nmonitor; j++)
+//        printf("%d ", res[i * nmonitor + j]);
+//      putchar('\n');
     }
   }
 
