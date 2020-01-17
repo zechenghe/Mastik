@@ -16,7 +16,7 @@ GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 status "Experiment begins"
 status "Encryption"
 
-$GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
+taskset 0x4 $GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
 VICTIM_PID=$!
 
 $quickhpc -c hpc_config -a $VICTIM_PID -i 200
@@ -24,12 +24,12 @@ $quickhpc -c hpc_config -a $VICTIM_PID -i 200
 sleep 2
 
 status "Attacker running"
-./spy $GPG &
+taskset 0x2 ./spy $GPG &
 SPY_PID=$!
 
 sleep 2
 
-$GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
+taskset 0x4 $GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
 VICTIM_PID=$!
 
 $quickhpc -c hpc_config -a $VICTIM_PID -i 100
