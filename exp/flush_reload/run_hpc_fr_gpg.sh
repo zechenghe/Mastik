@@ -27,6 +27,8 @@ status "Attacker running"
 ./spy $GPG &
 SPY_PID=$!
 
+sleep 2
+
 $GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
 VICTIM_PID=$!
 
