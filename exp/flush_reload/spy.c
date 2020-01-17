@@ -63,7 +63,11 @@ int main(int ac, char **av) {
     res[i] = 1;
   fr_probe(fr, res);
 
-  int l = fr_trace(fr, SAMPLES, res, SLOT, THRESHOLD, 500);
+  int l;
+  while(1){
+    l = fr_trace(fr, SAMPLES, res, SLOT, THRESHOLD, 500);
+  }
+
   for (int i = 0; i < l; i++) {
     for (int j = 0; j < nmonitor; j++)
       printf("%d ", res[i * nmonitor + j]);
