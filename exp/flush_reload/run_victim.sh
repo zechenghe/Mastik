@@ -15,7 +15,7 @@ GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 status "Experiment begins"
 status "Encryption"
 
-taskset 0x1 $GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
+taskset 0x80000 $GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
 VICTIM_PID=$!
 
 $quickhpc -c hpc_config -a $VICTIM_PID -i 100
