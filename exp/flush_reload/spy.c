@@ -72,10 +72,8 @@ int main(int ac, char **av) {
 //      for (int j = 0; j < nmonitor; j++)
 //        printf("%d ", res[i * nmonitor + j]);
 //      putchar('\n');
-    }
+//    }
   }
-
-
 
   free(res);
   fr_release(fr);
