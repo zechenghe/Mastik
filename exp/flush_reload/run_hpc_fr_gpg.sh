@@ -19,7 +19,7 @@ status "Encryption"
 $GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
 VICTIM_PID=$!
 
-$quickhpc -c hpc_config -a $VICTIM_PID -i 2000
+$quickhpc -c hpc_config -a $VICTIM_PID -i 200
 
 
 #status "Attacker starts"
