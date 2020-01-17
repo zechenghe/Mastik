@@ -19,8 +19,20 @@ status "Encryption"
 $GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
 VICTIM_PID=$!
 
-$quickhpc -c hpc_config -a $VICTIM_PID -i 200
+$quickhpc -c hpc_config -a $VICTIM_PID -i 200 > $OUTPUT_FOLDER/normal
 
+sleep 2
+
+status "Attacker running"
+./spy $GPG &
+SPY_PID=$!
+
+$GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
+VICTIM_PID=$!
+
+$quickhpc -c hpc_config -a $VICTIM_PID -i 200 > $OUTPUT_FOLDER/attack
+
+kill $SPY_ID
 
 #status "Attacker starts"
 #./attacker $SHARED_MEM > $OUTPUT_FOLDER/0
