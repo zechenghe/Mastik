@@ -8,7 +8,6 @@ source $EXP_ROOT_DIR/exp_funcs.sh
 
 OUTPUT_FOLDER=EXP_ROOT_DIR/flush_reload/results
 
-[ -d $OUTPUT_FOLDER ] && rm -r $OUTPUT_FOLDER
 mkdir -p $OUTPUT_FOLDER
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
@@ -21,20 +20,6 @@ VICTIM_PID=$!
 
 $quickhpc -c hpc_config -a $VICTIM_PID -i 100
 
-sleep 2
-
-status "Attacker running"
-taskset 0x2 ./spy $GPG &
-SPY_PID=$!
-
-sleep 2
-
-taskset 0x4 $GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
-VICTIM_PID=$!
-
-$quickhpc -c hpc_config -a $VICTIM_PID -i 100
-
-kill $SPY_ID
 
 #status "Attacker starts"
 #./attacker $SHARED_MEM > $OUTPUT_FOLDER/0
