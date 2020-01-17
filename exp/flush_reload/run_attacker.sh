@@ -16,3 +16,4 @@ GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 status "Attacker running"
 taskset 0x2 ./spy $GPG &
 SPY_PID=$!
+echo $SPY_PID
