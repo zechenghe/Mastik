@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/.bashrc
+source "/home/zechengh/.bashrc"
 
 ROOT_DIR="/home/zechengh/Mastik"
 EXP_ROOT_DIR=$ROOT_DIR/exp
