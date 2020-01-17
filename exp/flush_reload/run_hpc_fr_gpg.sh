@@ -21,16 +21,15 @@ VICTIM_PID=$!
 
 $quickhpc -c hpc_config -a $VICTIM_PID -i 2000
 
-'''
-status "Attacker starts"
-./attacker $SHARED_MEM > $OUTPUT_FOLDER/0
 
-status "Victim starts"
-./victim $SHARED_MEM &
-VICTIM_PID=$!
+#status "Attacker starts"
+#./attacker $SHARED_MEM > $OUTPUT_FOLDER/0
 
-./attacker $SHARED_MEM > $OUTPUT_FOLDER/1
+#status "Victim starts"
+#./victim $SHARED_MEM &
+#VICTIM_PID=$!
 
-kill "$VICTIM_PID"
-status "Experiment ends"
-'''
+#./attacker $SHARED_MEM > $OUTPUT_FOLDER/1
+
+#kill "$VICTIM_PID"
+#status "Experiment ends"
