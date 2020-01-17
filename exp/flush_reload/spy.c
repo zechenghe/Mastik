@@ -66,13 +66,14 @@ int main(int ac, char **av) {
   int l;
   while(1){
     l = fr_trace(fr, SAMPLES, res, SLOT, THRESHOLD, 500);
+    for (int i = 0; i < l; i++) {
+      for (int j = 0; j < nmonitor; j++)
+        printf("%d ", res[i * nmonitor + j]);
+      putchar('\n');
+    }
   }
 
-  for (int i = 0; i < l; i++) {
-    for (int j = 0; j < nmonitor; j++)
-      printf("%d ", res[i * nmonitor + j]);
-    putchar('\n');
-  }
+
 
   free(res);
   fr_release(fr);
