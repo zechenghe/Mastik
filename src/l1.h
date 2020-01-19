@@ -43,4 +43,3 @@ int l1_repeatedprobe(l1pp_t l1, int nrecords, uint16_t *results, int slot);
 
 
 #endif // __L1_H__
-

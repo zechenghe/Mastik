@@ -42,4 +42,3 @@ int l1i_repeatedprobe(l1ipp_t l1, int nrecords, uint16_t *results, int slot);
 
 
 #endif // __L1I_H__
-
