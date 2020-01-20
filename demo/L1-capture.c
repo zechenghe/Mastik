@@ -35,7 +35,7 @@ int compare(const void *p1, const void *p2) {
   float u1 = *(float *)p1;
   float u2 = *(float *)p2;
 
-  return (float)u1 - (float)u2;
+  return u1 - u2;
 }
 
 int main(int ac, char **av) {
@@ -89,6 +89,7 @@ int main(int ac, char **av) {
   for (int i = 0; i < L1_SETS; i++) {
     printf("%3f1 ", avg[rmap[i]] / samples);
   }
+  putchar('\n');
 
   free(map);
   free(res);
