@@ -81,7 +81,7 @@ int main(int ac, char **av) {
   }
 
   for (int i = 0; i < L1_SETS; i++) {
-    printf("%3f ", avg[rmap[i]] / samples);
+    printf("%3f1 ", avg[rmap[i]] / samples);
   }
 
   free(map);
