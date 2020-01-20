@@ -85,9 +85,16 @@ int main(int ac, char **av) {
     //putchar('\n');
   }
 
-  qsort(avg, L1_SETS, sizeof(float), flcompare);
+
   for (int i = 0; i < L1_SETS; i++) {
     printf("%3f1 ", avg[rmap[i]] / samples);
+  }
+  putchar('\n');
+
+  printf("Sorted: ");
+  qsort(avg, L1_SETS, sizeof(float), flcompare);
+  for (int i = 0; i < L1_SETS; i++) {
+    printf("%3f1 ", avg[i] / samples);
   }
   putchar('\n');
 
