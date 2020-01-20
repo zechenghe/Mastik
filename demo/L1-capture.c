@@ -53,12 +53,16 @@ int main(int ac, char **av) {
     rmap[i] = -1;
   for (int i = 0; i < nsets; i++)
     rmap[map[i]] = i;
-  
+
 
   uint16_t *res = calloc(samples * nsets, sizeof(uint16_t));
   for (int i = 0; i < samples * nsets; i+= 4096/sizeof(uint16_t))
     res[i] = 1;
-  
+
+  uint16_t *avg = calloc(nsets, sizeof(uint16_t));
+  for (int i = 0; i < nsets; i++)
+      avg[i] = 0;
+
   delayloop(3000000000U);
   l1_repeatedprobe(l1, samples, res, 0);
 
@@ -67,11 +71,17 @@ int main(int ac, char **av) {
   for (int i = 0; i < samples; i++) {
     for (int j = 0; j < L1_SETS; j++) {
       if (rmap[j] == -1)
-	printf("  0 ");
-      else
-	printf("%3d ", res[i*nsets + rmap[j]]);
+	       printf("  0 ");
+      else{
+	       printf("%3d ", res[i*nsets + rmap[j]]);
+         avg[rmap[j]] += res[i*nsets + rmap[j]];
+      }
     }
     putchar('\n');
+  }
+
+  for (int i = 0; i < L1_SETS; i++) {
+    printf("%3d ", avg[rmap[i]] / samples);
   }
 
   free(map);
