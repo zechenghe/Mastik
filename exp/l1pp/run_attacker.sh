@@ -12,7 +12,7 @@ OUTPUT_FOLDER=EXP_ROOT_DIR/l1pp/results
 mkdir -p $OUTPUT_FOLDER
 
 status "Attacker running"
-taskset 0x2 ./spy 10000000 &
+taskset 0x2 ./spy 1000000000 &
 SPY_PID=$!
 echo $SPY_PID
 
