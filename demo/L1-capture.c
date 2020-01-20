@@ -73,11 +73,11 @@ int main(int ac, char **av) {
       if (rmap[j] == -1)
 	       printf("  0 ");
       else{
-	       printf("%3d ", res[i*nsets + rmap[j]]);
+	       //printf("%3d ", res[i*nsets + rmap[j]]);
          avg[rmap[j]] += res[i*nsets + rmap[j]];
       }
     }
-    putchar('\n');
+    //putchar('\n');
   }
 
   for (int i = 0; i < L1_SETS; i++) {
