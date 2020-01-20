@@ -11,6 +11,6 @@ OUTPUT_FOLDER=$EXP_ROOT_DIR/l1pp/results
 mkdir -p $OUTPUT_FOLDER
 
 status "Run victim"
-taskset 0x8000 ./victim &
+taskset 0x8 ./victim &
 VICTIM_PID=$!
 echo $VICTIM_PID
