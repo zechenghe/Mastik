@@ -13,6 +13,7 @@ mkdir -p $OUTPUT_FOLDER
 status "Run victim"
 taskset 0x8 ./victim &
 VICTIM_PID=$!
+echo $VICTIM_PID
 
 sleep 100
 
