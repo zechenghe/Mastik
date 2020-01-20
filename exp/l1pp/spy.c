@@ -24,7 +24,7 @@
 #include <util.h>
 #include <l1.h>
 
-#define MAX_SAMPLES 100000000
+#define MAX_SAMPLES 10000000
 
 void usage(const char *prog) {
   fprintf(stderr, "Usage: %s <samples>\n", prog);
