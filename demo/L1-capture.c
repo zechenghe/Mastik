@@ -31,6 +31,13 @@ void usage(const char *prog) {
   exit(1);
 }
 
+int compare(const void *p1, const void *p2) {
+  float u1 = *(float *)p1;
+  float u2 = *(float *)p2;
+
+  return (float)u1 - (float)u2;
+}
+
 int main(int ac, char **av) {
   int samples = 0;
 
@@ -80,6 +87,7 @@ int main(int ac, char **av) {
     //putchar('\n');
   }
 
+  qsort(avg, L1_SETS, sizeof(float), compare);
   for (int i = 0; i < L1_SETS; i++) {
     printf("%3f1 ", avg[rmap[i]] / samples);
   }
