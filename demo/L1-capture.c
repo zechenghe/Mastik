@@ -66,9 +66,7 @@ int main(int ac, char **av) {
   for (int i = 0; i < samples * nsets; i+= 4096/sizeof(uint16_t))
     res[i] = 1;
 
-  float *avg = calloc(nsets, sizeof(float));
-  for (int i = 0; i < nsets; i++)
-      avg[i] = 0;
+  float *avg = calloc(L1_SETS, sizeof(float));
 
   delayloop(3000000000U);
   l1_repeatedprobe(l1, samples, res, 0);
