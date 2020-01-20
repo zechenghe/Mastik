@@ -59,7 +59,7 @@ int main(int ac, char **av) {
   for (int i = 0; i < samples * nsets; i+= 4096/sizeof(uint16_t))
     res[i] = 1;
 
-  uint16_t *avg = calloc(nsets, sizeof(uint16_t));
+  float *avg = calloc(nsets, sizeof(float));
   for (int i = 0; i < nsets; i++)
       avg[i] = 0;
 
@@ -81,7 +81,7 @@ int main(int ac, char **av) {
   }
 
   for (int i = 0; i < L1_SETS; i++) {
-    printf("%3d ", avg[rmap[i]] / samples);
+    printf("%3f ", avg[rmap[i]] / samples);
   }
 
   free(map);
