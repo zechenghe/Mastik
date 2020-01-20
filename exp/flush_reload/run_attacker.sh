@@ -6,7 +6,7 @@ ROOT_DIR="/home/zechengh/Mastik"
 EXP_ROOT_DIR=$ROOT_DIR/exp
 source $EXP_ROOT_DIR/exp_funcs.sh
 
-OUTPUT_FOLDER=EXP_ROOT_DIR/flush_reload/results
+OUTPUT_FOLDER=$EXP_ROOT_DIR/flush_reload/results
 
 [ -d $OUTPUT_FOLDER ] && rm -r $OUTPUT_FOLDER
 mkdir -p $OUTPUT_FOLDER
