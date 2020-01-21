@@ -6,7 +6,7 @@ ROOT_DIR="/home/zechengh/Mastik"
 EXP_ROOT_DIR=$ROOT_DIR/exp
 source $EXP_ROOT_DIR/exp_funcs.sh
 
-OUTPUT_FOLDER=$EXP_ROOT_DIR/l1pp/results
+OUTPUT_FOLDER=$EXP_ROOT_DIR/l3pp/results
 
 mkdir -p $OUTPUT_FOLDER
 
