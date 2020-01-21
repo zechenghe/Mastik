@@ -22,4 +22,4 @@ kill $SPY_PID
 
 # $quickhpc -c hpc_config -a $SPY_PID -i 1000 > $OUTPUT_FOLDER/hpc_attacker
 
-echo "Experiment end"
+echo "Attacker ends"
