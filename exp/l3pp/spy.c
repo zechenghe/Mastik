@@ -43,7 +43,7 @@ int main(int ac, char **av) {
 
   if (av[1] == NULL)
     usage(av[0]);
-  samples = atoi(av[1]);
+  int samples = atoi(av[1]);
   if (samples < 0)
     usage(av[0]);
   if (samples > MAX_SAMPLES)
