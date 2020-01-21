@@ -15,7 +15,7 @@ taskset 0x8 ./victim &
 VICTIM_PID=$!
 echo $VICTIM_PID
 
-$quickhpc -c hpc_config -a $VICTIM_PID -i 1000 > $OUTPUT_FOLDER/hpc_victim &
+$quickhpc -c hpc_config -a $VICTIM_PID -i 1000 #> $OUTPUT_FOLDER/hpc_victim &
 
 sleep 10
 
