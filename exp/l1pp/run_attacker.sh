@@ -8,7 +8,6 @@ source $EXP_ROOT_DIR/exp_funcs.sh
 
 OUTPUT_FOLDER=$EXP_ROOT_DIR/l1pp/results
 
-[ -d $OUTPUT_FOLDER ] && rm -r $OUTPUT_FOLDER
 mkdir -p $OUTPUT_FOLDER
 
 status "Attacker running"
