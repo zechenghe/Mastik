@@ -10,14 +10,15 @@ OUTPUT_FOLDER=$EXP_ROOT_DIR/l1pp/results
 
 mkdir -p $OUTPUT_FOLDER
 
-status "Run victim"
-taskset 0x8 ./victim &
-VICTIM_PID=$!
-echo $VICTIM_PID
+status "Attacker running"
+taskset 0x8000 ./spy 1000000000 &
+SPY_PID=$!
+echo $SPY_PID
 
-$quickhpc -c hpc_config -a $VICTIM_PID -i 1000 > $OUTPUT_FOLDER/hpc_victim &
+sleep 3
 
-sleep 10
+kill $SPY_PID
 
-kill $VICTIM_PID
-echo "victim ends"
+# $quickhpc -c hpc_config -a $SPY_PID -i 1000 > $OUTPUT_FOLDER/hpc_attacker
+
+echo "Attacker ends"
