@@ -16,6 +16,6 @@ taskset 0x8 ./spy 1000000000 &
 SPY_PID=$!
 echo $SPY_PID
 
-$quickhpc -c hpc_config -a $SPY_PID -i 100 > $OUTPUT_FOLDER/hpc
+$quickhpc -c hpc_config -a $SPY_PID -i 1000 > $OUTPUT_FOLDER/hpc
 
 echo "Experiment end"
