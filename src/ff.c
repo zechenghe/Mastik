@@ -34,7 +34,7 @@
 
 #define THRESHOLD_SAMPLES 1000
 
-struct ff { 
+struct ff {
   vlist_t vl;
   int modified;
   uint16_t *thresholds;
@@ -125,7 +125,7 @@ void ff_probe(ff_t fr, uint16_t *results) {
   assert(fr != NULL);
   assert(results != NULL);
   int l = vl_len(fr->vl);
-  for (int i = 0; i < l; i++) 
+  for (int i = 0; i < l; i++)
     results[i] = probeaddr(vl_get(fr->vl, i));
 }
 
@@ -221,5 +221,3 @@ int ff_trace(ff_t ff, int max_records, uint16_t *results, int slot, int threshol
   }
   return count;
 }
-
-  
