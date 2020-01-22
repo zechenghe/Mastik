@@ -29,8 +29,6 @@
 #define SLOT	2000
 #define THRESHOLD 100
 
-#define BINARY "gpg-1.4.13"
-
 char *monitor[] = {
   "mpih-mul.c:85",
   "mpih-mul.c:271",
@@ -38,16 +36,27 @@ char *monitor[] = {
 };
 int nmonitor = sizeof(monitor)/sizeof(monitor[0]);
 
+void usage(const char *prog) {
+  fprintf(stderr, "Usage: %s <gpg-binary>\n", prog);
+  exit(1);
+}
+
+
 int main(int ac, char **av) {
+  char *binary = av[1];
+  if (binary == NULL)
+    usage(av[0]);
+
   delayloop(2000000000);
+
   ff_t ff = ff_prepare();
   for (int i = 0; i < nmonitor; i++) {
-    uint64_t offset = sym_getsymboloffset(BINARY, monitor[i]);
+    uint64_t offset = sym_getsymboloffset(binary, monitor[i]);
     if (offset == ~0ULL) {
-      fprintf(stderr, "Cannot find %s in %s\n", monitor[i], BINARY);
+      fprintf(stderr, "Cannot find %s in %s\n", monitor[i], binary);
       exit(1);
     }
-    ff_monitor(ff, map_offset(BINARY, offset));
+    ff_monitor(ff, map_offset(binary, offset));
   }
 
   uint16_t *res = malloc(SAMPLES * nmonitor * sizeof(uint16_t));
