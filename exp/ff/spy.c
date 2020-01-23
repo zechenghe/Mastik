@@ -24,6 +24,7 @@
 #include <symbol.h>
 #include <ff.h>
 #include <util.h>
+#include <vlist.h>
 
 #define SAMPLES 100000
 #define SLOT	2000
