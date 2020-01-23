@@ -11,7 +11,7 @@ OUTPUT_FOLDER=$EXP_ROOT_DIR/flush_reload/results
 mkdir -p $OUTPUT_FOLDER
 
 status "Attacker running"
-taskset 0x80000 ./sensitive1 &
+taskset 0x40000 ./sensitive1 &
 SENSITIVE_PID=$!
 echo $SENSITIVE_PID
 
