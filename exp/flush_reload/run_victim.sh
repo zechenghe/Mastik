@@ -15,7 +15,6 @@ GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 status "Experiment begins"
 status "Encryption"
 
-echo "Hello World" > hello.txt
 taskset 0x4 $GPG -r 'zechengh_key1' -e 'hello.txt' &
 
 while true;
