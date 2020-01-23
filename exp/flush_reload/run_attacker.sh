@@ -13,6 +13,6 @@ mkdir -p $OUTPUT_FOLDER
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 
 status "Attacker running"
-taskset 0x2 ./spy $GPG &
+taskset 0x20000 ./spy $GPG &
 SPY_PID=$!
 echo $SPY_PID
