@@ -30,6 +30,13 @@
 #define SLOT	2000
 #define THRESHOLD 100
 
+struct ff {
+  vlist_t vl;
+  int modified;
+  uint16_t *thresholds;
+  int thresholdcap;
+};
+
 char *monitor[] = {
   "mpih-mul.c:85",
   "mpih-mul.c:271",
