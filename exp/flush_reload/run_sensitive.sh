@@ -10,7 +10,7 @@ OUTPUT_FOLDER=$EXP_ROOT_DIR/flush_reload/results
 
 mkdir -p $OUTPUT_FOLDER
 
-status "Sensitive running"
+status "Sensitive program running"
 taskset 0x80000 ./sensitive1 &
 SENSITIVE_PID=$!
 echo $SENSITIVE_PID
@@ -26,6 +26,11 @@ kill $SENSITIVE_PID
 status "Spy running"
 taskset 0x20000 ./spy $GPG &
 SPY_PID=$!
+
+status "Sensitive program running"
+taskset 0x80000 ./sensitive1 &
+SENSITIVE_PID=$!
+echo $SENSITIVE_PID
 
 $quickhpc -c hpc_config -a $SENSITIVE_PID -i 100 > $OUTPUT_FOLDER/hpc_sensiprog_abnormal &
 QUICKHPC_PID=$!
