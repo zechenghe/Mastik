@@ -25,6 +25,7 @@
 #include <ff.h>
 #include <util.h>
 #include <vlist.h>
+#include <assert.h>
 
 #define SAMPLES 100000
 #define SLOT	2000
