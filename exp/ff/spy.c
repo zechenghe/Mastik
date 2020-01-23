@@ -82,6 +82,7 @@ int main(int ac, char **av) {
     for (int i=0; i<ff->thresholdcap; i++){
       printf("%d ", ff->thresholds[i]);
     }
+    printf("l=%d ", l);
     putchar('\n');
 
   } while (l < 10000);
