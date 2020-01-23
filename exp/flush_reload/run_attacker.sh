@@ -8,7 +8,6 @@ source $EXP_ROOT_DIR/exp_funcs.sh
 
 OUTPUT_FOLDER=$EXP_ROOT_DIR/flush_reload/results
 
-[ -d $OUTPUT_FOLDER ] && rm -r $OUTPUT_FOLDER
 mkdir -p $OUTPUT_FOLDER
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
