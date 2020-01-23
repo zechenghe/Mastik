@@ -21,3 +21,16 @@ QUICKHPC_PID=$!
 sleep 5
 kill $QUICKHPC_PID
 kill $SENSITIVE_PID
+
+
+status "Spy running"
+taskset 0x20000 ./spy $GPG &
+SPY_PID=$!
+
+$quickhpc -c hpc_config -a $SENSITIVE_PID -i 100 > $OUTPUT_FOLDER/hpc_sensiprog_abnormal &
+QUICKHPC_PID=$!
+
+sleep 5
+kill $QUICKHPC_PID
+kill $SENSITIVE_PID
+kill $SPY_PID
