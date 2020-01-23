@@ -66,13 +66,24 @@ int main(int ac, char **av) {
 
   int l;
   do {
+    // int ff_trace(ff_t ff, int max_records, uint16_t *results, int slot, int threshold, int max_idle)
+    // return count;
     l = ff_trace(ff, SAMPLES, res, SLOT, THRESHOLD, 500);
+
+    for (int i; i<vl_len(ff->vl)); i++){
+      printf("%d ", vl_get(ff->thresholds, i));
+    }
+    putchar('\n');
+
   } while (l < 10000);
+
+/*
   for (int i = 0; i < l; i++) {
     for (int j = 0; j < nmonitor; j++)
       printf("%d ", res[i * nmonitor + j]);
     putchar('\n');
   }
+*/
 
   free(res);
   ff_release(ff);

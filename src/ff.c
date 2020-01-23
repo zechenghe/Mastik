@@ -142,6 +142,8 @@ static void setthresholds(ff_t ff, int force) {
       samples = ts_alloc();
     ts_clear(samples);
     void *addr = vl_get(ff->vl, i);
+
+    // Time THRESHOLD_SAMPLES probes and use the 99 percentile as threshold
     for (int j = 0; j < THRESHOLD_SAMPLES; j++) {
       ts_add(samples, probeaddr(addr));
       delayloop(1000);
@@ -194,7 +196,7 @@ int ff_trace(ff_t ff, int max_records, uint16_t *results, int slot, int threshol
   do {
     if (slot > 0) {
       do {
-	prev_time += slot;
+	         prev_time += slot;
       } while (slotwait(prev_time));
     }
     ff_probe(ff, results);
@@ -210,11 +212,11 @@ int ff_trace(ff_t ff, int max_records, uint16_t *results, int slot, int threshol
     count++;
     if (missed) {
       for (int i = 0; i < len; i++)
-	results[i] = 0;
+	       results[i] = 0;
     } else {
       ff_probe(ff, results);
       if (is_active(results, len, thresholds))
-	idle_count = 0;
+	       idle_count = 0;
     }
     prev_time += slot;
     missed = slotwait(prev_time);
