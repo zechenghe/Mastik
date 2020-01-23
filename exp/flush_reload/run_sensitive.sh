@@ -7,8 +7,9 @@ EXP_ROOT_DIR=$ROOT_DIR/exp
 source $EXP_ROOT_DIR/exp_funcs.sh
 
 OUTPUT_FOLDER=$EXP_ROOT_DIR/flush_reload/results
-
 mkdir -p $OUTPUT_FOLDER
+
+GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 
 status "Sensitive program running"
 taskset 0x80000 ./sensitive1 &
