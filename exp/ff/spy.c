@@ -70,7 +70,7 @@ int main(int ac, char **av) {
     // return count;
     l = ff_trace(ff, SAMPLES, res, SLOT, THRESHOLD, 500);
 
-    for (int i; i<vl_len(ff->vl)); i++){
+    for (int i=0; i<vl_len(ff->vl); i++){
       printf("%d ", vl_get(ff->thresholds, i));
     }
     putchar('\n');
