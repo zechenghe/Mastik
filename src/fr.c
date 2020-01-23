@@ -27,7 +27,7 @@
 #include "timestats.h"
 #include "fr.h"
 
-struct fr { 
+struct fr {
   vlist_t vl;
   vlist_t evict;
 };
@@ -153,7 +153,7 @@ void fr_probe(fr_t fr, uint16_t *results) {
     clflush(adrs);
   }
   l = vl_len(fr->evict);
-  for (int i = 0; i < l; i++) 
+  for (int i = 0; i < l; i++)
     clflush(vl_get(fr->evict, i));
 }
 
@@ -181,7 +181,7 @@ int fr_trace(fr_t fr, int max_records, uint16_t *results, int slot, int threshol
   do {
     if (slot > 0) {
       do {
-	prev_time += slot;
+	       prev_time += slot;
       } while (slotwait(prev_time));
     }
     fr_probe(fr, results);
@@ -197,11 +197,11 @@ int fr_trace(fr_t fr, int max_records, uint16_t *results, int slot, int threshol
     count++;
     if (missed) {
       for (int i = 0; i < len; i++)
-	results[i] = 0;
+	     results[i] = 0;
     } else {
       fr_probe(fr, results);
       if (is_active(results, len, threshold))
-	idle_count = 0;
+	       idle_count = 0;
     }
     prev_time += slot;
     missed = slotwait(prev_time);
@@ -212,4 +212,3 @@ int fr_trace(fr_t fr, int max_records, uint16_t *results, int slot, int threshol
 int fr_repeatedprobe(fr_t fr, int max_records, uint16_t *results, int slot) {
   return fr_trace(fr, max_records, results, slot, 0, max_records);
 }
-  

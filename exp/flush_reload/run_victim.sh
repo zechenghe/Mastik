@@ -12,15 +12,12 @@ mkdir -p $OUTPUT_FOLDER
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 
-status "Experiment begins"
 status "Encryption"
 
-while true;
+while true
   do
-    taskset 0x4 $GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
-    VICTIM_PID=$!
-#    $quickhpc -c hpc_config -a $VICTIM_PID -i 100
-    sleep 1
+    taskset 0x8 $GPG -r 'zechengh_key1' -d 'hello.txt.gpg' &
+    sleep 0.01
   done
 
 #status "Attacker starts"
