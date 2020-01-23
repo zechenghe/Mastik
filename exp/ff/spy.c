@@ -78,8 +78,8 @@ int main(int ac, char **av) {
     // return count;
     l = ff_trace(ff, SAMPLES, res, SLOT, THRESHOLD, 500);
 
-    for (int i=0; i<vl_len(ff->vl); i++){
-      printf("%d ", vl_get(ff->thresholds, i));
+    for (int i=0; i<ff->thresholdcap; i++){
+      printf("%d ", ff->thresholds[i]);
     }
     putchar('\n');
 
