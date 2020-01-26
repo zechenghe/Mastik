@@ -68,7 +68,7 @@ int main(int ac, char **av) {
 
   float *avg = calloc(L1_SETS, sizeof(float));
 
-  delayloop(3000000000U);
+  //delayloop(3000000000U);
   l1_repeatedprobe(l1, samples, res, 0);
 
 
