@@ -33,7 +33,7 @@ taskset 0x8 ./sensitive1 &
 SENSITIVE_PID=$!
 echo $SENSITIVE_PID
 
-$quickhpc -c hpc_config -a $SENSITIVE_PID -i 100 > $OUTPUT_FOLDER/hpc_sensiprog_abnormal &
+$quickhpc -c hpc_config_2 -a $SENSITIVE_PID -i 100 > $OUTPUT_FOLDER/hpc_sensiprog_abnormal &
 QUICKHPC_PID=$!
 
 sleep 5
