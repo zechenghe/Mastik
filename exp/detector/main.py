@@ -238,10 +238,10 @@ if __name__ == '__main__':
         # Sequential data in the form of (Timeframe, Features)
         # Training only leverages normal data. Abnormaly data only for testing.
         parser.add_argument('--normal_data_dir', type = str, default = "data/", help='The directory of normal data')
-        parser.add_argument('--normal_data_name', type = str, default = "baseline.npy", help='The file name of normal data')
+        parser.add_argument('--normal_data_name', type = str, default = "baseline_training.npy", help='The file name of normal data')
 
         parser.add_argument('--abnormal_data_dir', type = str, default = "data/", help='The directory of abnormal data')
-        parser.add_argument('--abnormal_data_name', type = str, default = "attack1.npy", help='The file name of abnormal data')
+        parser.add_argument('--abnormal_data_name', type = str, default = "attack1_testing.npy", help='The file name of abnormal data')
 
         # Save and load model. Save after training. Load before testing.
         parser.add_argument('--save_model_dir', type = str, default = "checkpoints/", help='The directory to save the model')
