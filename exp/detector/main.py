@@ -145,11 +145,13 @@ def eval_detector(args):
     normal_data_name = args.normal_data_name
     abnormal_data_dir = args.abnormal_data_dir
     abnormal_data_name = args.abnormal_data_name
+    Pvalue_th = args.Pvalue_th
 
     gpu = args.gpu
 
     AnomalyDetector = torch.load(load_model_dir + load_model_name)
     AnomalyDetector.eval()
+    AnomalyDetector.th = Pvalue_th
 
     if args.dummydata:
         training_normal_data, ref_normal_data, testing_normal_data = load_normal_dummydata()
