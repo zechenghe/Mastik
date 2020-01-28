@@ -200,7 +200,7 @@ def eval_detector(args):
     pred_scores = np.concatenate((p_values_normal, p_values_abnormal), axis=0)
     print "true_label.shape", true_label.shape, "pred.shape", pred.shape
     eval_metrics(true_label, pred)
-    roc_auc = roc_auc_score(true_label, pred_scores)
+    roc_auc = roc_auc_score(true_label, 1-pred_scores)
     print "ROC AUC = ", roc_auc
 
 
