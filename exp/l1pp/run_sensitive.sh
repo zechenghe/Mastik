@@ -15,7 +15,7 @@ for SPLIT in TRAINING TESTING
 do
   for HPC_COLLECTION in L1 L23 MISC
   do
-    HPC_SUFFIX=$HPC_COLLECTION$SPLIT
+    HPC_SUFFIX=$HPC_COLLECTION _$SPLIT
     status "Sensitive program running"
     taskset 0x8 ./sensitive1 &
     SENSITIVE_PID=$!
