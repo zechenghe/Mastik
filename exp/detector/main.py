@@ -16,6 +16,7 @@ from SeqGenerator import *
 from detector import *
 from loaddata import *
 from utils import *
+from sklearn.metrics import roc_auc_score
 
 
 def train(args):
@@ -196,8 +197,10 @@ def eval_detector(args):
     print "p_values_abnormal.mean ", np.mean(p_values_abnormal)
 
     pred = np.concatenate((pred_normal, pred_abnormal), axis=0)
+    pred_scores = np.concatenate((p_values_normal, p_values_abnormal), axis=0)
     print "true_label.shape", true_label.shape, "pred.shape", pred.shape
     eval_metrics(true_label, pred)
+    roc_auc_score(true_label, pred_scores)
 
 
 
