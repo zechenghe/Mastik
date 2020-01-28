@@ -39,7 +39,7 @@ def train(args):
     save_model_name = args.save_model_name
 
     normal_data_dir = args.normal_data_dir
-    normal_data_name = args.normal_data_name
+    normal_data_name_train = args.normal_data_name_train
 
     RED_collection_len = args.RED_collection_len
     RED_points = args.RED_points
@@ -49,7 +49,7 @@ def train(args):
         training_normal_data, ref_normal_data, testing_normal_data = load_normal_dummydata()
     else:
         training_normal_data, ref_normal_data, testing_normal_data = load_normal_data(
-        data_dir = normal_data_dir, file_name = normal_data_name)
+        data_dir = normal_data_dir, file_name = normal_data_name_train, split = (0.8, 0.1, 0.1))
 
     training_normal_data_mean = get_mean(training_normal_data)
     training_normal_data_std = get_std(training_normal_data)
@@ -143,7 +143,7 @@ def eval_detector(args):
     load_model_dir = args.load_model_dir
     load_model_name = args.load_model_name
     normal_data_dir = args.normal_data_dir
-    normal_data_name = args.normal_data_name
+    normal_data_name_test = args.normal_data_name_test
     abnormal_data_dir = args.abnormal_data_dir
     abnormal_data_name = args.abnormal_data_name
     Pvalue_th = args.Pvalue_th
@@ -158,7 +158,7 @@ def eval_detector(args):
         training_normal_data, ref_normal_data, testing_normal_data = load_normal_dummydata()
     else:
         training_normal_data, ref_normal_data, testing_normal_data = load_normal_data(
-        data_dir = normal_data_dir, file_name = normal_data_name)
+        data_dir = normal_data_dir, file_name = normal_data_name_test, split=(0.0, 0.0, 1.0))
 
     testing_normal_data = torch.tensor(AnomalyDetector.normalize(testing_normal_data))
 
@@ -243,10 +243,11 @@ if __name__ == '__main__':
         # Sequential data in the form of (Timeframe, Features)
         # Training only leverages normal data. Abnormaly data only for testing.
         parser.add_argument('--normal_data_dir', type = str, default = "data/", help='The directory of normal data')
-        parser.add_argument('--normal_data_name', type = str, default = "baseline_training.npy", help='The file name of normal data')
+        parser.add_argument('--normal_data_name_train', type = str, default = "baseline_train.npy", help='The file name of training normal data')
+        parser.add_argument('--normal_data_name_test', type = str, default = "baseline_test.npy", help='The file name of testing normal data')
 
         parser.add_argument('--abnormal_data_dir', type = str, default = "data/", help='The directory of abnormal data')
-        parser.add_argument('--abnormal_data_name', type = str, default = "attack1_testing.npy", help='The file name of abnormal data')
+        parser.add_argument('--abnormal_data_name', type = str, default = "attack1_test.npy", help='The file name of abnormal data')
 
         # Save and load model. Save after training. Load before testing.
         parser.add_argument('--save_model_dir', type = str, default = "checkpoints/", help='The directory to save the model')
