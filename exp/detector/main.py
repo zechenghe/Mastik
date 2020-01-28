@@ -201,7 +201,7 @@ def eval_detector(args):
     print "true_label.shape", true_label.shape, "pred.shape", pred.shape
     eval_metrics(true_label, pred)
     roc_auc = roc_auc_score(true_label, pred_scores)
-    print "ROC AUC = " + roc_auc
+    print "ROC AUC = ", roc_auc
 
 
 if __name__ == '__main__':
