@@ -66,6 +66,10 @@ if __name__=="__main__":
         window_size = args.window_size
     )
 
+    print "Vectorized training_normal_data.shape", training_normal_data.shape
+    print "Vectorized ref_normal_data.shape", ref_normal_data.shape
+    print "Vectorized testing_normal_data.shape", testing_normal_data.shape
+
     training_data_run = training_normal_data
     testing_data_run = np.concatenate(
         (
