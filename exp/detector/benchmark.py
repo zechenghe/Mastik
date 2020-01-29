@@ -70,6 +70,15 @@ if __name__=="__main__":
     print "Vectorized ref_normal_data.shape", ref_normal_data.shape
     print "Vectorized testing_normal_data.shape", testing_normal_data.shape
 
+    true_label_normal = np.zeros(len(testing_normal_data))
+    true_label_abnormal = np.ones(len(testing_abnormal_data))
+    true_label = np.concatenate(
+        (
+            true_label_normal,
+            true_label_abnormal
+        )
+    )
+
     training_data_run = training_normal_data
     testing_data_run = np.concatenate(
         (
@@ -78,6 +87,8 @@ if __name__=="__main__":
         ),
         axis=0
     )
+
+    assert len(testing_data_run) = len(true_label)
 
     cls = IsolationForest(n_estimators=1000, contamination = 0.1, behaviour='new')
     cls.fit(training_data_run)
