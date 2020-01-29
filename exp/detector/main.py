@@ -166,7 +166,7 @@ def eval_detector(args):
     if args.dummydata:
         training_normal_data, ref_normal_data, testing_normal_data = load_normal_dummydata()
     else:
-        training_normal_data, ref_normal_data, testing_normal_data = load_data_all(
+        testing_normal_data = load_data_all(
             data_dir = normal_data_dir,
             file_name = normal_data_name_test
         )
