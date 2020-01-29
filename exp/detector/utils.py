@@ -37,7 +37,7 @@ def eval_metrics( truth, pred, pred_score=None ):
     fnr = fn / (fn + tp) if fn + tp != 0 else None
     prec = tp / ( ( tp + fp ) * 1. ) if tp + fp != 0 else None
     rec =  tp / ( ( tp + fn ) * 1. ) if tp + fn != 0 else None
-    f1 = 2.*prec*rec/(prec+rec) if pre != None and rec != None and prec+rec != 0 else None
+    f1 = 2.*prec*rec/(prec+rec) if prec != None and rec != None and prec+rec != 0 else None
 
     print 'False Positive Rate: ', fpr
     print 'False Negative Rate: ', fnr
