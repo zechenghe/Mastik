@@ -214,7 +214,7 @@ def eval_detector(args):
     eval_metrics(
         truth = true_label,
         pred = pred,
-        pred_score = pred_score
+        pred_score = 1-pred_score
     )
 
 
