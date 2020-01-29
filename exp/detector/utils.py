@@ -33,10 +33,10 @@ def eval_metrics( truth, pred, pred_score=None ):
     print 'True positives: ', tp
     print 'True negatives: ', tn
 
-    fpr = fp / (fp + tn)
-    fnr = fn / (fn + tp)
-    prec = tp / ( ( tp + fp ) * 1. )
-    rec =  tp / ( ( tp + fn ) * 1. )
+    fpr = fp / (fp + tn) if fp + tn != 0 else None
+    fnr = fn / (fn + tp) if fn + tp != 0 else None
+    prec = tp / ( ( tp + fp ) * 1. ) if tp + fp != 0 else None
+    rec =  tp / ( ( tp + fn ) * 1. ) if tp + fn != 0 else None
     f1 = 2.*prec*rec/(prec+rec)
 
     print 'False Positive Rate: ', fpr
