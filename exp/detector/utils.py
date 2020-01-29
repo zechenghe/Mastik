@@ -25,7 +25,7 @@ def normalize(data, mean, std):
     assert data.shape[1] == std.shape[1], "Feature size should match std size"
 
     eps = 1e-8
-    data.substract(mean).devide(std + eps)
+    return (data - self.mean) / (self.std + self.eps)
 
 def eval_metrics( truth, pred, pred_score=None ):
     tp = np.sum( np.multiply((pred == 1) , (truth == 1)), axis=0 , dtype=np.float32)

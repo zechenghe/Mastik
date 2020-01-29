@@ -54,14 +54,21 @@ if __name__=="__main__":
     training_normal_data_mean = get_mean(training_normal_data)
     training_normal_data_std = get_std(training_normal_data)
 
-    for data in [
-        training_normal_data,
-        ref_normal_data,
-        val_normal_data,
-        testing_normal_data,
-        testing_abnormal_data,
-    ]:
-        normalize(data, training_normal_data_mean, training_normal_data_std)
+    training_normal_data = normalize(
+        training_normal_data, training_normal_data_mean, training_normal_data_std
+    )
+    ref_normal_data = normalize(
+        ref_normal_data, training_normal_data_mean, training_normal_data_std
+    )
+    val_normal_data = normalize(
+        val_normal_data, training_normal_data_mean, training_normal_data_std
+    )
+    testing_normal_data = normalize(
+        testing_normal_data, training_normal_data_mean, training_normal_data_std
+    )
+    testing_abnormal_data = normalize(
+        testing_abnormal_data, training_normal_data_mean, training_normal_data_std
+    )
 
     print "training_normal_data.shape", training_normal_data.shape
     print "ref_normal_data.shape", ref_normal_data.shape
