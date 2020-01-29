@@ -44,8 +44,8 @@ if __name__=="__main__":
     )
 
     testing_abnormal_data = load_data_all(
-        data_dir = abnormal_data_dir,
-        file_name = abnormal_data_name
+        data_dir = args.abnormal_data_dir,
+        file_name = args.abnormal_data_name
     )
 
     print "training_normal_data.shape", training_normal_data.shape
