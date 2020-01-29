@@ -79,7 +79,7 @@ if __name__=="__main__":
         axis=0
     )
 
-    cls = IsolationForest(n_estimators=1000, contamination = 0.1)
+    cls = IsolationForest(n_estimators=1000, contamination = 0.1, behaviour='new')
     cls.fit(training_data_run)
     pred = cls.predict(testing_data_run)
     pred_score = cls.score_samples(testing_data_run)
