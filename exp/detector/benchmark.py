@@ -14,6 +14,8 @@ from sklearn.ensemble import IsolationForest
 
 if __name__=="__main__":
 
+    parser = argparse.ArgumentParser()
+    
     # Loaddata
     # Sequential data in the form of (Timeframe, Features)
     # Training only leverages normal data. Abnormaly data only for testing.
