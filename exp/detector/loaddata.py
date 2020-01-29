@@ -3,7 +3,7 @@ import scipy.signal
 
 from utils import *
 
-def load_normal_data(split = (0.4, 0.2, 0.4), data_dir = "data/", file_name = 'baseline.npy'):
+def load_data_split(split = (0.4, 0.2, 0.4), data_dir = "data/", file_name = 'baseline.npy'):
 
     assert (len(split) == 3) and (sum(split) == 1.0), "Data split error..."
 
@@ -29,7 +29,7 @@ def load_normal_data(split = (0.4, 0.2, 0.4), data_dir = "data/", file_name = 'b
     return np.float32(training_normal), np.float32(ref_normal), np.float32(testing_normal)
 
 
-def load_abnormal_data(data_dir = "data/", file_name = 'attack1.npy'):
+def load_data_all(data_dir, file_name):
 
     abnormal_data_path = data_dir + file_name
     data = read_npy_data_single_flle(abnormal_data_path)
