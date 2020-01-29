@@ -8,7 +8,6 @@ import glob
 import numpy as np
 import utils
 
-from StatHistoryBatchGenerator import StatHistoryBatchGenerator as HistoryBatchGenerator
 from sklearn.ensemble import IsolationForest
 
 
