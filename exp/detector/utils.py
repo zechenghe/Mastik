@@ -81,5 +81,5 @@ def seq_win_vectorize(seq, window_size):
 
     res = []
     for i in range(len(seq)-window_size+1):
-        res.append(seq[i: i+window_size,:].reshape((,1)))
+        res.append(seq[i: i+window_size,:].reshape((:,1)))
     return np.array(res)
