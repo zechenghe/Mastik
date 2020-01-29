@@ -88,7 +88,7 @@ if __name__=="__main__":
         axis=0
     )
 
-    assert len(testing_data_run) = len(true_label)
+    assert len(testing_data_run) == len(true_label)
 
     cls = IsolationForest(n_estimators=1000, contamination = 0.1, behaviour='new')
     cls.fit(training_data_run)
