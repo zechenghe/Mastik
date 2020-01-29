@@ -67,7 +67,7 @@ if __name__=="__main__":
     )
 
     training_data_run = training_normal_data
-    testing_data_run = np.concatinate(
+    testing_data_run = np.concatenate(
         (
             testing_normal_data,
             testing_abnormal_data
