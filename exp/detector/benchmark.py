@@ -13,7 +13,7 @@ from utils import *
 from sklearn.ensemble import IsolationForest
 from pyod.models.ocsvm import OCSVM
 from sklearn.neighbors import LocalOutlierFactor
-
+from pyod.models.abod import ABOD
 
 if __name__=="__main__":
 
@@ -94,7 +94,8 @@ if __name__=="__main__":
 
     #cls = IsolationForest(n_estimators=1000, contamination = 0.1, behaviour='new')
     #cls = OCSVM()
-    cls = LocalOutlierFactor(novelty=True, contamination=0.01)
+    #cls = LocalOutlierFactor(novelty=True, contamination=0.01)
+    cls = ABOD(contamination=1e-4)
     cls.fit(training_data_run)
     pred = cls.predict(testing_data_run)
     pred_score = cls.decision_function(testing_data_run)
