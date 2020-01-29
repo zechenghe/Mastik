@@ -12,6 +12,7 @@ from utils import *
 
 from sklearn.ensemble import IsolationForest
 from pyod.models.ocsvm import OCSVM
+from sklearn.neighbors import LocalOutlierFactor
 
 
 if __name__=="__main__":
@@ -92,7 +93,8 @@ if __name__=="__main__":
     assert len(testing_data_run) == len(true_label)
 
     #cls = IsolationForest(n_estimators=1000, contamination = 0.1, behaviour='new')
-    cls = OCSVM()
+    #cls = OCSVM()
+    cls = LocalOutlierFactor()
     cls.fit(training_data_run)
     pred = cls.predict(testing_data_run)
     pred_score = cls.decision_function(testing_data_run)
