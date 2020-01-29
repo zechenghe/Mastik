@@ -25,7 +25,7 @@ if __name__=="__main__":
     parser.add_argument('--abnormal_data_name', type = str, default = "attack1_test.npy", help='The file name of abnormal data')
 
     # Window size
-    parser.add_argument('--window_size', type = int, default = 10, help='Window size of vectorization')
+    parser.add_argument('--window_size', type = int, default = 10, help='Window size for vectorization')
 
     args = parser.parse_args()
 

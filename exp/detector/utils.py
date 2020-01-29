@@ -49,7 +49,7 @@ def eval_metrics( truth, pred, pred_score=None ):
     print 'F1: ', f1
     print '---------------------------------------------------'
 
-    if pred_score != None:
+    if pred_score is not None:
         roc_auc = roc_auc_score(true_label, 1-pred_scores)
         print "ROC AUC = ", roc_auc
 
