@@ -16,7 +16,6 @@ from SeqGenerator import *
 from detector import *
 from loaddata import *
 from utils import *
-from sklearn.metrics import roc_auc_score
 
 
 def train(args):
@@ -46,9 +45,9 @@ def train(args):
     Pvalue_th = args.Pvalue_th
 
     if args.dummydata:
-        training_normal_data, ref_normal_data, testing_normal_data = load_normal_dummydata()
+        training_normal_data, ref_normal_data, val_normal_data = load_normal_dummydata()
     else:
-        training_normal_data, ref_normal_data, testing_normal_data = load_data_split(
+        training_normal_data, ref_normal_data, val_normal_data = load_data_split(
             data_dir = normal_data_dir,
             file_name = normal_data_name_train,
             split = (0.8, 0.1, 0.1)
@@ -68,7 +67,7 @@ def train(args):
 
     training_normal_data = AnomalyDetector.normalize(training_normal_data)
     ref_normal_data = torch.tensor(AnomalyDetector.normalize(ref_normal_data))
-    testing_normal_data = torch.tensor(AnomalyDetector.normalize(testing_normal_data))
+    val_normal_data = torch.tensor(AnomalyDetector.normalize(val_normal_data))
 
     training_normal_wrapper = SeqGenerator(training_normal_data)
     training_normal_len = len(training_normal_data)
@@ -210,11 +209,13 @@ def eval_detector(args):
     print "p_values_abnormal.mean ", np.mean(p_values_abnormal)
 
     pred = np.concatenate((pred_normal, pred_abnormal), axis=0)
-    pred_scores = np.concatenate((p_values_normal, p_values_abnormal), axis=0)
+    pred_score = np.concatenate((p_values_normal, p_values_abnormal), axis=0)
     print "true_label.shape", true_label.shape, "pred.shape", pred.shape
-    eval_metrics(true_label, pred)
-    roc_auc = roc_auc_score(true_label, 1-pred_scores)
-    print "ROC AUC = ", roc_auc
+    eval_metrics(
+        truth = true_label,
+        pred = pred,
+        pred_score = pred_score
+    )
 
 
 if __name__ == '__main__':

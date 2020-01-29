@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from sklearn.metrics import roc_auc_score
+
 def read_npy_data_single_flle(filename):
     print "Reading Data: " + filename
     data = np.load(filename)
@@ -18,7 +20,7 @@ def get_std(data):
     return np.std(data, axis = 0, keepdims = True)
 
 
-def eval_metrics( truth, pred ):
+def eval_metrics( truth, pred, pred_score=None ):
     tp = np.sum( np.multiply((pred == 1) , (truth == 1)), axis=0 , dtype=np.float32)
     fp = np.sum( np.multiply((pred == 1) , (truth == 0)), axis=0 , dtype=np.float32)
     fn = np.sum( np.multiply((pred == 0) , (truth == 1)), axis=0 , dtype=np.float32)
@@ -46,6 +48,10 @@ def eval_metrics( truth, pred ):
     print 'Recall: ', rec
     print 'F1: ', f1
     print '---------------------------------------------------'
+
+    if pred_score != None:
+        roc_auc = roc_auc_score(true_label, 1-pred_scores)
+        print "ROC AUC = ", roc_auc
 
     return tp, fp, fn, tn, acc, prec, rec, f1
 
