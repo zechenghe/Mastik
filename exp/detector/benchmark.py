@@ -7,8 +7,8 @@ import glob
 
 import argparse
 import numpy as np
-import loaddata
-import utils
+from loaddata import *
+from utils import *
 
 from sklearn.ensemble import IsolationForest
 
