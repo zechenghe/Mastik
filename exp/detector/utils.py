@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score
 
 def read_npy_data_single_flle(filename):
@@ -56,11 +57,13 @@ def eval_metrics( truth, pred, pred_score=None ):
     print 'F1: ', f1
     print '---------------------------------------------------'
 
+    roc, roc_auc = None, None
     if pred_score is not None:
+        fpr, tpr, thresholds = roc_curve(truth, pred_score)
         roc_auc = roc_auc_score(truth, pred_score)
         print "ROC AUC = ", roc_auc
 
-    return tp, fp, fn, tn, acc, prec, rec, f1
+    return tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds
 
 
 def setLearningRate(optimizer, lr):

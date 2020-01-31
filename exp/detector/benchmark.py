@@ -120,8 +120,11 @@ if __name__=="__main__":
     pred = cls.predict(testing_data_run)
     pred_score = cls.decision_function(testing_data_run)
 
+    tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds = \
     eval_metrics(
         truth = true_label,
         pred = pred,
         pred_score = pred_score
     )
+
+    return fpr, tpr, thresholds
