@@ -138,6 +138,9 @@ def main(
         pred_score = pred_score if not reverse else 1-pred_score
     )
 
+    print fpr
+    print tpr
+    print thresholds
     return fpr, tpr, thresholds
 
 if __name__=="__main__":
