@@ -17,6 +17,7 @@ from pyod.models.abod import ABOD
 
 
 def main(
+        model,
         normal_data_dir,
         normal_data_name_train,
         normal_data_name_test,
@@ -83,8 +84,9 @@ def main(
     print "Vectorized ref_normal_data.shape", ref_normal_data.shape
     print "Vectorized testing_normal_data.shape", testing_normal_data.shape
 
-    true_label_normal = np.zeros(len(testing_normal_data))
-    true_label_abnormal = np.ones(len(testing_abnormal_data))
+    # +1 is normal, -1 is abnormal
+    true_label_normal = np.ones(len(testing_normal_data))
+    true_label_abnormal = -np.ones(len(testing_abnormal_data))
     true_label = np.concatenate(
         (
             true_label_normal,
@@ -103,19 +105,30 @@ def main(
 
     assert len(testing_data_run) == len(true_label)
 
-    #cls = IsolationForest(n_estimators=1000, contamination = 0.1, behaviour='new')
-    #cls = OCSVM()
-    cls = LocalOutlierFactor(novelty=True, contamination=0.01)
-    #cls = ABOD(contamination=1e-4)
+    reverse = False
+    if model == 'IF':
+        cls = IsolationForest(n_estimators=1000, contamination = 0.1, behaviour='new')
+    elif model == 'OCSVM':
+        cls = OCSVM()
+    elif model == 'LOF':
+        cls = LocalOutlierFactor(novelty=True, contamination=0.01)
+    elif model == 'ABOD':
+        cls = ABOD(contamination=1e-4)
+    else:
+        print "Model not support"
+        exit(1)
+
+
     cls.fit(training_data_run)
     pred = cls.predict(testing_data_run)
     pred_score = cls.decision_function(testing_data_run)
 
+    # Pay special attention here the score is the anomaly score, as we label abnomal as class 1.
     tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds = \
     eval_metrics(
         truth = true_label,
         pred = pred,
-        pred_score = pred_score
+        pred_score = pred_score if not reverse else 1-pred_score
     )
 
     return fpr, tpr, thresholds
@@ -123,6 +136,8 @@ def main(
 if __name__=="__main__":
 
     parser = argparse.ArgumentParser()
+
+    parser.add_argument('--model', type = str, default = "OCSVM", help='Anomaly detection models')
 
     # Loaddata
     # Sequential data in the form of (Timeframe, Features)
@@ -138,6 +153,7 @@ if __name__=="__main__":
     args = parser.parse_args()
 
     main(
+        model = args.model,
         normal_data_dir = args.normal_data_dir,
         normal_data_name_train = args.normal_data_name_train,
         normal_data_name_test = args.normal_data_name_test,
