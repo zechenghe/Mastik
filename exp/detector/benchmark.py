@@ -138,9 +138,6 @@ def main(
         pred_score = pred_score if not reverse else 1-pred_score
     )
 
-    print fpr
-    print tpr
-    print thresholds
     return fpr, tpr, thresholds
 
 if __name__=="__main__":
@@ -162,7 +159,7 @@ if __name__=="__main__":
     parser.add_argument('--window_size', type = int, default = 10, help='Window size for vectorization')
     args = parser.parse_args()
 
-    main(
+    fpr, tpr, thresholds = main(
         model = args.model,
         normal_data_dir = args.normal_data_dir,
         normal_data_name_train = args.normal_data_name_train,
@@ -171,3 +168,7 @@ if __name__=="__main__":
         abnormal_data_name = args.abnormal_data_name,
         window_size = args.window_size
     )
+
+    results_dir = 'results/'
+    np.save(results_dir + args.model + '_fpr', fpr)
+    np.save(results_dir + args.model + '_tpr', tpr)
