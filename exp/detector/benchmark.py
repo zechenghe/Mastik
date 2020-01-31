@@ -120,6 +120,7 @@ def main(
         cls = ABOD(contamination=1e-4)
     elif model == 'PCA':
         cls = PCA()
+        reverse = True
     else:
         print "Model not support"
         exit(1)
