@@ -12,7 +12,7 @@ from utils import *
 
 from sklearn.ensemble import IsolationForest
 from pyod.models.ocsvm import OCSVM
-from sklearn.neighbors import LocalOutlierFactor
+from pyod.models.lof import LOF
 from pyod.models.abod import ABOD
 
 
@@ -112,10 +112,7 @@ def main(
         cls = OCSVM()
         reverse = True
     elif model == 'LOF':
-        # Bigger is better, i.e. large values correspond to inliers.
-        # https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.LocalOutlierFactor.html
-        cls = LocalOutlierFactor(novelty=True, contamination=0.01)
-        reverse = True
+        cls = LOF(contamination=0.01)
     elif model == 'ABOD':
         # Outliers have higher outlier scores
         cls = ABOD(contamination=1e-4)
