@@ -146,8 +146,8 @@ class Detector(nn.Module):
 
         p_values = np.array(p_values)
         labels = p_values.copy()
-        labels[p_values >= self.th] = 1
-        labels[p_values < self.th] = -1
+        labels[p_values >= self.th] = 0
+        labels[p_values < self.th] = 1
 
         return labels, p_values
 
