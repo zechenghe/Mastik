@@ -190,8 +190,8 @@ def eval_detector(args):
         testing_abnormal_data = testing_abnormal_data.cuda()
 
 
-    true_label_normal = np.zeros(len(testing_normal_data) - AnomalyDetector.RED_collection_len * AnomalyDetector.RED_points - 1)
-    true_label_abnormal = np.ones(len(testing_abnormal_data) - AnomalyDetector.RED_collection_len * AnomalyDetector.RED_points - 1)
+    true_label_normal = np.ones(len(testing_normal_data) - AnomalyDetector.RED_collection_len * AnomalyDetector.RED_points - 1)
+    true_label_abnormal = -np.ones(len(testing_abnormal_data) - AnomalyDetector.RED_collection_len * AnomalyDetector.RED_points - 1)
     true_label = np.concatenate((true_label_normal, true_label_abnormal), axis=0)
 
     pred_normal, p_values_normal = AnomalyDetector.predict(testing_normal_data, gpu)
