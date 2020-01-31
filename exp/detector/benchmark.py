@@ -112,8 +112,8 @@ def main():
 
     assert len(testing_data_run) == len(true_label)
 
-    #cls = IsolationForest(n_estimators=1000, contamination = 0.1, behaviour='new')
-    cls = OCSVM()
+    cls = IsolationForest(n_estimators=1000, contamination = 0.1, behaviour='new')
+    #cls = OCSVM()
     #cls = LocalOutlierFactor(novelty=True, contamination=0.01)
     #cls = ABOD(contamination=1e-4)
     cls.fit(training_data_run)
