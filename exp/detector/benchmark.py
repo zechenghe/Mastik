@@ -112,7 +112,7 @@ def main(
         cls = OCSVM()
         reverse = True
     elif model == 'LOF':
-        cls = LOF(contamination=0.01)
+        cls = LOF(contamination=0.1)
     elif model == 'ABOD':
         # Outliers have higher outlier scores
         cls = ABOD(contamination=1e-4)
