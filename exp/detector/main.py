@@ -211,12 +211,17 @@ def eval_detector(args):
     pred = np.concatenate((pred_normal, pred_abnormal), axis=0)
     pred_score = np.concatenate((p_values_normal, p_values_abnormal), axis=0)
     print "true_label.shape", true_label.shape, "pred.shape", pred.shape
+
+    tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds = \
     eval_metrics(
         truth = true_label,
         pred = pred,
         pred_score = 1-pred_score
     )
 
+    results_dir = 'results/'
+    np.save(results_dir + 'LSTM-KS' + '_fpr', fpr)
+    np.save(results_dir + 'LSTM-KS' + '_tpr', tpr)
 
 if __name__ == '__main__':
     import argparse
