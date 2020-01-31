@@ -113,6 +113,7 @@ def main(
         reverse = True
     elif model == 'LOF':
         cls = LOF(contamination=0.1)
+        reverse = True
     elif model == 'ABOD':
         # Outliers have higher outlier scores
         cls = ABOD(contamination=1e-4)
