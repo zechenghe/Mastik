@@ -15,8 +15,6 @@ from pyod.models.ocsvm import OCSVM
 from sklearn.neighbors import LocalOutlierFactor
 from pyod.models.abod import ABOD
 
-if __name__=="__main__":
-    main()
 
 def main():
     parser = argparse.ArgumentParser()
@@ -130,3 +128,6 @@ def main():
     )
 
     return fpr, tpr, thresholds
+
+if __name__=="__main__":
+    main()
