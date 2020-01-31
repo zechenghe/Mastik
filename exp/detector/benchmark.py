@@ -110,9 +110,14 @@ def main(
         cls = IsolationForest(n_estimators=1000, contamination = 0.1, behaviour='new')
     elif model == 'OCSVM':
         cls = OCSVM()
+        reverse = True
     elif model == 'LOF':
+        # Bigger is better, i.e. large values correspond to inliers.
+        # https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.LocalOutlierFactor.html
         cls = LocalOutlierFactor(novelty=True, contamination=0.01)
+        reverse = True
     elif model == 'ABOD':
+        # Outliers have higher outlier scores
         cls = ABOD(contamination=1e-4)
     else:
         print "Model not support"
@@ -123,7 +128,7 @@ def main(
     pred = cls.predict(testing_data_run)
     pred_score = cls.decision_function(testing_data_run)
 
-    # Pay special attention here the score is the anomaly score, as we label abnomal as class 1.
+    # Pay special attention here the score is the anomaly score
     tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds = \
     eval_metrics(
         truth = true_label,
