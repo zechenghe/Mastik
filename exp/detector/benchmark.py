@@ -14,6 +14,7 @@ from sklearn.ensemble import IsolationForest
 from pyod.models.ocsvm import OCSVM
 from pyod.models.lof import LOF
 from pyod.models.abod import ABOD
+from pyod.models.pca import PCA
 
 
 def main(
@@ -117,6 +118,8 @@ def main(
     elif model == 'ABOD':
         # Outliers have higher outlier scores
         cls = ABOD(contamination=1e-4)
+    elif model == 'PCA':
+        cls = PCA()
     else:
         print "Model not support"
         exit(1)
