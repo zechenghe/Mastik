@@ -127,8 +127,6 @@ def train(args):
             state = (state[0].detach(), state[1].detach())
             t += ChunkSize
 
-        #plotsignal([truth.detach().numpy(), pred.detach().numpy()])
-
         print "Batch", batch, "Training loss", np.mean(loss_hist)
 
         if (batch + 1) % LRdecrease == 0:
