@@ -173,8 +173,8 @@ if __name__=="__main__":
             )
             print " "
             results_dir = 'results/'
-            np.save(results_dir + args.model + '_fpr', fpr)
-            np.save(results_dir + args.model + '_tpr', tpr)
+            np.save(results_dir + model + '_fpr', fpr)
+            np.save(results_dir + model + '_tpr', tpr)
     else:
         fpr, tpr, thresholds = main(
             model = args.model,
