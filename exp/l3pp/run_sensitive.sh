@@ -17,7 +17,7 @@ do
   do
     HPC_SUFFIX=${HPC_COLLECTION}_${SPLIT}
     status "Sensitive program running"
-    taskset 0x2000 ./sensitive1 &
+    taskset 0x8 ./sensitive1 &
     SENSITIVE_PID=$!
     echo $SENSITIVE_PID
 
@@ -30,11 +30,11 @@ do
 
 
     status "Spy running"
-    taskset 0x8 ./spy 1000000 &
+    taskset 0x2000 ./spy 1000000 &
     SPY_PID=$!
 
     status "Sensitive program running"
-    taskset 0x2000 ./sensitive1 &
+    taskset 0x8 ./sensitive1 &
     SENSITIVE_PID=$!
     echo $SENSITIVE_PID
 
