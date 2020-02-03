@@ -13,7 +13,7 @@ GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 
 for SPLIT in TRAINING TESTING
 do
-  for HPC_COLLECTION in L1 L23 MISC
+  for HPC_COLLECTION in L1 L23 MISC DEBUG
   do
     HPC_SUFFIX=${HPC_COLLECTION}_${SPLIT}
     status "Sensitive program running"
