@@ -30,7 +30,7 @@ do
 
 
     status "Spy running"
-    taskset 0x8000 ./spy 1000000000 &
+    taskset 0x2000 ./spy 10000 &
     SPY_PID=$!
 
     status "Sensitive program running"
