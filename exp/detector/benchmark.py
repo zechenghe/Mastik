@@ -171,7 +171,7 @@ if __name__=="__main__":
                 abnormal_data_name = args.abnormal_data_name,
                 window_size = args.window_size
             )
-
+            print " "
             results_dir = 'results/'
             np.save(results_dir + args.model + '_fpr', fpr)
             np.save(results_dir + args.model + '_tpr', tpr)
