@@ -75,10 +75,10 @@ int main(int ac, char **av) {
   }
 */
 
-  for (int i = 0; i < nmonitored; i++) {
-    printf("%3f1 ", avg[i] / samples);
-  }
-  putchar('\n');
+//  for (int i = 0; i < nmonitored; i++) {
+//    printf("%3f1 ", avg[i] / samples);
+//  }
+//  putchar('\n');
 
   printf("Attack stops\n");
   free(res);
