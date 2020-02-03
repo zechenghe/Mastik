@@ -144,7 +144,7 @@ if __name__=="__main__":
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--model', type = str, default = "OCSVM", help='Anomaly detection models')
+    parser.add_argument('--model', type = str, default = "all", help='Anomaly detection models')
 
     # Loaddata
     # Sequential data in the form of (Timeframe, Features)
@@ -161,6 +161,7 @@ if __name__=="__main__":
 
     if args.model == 'all':
         for model in ['LOF', 'OCSVM', 'IF', 'PCA']:
+            print "Model: ", model
             fpr, tpr, thresholds = main(
                 model = model,
                 normal_data_dir = args.normal_data_dir,
