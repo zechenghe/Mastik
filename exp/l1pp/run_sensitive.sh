@@ -21,7 +21,7 @@ do
     SENSITIVE_PID=$!
     echo $SENSITIVE_PID
 
-    $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 1000 > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
+    $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 100 > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
     sleep 5
@@ -38,7 +38,7 @@ do
     SENSITIVE_PID=$!
     echo $SENSITIVE_PID
 
-    $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 1000 > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
+    $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 100 > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
     sleep 5
