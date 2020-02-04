@@ -64,6 +64,7 @@ int main(int ac, char **av) {
 
   float *avg = calloc(nmonitored, sizeof(float));
 
+  printf("Attack starts\n");
   l3_repeatedprobecount(l3, samples, res, 0);
 
 /*
