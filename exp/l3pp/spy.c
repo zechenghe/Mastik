@@ -53,8 +53,8 @@ int main(int ac, char **av) {
 
   int nsets = l3_getSets(l3);
 
-  printf("l3->ngroups %d \n", l3->ngroups);
-  printf("l3->groupsize %d \n", l3->groupsize);
+  printf("l3->ngroups %d \n", l3.ngroups);
+  printf("l3->groupsize %d \n", l3.groupsize);
 
   int nmonitored = nsets/64;
 
