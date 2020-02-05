@@ -8,7 +8,7 @@ volatile char buffer[PAGE_SIZE*1000];
 
 int main(int ac, char **av) {
   for (;;) {
-    for (int i = 0; i < PAGE_SIZE; i++){
+    for (int i = 0; i < 1000; i++){
       buffer[i*PAGE_SIZE + 31] += i;
       buffer[i*PAGE_SIZE + 168] += i;
     }
