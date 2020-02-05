@@ -10,6 +10,7 @@ OUTPUT_FOLDER=$EXP_ROOT_DIR/l3pp/results
 mkdir -p $OUTPUT_FOLDER
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
+SENSITIVE_PROGRAM=sensitive2
 
 for SPLIT in TRAINING TESTING
 do
@@ -17,7 +18,7 @@ do
   do
     HPC_SUFFIX=${HPC_COLLECTION}_${SPLIT}
     status "Sensitive program running"
-    taskset 0x8 ./sensitive1 &
+    taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
     echo $SENSITIVE_PID
 
@@ -34,7 +35,7 @@ do
     SPY_PID=$!
 
     status "Sensitive program running"
-    taskset 0x8 ./sensitive1 &
+    taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
     echo $SENSITIVE_PID
 
