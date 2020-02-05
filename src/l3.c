@@ -40,7 +40,7 @@
 /*
  * Intel documentation still mentiones one slice per core, but
  * experience shows that at least some Skylake models have two
- * smaller slices per core. 
+ * smaller slices per core.
  * When probing the cache, we can use the smaller size - this will
  * increase the probe time but for huge pages, where we use
  * the slice size, the probe is fast and the increase is not too
@@ -200,7 +200,7 @@ void printL3Info() {
 
 void *sethead(l3pp_t l3, int set) { //vlist_t list, int count, int offset) {
   vlist_t list = l3->groups[set / l3->groupsize];
-  
+
   int count = l3->l3info.associativity;
   if (count == 0 || vl_len(list) < count)
     count = vl_len(list);
@@ -294,7 +294,7 @@ static int timedwalk(void *list, register void *candidate) {
   }
   if (debug) {
     printf("--------------------\n");
-    for (int i = 0; i < TIME_MAX; i++) 
+    for (int i = 0; i < TIME_MAX; i++)
       if (ts_get(ts, i) != 0)
 	printf("++ %4d: %4d\n", i, ts_get(ts, i));
     debug--;
@@ -307,7 +307,7 @@ static int timedwalk(void *list, register void *candidate) {
 static int checkevict(vlist_t es, void *candidate) {
   if (vl_len(es) == 0)
     return 0;
-  for (int i = 0; i < vl_len(es); i++) 
+  for (int i = 0; i < vl_len(es); i++)
     LNEXT(vl_get(es, i)) = vl_get(es, (i + 1) % vl_len(es));
   int timecur = timedwalk(vl_get(es, 0), candidate);
   return timecur > L3_THRESHOLD;
@@ -362,7 +362,7 @@ static vlist_t map(l3pp_t l3, vlist_t lines) {
 #ifdef DEBUG
     int d_l1 = vl_len(lines);
 #endif // DEBUG
-    if (fail > 5) 
+    if (fail > 5)
       break;
     void *c = expand(es, lines);
 #ifdef DEBUG
@@ -391,7 +391,7 @@ static vlist_t map(l3pp_t l3, vlist_t lines) {
 #endif // DEBUG
       fail++;
       continue;
-    } 
+    }
     fail = 0;
     vlist_t set = vl_new();
     vl_push(set, c);
@@ -402,7 +402,7 @@ static vlist_t map(l3pp_t l3, vlist_t lines) {
     printf("set %3d: lines: %4d expanded: %4d contracted: %2d collected: %d\n", vl_len(groups), d_l1, d_l2, d_l3, vl_len(set));
 #endif // DEBUG
     vl_push(groups, set);
-    if (l3->l3info.progressNotification) 
+    if (l3->l3info.progressNotification)
       (*l3->l3info.progressNotification)(nlines - vl_len(lines), nlines, l3->l3info.progressNotificationData);
   }
 
@@ -414,7 +414,7 @@ static int probemap(l3pp_t l3) {
   if ((l3->l3info.flags & L3FLAG_NOPROBE) != 0)
     return 0;
   vlist_t pages = vl_new();
-  for (int i = 0; i < l3->l3info.bufsize; i+= l3->groupsize * L3_CACHELINE) 
+  for (int i = 0; i < l3->l3info.bufsize; i+= l3->groupsize * L3_CACHELINE)
     vl_push(pages, l3->buffer + i);
   vlist_t groups = map(l3, pages);
 
@@ -449,7 +449,7 @@ static int ptemap(l3pp_t l3) {
   }
   return 1;
 }
-    
+
 
 
 
@@ -467,7 +467,7 @@ l3pp_t l3_prepare(l3info_t l3info) {
 #ifdef HUGEPAGES
   if ((l3->l3info.flags & L3FLAG_NOHUGEPAGES) == 0) {
     bufsize = (l3->l3info.bufsize + HUGEPAGESIZE - 1) & ~HUGEPAGEMASK;
-    l3->groupsize = L3_GROUPSIZE_FOR_HUGEPAGES;	
+    l3->groupsize = L3_GROUPSIZE_FOR_HUGEPAGES;
     buffer = mmap(NULL, bufsize, PROT_READ|PROT_WRITE, MAP_ANON|MAP_PRIVATE|HUGEPAGES, -1, 0);
   }
 #endif
@@ -515,7 +515,7 @@ void l3_release(l3pp_t l3) {
 
 
 int l3_monitor(l3pp_t l3, int line) {
-  if (line < 0 || line >= l3->ngroups * l3->groupsize) 
+  if (line < 0 || line >= l3->ngroups * l3->groupsize)
     return 0;
   if (IS_MONITORED(l3->monitoredbitmap, line))
     return 0;
@@ -527,7 +527,7 @@ int l3_monitor(l3pp_t l3, int line) {
 }
 
 int l3_unmonitor(l3pp_t l3, int line) {
-  if (line < 0 || line >= l3->ngroups * l3->groupsize) 
+  if (line < 0 || line >= l3->ngroups * l3->groupsize)
     return 0;
   if (!IS_MONITORED(l3->monitoredbitmap, line))
     return 0;
@@ -597,6 +597,8 @@ void l3_bprobecount(l3pp_t l3, uint16_t *results) {
 
 // Returns the number of probed sets in the LLC
 int l3_getSets(l3pp_t l3) {
+  printf("l3->ngroups %d\n", l3->ngroups);
+  printf("l3->groupsize %d\n", l3->groupsize);
   return l3->ngroups * l3->groupsize;
 }
 
@@ -673,4 +675,3 @@ int l3_repeatedprobecount(l3pp_t l3, int nrecords, uint16_t *results, int slot) 
   }
   return nrecords;
 }
-
