@@ -174,7 +174,6 @@ static void fillL3Info(l3pp_t l3) {
   }
 }
 
-#if 0
 void printL3Info() {
   struct l3info l3Info;
   loadL3cpuidInfo(&l3Info);
@@ -193,7 +192,6 @@ void printL3Info() {
   printf("complexIndex    : %u\n", l3Info.cpuidInfo.cacheInfo.complexIndex);
   exit(0);
 }
-#endif
 
 
 
