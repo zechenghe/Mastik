@@ -52,6 +52,10 @@ int main(int ac, char **av) {
   l3pp_t l3 = l3_prepare(NULL);
 
   int nsets = l3_getSets(l3);
+
+  printf("l3->ngroups %d \n", l3->ngroups);
+  printf("l3->groupsize %d \n", l3->groupsize);
+
   int nmonitored = nsets/64;
 
   for (int i = 17; i < nsets; i += 64)
