@@ -36,8 +36,8 @@ typedef struct l3info *l3info_t;
 
 
 #define L3FLAG_NOHUGEPAGES	0x01
-#define L3FLAG_USEPTE		0x02 
-#define L3FLAG_NOPROBE		0x04 
+#define L3FLAG_USEPTE		0x02
+#define L3FLAG_NOPROBE		0x04
 
 
 l3pp_t l3_prepare(l3info_t l3info);
@@ -69,4 +69,3 @@ int l3_repeatedprobecount(l3pp_t l3, int nrecords, uint16_t *results, int slot);
 
 
 #endif // __L3_H__
-
