@@ -348,7 +348,7 @@ static void collect(vlist_t es, vlist_t candidates, vlist_t set) {
   }
 }
 
-
+// Create evict sets?
 static vlist_t map(l3pp_t l3, vlist_t lines) {
 #ifdef DEBUG
   printf("%d lines\n", vl_len(lines));
@@ -423,6 +423,7 @@ static int probemap(l3pp_t l3) {
   l3->groups = (vlist_t *)calloc(l3->ngroups, sizeof(vlist_t));
   for (int i = 0; i < vl_len(groups); i++)
     l3->groups[i] = vl_get(groups, i);
+    printf("Set %d contains %d lines\n", i, vl_len(l3->groups[i]));
   vl_free(groups);
   vl_free(pages);
   return 1;
@@ -486,15 +487,15 @@ l3pp_t l3_prepare(l3info_t l3info) {
 
   // Create the cache map
   if (!ptemap(l3)) {
-    printf("ptemap fails");
+    printf("ptemap fails\n");
     if (!probemap(l3)) {
-      printf("probemap fails");
+      printf("probemap fails\n");
       free(l3->buffer);
       free(l3);
       return NULL;
     }
   }
-  printf("OK...");
+  printf("OK...\n");
   // Allocate monitored set info
   l3->monitoredbitmap = (uint32_t *)calloc(l3->ngroups*l3->groupsize/32, sizeof(uint32_t));
   l3->monitoredset = (int *)malloc(l3->ngroups * l3->groupsize * sizeof(int));
