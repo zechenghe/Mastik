@@ -414,7 +414,7 @@ static int probemap(l3pp_t l3) {
   if ((l3->l3info.flags & L3FLAG_NOPROBE) != 0)
     return 0;
   vlist_t pages = vl_new();
-  printd("l3info.bufsize %d\n", l3info.bufsize);
+  printd("l3info.bufsize %d\n", l3->l3info.bufsize);
   for (int i = 0; i < l3->l3info.bufsize; i+= l3->groupsize * L3_CACHELINE)
     vl_push(pages, l3->buffer + i);
   vlist_t groups = map(l3, pages);
