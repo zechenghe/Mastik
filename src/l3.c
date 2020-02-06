@@ -245,14 +245,17 @@ int probecount(void *pp) {
   if (pp == NULL)
     return 0;
   int rv = 0;
+  int total = 0;
   void *p = (void *)pp;
   do {
+    total += 1;
     uint32_t s = rdtscp();
     p = LNEXT(p);
     s = rdtscp() - s;
     if (s > L3_THRESHOLD)
       rv++;
   } while (p != (void *) pp);
+  printf("Total= %d rv= %d\n", total, rv);
   return rv;
 }
 
