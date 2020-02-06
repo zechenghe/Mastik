@@ -45,5 +45,8 @@ do
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
     kill $SPY_PID
+
+    sleep 1
+
   done
 done
