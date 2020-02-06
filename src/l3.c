@@ -421,9 +421,10 @@ static int probemap(l3pp_t l3) {
   //Store map results
   l3->ngroups = vl_len(groups);
   l3->groups = (vlist_t *)calloc(l3->ngroups, sizeof(vlist_t));
-  for (int i = 0; i < vl_len(groups); i++)
+  for (int i = 0; i < vl_len(groups); i++){
     l3->groups[i] = vl_get(groups, i);
     printf("Set %d contains %d lines\n", i, vl_len(l3->groups[i]));
+  }
   vl_free(groups);
   vl_free(pages);
   return 1;
