@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 #define PAGE_SIZE 4096
+#define CACHELINE_SIZE 64
 
 int main(int ac, char **av) {
   int npages = 1024;
@@ -17,9 +18,9 @@ int main(int ac, char **av) {
   }
 
   for (;;) {
-    for (int i = 0; i < 1024; i++){
-      buffer[i*PAGE_SIZE + 31] += i;
-      buffer[i*PAGE_SIZE + 168] += i;
+    for (int i = 0; i < 65536; i++){
+      buffer[i*CACHELINE_SIZE + 31] += i;
+      buffer[i*CACHELINE_SIZE + 41] += i;
     }
   }
 }
