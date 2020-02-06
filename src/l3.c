@@ -424,7 +424,7 @@ static int probemap(l3pp_t l3) {
   for (int i = 0; i < vl_len(groups); i++){
     l3->groups[i] = vl_get(groups, i);
     printf("Group %d contains %d sets\n", i, vl_len(l3->groups[i]));
-    for(int j=0; j < vl_len(l3->group[i]); j++){
+    for(int j=0; j < vl_len(l3->groups[i]); j++){
       printf("Line %d\n", j);
     }
   }
