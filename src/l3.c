@@ -370,7 +370,7 @@ static vlist_t map(l3pp_t l3, vlist_t lines) {
 #endif //DEBUG
     if (c == NULL) {
       while (vl_len(es))
-	vl_push(lines, vl_del(es, 0));
+	     vl_push(lines, vl_del(es, 0));
 #ifdef DEBUG
       printf("set %3d: lines: %4d expanded: %4d c=NULL\n", vl_len(groups), d_l1, d_l2);
 #endif // DEBUG
@@ -423,7 +423,10 @@ static int probemap(l3pp_t l3) {
   l3->groups = (vlist_t *)calloc(l3->ngroups, sizeof(vlist_t));
   for (int i = 0; i < vl_len(groups); i++){
     l3->groups[i] = vl_get(groups, i);
-    printf("Set %d contains %d lines\n", i, vl_len(l3->groups[i]));
+    printf("Group %d contains %d sets\n", i, vl_len(l3->groups[i]));
+    for(int j=0; j < vl_len(l3->group[i]); j++){
+      printf("Line %d\n", j);
+    }
   }
   vl_free(groups);
   vl_free(pages);
