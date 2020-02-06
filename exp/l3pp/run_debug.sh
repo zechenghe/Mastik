@@ -14,13 +14,12 @@ SENSITIVE_PROGRAM=sensitive2
 
 for SPLIT in TRAINING TESTING
 do
-  for HPC_COLLECTION in L23 L23
+  for HPC_COLLECTION in DEBUG L23
   do
     HPC_SUFFIX=${HPC_COLLECTION}_${SPLIT}
     status "Sensitive program running"
     taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
-    echo $SENSITIVE_PID
 
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 1000 > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
     QUICKHPC_PID=$!
@@ -37,7 +36,6 @@ do
     status "Sensitive program running"
     taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
-    echo $SENSITIVE_PID
 
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 1000 > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
     QUICKHPC_PID=$!
