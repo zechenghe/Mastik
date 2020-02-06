@@ -35,6 +35,7 @@
 #include "timestats.h"
 #include "low.h"
 
+#define ZCHE_DEGUB 1
 #define CHECKTIMES 16
 
 /*
@@ -255,7 +256,9 @@ int probecount(void *pp) {
     if (s > L3_THRESHOLD)
       rv++;
   } while (p != (void *) pp);
-  printf("Total= %d rv= %d\n", total, rv);
+  #ifdef DEBUG
+    printf("Total= %d rv= %d\n", total, rv);
+  #endif
   return rv;
 }
 
