@@ -70,8 +70,11 @@ int main(int ac, char **av) {
 
   int loops = 0;
   while(1){
-    printf("Probe loops %d \n", loops);
+    if (loops % 1000){
+      printf("Probe loops %d \n", loops);
+    }
     l3_repeatedprobecount(l3, samples, res, 0);
+    loops += 1;
   }
 /*
   for (int i = 0; i < samples; i++) {
