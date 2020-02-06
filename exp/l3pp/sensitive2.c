@@ -9,7 +9,7 @@
 #define PAGE_SIZE 4096
 
 int main(int ac, char **av) {
-  int npages = 4096;
+  int npages = 1024;
   char* buffer = (char*)mmap(0, npages * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, -1, 0);
   if (!buffer){
     printf("mmap error");
