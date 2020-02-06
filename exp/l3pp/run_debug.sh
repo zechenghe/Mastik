@@ -28,6 +28,7 @@ do
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
 
+    sleep 1
 
     status "Spy running"
     taskset 0x2000 ./spy 1000000 &
