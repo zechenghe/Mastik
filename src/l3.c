@@ -256,7 +256,7 @@ int probecount(void *pp) {
     if (s > L3_THRESHOLD)
       rv++;
   } while (p != (void *) pp);
-  #ifdef DEBUG
+  #ifdef ZCHE_DEBUG
     printf("Total= %d rv= %d\n", total, rv);
   #endif
   return rv;
@@ -430,10 +430,12 @@ static int probemap(l3pp_t l3) {
   l3->groups = (vlist_t *)calloc(l3->ngroups, sizeof(vlist_t));
   for (int i = 0; i < vl_len(groups); i++){
     l3->groups[i] = vl_get(groups, i);
-    printf("Group %d contains %d sets\n", i, vl_len(l3->groups[i]));
-    for(int j=0; j < vl_len(l3->groups[i]); j++){
-      vlist_t temp = vl_get(l3->groups[i], j);
-      printf("Set %d contains %d lines\n", j, vl_len(temp));
+    #ifdef ZCHE_DEBUG
+      printf("Group %d contains %d sets\n", i, vl_len(l3->groups[i]));
+      for(int j=0; j < vl_len(l3->groups[i]); j++){
+        vlist_t temp = vl_get(l3->groups[i], j);
+        printf("Set %d contains %d lines\n", j, vl_len(temp));
+    #endif
     }
   }
   vl_free(groups);
