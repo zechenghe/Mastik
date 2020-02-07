@@ -20,7 +20,6 @@ do
     status "Sensitive program running"
     taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
-    echo $SENSITIVE_PID
 
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 1000 > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
     QUICKHPC_PID=$!
@@ -29,6 +28,7 @@ do
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
 
+    sleep 1
 
     status "Spy running"
     taskset 0x2000 ./spy 1000000 &
@@ -37,7 +37,6 @@ do
     status "Sensitive program running"
     taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
-    echo $SENSITIVE_PID
 
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 1000 > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
     QUICKHPC_PID=$!
@@ -46,5 +45,8 @@ do
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
     kill $SPY_PID
+
+    sleep 1
+
   done
 done
