@@ -14,7 +14,7 @@ SENSITIVE_PROGRAM=sensitive2
 
 for SPLIT in TRAINING TESTING
 do
-  for HPC_COLLECTION in L1 L23 MISC DEBUG
+  for HPC_COLLECTION in L1 L23 INS
   do
     HPC_SUFFIX=${HPC_COLLECTION}_${SPLIT}
     status "Sensitive program running"
