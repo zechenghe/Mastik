@@ -12,7 +12,7 @@ mkdir -p $OUTPUT_FOLDER
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 SENSITIVE_PROGRAM=sensitive2
 
-for SPLIT in TRAINING TESTING
+for SPLIT in TESTING
 do
   for HPC_COLLECTION in L23
   do
