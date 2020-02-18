@@ -14,7 +14,7 @@ SENSITIVE_PROGRAM=sensitive2
 
 for SPLIT in TRAINING TESTING
 do
-  for HPC_COLLECTION in L1 L23 INS
+  for HPC_COLLECTION in L23
   do
     HPC_SUFFIX=${HPC_COLLECTION}_${SPLIT}
     status "Sensitive program running"
@@ -24,11 +24,11 @@ do
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 100000 > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
-    sleep 20
+    sleep 100
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
 
-    sleep 1
+    sleep 2
 
     status "Spy running"
     taskset 0x2000 ./spy 1000000 &
@@ -41,12 +41,12 @@ do
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 100000 > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
-    sleep 20
+    sleep 100
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
     kill $SPY_PID
 
-    sleep 1
+    sleep 2
 
   done
 done
