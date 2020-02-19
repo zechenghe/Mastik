@@ -12,7 +12,7 @@
 int main(int ac, char **av) {
   int npages = 1024;
   int i = 0;
-  char temp = 0;
+  int temp = 0;
 
   char* buffer = (char*)mmap(0, npages * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, -1, 0);
   if (!buffer){
