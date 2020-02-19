@@ -10,7 +10,7 @@
 #define CACHELINE_SIZE 64
 
 int main(int ac, char **av) {
-  int npages = 1;
+  int npages = 1024;
   int i = 0;
   int temp = 0;
 
