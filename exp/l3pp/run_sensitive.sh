@@ -12,7 +12,7 @@ OUTPUT_FOLDER=$EXP_ROOT_DIR/l3pp/results
 mkdir -p $OUTPUT_FOLDER
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
-SENSITIVE_PROGRAM=sensitive2
+SENSITIVE_PROGRAM=sensitive3
 
 for SPLIT in TRAINING TESTING
 do
@@ -26,7 +26,7 @@ do
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 100000 > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
-    sleep 3600
+    sleep 30
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
 
@@ -43,7 +43,7 @@ do
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 100000 > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
-    sleep 3600
+    sleep 30
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
     kill $SPY_PID
