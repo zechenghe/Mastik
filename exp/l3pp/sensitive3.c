@@ -27,7 +27,7 @@ int main(int ac, char **av) {
   asm volatile("mfence");
   asm volatile("mfence");
 
-  printf("Start For Loop");
+  printf("Start For Loop\n");
 
   for (;;) {
     for (i = 0; i < 65536; i++){
