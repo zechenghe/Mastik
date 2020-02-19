@@ -27,6 +27,8 @@ int main(int ac, char **av) {
   asm volatile("mfence");
   asm volatile("mfence");
 
+  printf("Start For Loop");
+
   for (;;) {
     for (i = 0; i < 65536; i++){
       temp = buffer[i*CACHELINE_SIZE + 31];
