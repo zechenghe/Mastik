@@ -30,7 +30,7 @@ int main(int ac, char **av) {
   for (;;) {
     for (i = 0; i < 65536; i++){
       temp = buffer[i*CACHELINE_SIZE + 31];
-      temp += i;
+      //temp += i;
     }
   }
 }
