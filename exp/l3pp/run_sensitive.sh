@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 quickhpc="/home/zechengh/quickhpc/quickhpc"
 
 ROOT_DIR="/home/zechengh/Mastik"
@@ -12,9 +14,9 @@ mkdir -p $OUTPUT_FOLDER
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 SENSITIVE_PROGRAM=sensitive2
 
-for SPLIT in TESTING
+for SPLIT in TRAINING TESTING
 do
-  for HPC_COLLECTION in L23
+  for HPC_COLLECTION in L1 L23 INS
   do
     HPC_SUFFIX=${HPC_COLLECTION}_${SPLIT}
     status "Sensitive program running"
