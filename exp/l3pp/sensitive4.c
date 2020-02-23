@@ -11,17 +11,16 @@
 #define NPAGES 1024;
 
 int main(int ac, char **av) {
-  long long i = 0;
-  int temp = 0;
+  char temp = 0;
 
-  char* buffer = (char*)mmap(0, npages * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, -1, 0);
+  char* buffer = (char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, -1, 0);
   if (!buffer){
     printf("mmap error");
     exit(1);
   }
 
   srand(0);
-  for (i = 0; i < npages * PAGE_SIZE; i++){
+  for (i = 0; i < NPAGES * PAGE_SIZE; i++){
     asm volatile ("clflush 0(%0)": : "r" (buffer + i):);
   }
 
