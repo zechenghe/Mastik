@@ -31,6 +31,6 @@ int main(int ac, char **av) {
   printf("Start For Loop\n");
 
   while(1){
-      temp = buffer[rand()];
+      temp = buffer[rand() % npages * PAGE_SIZE];
   }
 }
