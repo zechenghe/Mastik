@@ -27,8 +27,8 @@ int main(int ac, char **av) {
 
   asm volatile("mfence");
   asm volatile("mfence");
-  
-  printf("RAND_MAX", RAND_MAX)
+
+  printf("RAND_MAX", RAND_MAX);
   printf("Start For Loop\n");
 
   while(1){
