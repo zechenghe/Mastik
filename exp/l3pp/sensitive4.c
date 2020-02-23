@@ -20,7 +20,7 @@ int main(int ac, char **av) {
   }
 
   srand(0);
-  for (int i = 0; i < NPAGES * PAGE_SIZE; i++){
+  for (i = 0; i < NPAGES * PAGE_SIZE; i++){
     asm volatile ("clflush 0(%0)": : "r" (buffer + i):);
   }
 
