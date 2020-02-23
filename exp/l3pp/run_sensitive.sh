@@ -14,6 +14,7 @@ rm -f $EXP_ROOT_DIR/l3pp/results/*
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 SENSITIVE_PROGRAM=sensitive4
+INTERVAL_US=10000
 
 for SPLIT in TRAINING TESTING
 do
@@ -24,7 +25,7 @@ do
     taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
 
-    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 1000 > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
+    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
     sleep 10
@@ -41,7 +42,7 @@ do
     taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
 
-    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 1000 > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
+    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
     sleep 10
