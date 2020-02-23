@@ -8,9 +8,9 @@
 
 #define PAGE_SIZE 4096
 #define CACHELINE_SIZE 64
+#define NPAGES 1024;
 
 int main(int ac, char **av) {
-  int npages = 1024;
   long long i = 0;
   int temp = 0;
 
@@ -32,6 +32,6 @@ int main(int ac, char **av) {
   printf("Start For Loop\n");
 
   while(1){
-      temp = buffer[rand() % npages * PAGE_SIZE];
+      temp = buffer[rand() % NPAGES * PAGE_SIZE];
   }
 }
