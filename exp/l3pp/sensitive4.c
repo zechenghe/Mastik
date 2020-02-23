@@ -12,7 +12,6 @@
 
 int main(int ac, char **av) {
   char temp = 0;
-
   char* buffer = (char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, -1, 0);
   if (!buffer){
     printf("mmap error");
@@ -20,7 +19,7 @@ int main(int ac, char **av) {
   }
 
   srand(0);
-  for (i = 0; i < NPAGES * PAGE_SIZE; i++){
+  for (int i = 0; i < NPAGES * PAGE_SIZE; i++){
     asm volatile ("clflush 0(%0)": : "r" (buffer + i):);
   }
 
