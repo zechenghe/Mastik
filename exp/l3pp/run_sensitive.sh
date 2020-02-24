@@ -28,7 +28,7 @@ do
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
-    sleep 10
+    sleep 600
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
 
@@ -45,7 +45,7 @@ do
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
-    sleep 10
+    sleep 600
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
     kill $SPY_PID
