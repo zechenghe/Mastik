@@ -31,5 +31,6 @@ int main(int ac, char **av) {
 
   while(1){
       temp = buffer[rand() % (NPAGES * PAGE_SIZE)];
+      asm volatile("mfence");
   }
 }
