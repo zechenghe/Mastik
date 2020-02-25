@@ -34,6 +34,6 @@ int main(int ac, char **av) {
       exit(1);
     }
     p = map_offset(binary, offset);
-    printf("%s %x\n",monitor[i], p);
+    printf("%s %p\n",monitor[i], p);
   }
 }
