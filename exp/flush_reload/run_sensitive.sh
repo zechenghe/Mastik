@@ -13,7 +13,7 @@ mkdir -p $OUTPUT_FOLDER
 rm -f $EXP_ROOT_DIR/flush_reload/results/*
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
-SENSITIVE_PROGRAM=sensitive5
+SENSITIVE_PROGRAM=sensitive6
 INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=100
 
