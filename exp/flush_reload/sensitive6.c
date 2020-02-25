@@ -22,8 +22,7 @@ int nmonitor = sizeof(monitor)/sizeof(monitor[0]);
 int main(int ac, char **av) {
   char *binary = av[1];
   char temp = 0;
-  void **p = malloc(nmonitor*sizeof(void*));
-
+  char **p = malloc(nmonitor*sizeof(char*));
 
   if (binary == NULL)
     usage(av[0]);
@@ -39,7 +38,6 @@ int main(int ac, char **av) {
     printf("%s %p\n",monitor[i], p[i]);
   }
 
-
   for (int i = 0; i < nmonitor; i++){
     asm volatile ("clflush 0(%0)": : "r" (p + i):);
   }
@@ -49,7 +47,9 @@ int main(int ac, char **av) {
 
   while(1){
       temp = *p[0];
+      asm volatile("mfence");
       temp = *p[1];
+      asm volatile("mfence");
       temp = *p[2];
       asm volatile("mfence");
   }
