@@ -15,6 +15,7 @@ rm -f $EXP_ROOT_DIR/flush_reload/results/*
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 SENSITIVE_PROGRAM=sensitive4
 INTERVAL_US=10000
+DATA_COLLECTION_TIME_S=100
 
 for SPLIT in TRAINING TESTING
 do
@@ -28,7 +29,7 @@ do
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
-    sleep 10
+    sleep $DATA_COLLECTION_TIME_S
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
 
@@ -45,7 +46,7 @@ do
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
-    sleep 100
+    sleep $DATA_COLLECTION_TIME_S
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
     kill $SPY_PID
