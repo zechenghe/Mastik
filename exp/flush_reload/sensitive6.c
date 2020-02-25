@@ -21,7 +21,7 @@ int nmonitor = sizeof(monitor)/sizeof(monitor[0]);
 
 int main(int ac, char **av) {
   char *binary = av[1];
-  char *p = Null;
+  char *p = NULL;
 
   if (binary == NULL)
     usage(av[0]);
@@ -34,6 +34,6 @@ int main(int ac, char **av) {
       exit(1);
     }
     p = map_offset(binary, offset);
-    print("%s %x\n",monitor[i], p);
+    printf("%s %x\n",monitor[i], p);
   }
 }
