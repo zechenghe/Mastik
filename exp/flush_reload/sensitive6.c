@@ -21,7 +21,7 @@ int nmonitor = sizeof(monitor)/sizeof(monitor[0]);
 
 int main(int ac, char **av) {
   char *binary = av[1];
-  void **p = malloc(3*sizeof(void*));
+  void **p = malloc(nmonitor*sizeof(void*));
 
   if (binary == NULL)
     usage(av[0]);
@@ -38,8 +38,8 @@ int main(int ac, char **av) {
   }
 
 
-  for (int i = 0; i < NPAGES * PAGE_SIZE; i++){
-    asm volatile ("clflush 0(%0)": : "r" (buffer + i):);
+  for (int i = 0; i < nmonitor; i++){
+    asm volatile ("clflush 0(%0)": : "r" (p + i):);
   }
 
   asm volatile("mfence");
