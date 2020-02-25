@@ -1,3 +1,7 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <symbol.h>
 #include <fr.h>
 #include <util.h>
@@ -13,10 +17,11 @@ void usage(const char *prog) {
   exit(1);
 }
 
+int nmonitor = sizeof(monitor)/sizeof(monitor[0]);
 
 int main(int ac, char **av) {
   char *binary = av[1];
-  char *p = NULL;
+  char *p = Null;
 
   if (binary == NULL)
     usage(av[0]);
