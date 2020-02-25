@@ -35,7 +35,7 @@ do
     sleep 2
 
     status "Spy running"
-    taskset 0x2000 ./spy 100000000 &
+    taskset 0x2000 ./spy $GPG &
     SPY_PID=$!
 
     status "Sensitive program running"
