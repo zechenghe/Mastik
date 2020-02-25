@@ -21,7 +21,7 @@ int nmonitor = sizeof(monitor)/sizeof(monitor[0]);
 
 int main(int ac, char **av) {
   char *binary = av[1];
-  void *p = NULL;
+  void **p = malloc(3*sizeof(void*));
 
   if (binary == NULL)
     usage(av[0]);
@@ -33,7 +33,20 @@ int main(int ac, char **av) {
       fprintf(stderr, "Cannot find %s in %s\n", monitor[i], binary);
       exit(1);
     }
-    p = map_offset(binary, offset);
-    printf("%s %p\n",monitor[i], p);
+    p[i] = map_offset(binary, offset);
+    printf("%s %p\n",monitor[i], p[i]);
   }
+
+
+  for (int i = 0; i < NPAGES * PAGE_SIZE; i++){
+    asm volatile ("clflush 0(%0)": : "r" (buffer + i):);
+  }
+
+  asm volatile("mfence");
+  asm volatile("mfence");
+
+  while(1){
+
+  }
+
 }
