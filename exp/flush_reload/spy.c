@@ -68,11 +68,6 @@ int main(int ac, char **av) {
     fr_trace(fr, SAMPLES, res, SLOT, THRESHOLD, 500);
     printf("Gpg running %d\n",l);
     l += 1;
-//    for (int i = 0; i < l; i++) {
-//      for (int j = 0; j < nmonitor; j++)
-//        printf("%d ", res[i * nmonitor + j]);
-//      putchar('\n');
-//    }
   }
 
   free(res);
