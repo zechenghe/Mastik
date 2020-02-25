@@ -21,7 +21,9 @@ int nmonitor = sizeof(monitor)/sizeof(monitor[0]);
 
 int main(int ac, char **av) {
   char *binary = av[1];
+  char temp = 0;
   void **p = malloc(nmonitor*sizeof(void*));
+
 
   if (binary == NULL)
     usage(av[0]);
@@ -46,7 +48,10 @@ int main(int ac, char **av) {
   asm volatile("mfence");
 
   while(1){
-
+      temp = *p[0];
+      temp = *p[1];
+      temp = *p[2];
+      asm volatile("mfence");
   }
 
 }
