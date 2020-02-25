@@ -5,12 +5,13 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 #define PAGE_SIZE 4096
 #define CACHELINE_SIZE 64
 #define NPAGES 1024
 
-int main(int ac, char **av) {
+int main(int argc, char **argv) {
   char temp = 0;
   int fd = open(argv[1]);
   char* buffer = (char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, fd, 0);
