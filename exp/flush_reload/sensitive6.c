@@ -21,7 +21,7 @@ int nmonitor = sizeof(monitor)/sizeof(monitor[0]);
 
 int main(int ac, char **av) {
   char *binary = av[1];
-  char *p = NULL;
+  void *p = NULL;
 
   if (binary == NULL)
     usage(av[0]);
