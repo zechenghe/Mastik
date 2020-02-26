@@ -19,7 +19,7 @@ INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=100
 
 ps -ef | grep $SENSITIVE_PROGRAM | awk '{print $3}' | xargs kill
-ps -ef | grep spy | awk '{print $3;}' | xargs kill
+ps -ef | grep $SPY_PROGRAM | awk '{print $3;}' | xargs kill
 
 for SPLIT in TRAINING TESTING
 do
