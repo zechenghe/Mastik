@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <fr.h>
 #include <util.h>
+#include <symbol.h>
 
 #define PAGE_SIZE 4096
 #define CACHELINE_SIZE 64
@@ -36,7 +37,7 @@ int main(int argc, char **argv) {
   for (int i = 0; i < nmonitor; i++) {
     uint64_t offset = sym_getsymboloffset(argv[1], monitor[i]);
     if (offset == ~0ULL) {
-      fprintf(stderr, "Cannot find %s in %s\n", monitor[i], binary);
+      fprintf(stderr, "Cannot find %s in %s\n", monitor[i], argv[1]);
       exit(1);
     }
     p[i] = map_offset(argv[1], offset);
