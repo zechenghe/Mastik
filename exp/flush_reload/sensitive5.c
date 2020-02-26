@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
 
   //mapaddress = mmap(0, sysconf(_SC_PAGE_SIZE), PROT_READ, MAP_PRIVATE, fd, offset & ~(sysconf(_SC_PAGE_SIZE) -1));
   char* buffer = (char*)mmap(0, PAGE_SIZE, PROT_READ, MAP_PRIVATE|MAP_HUGETLB, fd, 0);
-  if (!buffer){
+  if (buffer == MAP_FAILED){
     printf("mmap error");
     exit(1);
   }
