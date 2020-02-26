@@ -56,7 +56,8 @@ int main(int argc, char **argv) {
   printf("Start For Loop\n");
 
   while(1){
-      temp = buffer[rand() % (NPAGES * PAGE_SIZE)];
+      temp = buffer[offset];
+      //temp = buffer[rand() % (NPAGES * PAGE_SIZE)];
       asm volatile("mfence");
   }
 }
