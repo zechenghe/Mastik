@@ -10,7 +10,7 @@
 #include <fr.h>
 #include <util.h>
 #include <symbol.h>
-#include <asm/io.h>
+#include <sys/io.h>
 
 #define PAGE_SIZE 4096
 #define CACHELINE_SIZE 64
@@ -29,15 +29,14 @@ int main(int argc, char **argv) {
   printf("sysconf(SC_PAGE_SIZE) %ld\n", sysconf(_SC_PAGE_SIZE));
   //mapaddress = mmap(0, sysconf(_SC_PAGE_SIZE), PROT_READ, MAP_PRIVATE, fd, offset & ~(sysconf(_SC_PAGE_SIZE) -1));
   //(char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, -1, 0);
-
   //char* buffer = (char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, fd, 0);
-  char* buffer = (char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, fd, 0);
+
+  char* buffer = (char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
   if (buffer == MAP_FAILED){
     printf("mmap error\n");
     exit(1);
   }
   printf("Buffer %p\n",buffer);
-  printf("Buffer physical address %p\n", (void *)virt_to_phys(buffer));
 
   char **p = malloc(nmonitor*sizeof(char*));
   fr_t fr = fr_prepare();
