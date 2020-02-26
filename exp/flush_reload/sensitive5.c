@@ -2,6 +2,7 @@
 #include <sys/shm.h>
 #include <sys/types.h>
 #include <sys/mman.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
