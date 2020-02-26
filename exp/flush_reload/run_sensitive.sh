@@ -18,7 +18,8 @@ SPY_PROGRAM=./spy
 INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=100
 
-ps -ef | grep $SENSITIVE_PROGRAM | awk '{print $2;}'
+SENP=$"ps -ef | grep $SENSITIVE_PROGRAM | awk '{print $2;}'"
+echo $SENP
 ps -ef | grep spy | awk '{print $2;}'
 
 for SPLIT in TRAINING TESTING
