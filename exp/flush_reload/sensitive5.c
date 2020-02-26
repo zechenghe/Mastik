@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
   //(char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, -1, 0);
 
   //char* buffer = (char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, fd, 0);
-  char* buffer = (char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, fd, 0);
+  char* buffer = (char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_HUGETLB, fd, 0);
   if (buffer == MAP_FAILED){
     printf("mmap error\n");
     exit(1);
