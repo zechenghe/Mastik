@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
       exit(1);
     }
     p[i] = map_offset(argv[1], offset);
-    printf("%s %p\n",monitor[i], p[i]);
+    printf("%s %p, offset %p\n",monitor[i], p[i], offset);
   }
 
   srand(0);
