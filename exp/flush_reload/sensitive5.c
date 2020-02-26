@@ -34,8 +34,9 @@ int main(int argc, char **argv) {
 
   char **p = malloc(nmonitor*sizeof(char*));
   fr_t fr = fr_prepare();
+  uint64_t offset = 0;
   for (int i = 0; i < nmonitor; i++) {
-    uint64_t offset = sym_getsymboloffset(argv[1], monitor[i]);
+    offset = sym_getsymboloffset(argv[1], monitor[i]);
     if (offset == ~0ULL) {
       fprintf(stderr, "Cannot find %s in %s\n", monitor[i], argv[1]);
       exit(1);
