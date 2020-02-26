@@ -14,10 +14,11 @@ rm -f $EXP_ROOT_DIR/flush_reload/results/*
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 SENSITIVE_PROGRAM=sensitive6
+SPY_PROGRAM=./spy
 INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=100
 
-ps -ef | grep sensitive | awk '{print $2;}' | xargs kill
+ps -ef | grep $SENSITIVE_PROGRAM | awk '{print $2;}' | xargs kill
 ps -ef | grep spy | awk '{print $2;}' | xargs kill
 
 for SPLIT in TRAINING TESTING
@@ -39,7 +40,7 @@ do
     sleep 2
 
     status "Spy running"
-    taskset 0x2000 ./spy $GPG &
+    taskset 0x2000 $SPY_PROGRAM $GPG &
     SPY_PID=$!
 
     status "Sensitive program running"
