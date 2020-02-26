@@ -23,6 +23,9 @@ int main(int ac, char **av) {
   char *binary = av[1];
   char temp = 0;
   char **p = malloc(nmonitor*sizeof(char*));
+  char *p0 = NULL;
+  char *p1 = NULL;
+  char *p2 = NULL;
 
   if (binary == NULL)
     usage(av[0]);
@@ -42,15 +45,19 @@ int main(int ac, char **av) {
     asm volatile ("clflush 0(%0)": : "r" (p + i):);
   }
 
+  p0 = p[0];
+  p1 = p[1];
+  p2 = p[2];
+
   asm volatile("mfence");
   asm volatile("mfence");
 
   while(1){
-      temp = *p[0];
+      temp = *p0;
       asm volatile("mfence");
-      temp = *p[1];
+      temp = *p1;
       asm volatile("mfence");
-      temp = *p[2];
+      temp = *p2;
       asm volatile("mfence");
   }
 
