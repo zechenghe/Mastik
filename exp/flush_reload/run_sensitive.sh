@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#set -euxo pipefail
+set -u
 
 quickhpc="/home/zechengh/quickhpc/quickhpc"
 
@@ -18,8 +18,8 @@ SPY_PROGRAM=./spy
 INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=100
 
-ps -ef | awk '/sensitive6/ {print $2;}' | xargs kill
-#ps -ef | grep $SPY_PROGRAM | awk '{print $2;}' | xargs kill
+ps -ef | grep $SENSITIVE_PROGRAM | awk '{print $2;}' | xargs kill
+ps -ef | grep $SPY_PROGRAM | awk '{print $2;}' | xargs kill
 
 for SPLIT in TRAINING TESTING
 do
