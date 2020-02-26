@@ -16,7 +16,7 @@ GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 SENSITIVE_PROGRAM=sensitive5
 SPY_PROGRAM=./spy
 INTERVAL_US=100000
-DATA_COLLECTION_TIME_S=100
+DATA_COLLECTION_TIME_S=20
 
 ps -ef | grep $SENSITIVE_PROGRAM | awk '{print $2;}' | xargs kill
 ps -ef | grep $SPY_PROGRAM | awk '{print $2;}' | xargs kill
