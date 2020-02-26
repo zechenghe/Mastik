@@ -18,7 +18,7 @@ SPY_PROGRAM=./spy
 INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=100
 
-SEN="$(ps -ef | grep $SENSITIVE_PROGRAM)"
+SEN="$(ps -ef | grep $SENSITIVE_PROGRAM) | awk '{print $2; print $8}'"
 echo $SEN
 ps -ef | grep spy | awk '{print $2;}'
 
