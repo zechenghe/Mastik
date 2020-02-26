@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#set -euxo pipefail
+set -euxo pipefail
 
 quickhpc="/home/zechengh/quickhpc/quickhpc"
 
