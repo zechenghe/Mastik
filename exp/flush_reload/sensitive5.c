@@ -25,7 +25,7 @@ int nmonitor = sizeof(monitor)/sizeof(monitor[0]);
 int main(int argc, char **argv) {
   char temp = 0;
   int fd = open(argv[1], O_RDONLY);
-
+  printf("sysconf(SC_PAGE_SIZE) %d\n", sysconf(_SC_PAGE_SIZE));
   //mapaddress = mmap(0, sysconf(_SC_PAGE_SIZE), PROT_READ, MAP_PRIVATE, fd, offset & ~(sysconf(_SC_PAGE_SIZE) -1));
   //(char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, -1, 0);
 
@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
       exit(1);
     }
     p[i] = map_offset(argv[1], offset);
-    printf("%s %p, offset %p\n",monitor[i], p[i], offset);
+    printf("%s %p, offset %p\n",monitor[i], p[i], (void*)offset);
   }
 
   srand(0);
