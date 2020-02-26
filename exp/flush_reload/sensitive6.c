@@ -53,11 +53,11 @@ int main(int ac, char **av) {
   asm volatile("mfence");
 
   while(1){
-      temp = *p0;
+      temp = *p[0];
       asm volatile("mfence");
-      temp = *p1;
+      temp = *p[1];
       asm volatile("mfence");
-      temp = *p2;
+      temp = *p[2];
       asm volatile("mfence");
   }
 
