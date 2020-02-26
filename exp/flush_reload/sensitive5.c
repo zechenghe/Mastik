@@ -31,7 +31,6 @@ int main(int argc, char **argv) {
   printf("Buffer %p\n",buffer);
 
 
-  char temp = 0;
   char **p = malloc(nmonitor*sizeof(char*));
   fr_t fr = fr_prepare();
   for (int i = 0; i < nmonitor; i++) {
@@ -40,7 +39,7 @@ int main(int argc, char **argv) {
       fprintf(stderr, "Cannot find %s in %s\n", monitor[i], binary);
       exit(1);
     }
-    p[i] = map_offset(binary, offset);
+    p[i] = map_offset(argv[1], offset);
     printf("%s %p\n",monitor[i], p[i]);
   }
 
