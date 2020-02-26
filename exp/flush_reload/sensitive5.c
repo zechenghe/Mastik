@@ -10,7 +10,7 @@
 #include <fr.h>
 #include <util.h>
 #include <symbol.h>
-#include <sys/io.h>
+#include <asm/io.h>
 
 #define PAGE_SIZE 4096
 #define CACHELINE_SIZE 64
