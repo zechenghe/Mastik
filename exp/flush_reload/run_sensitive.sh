@@ -18,8 +18,8 @@ SPY_PROGRAM=./spy
 INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=100
 
-ps -ef | grep $SENSITIVE_PROGRAM | awk '{print $2 $8}'
-ps -ef | grep spy | awk '{print $2;}'
+ps -ef | grep $SENSITIVE_PROGRAM | awk '{print $3}' | xargs kill
+ps -ef | grep spy | awk '{print $3;}' | xargs kill
 
 for SPLIT in TRAINING TESTING
 do
