@@ -10,6 +10,7 @@
 #include <fr.h>
 #include <util.h>
 #include <symbol.h>
+#include <sys/io.h>
 
 #define PAGE_SIZE 4096
 #define CACHELINE_SIZE 64
@@ -25,7 +26,7 @@ int nmonitor = sizeof(monitor)/sizeof(monitor[0]);
 int main(int argc, char **argv) {
   char temp = 0;
   int fd = open(argv[1], O_RDONLY);
-  printf("sysconf(SC_PAGE_SIZE) %d\n", sysconf(_SC_PAGE_SIZE));
+  printf("sysconf(SC_PAGE_SIZE) %ld\n", sysconf(_SC_PAGE_SIZE));
   //mapaddress = mmap(0, sysconf(_SC_PAGE_SIZE), PROT_READ, MAP_PRIVATE, fd, offset & ~(sysconf(_SC_PAGE_SIZE) -1));
   //(char*)mmap(0, NPAGES * PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_HUGETLB, -1, 0);
 
@@ -36,7 +37,7 @@ int main(int argc, char **argv) {
     exit(1);
   }
   printf("Buffer %p\n",buffer);
-
+  printf("Buffer physical address %p\n", (void *)virt_to_phys(buffer));
 
   char **p = malloc(nmonitor*sizeof(char*));
   fr_t fr = fr_prepare();
