@@ -6,10 +6,19 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <fr.h>
+#include <util.h>
 
 #define PAGE_SIZE 4096
 #define CACHELINE_SIZE 64
 #define NPAGES 1024
+
+char *monitor[] = {
+  "mpih-mul.c:85",
+  "mpih-mul.c:271",
+  "mpih-div.c:356"
+};
+int nmonitor = sizeof(monitor)/sizeof(monitor[0]);
 
 int main(int argc, char **argv) {
   char temp = 0;
@@ -18,6 +27,21 @@ int main(int argc, char **argv) {
   if (!buffer){
     printf("mmap error");
     exit(1);
+  }
+  printf("Buffer %p\n",buffer);
+
+
+  char temp = 0;
+  char **p = malloc(nmonitor*sizeof(char*));
+  fr_t fr = fr_prepare();
+  for (int i = 0; i < nmonitor; i++) {
+    uint64_t offset = sym_getsymboloffset(argv[1], monitor[i]);
+    if (offset == ~0ULL) {
+      fprintf(stderr, "Cannot find %s in %s\n", monitor[i], binary);
+      exit(1);
+    }
+    p[i] = map_offset(binary, offset);
+    printf("%s %p\n",monitor[i], p[i]);
   }
 
   srand(0);
