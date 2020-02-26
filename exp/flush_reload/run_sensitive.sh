@@ -17,6 +17,9 @@ SENSITIVE_PROGRAM=sensitive6
 INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=100
 
+ps -ef | grep sensitive | awk '{print $2;}' | xargs kill
+ps -ef | grep spy | awk '{print $2;}' | xargs kill
+
 for SPLIT in TRAINING TESTING
 do
   for HPC_COLLECTION in L1 L23 INS
