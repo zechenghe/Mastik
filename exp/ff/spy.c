@@ -74,18 +74,14 @@ int main(int ac, char **av) {
   ff_probe(ff, res);
 
   int l;
-  do {
+  while(true) {
     // int ff_trace(ff_t ff, int max_records, uint16_t *results, int slot, int threshold, int max_idle)
     // return count;
-    l = ff_trace(ff, SAMPLES, res, SLOT, THRESHOLD, 500);
-
-    for (int i=0; i<ff->thresholdcap; i++){
-      printf("%d ", ff->thresholds[i]);
-    }
-    printf("l=%d ", l);
-    putchar('\n');
-
-  } while (l < 10000);
+    
+    ff_trace(ff, SAMPLES, res, SLOT, THRESHOLD, 500);
+    printf("Gpg running %d\n",l);
+    l += 1;
+  }
 
 /*
   for (int i = 0; i < l; i++) {
