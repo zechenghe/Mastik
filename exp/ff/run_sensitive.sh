@@ -8,9 +8,9 @@ ROOT_DIR="/home/zechengh/Mastik"
 EXP_ROOT_DIR=$ROOT_DIR/exp
 source $EXP_ROOT_DIR/exp_funcs.sh
 
-OUTPUT_FOLDER=$EXP_ROOT_DIR/flush_reload/results
+OUTPUT_FOLDER=$EXP_ROOT_DIR/ff/results
 mkdir -p $OUTPUT_FOLDER
-rm -f $EXP_ROOT_DIR/flush_reload/results/*
+rm -f $EXP_ROOT_DIR/ff/results/*
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 SENSITIVE_PROGRAM=sensitive5
