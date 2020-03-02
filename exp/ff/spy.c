@@ -74,10 +74,10 @@ int main(int ac, char **av) {
   ff_probe(ff, res);
 
   int l;
-  while(true) {
+  while(1) {
     // int ff_trace(ff_t ff, int max_records, uint16_t *results, int slot, int threshold, int max_idle)
     // return count;
-    
+
     ff_trace(ff, SAMPLES, res, SLOT, THRESHOLD, 500);
     printf("Gpg running %d\n",l);
     l += 1;
