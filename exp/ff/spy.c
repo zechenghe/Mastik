@@ -24,19 +24,11 @@
 #include <symbol.h>
 #include <ff.h>
 #include <util.h>
-#include <vlist.h>
 #include <assert.h>
 
 #define SAMPLES 100000
 #define SLOT	2000
 #define THRESHOLD 100
-
-struct ff {
-  vlist_t vl;
-  int modified;
-  uint16_t *thresholds;
-  int thresholdcap;
-};
 
 char *monitor[] = {
   "mpih-mul.c:85",
