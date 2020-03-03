@@ -51,8 +51,8 @@ QUICKHPC_MISC_PID=$!
 
 sleep 10
 
-kill $SENSITIVE_PROGRAM_L1_PID
-kill $SENSITIVE_PROGRAM_L3_PID
-kill $QUICKHPC_L1_PID
-kill $QUICKHPC_L23_PID
-kill $QUICKHPC_MISC_PID
+ps -ef | grep $quickhpc | awk '{print $2;}' | xargs kill
+ps -ef | grep $SENSITIVE_PROGRAM_L1 | awk '{print $2;}' | xargs kill
+ps -ef | grep $SENSITIVE_PROGRAM_L3 | awk '{print $2;}' | xargs kill
+ps -ef | grep $SPY_PROGRAM_L1PP | awk '{print $2;}' | xargs kill
+ps -ef | grep $SPY_PROGRAM_FR | awk '{print $2;}' | xargs kill
