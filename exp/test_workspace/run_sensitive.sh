@@ -36,7 +36,7 @@ SENSITIVE_PROGRAM_L1_PID=$!
 
 sleep 1
 
-taskset 0x8 ./$SENSITIVE_PROGRAM_L3 $GPG&
+taskset 0x10 ./$SENSITIVE_PROGRAM_L3 $GPG&
 SENSITIVE_PROGRAM_L3_PID=$!
 
 sleep 1
@@ -45,7 +45,7 @@ taskset 0x20 $quickhpc -c hpc_config_L1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVA
 QUICKHPC_L1_PID=$!
 taskset 0x20 $quickhpc -c hpc_config_L23 -a $SENSITIVE_PROGRAM_L3_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_L23 &
 QUICKHPC_L23_PID=$!
-taskset 0x40 $quickhpc -c hpc_config_MISC -a $SENSITIVE_PROGRAM_L3_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_MISC &
+taskset 0x20 $quickhpc -c hpc_config_MISC -a $SENSITIVE_PROGRAM_L3_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_MISC &
 QUICKHPC_MISC_PID=$!
 
 sleep 2
