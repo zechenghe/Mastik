@@ -48,7 +48,7 @@ QUICKHPC_L23_PID=$!
 taskset 0x40 $quickhpc -c hpc_config_MISC -a $SENSITIVE_PROGRAM_L3_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_MISC &
 QUICKHPC_MISC_PID=$!
 
-sleep 10
+sleep 2
 
 ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
 ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
