@@ -23,9 +23,9 @@ SPY_PROGRAM_L3PP=./spy_l3pp
 SPY_PROGRAM_FF=./spy_ff
 SPY_PROGRAM_FR=./spy_fr
 
-ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs kill
-ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs kill
-ps -ef | grep "spy" | awk '{print $2;}' | xargs kill
+ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
+ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
+ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
 
 INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=20
@@ -50,6 +50,6 @@ QUICKHPC_MISC_PID=$!
 
 sleep 10
 
-ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs kill
-ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs kill
-ps -ef | grep "spy" | awk '{print $2;}' | xargs kill
+ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
+ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
+ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
