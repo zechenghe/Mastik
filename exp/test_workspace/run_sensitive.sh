@@ -23,10 +23,9 @@ SPY_PROGRAM_L3PP=./spy_l3pp
 SPY_PROGRAM_FF=./spy_ff
 SPY_PROGRAM_FR=./spy_fr
 
-ps -ef | grep $SENSITIVE_PROGRAM_L1 | awk '{print $2;}' | xargs kill
-ps -ef | grep $SENSITIVE_PROGRAM_L3 | awk '{print $2;}' | xargs kill
-ps -ef | grep $SPY_PROGRAM_L1PP | awk '{print $2;}' | xargs kill
-ps -ef | grep $SPY_PROGRAM_FR | awk '{print $2;}' | xargs kill
+ps -ef | grep $quickhpc | awk '{print $2;}' | xargs kill
+ps -ef | grep $SPY_PROGRAM | awk '{print $2;}' | xargs kill
+ps -ef | grep $SENSITIVE_PROGRAM | awk '{print $2;}' | xargs kill
 
 INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=20
@@ -52,7 +51,5 @@ QUICKHPC_MISC_PID=$!
 sleep 10
 
 ps -ef | grep $quickhpc | awk '{print $2;}' | xargs kill
-ps -ef | grep $SENSITIVE_PROGRAM_L1 | awk '{print $2;}' | xargs kill
-ps -ef | grep $SENSITIVE_PROGRAM_L3 | awk '{print $2;}' | xargs kill
-ps -ef | grep $SPY_PROGRAM_L1PP | awk '{print $2;}' | xargs kill
-ps -ef | grep $SPY_PROGRAM_FR | awk '{print $2;}' | xargs kill
+ps -ef | grep $SPY_PROGRAM | awk '{print $2;}' | xargs kill
+ps -ef | grep $SENSITIVE_PROGRAM | awk '{print $2;}' | xargs kill
