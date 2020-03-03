@@ -45,13 +45,14 @@ sleep 1
 taskset 0x20 $quickhpc -c hpc_config_L1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_L1 &
 QUICKHPC_L1_PID=$!
 taskset 0x20 $quickhpc -c hpc_config_L23 -a $SENSITIVE_PROGRAM_L3_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_L23 &
-QUICKHPC_L3_PID=$!
+QUICKHPC_L23_PID=$!
 taskset 0x20 $quickhpc -c hpc_config_MISC -a $SENSITIVE_PROGRAM_L3_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_MISC &
-QUICKHPC_L3_PID=$!
+QUICKHPC_MISC_PID=$!
 
 sleep 10
 
 kill $SENSITIVE_PROGRAM_L1_PID
 kill $SENSITIVE_PROGRAM_L3_PID
 kill $QUICKHPC_L1_PID
-kill $QUICKHPC_L3_PID
+kill $QUICKHPC_L23_PID
+kill $QUICKHPC_MISC_PID
