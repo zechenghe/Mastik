@@ -36,33 +36,16 @@ SENSITIVE_PROGRAM_L1_PID=$!
 
 sleep 1
 
-taskset 0x10 ./$SENSITIVE_PROGRAM_L3 $GPG&
+taskset 0x40 ./$SENSITIVE_PROGRAM_L3 $GPG&
 SENSITIVE_PROGRAM_L3_PID1=$!
 
 sleep 1
 
-taskset 0x10 ./$SENSITIVE_PROGRAM_L3 $GPG&
-SENSITIVE_PROGRAM_L3_PID2=$!
-
-sleep 1
-
-taskset 0x10 ./$SENSITIVE_PROGRAM_L3 $GPG&
-SENSITIVE_PROGRAM_L3_PID3=$!
-
-sleep 1
-
-taskset 0x10 ./$SENSITIVE_PROGRAM_L3 $GPG&
-SENSITIVE_PROGRAM_L3_PID4=$!
-
-sleep 1
-
 taskset 0x40 $quickhpc -c hpc_config_L1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_L1 &
+taskset 0x40 $quickhpc -c hpc_config_INS -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_INS &
 taskset 0x40 $quickhpc -c hpc_config_L23 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_L23 &
-taskset 0x40 $quickhpc -c hpc_config_INS -a $SENSITIVE_PROGRAM_L3_PID2 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_INS &
-taskset 0x40 $quickhpc -c hpc_config_BR -a $SENSITIVE_PROGRAM_L3_PID3 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_BR &
-taskset 0x40 $quickhpc -c hpc_config_BR -a $SENSITIVE_PROGRAM_L3_PID4 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_BR2 &
 
-sleep 2
+sleep 10
 
 ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
 ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
