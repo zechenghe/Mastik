@@ -31,18 +31,48 @@ INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=20
 
 
-taskset 0x10 ./$SENSITIVE_PROGRAM_L1 &
+taskset 0x4 ./$SENSITIVE_PROGRAM_L1 &
 SENSITIVE_PROGRAM_L1_PID=$!
 
 sleep 1
 
-taskset 0x40 ./$SENSITIVE_PROGRAM_L3 $GPG&
+taskset 0x8 ./$SENSITIVE_PROGRAM_L3 $GPG&
 SENSITIVE_PROGRAM_L3_PID1=$!
 
 sleep 1
 
-taskset 0x40 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL1 &
-taskset 0x40 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL3 &
+taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL1 &
+taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL3 &
+
+sleep 10
+
+ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
+ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
+ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
+
+sleep 1
+
+
+
+
+# Flush reload attack
+
+taskset 0x2000 $SPY_PROGRAM_FR $GPG &
+
+sleep 1
+
+taskset 0x4 ./$SENSITIVE_PROGRAM_L1 &
+SENSITIVE_PROGRAM_L1_PID=$!
+
+sleep 1
+
+taskset 0x8 ./$SENSITIVE_PROGRAM_L3 $GPG&
+SENSITIVE_PROGRAM_L3_PID1=$!
+
+sleep 1
+
+taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL1 &
+taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL3 &
 
 sleep 10
 
