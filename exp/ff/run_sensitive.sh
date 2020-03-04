@@ -15,7 +15,7 @@ rm -f $EXP_ROOT_DIR/ff/results/*
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 SENSITIVE_PROGRAM=sensitive5
 SPY_PROGRAM=./spy
-INTERVAL_US=10000
+INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=40
 
 ps -ef | grep $SENSITIVE_PROGRAM | awk '{print $2;}' | xargs kill
