@@ -49,12 +49,13 @@ sleep 1
 taskset 0x10 ./$SENSITIVE_PROGRAM_L3 $GPG&
 SENSITIVE_PROGRAM_L3_PID3=$!
 
+sleep 1
 
 taskset 0x40 $quickhpc -c hpc_config_L1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_L1 &
 QUICKHPC_L1_PID=$!
 taskset 0x40 $quickhpc -c hpc_config_L23 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_L23 &
 QUICKHPC_L23_PID=$!
-taskset 0x40 $quickhpc -c hpc_config_MISC -a $SENSITIVE_PROGRAM_L3_PID2 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_MISC &
+taskset 0x40 $quickhpc -c hpc_config_INS -a $SENSITIVE_PROGRAM_L3_PID2 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_INS &
 QUICKHPC_MISC_PID=$!
 taskset 0x40 $quickhpc -c hpc_config_BR -a $SENSITIVE_PROGRAM_L3_PID3 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_BR &
 QUICKHPC_MISC_PID=$!
