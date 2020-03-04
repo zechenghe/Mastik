@@ -41,8 +41,8 @@ SENSITIVE_PROGRAM_L3_PID1=$!
 
 sleep 1
 
-taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL1_normal &
-taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL3_normal &
+taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_normal_SETL1_TRAINING &
+taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_normal_SETL3_TRAINING &
 
 sleep 10
 
@@ -71,8 +71,64 @@ SENSITIVE_PROGRAM_L3_PID1=$!
 
 sleep 1
 
-taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL1_abnormal &
-taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL3_abnormal &
+taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_SETL1_TRAINING &
+taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_SETL3_TRAINING &
+
+sleep 10
+
+ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
+ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
+ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
+
+
+
+
+###### Testing
+
+sleep 1
+
+taskset 0x4 ./$SENSITIVE_PROGRAM_L1 &
+SENSITIVE_PROGRAM_L1_PID=$!
+
+sleep 1
+
+taskset 0x8 ./$SENSITIVE_PROGRAM_L3 $GPG&
+SENSITIVE_PROGRAM_L3_PID1=$!
+
+sleep 1
+
+taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_normal_SETL1_TESTING &
+taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_normal_SETL3_TESTING &
+
+sleep 10
+
+ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
+ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
+ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
+
+sleep 1
+
+
+
+
+# Flush reload attack
+
+taskset 0x2000 $SPY_PROGRAM_FR $GPG &
+
+sleep 1
+
+taskset 0x4 ./$SENSITIVE_PROGRAM_L1 &
+SENSITIVE_PROGRAM_L1_PID=$!
+
+sleep 1
+
+taskset 0x8 ./$SENSITIVE_PROGRAM_L3 $GPG&
+SENSITIVE_PROGRAM_L3_PID1=$!
+
+sleep 1
+
+taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_SETL1_TESTING &
+taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_SETL3_TESTING &
 
 sleep 10
 
