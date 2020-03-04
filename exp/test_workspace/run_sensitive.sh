@@ -41,8 +41,8 @@ SENSITIVE_PROGRAM_L3_PID1=$!
 
 sleep 1
 
-taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL1 &
-taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL3 &
+taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL1_normal &
+taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL3_normal &
 
 sleep 10
 
@@ -71,8 +71,8 @@ SENSITIVE_PROGRAM_L3_PID1=$!
 
 sleep 1
 
-taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL1 &
-taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL3 &
+taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL1_abnormal &
+taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL3_abnormal &
 
 sleep 10
 
