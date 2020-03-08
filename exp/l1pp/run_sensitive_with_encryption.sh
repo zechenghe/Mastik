@@ -17,7 +17,7 @@ clean_env () {
    ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
    ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
    ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
-   ps -ef | grep "gnupg" | awk '{print $2;}' | xargs -r kill
+   ps -ef | grep "encrypt_" | awk '{print $2;}' | xargs -r kill
 }
 
 
