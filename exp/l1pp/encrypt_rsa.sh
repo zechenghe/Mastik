@@ -8,7 +8,7 @@ GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 
 while true
   do
-    $GPG -r zechengh_key1 -e 'hello'
+    $GPG -r zechengh_key1 -o /dev/null -e 'hello'
     echo "Encrypt..."
     sleep 0.01
   done
