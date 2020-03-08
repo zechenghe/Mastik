@@ -30,29 +30,29 @@ do
     taskset 0x8 ./sensitive1 &
 
     status "Encryption running"
-    taskset 0x8 $GPG -r 331A2EF2 -e "plaintext1" &
+    ./encrypt_rsa.sh &
 
-    $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 100 > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
+    $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 1000 > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
-    sleep 5
+    sleep 10
 
     clean_env
 
 
     status "Spy running"
     taskset 0x8000 ./spy 1000000000 &
-    SPY_PID=$!
 
     status "Sensitive program running"
     taskset 0x8 ./sensitive1 &
-    SENSITIVE_PID=$!
-    echo $SENSITIVE_PID
+
+    status "Encryption running"
+    ./encrypt_rsa.sh &
 
     $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 100 > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
-    sleep 5
+    sleep 10
 
     clean_env
 
