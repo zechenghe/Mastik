@@ -40,7 +40,7 @@ do
     taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
 
-    sleep 1
+    #sleep 1
 
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
 
@@ -58,7 +58,7 @@ do
     taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
 
-    sleep 1
+    #sleep 1
 
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
 
