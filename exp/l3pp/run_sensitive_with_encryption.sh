@@ -36,6 +36,8 @@ do
     status "Encryption running"
     ./encrypt_rsa.sh &
 
+    sleep 1
+
     status "Sensitive program running"
     taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
@@ -51,8 +53,12 @@ do
     status "Encryption running"
     ./encrypt_rsa.sh &
 
+    sleep 1
+
     status "Spy running"
     taskset 0x2000 ./spy 1000000000 &
+
+    sleep 1
 
     status "Sensitive program running"
     taskset 0x8 ./$SENSITIVE_PROGRAM &
