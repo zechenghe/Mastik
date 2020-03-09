@@ -48,16 +48,15 @@ do
     clean_env
 
 
-
     #status "Encryption running"
     #./encrypt_rsa.sh &
+
+    status "Spy running"
+    taskset 0x2000 ./spy 1000000000 &
 
     status "Sensitive program running"
     taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
-
-    status "Spy running"
-    taskset 0x2000 ./spy 1000000000 &
 
     sleep 1
 
