@@ -37,8 +37,8 @@ do
 
     HPC_SUFFIX=${HPC_COLLECTION}_${SPLIT}
 
-    #status "Encryption running"
-    #./encrypt_rsa.sh &
+    status "Encryption running"
+    ./encrypt_rsa.sh &
 
     status "Sensitive program running"
     taskset 0x8 ./$SENSITIVE_PROGRAM $GPG&
@@ -51,8 +51,8 @@ do
 
     clean_env
 
-    #status "Encryption running"
-    #./encrypt_rsa.sh &
+    status "Encryption running"
+    ./encrypt_rsa.sh &
 
     status "Spy running"
     taskset 0x2000 $SPY_PROGRAM $GPG &
