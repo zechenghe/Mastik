@@ -33,8 +33,8 @@ do
   do
     HPC_SUFFIX=${HPC_COLLECTION}_${SPLIT}
 
-    #status "Encryption running"
-    #./encrypt_rsa.sh &
+    status "Encryption running"
+    ./encrypt_rsa.sh &
 
     sleep 1
 
@@ -50,8 +50,8 @@ do
     clean_env
 
 
-    #status "Encryption running"
-    #./encrypt_rsa.sh &
+    status "Encryption running"
+    ./encrypt_rsa.sh &
 
     sleep 1
 
