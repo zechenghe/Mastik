@@ -8,6 +8,13 @@ source $EXP_ROOT_DIR/exp_funcs.sh
 
 OUTPUT_FOLDER=$EXP_ROOT_DIR/l1pp/results
 mkdir -p $OUTPUT_FOLDER
+rm -f $EXP_ROOT_DIR/l1pp/results/*
+
+GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
+SENSITIVE_PROGRAM=sensitive1
+SPY_PROGRAM=./spy
+INTERVAL_US=10000
+DATA_COLLECTION_TIME_S=10
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 
@@ -24,7 +31,7 @@ do
     $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i 100 > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
     QUICKHPC_PID=$!
 
-    sleep 5
+    sleep $DATA_COLLECTION_TIME_S
     kill $QUICKHPC_PID
     kill $SENSITIVE_PID
 

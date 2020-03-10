@@ -9,6 +9,7 @@ source $EXP_ROOT_DIR/exp_funcs.sh
 OUTPUT_FOLDER=$EXP_ROOT_DIR/l1pp/results
 
 mkdir -p $OUTPUT_FOLDER
+rm -f $EXP_ROOT_DIR/l1pp/results/*
 
 status "Attacker running"
 taskset 0x8 ./spy 1000000000 &
