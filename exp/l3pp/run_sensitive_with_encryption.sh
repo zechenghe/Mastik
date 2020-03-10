@@ -33,8 +33,8 @@ do
   do
     HPC_SUFFIX=${HPC_COLLECTION}_${SPLIT}
 
-    status "Encryption running"
-    ./encrypt_rsa.sh &
+    #status "Encryption running"
+    #./encrypt_rsa.sh &
 
     sleep 1
 
@@ -42,7 +42,7 @@ do
     taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
 
-    sleep 1
+    sleep 2
 
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
 
@@ -50,8 +50,8 @@ do
     clean_env
 
 
-    status "Encryption running"
-    ./encrypt_rsa.sh &
+    #status "Encryption running"
+    #./encrypt_rsa.sh &
 
     sleep 1
 
@@ -64,7 +64,7 @@ do
     taskset 0x8 ./$SENSITIVE_PROGRAM &
     SENSITIVE_PID=$!
 
-    sleep 1
+    sleep 2
 
     taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
 
