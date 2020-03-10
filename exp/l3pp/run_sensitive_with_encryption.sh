@@ -26,6 +26,7 @@ clean_env () {
     sleep 1
 }
 
+clean_env
 
 for SPLIT in TRAINING TESTING
 do
