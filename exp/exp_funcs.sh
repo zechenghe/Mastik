@@ -34,3 +34,13 @@ function ensure_spy_not_running {
         exp_failed
     fi
 }
+
+clean_env () {
+    sleep 1
+    echo "Killing processes quickhpc, sensitive[1-9], spy, gnupg"
+    ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
+    ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
+    ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
+    ps -ef | grep "encrypt_" | awk '{print $2;}' | xargs -r kill
+    sleep 1
+}
