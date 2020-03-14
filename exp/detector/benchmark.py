@@ -108,7 +108,7 @@ def main(
 
     reverse = False
     if model == 'IF':
-        cls = IsolationForest(n_estimators=1000, contamination = 0.1, behaviour='new')
+        cls = IsolationForest(n_estimators=1000, contamination = 0.1)
     elif model == 'OCSVM':
         cls = OCSVM()
         reverse = True
