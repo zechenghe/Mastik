@@ -85,7 +85,6 @@ class Detector(nn.Module):
             truth_array = truth.detach().numpy()
 
         RE = np.squeeze(np.sum((pred_array - truth_array)**2, axis=2))
-        #print "RE.shape ", RE.shape
 
         return RE
 
@@ -108,12 +107,12 @@ class Detector(nn.Module):
             for l in range(self.RED_collection_len):
                 accumulate_RED += RE[accumulate_idx + l]
 
-            #print "accumulate_RED.shape ", accumulate_RED.shape
+            #print("accumulate_RED.shape ", accumulate_RED.shape)
             ref_RED.append(accumulate_RED)
             t += self.RED_collection_len * self.RED_points
 
         self.RED = ref_RED[:]
-        #print "len(self.RED) ", len(self.RED)
+        #print("len(self.RED) ", len(self.RED))
 
 
     def predict(self, seq, gpu):
@@ -125,7 +124,7 @@ class Detector(nn.Module):
         T_pred_start = time.clock()
         RE = self._get_RE(seq, gpu)
         T_pred_end = time.clock()
-        print "Prediction takes ", (T_pred_end-T_pred_start), "seconds"
+        print("Prediction takes ", (T_pred_end-T_pred_start), "seconds")
 
         p_values = []
         t = 0
@@ -142,7 +141,7 @@ class Detector(nn.Module):
             t += 1
 
         T_KS_end = time.clock()
-        print "Statistical test takes ", (T_KS_end-T_KS_start), "seconds"
+        print("Statistical test takes ", (T_KS_end-T_KS_start), "seconds")
 
         p_values = np.array(p_values)
         labels = p_values.copy()
@@ -154,9 +153,9 @@ class Detector(nn.Module):
     def forward(self, seq, state):
         hiddens, state = self.net(seq, state)
 
-        #print "hiddens.size ", hiddens.size()
-        #print hiddens[-1, :, :].detach().numpy()
-        #print state
+        #print("hiddens.size ", hiddens.size())
+        #print(hiddens[-1, :, :].detach().numpy())
+        #print(state)
 
         pred = self.hidden2pred(hiddens)
         return pred, state

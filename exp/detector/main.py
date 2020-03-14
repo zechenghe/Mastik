@@ -87,7 +87,7 @@ def train(args):
 
     if debug:
         for name, para in AnomalyDetector.named_parameters():
-            print name, para.size()
+            print(name, para.size())
 
     for batch in range(Nbatches):
         t = 0
@@ -111,7 +111,7 @@ def train(args):
             loss = MSELossLayer(pred, truth)
 
             if debug:
-                print "pred.size ", pred.size(), "truth.size ", truth.size()
+                print("pred.size ", pred.size(), "truth.size ", truth.size())
 
             loss.backward()
             optimizer.step()
@@ -122,19 +122,19 @@ def train(args):
                 loss_hist.append(loss.detach().numpy())
 
             if debug:
-                print "t =", t, 'Training loss: ', loss
+                print("t =", t, 'Training loss: ', loss)
 
             state = (state[0].detach(), state[1].detach())
             t += ChunkSize
 
-        print "Batch", batch, "Training loss", np.mean(loss_hist)
+        print("Batch", batch, "Training loss", np.mean(loss_hist))
 
         if (batch + 1) % LRdecrease == 0:
             LearningRate = LearningRate / 2.0
             setLearningRate(optimizer, LearningRate)
 
-    print "Training Done"
-    print "Getting RED"
+    print("Training Done")
+    print("Getting RED")
 
     AnomalyDetector.set_RED_config(RED_collection_len = RED_collection_len, RED_points = RED_points)
     AnomalyDetector.collect_ref_RED(ref_normal_data, gpu)
@@ -142,7 +142,7 @@ def train(args):
     if not os.path.exists(save_model_dir):
         os.makedirs(save_model_dir)
     torch.save(AnomalyDetector, save_model_dir + save_model_name)
-    print "Model saved"
+    print("Model saved")
 
 def eval_detector(args):
 
@@ -180,7 +180,7 @@ def eval_detector(args):
         )
 
     testing_abnormal_data = torch.tensor(AnomalyDetector.normalize(testing_abnormal_data))
-    print "testing_abnormal_data.shape ", testing_abnormal_data.shape
+    print("testing_abnormal_data.shape ", testing_abnormal_data.shape)
 
     if gpu:
         AnomalyDetector = AnomalyDetector.cuda()
@@ -193,22 +193,22 @@ def eval_detector(args):
     true_label = np.concatenate((true_label_normal, true_label_abnormal), axis=0)
 
     pred_normal, p_values_normal = AnomalyDetector.predict(testing_normal_data, gpu)
-    #print "p_values_normal", p_values_normal[:100]
-    #print "p_values_normal", p_values_normal[100:200]
+    #print("p_values_normal", p_values_normal[:100])
+    #print("p_values_normal", p_values_normal[100:200])
 
-    #print "p_values_normal", p_values_normal[-100:]
-    #print "p_values_normal", p_values_normal[-200:-100]
+    #print("p_values_normal", p_values_normal[-100:])
+    #print("p_values_normal", p_values_normal[-200:-100])
 
-    print "p_values_normal.shape ", len(p_values_normal)
-    print "p_values_normal.mean ", np.mean(p_values_normal)
+    print("p_values_normal.shape ", len(p_values_normal))
+    print("p_values_normal.mean ", np.mean(p_values_normal))
 
     pred_abnormal, p_values_abnormal = AnomalyDetector.predict(testing_abnormal_data, gpu)
-    print "p_values_abnormal.shape ", len(p_values_abnormal)
-    print "p_values_abnormal.mean ", np.mean(p_values_abnormal)
+    print("p_values_abnormal.shape ", len(p_values_abnormal))
+    print("p_values_abnormal.mean ", np.mean(p_values_abnormal))
 
     pred = np.concatenate((pred_normal, pred_abnormal), axis=0)
     pred_score = np.concatenate((p_values_normal, p_values_abnormal), axis=0)
-    print "true_label.shape", true_label.shape, "pred.shape", pred.shape
+    print("true_label.shape", true_label.shape, "pred.shape", pred.shape)
 
     tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds = \
     eval_metrics(
@@ -282,7 +282,7 @@ if __name__ == '__main__':
         args = parser.parse_args()
 
         if args.debug:
-            print args
+            print(args)
 
         if args.training:
             train(args)
@@ -293,6 +293,6 @@ if __name__ == '__main__':
         sys.exit(0)
 
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         traceback.print_exc(file=sys.stdout)
         sys.exit(1)

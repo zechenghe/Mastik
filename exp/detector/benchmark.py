@@ -63,9 +63,9 @@ def main(
         testing_abnormal_data, training_normal_data_mean, training_normal_data_std
     )
 
-    print "training_normal_data.shape", training_normal_data.shape
-    print "ref_normal_data.shape", ref_normal_data.shape
-    print "testing_normal_data.shape", testing_normal_data.shape
+    print("training_normal_data.shape", training_normal_data.shape)
+    print("ref_normal_data.shape", ref_normal_data.shape)
+    print("testing_normal_data.shape", testing_normal_data.shape)
 
 
     training_normal_data = seq_win_vectorize(
@@ -81,9 +81,9 @@ def main(
         window_size = window_size
     )
 
-    print "Vectorized training_normal_data.shape", training_normal_data.shape
-    print "Vectorized ref_normal_data.shape", ref_normal_data.shape
-    print "Vectorized testing_normal_data.shape", testing_normal_data.shape
+    print("Vectorized training_normal_data.shape", training_normal_data.shape)
+    print("Vectorized ref_normal_data.shape", ref_normal_data.shape)
+    print("Vectorized testing_normal_data.shape", testing_normal_data.shape)
 
     # +1 is normal, -1 is abnormal
     true_label_normal = np.ones(len(testing_normal_data))
@@ -122,7 +122,7 @@ def main(
         cls = PCA()
         reverse = True
     else:
-        print "Model not support"
+        print("Model not support")
         exit(1)
 
 
@@ -161,7 +161,7 @@ if __name__=="__main__":
 
     if args.model == 'all':
         for model in ['LOF', 'OCSVM', 'IF', 'PCA']:
-            print "Model: ", model
+            print("Model: ", model)
             fpr, tpr, thresholds = main(
                 model = model,
                 normal_data_dir = args.normal_data_dir,
@@ -171,7 +171,7 @@ if __name__=="__main__":
                 abnormal_data_name = args.abnormal_data_name,
                 window_size = args.window_size
             )
-            print " "
+            print(" ")
             results_dir = 'results/'
             np.save(results_dir + model + '_fpr', fpr)
             np.save(results_dir + model + '_tpr', tpr)
