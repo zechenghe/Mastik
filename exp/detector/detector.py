@@ -13,7 +13,6 @@ import numpy as np
 
 from scipy import stats
 
-from utils import *
 
 class Detector(nn.Module):
 
