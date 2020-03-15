@@ -2,7 +2,7 @@ import torch
 import numpy as np
 import scipy.signal
 
-from utils import *
+from utils import read_npy_data_single_flle
 
 def load_data_split(split = (0.4, 0.2, 0.4), data_dir = "data/", file_name = 'baseline.npy'):
 
