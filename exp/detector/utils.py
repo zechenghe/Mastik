@@ -1,6 +1,6 @@
+import torch
 import numpy as np
 import matplotlib.pyplot as plt
-import torch
 
 from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score

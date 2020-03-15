@@ -1,10 +1,10 @@
+import torch
 import time
 import math
 import os
 import numpy as np
 import pickle
 
-import torch
 import torchvision
 import torchvision.transforms as transforms
 import torch.nn as nn
