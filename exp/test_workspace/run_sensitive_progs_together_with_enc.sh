@@ -18,12 +18,12 @@ DATA_COLLECTION_TIME_S=10
 
 #SPY_PROGRAM=./spy_fr
 #SPs=('sensitive1' 'sensitive4' 'sensitive5')
-#SPcores=('0x20' '0x80' '0x200')
+#SPcores=('0x8' '0x80' '0x80')
 #SPIDs=('' '' '')
 
 SPY_PROGRAM=./spy_l1pp
 SPs=('sensitive1')
-SPcores=('0x20')
+SPcores=('0x8')
 SPIDs=('')
 
 clean_env () {
@@ -76,13 +76,20 @@ do
     status "Spy running"
     if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
     then
-        echo "Set" $SPY_PROGRAM "Core 0x8"
-        taskset 0x8 $SPY_PROGRAM 1000000000 &
+        echo "Set" $SPY_PROGRAM "Core 0x8000"
+        taskset 0x8000 $SPY_PROGRAM 1000000000 &
     else
         echo "Set" $SPY_PROGRAM "Core 0x2000"
-        taskset 0x2000 $SPY_PROGRAM $GPG &
+        if [[ "$SPY_PROGRAM" == *"l3pp"* ]]
+        then
+            taskset 0x2000 $SPY_PROGRAM 1000000000 &
+        else
+            taskset 0x2000 $SPY_PROGRAM $GPG &
+        fi
     fi
+
     spawn_sensitive_programs
+
     for i in ${!SPs[@]}
     do
         HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}_abnormal
