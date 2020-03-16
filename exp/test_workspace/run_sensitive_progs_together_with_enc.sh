@@ -49,9 +49,16 @@ spawn_sensitive_programs (){
     sleep 1
 }
 
-clean_env
-spawn_sensitive_programs
+if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
+then
+    echo "Set" $SPY_PROGRAM "Core 0x8"
+    taskset 0x8 $SPY_PROGRAM $GPG &
+else
+    echo "Set" $SPY_PROGRAM "Core 0x2000"
+    taskset 0x2000 $SPY_PROGRAM $GPG &
+fi
 
+exit
 
 for SPLIT in TRAINING TESTING
 do
@@ -76,7 +83,7 @@ do
     ./encrypt_rsa.sh &
 
     status "Spy running"
-    if [["$SPY_PROGRAM" == *"l1pp"*]]
+    if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
     then
         echo "Set" $SPY_PROGRAM "Core 0x8"
         taskset 0x8 $SPY_PROGRAM $GPG &
