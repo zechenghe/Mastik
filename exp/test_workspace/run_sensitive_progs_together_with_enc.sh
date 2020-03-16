@@ -22,7 +22,7 @@ DATA_COLLECTION_TIME_S=10
 #SPIDs=('' '' '')
 
 SPY_PROGRAM=./spy_fr
-SPs=('sensitive6')
+SPs=('sensitive5')
 SPcores=('0x80')
 SPIDs=('')
 
