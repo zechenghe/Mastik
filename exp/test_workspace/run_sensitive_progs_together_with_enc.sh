@@ -63,7 +63,7 @@ do
     for i in ${!SPs[@]}
     do
         HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
-        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${gSPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
+        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
     done
 
     sleep $DATA_COLLECTION_TIME_S
