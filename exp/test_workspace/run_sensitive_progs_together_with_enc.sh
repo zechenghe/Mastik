@@ -19,6 +19,7 @@ DATA_COLLECTION_TIME_S=20
 
 SPs=('sensitive1' 'sensitive4' 'sensitive5')
 SPcores=('0x20' '0x80' '0x200')
+SPIDs=('' '' '')
 
 clean_env () {
     sleep 1
@@ -33,13 +34,21 @@ clean_env () {
 spawn_sensitive_programs (){
     for i in "${!SPs[@]}"
     do
-        echo "Spawn " ${SPs[i]} ${SPcores[i]}
+        sleep 1
+        echo "Spawn" ${SPs[i]} "on core " ${SPcores[i]}
+        taskset ${SPcores[i]} ./${SPs[i]} $GPG &
+        SPIDs[i]=$!
     done
+    sleep 1
 }
 
 clean_env
 spawn_sensitive_programs
-exit(0)
+for i in "${!SPs[@]}"
+do
+    echo ${SPcores[i]}
+done
+exit
 
 for SPLIT in TRAINING TESTING
 do
