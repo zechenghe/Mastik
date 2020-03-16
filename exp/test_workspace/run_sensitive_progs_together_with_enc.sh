@@ -13,9 +13,9 @@ mkdir -p $OUTPUT_FOLDER
 rm -f $EXP_ROOT_DIR/flush_reload/results/*
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
-SPY_PROGRAM=./spy
+SPY_PROGRAM=./spy_fr
 INTERVAL_US=100000
-DATA_COLLECTION_TIME_S=20
+DATA_COLLECTION_TIME_S=10
 
 SPs=('sensitive1' 'sensitive4' 'sensitive5')
 SPcores=('0x20' '0x80' '0x200')
@@ -44,11 +44,7 @@ spawn_sensitive_programs (){
 
 clean_env
 spawn_sensitive_programs
-for i in "${!SPs[@]}"
-do
-    echo ${SPIDs[i]}
-done
-clean_env
+
 exit
 
 for SPLIT in TRAINING TESTING
@@ -56,22 +52,15 @@ do
   for HPC_COLLECTION in L1 L23 INS
   do
 
-    HPC_SUFFIX=${HPC_COLLECTION}_${SPLIT}
-
     status "Encryption running"
     ./encrypt_rsa.sh &
 
-    status "Sensitive program running"
-    taskset 0x8 ./sensitive1 &
-    SENSITIVE1_PID=$!
-
-    sleep 1
-
-    taskset 0x20 ./sensitive1 $GPG&
-    SENSITIVE4_PID=$!
-
-    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_$HPC_SUFFIX &
-    QUICKHPC_PID=$!
+    spawn_sensitive_programs
+    for i in "${!SPs[@]}"
+    do
+        HPC_SUFFIX=${!SPs[i]}_${HPC_COLLECTION}_${SPLIT}
+        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${!SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
+    done
 
     sleep $DATA_COLLECTION_TIME_S
 
@@ -82,14 +71,13 @@ do
 
     status "Spy running"
     taskset 0x2000 $SPY_PROGRAM $GPG &
-    SPY_PID=$!
 
-    status "Sensitive program running"
-    taskset 0x8 ./$SENSITIVE_PROGRAM $GPG&
-    SENSITIVE_PID=$!
-
-    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $SENSITIVE_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_$HPC_SUFFIX &
-    QUICKHPC_PID=$!
+    spawn_sensitive_programs
+    for i in "${!SPs[@]}"
+    do
+        HPC_SUFFIX=${!SPs[i]}_${HPC_COLLECTION}_${SPLIT}_abnormal
+        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${!SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
+    done
 
     sleep $DATA_COLLECTION_TIME_S
     clean_env
