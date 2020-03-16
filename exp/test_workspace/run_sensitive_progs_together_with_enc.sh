@@ -21,8 +21,8 @@ DATA_COLLECTION_TIME_S=10
 #SPcores=('0x8' '0x80' '0x80')
 #SPIDs=('' '' '')
 
-SPY_PROGRAM=./spy_l3pp
-SPs=('sensitive4')
+SPY_PROGRAM=./spy_fr
+SPs=('sensitive6')
 SPcores=('0x80')
 SPIDs=('')
 
@@ -46,7 +46,7 @@ spawn_sensitive_programs (){
         taskset ${SPcores[i]} ./${SPs[i]} $GPG &
         SPIDs[i]=$!
     done
-    sleep 1
+    sleep 5
 }
 
 clean_env
