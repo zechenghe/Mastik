@@ -23,7 +23,7 @@ DATA_COLLECTION_TIME_S=10
 
 SPY_PROGRAM=./spy_l3pp
 SPs=('sensitive4')
-SPcores=('0x2000')
+SPcores=('0x80')
 SPIDs=('')
 
 clean_env () {
