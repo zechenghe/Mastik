@@ -21,9 +21,9 @@ DATA_COLLECTION_TIME_S=10
 #SPcores=('0x8' '0x80' '0x80')
 #SPIDs=('' '' '')
 
-SPY_PROGRAM=./spy_l1pp
-SPs=('sensitive1')
-SPcores=('0x8')
+SPY_PROGRAM=./spy_l3pp
+SPs=('sensitive4')
+SPcores=('0x2000')
 SPIDs=('')
 
 clean_env () {
