@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -u
 
 quickhpc="/home/zechengh/quickhpc/quickhpc"
 
