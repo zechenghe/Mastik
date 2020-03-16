@@ -35,6 +35,8 @@ clean_env () {
     ps -ef | grep "encrypt_" | awk '{print $2;}' | xargs -r kill
     sleep 1
 }
+# Cleanup environment when exit
+trap clean_env EXIT
 
 spawn_sensitive_programs (){
     for i in "${!SPs[@]}"
