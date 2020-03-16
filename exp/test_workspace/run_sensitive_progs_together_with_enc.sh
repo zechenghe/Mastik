@@ -45,7 +45,6 @@ spawn_sensitive_programs (){
 clean_env
 spawn_sensitive_programs
 
-exit
 
 for SPLIT in TRAINING TESTING
 do
@@ -83,4 +82,5 @@ do
     clean_env
 
   done
+  exit
 done
