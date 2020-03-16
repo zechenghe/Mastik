@@ -13,13 +13,18 @@ mkdir -p $OUTPUT_FOLDER
 rm -f $EXP_ROOT_DIR/flush_reload/results/*
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
-SPY_PROGRAM=./spy_fr
 INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=10
 
-SPs=('sensitive1' 'sensitive4' 'sensitive5')
-SPcores=('0x20' '0x80' '0x200')
-SPIDs=('' '' '')
+#SPY_PROGRAM=./spy_fr
+#SPs=('sensitive1' 'sensitive4' 'sensitive5')
+#SPcores=('0x20' '0x80' '0x200')
+#SPIDs=('' '' '')
+
+SPY_PROGRAM=./spy_l1pp
+SPs=('sensitive1')
+SPcores=('0x20')
+SPIDs=('')
 
 clean_env () {
     sleep 1
@@ -58,7 +63,7 @@ do
     for i in ${!SPs[@]}
     do
         HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
-        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
+        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${gSPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
     done
 
     sleep $DATA_COLLECTION_TIME_S
@@ -69,8 +74,14 @@ do
     ./encrypt_rsa.sh &
 
     status "Spy running"
-    taskset 0x2000 $SPY_PROGRAM $GPG &
-
+    if ["$SPY_PROGRAM" == *"l1pp"*]
+    then
+        echo "Set" $SPY_PROGRAM "Core 0x8"
+        taskset 0x8 $SPY_PROGRAM $GPG &
+    else
+        echo "Set" $SPY_PROGRAM "Core 0x2000"
+        taskset 0x2000 $SPY_PROGRAM $GPG &
+    fi
     spawn_sensitive_programs
     for i in ${!SPs[@]}
     do
@@ -82,5 +93,4 @@ do
     clean_env
 
   done
-  exit
 done
