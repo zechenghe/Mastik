@@ -57,7 +57,7 @@ do
     spawn_sensitive_programs
     for i in ${!SPs[@]}
     do
-        HPC_SUFFIX=${!SPs[i]}_${HPC_COLLECTION}_${SPLIT}
+        HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
         taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${!SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
     done
 
@@ -74,7 +74,7 @@ do
     spawn_sensitive_programs
     for i in ${!SPs[@]}
     do
-        HPC_SUFFIX=${!SPs[i]}_${HPC_COLLECTION}_${SPLIT}_abnormal
+        HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}_abnormal
         taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${!SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
     done
 
