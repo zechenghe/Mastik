@@ -16,15 +16,20 @@ GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 INTERVAL_US=100000
 DATA_COLLECTION_TIME_S=10
 
-SPY_PROGRAM=./spy_fr
-SPs=('sensitive1' 'sensitive4' 'sensitive5')
-SPcores=('0x8' '0x80' '0x80')
-SPIDs=('' '' '')
+#SPY_PROGRAM=./spy_fr
+#SPs=('sensitive1' 'sensitive4' 'sensitive5')
+#SPcores=('0x8' '0x80' '0x80')
+#SPIDs=('' '' '')
 
 #SPY_PROGRAM=./spy_ff
 #SPs=('sensitive5')
 #SPcores=('0x80')
 #SPIDs=('')
+
+SPY_PROGRAM=./spy_fr
+SPs=('sensitive1' 'sensitive5')
+SPcores=('0x8' '0x80')
+SPIDs=('' '')
 
 clean_env () {
     sleep 1
