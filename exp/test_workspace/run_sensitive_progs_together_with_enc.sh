@@ -46,8 +46,9 @@ clean_env
 spawn_sensitive_programs
 for i in "${!SPs[@]}"
 do
-    echo ${SPcores[i]}
+    echo ${SPIDs[i]}
 done
+clean_env
 exit
 
 for SPLIT in TRAINING TESTING
