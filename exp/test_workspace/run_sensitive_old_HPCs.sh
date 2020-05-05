@@ -63,7 +63,7 @@ do
   do
 
     status "Encryption running"
-    taskset 0x8 $GPG -r zechengh_key1 -o /dev/null -e ~/cuda_10.1.105_418.39_linux.run
+    taskset 0x8 $GPG -r zechengh_key1 -o /dev/null -e ~/cuda_10.1.105_418.39_linux.run &
     #./encrypt_rsa.sh &
 
     spawn_sensitive_programs
@@ -79,7 +79,7 @@ do
 
     status "Encryption running"
     #./encrypt_rsa.sh &
-    taskset 0x8 $GPG -r zechengh_key1 -o /dev/null -e ~/cuda_10.1.105_418.39_linux.run
+    taskset 0x8 $GPG -r zechengh_key1 -o /dev/null -e ~/cuda_10.1.105_418.39_linux.run &
 
     status "Spy running"
     if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
