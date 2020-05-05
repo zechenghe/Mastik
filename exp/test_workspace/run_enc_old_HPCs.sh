@@ -72,12 +72,8 @@ do
     encrypt_large_file
     #./encrypt_rsa.sh &
 
-    spawn_sensitive_programs
-    for i in ${!SPs[@]}
-    do
-        HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
-        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
-    done
+    HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}
+    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
 
     sleep $DATA_COLLECTION_TIME_S
 
@@ -102,13 +98,8 @@ do
         fi
     fi
 
-    spawn_sensitive_programs
-
-    for i in ${!SPs[@]}
-    do
-        HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}_abnormal
-        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
-    done
+    HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}_abnormal
+    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
 
     sleep $DATA_COLLECTION_TIME_S
     clean_env
