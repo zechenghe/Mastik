@@ -75,6 +75,7 @@ do
   do
 
     status "Encryption running"
+    spec_background
     encrypt_large_file
     #./encrypt_rsa.sh &
 
@@ -86,6 +87,7 @@ do
     clean_env
 
     status "Encryption running"
+    spec_background
     encrypt_large_file
     #./encrypt_rsa.sh &
 
