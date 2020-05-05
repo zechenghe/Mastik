@@ -37,6 +37,7 @@ clean_env () {
     ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
+    ps -ef | grep "zechengh_key1" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "encrypt_" | awk '{print $2;}' | xargs -r kill
     sleep 1
 }
@@ -62,7 +63,8 @@ do
   do
 
     status "Encryption running"
-    ./encrypt_rsa.sh &
+    taskset 0x8 $GPG -r zechengh_key1 -o /dev/null -e ~/cuda_10.1.105_418.39_linux.run
+    #./encrypt_rsa.sh &
 
     spawn_sensitive_programs
     for i in ${!SPs[@]}
@@ -76,7 +78,8 @@ do
     clean_env
 
     status "Encryption running"
-    ./encrypt_rsa.sh &
+    #./encrypt_rsa.sh &
+    taskset 0x8 $GPG -r zechengh_key1 -o /dev/null -e ~/cuda_10.1.105_418.39_linux.run
 
     status "Spy running"
     if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
