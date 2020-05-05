@@ -13,7 +13,7 @@ mkdir -p $OUTPUT_FOLDER
 rm -f $EXP_ROOT_DIR/test_workspace/results/*
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
-INTERVAL_US=100000
+INTERVAL_US=1000
 DATA_COLLECTION_TIME_S=10
 
 #SPY_PROGRAM=./spy_fr
