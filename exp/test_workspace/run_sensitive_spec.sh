@@ -63,7 +63,7 @@ encrypt_large_file (){
 }
 
 spec_background(){
-    runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 bzip2
+    runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 bzip2 &
     sleep 1
 }
 
