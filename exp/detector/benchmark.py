@@ -17,7 +17,7 @@ from pyod.models.abod import ABOD
 from pyod.models.pca import PCA
 
 
-def benchmark(
+def run_benchmark(
         model,
         normal_data_dir,
         normal_data_name_train,
