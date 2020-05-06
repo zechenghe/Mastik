@@ -70,57 +70,60 @@ encrypt_large_file (){
 
 clean_env
 
-for SPLIT in TRAINING TESTING
+for SPEC in perlbench bzip2 gcc #mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
 do
-  for HPC_COLLECTION in OLD
-  do
-
-    status "Encryption running"
-    encrypt_large_file
-    spec_background
-    #./encrypt_rsa.sh &
-
-    spawn_sensitive_programs
-    for i in ${!SPs[@]}
+    mkdir -p $OUTPUT_FOLDER/$SPEC
+    for SPLIT in TRAINING TESTING
     do
-        HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
-        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
-    done
+        for HPC_COLLECTION in OLD
+        do
 
-    sleep $DATA_COLLECTION_TIME_S
+            status "Encryption running"
+            encrypt_large_file
+            spec_background
+            #./encrypt_rsa.sh &
 
-    clean_env
+            spawn_sensitive_programs
+            for i in ${!SPs[@]}
+            do
+                HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
+                taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/$SPEC/hpc_$HPC_SUFFIX &
+            done
 
-    status "Encryption running"
-    encrypt_large_file
-    spec_background
-    #./encrypt_rsa.sh &
+            sleep $DATA_COLLECTION_TIME_S
 
-    status "Spy running"
-    if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
-    then
-        echo "Set" $SPY_PROGRAM "Core 0x8000"
-        taskset 0x8000 $SPY_PROGRAM 1000000000 &
-    else
-        echo "Set" $SPY_PROGRAM "Core 0x2000"
-        if [[ "$SPY_PROGRAM" == *"l3pp"* ]]
-        then
-            taskset 0x2000 $SPY_PROGRAM 1000000000 &
-        else
-            taskset 0x2000 $SPY_PROGRAM $GPG &
+            clean_env
+
+            status "Encryption running"
+            encrypt_large_file
+            spec_background
+            #./encrypt_rsa.sh &
+
+            status "Spy running"
+            if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
+            then
+                echo "Set" $SPY_PROGRAM "Core 0x8000"
+                taskset 0x8000 $SPY_PROGRAM 1000000000 &
+            else
+                echo "Set" $SPY_PROGRAM "Core 0x2000"
+            if [[ "$SPY_PROGRAM" == *"l3pp"* ]]
+            then
+                taskset 0x2000 $SPY_PROGRAM 1000000000 &
+            else
+                taskset 0x2000 $SPY_PROGRAM $GPG &
+            fi
         fi
-    fi
 
-    spawn_sensitive_programs
+        spawn_sensitive_programs
 
-    for i in ${!SPs[@]}
-    do
-        HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}_abnormal
-        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
+        for i in ${!SPs[@]}
+        do
+            HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}_abnormal
+            taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/$SPEC/hpc_$HPC_SUFFIX &
+        done
+
+        sleep $DATA_COLLECTION_TIME_S
+        clean_env
     done
-
-    sleep $DATA_COLLECTION_TIME_S
-    clean_env
-
   done
 done
