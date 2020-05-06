@@ -65,7 +65,7 @@ clean_env
 
 for SPLIT in TRAINING TESTING
 do
-  for HPC_COLLECTION in OLD
+  for HPC_COLLECTION in OLD_L3
   do
 
     status "Encryption running"
