@@ -70,7 +70,7 @@ encrypt_large_file (){
 
 clean_env
 
-for SPEC in perlbench bzip2 gcc #mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
+for SPEC in perlbench bzip2 gcc mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
 do
     mkdir -p $OUTPUT_FOLDER/$SPEC
     for SPLIT in TRAINING TESTING
