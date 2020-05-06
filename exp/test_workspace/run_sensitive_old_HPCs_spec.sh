@@ -10,7 +10,7 @@ source $EXP_ROOT_DIR/exp_funcs.sh
 
 OUTPUT_FOLDER=$EXP_ROOT_DIR/test_workspace/results
 mkdir -p $OUTPUT_FOLDER
-rm -f $EXP_ROOT_DIR/test_workspace/results/*
+rm -rf $EXP_ROOT_DIR/test_workspace/results/*
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 INTERVAL_US=1000
