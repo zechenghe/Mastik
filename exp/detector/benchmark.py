@@ -164,7 +164,7 @@ if __name__=="__main__":
     if args.model == 'all':
         for model in ['LOF', 'OCSVM', 'IF', 'PCA']:
             print("Model: ", model)
-            fpr, tpr, thresholds, roc, roc_auc = benchmark(
+            fpr, tpr, thresholds, roc, roc_auc = run_benchmark(
                 model = model,
                 normal_data_dir = args.normal_data_dir,
                 normal_data_name_train = args.normal_data_name_train,
@@ -178,7 +178,7 @@ if __name__=="__main__":
             np.save(results_dir + model + '_fpr', fpr)
             np.save(results_dir + model + '_tpr', tpr)
     else:
-        fpr, tpr, thresholds, roc, roc_auc = benchmark(
+        fpr, tpr, thresholds, roc, roc_auc = run_benchmark(
             model = args.model,
             normal_data_dir = args.normal_data_dir,
             normal_data_name_train = args.normal_data_name_train,
