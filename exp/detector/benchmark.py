@@ -17,14 +17,15 @@ from pyod.models.abod import ABOD
 from pyod.models.pca import PCA
 
 
-def main(
+def benchmark(
         model,
         normal_data_dir,
         normal_data_name_train,
         normal_data_name_test,
         abnormal_data_dir,
         abnormal_data_name,
-        window_size
+        window_size,
+        verbose = True
     ):
 
     training_normal_data, ref_normal_data, val_normal_data = load_data_split(
@@ -131,14 +132,15 @@ def main(
     pred_score = cls.decision_function(testing_data_run)
 
     # Pay special attention here the score is the anomaly score
-    tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds = \
+    tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds, roc_auc = \
     eval_metrics(
         truth = true_label,
         pred = pred,
-        pred_score = pred_score if not reverse else 1-pred_score
+        pred_score = pred_score if not reverse else 1-pred_score,
+        verbose = verbose
     )
 
-    return fpr, tpr, thresholds
+    return fpr, tpr, thresholds, roc_auc
 
 if __name__=="__main__":
 
@@ -162,7 +164,7 @@ if __name__=="__main__":
     if args.model == 'all':
         for model in ['LOF', 'OCSVM', 'IF', 'PCA']:
             print("Model: ", model)
-            fpr, tpr, thresholds = main(
+            fpr, tpr, thresholds, roc, roc_auc = benchmark(
                 model = model,
                 normal_data_dir = args.normal_data_dir,
                 normal_data_name_train = args.normal_data_name_train,
@@ -176,7 +178,7 @@ if __name__=="__main__":
             np.save(results_dir + model + '_fpr', fpr)
             np.save(results_dir + model + '_tpr', tpr)
     else:
-        fpr, tpr, thresholds = main(
+        fpr, tpr, thresholds, roc, roc_auc = benchmark(
             model = args.model,
             normal_data_dir = args.normal_data_dir,
             normal_data_name_train = args.normal_data_name_train,

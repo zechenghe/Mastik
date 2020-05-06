@@ -210,7 +210,7 @@ def eval_detector(args):
     pred_score = np.concatenate((p_values_normal, p_values_abnormal), axis=0)
     print("true_label.shape", true_label.shape, "pred.shape", pred.shape)
 
-    tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds = \
+    tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds, roc_auc = \
     eval_metrics(
         truth = true_label,
         pred = pred,

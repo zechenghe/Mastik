@@ -28,18 +28,12 @@ def normalize(data, mean, std):
     eps = 1e-8
     return (data - mean) / (std + eps)
 
-def eval_metrics( truth, pred, pred_score=None ):
+def eval_metrics( truth, pred, pred_score=None, verbose=True ):
     tp = np.sum( np.multiply((pred == 1) , (truth == 1)), axis=0 , dtype=np.float32)
     fp = np.sum( np.multiply((pred == 1) , (truth == 0)), axis=0 , dtype=np.float32)
     fn = np.sum( np.multiply((pred == 0) , (truth == 1)), axis=0 , dtype=np.float32)
     tn = np.sum( np.multiply((pred == 0) , (truth == 0)), axis=0 , dtype=np.float32)
     acc = np.sum( pred == truth , axis=0 )/ (1. * truth.shape[0])
-
-    print('----------------Detection Results------------------')
-    print('False positives: ', fp)
-    print('False negatives: ', fn)
-    print('True positives: ', tp)
-    print('True negatives: ', tn)
 
     fpr = fp / (fp + tn) if fp + tn != 0 else None
     fnr = fn / (fn + tp) if fn + tp != 0 else None
@@ -47,15 +41,19 @@ def eval_metrics( truth, pred, pred_score=None ):
     rec =  tp / ( ( tp + fn ) * 1. ) if tp + fn != 0 else None
     f1 = 2.*prec*rec/(prec+rec) if prec != None and rec != None and prec+rec != 0 else None
 
-    print('False Positive Rate: ', fpr)
-    print('False Negative Rate: ', fnr)
-
-    print('Accuracy: ', acc)
-
-    print('Precision: ', prec)
-    print('Recall: ', rec)
-    print('F1: ', f1)
-    print('---------------------------------------------------')
+    if verbose:
+        print('----------------Detection Results------------------')
+        print('False positives: ', fp)
+        print('False negatives: ', fn)
+        print('True positives: ', tp)
+        print('True negatives: ', tn)
+        print('False Positive Rate: ', fpr)
+        print('False Negative Rate: ', fnr)
+        print('Accuracy: ', acc)
+        print('Precision: ', prec)
+        print('Recall: ', rec)
+        print('F1: ', f1)
+        print('---------------------------------------------------')
 
     roc, roc_auc = None, None
     if pred_score is not None:
@@ -63,7 +61,7 @@ def eval_metrics( truth, pred, pred_score=None ):
         roc_auc = roc_auc_score(truth, pred_score)
         print("ROC AUC = ", roc_auc)
 
-    return tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds
+    return tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds, roc_auc
 
 
 def setLearningRate(optimizer, lr):
