@@ -59,7 +59,8 @@ def eval_metrics( truth, pred, pred_score=None, verbose=True ):
     if pred_score is not None:
         fpr, tpr, thresholds = roc_curve(truth, pred_score)
         roc_auc = roc_auc_score(truth, pred_score)
-        print("ROC AUC = ", roc_auc)
+        if verbose:
+            print("ROC AUC = ", roc_auc)
 
     return tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds, roc_auc
 
