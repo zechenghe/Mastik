@@ -116,7 +116,7 @@ do
                 spec_background $SPEC
             fi
 
-            HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}
+            HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}_abnormal
             taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
 
             sleep $DATA_COLLECTION_TIME_S
