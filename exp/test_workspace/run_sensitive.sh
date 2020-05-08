@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Test whether HPCs of two different processes can be read at same time.
-
 set -u
 
 quickhpc="/home/zechengh/quickhpc/quickhpc"
@@ -15,123 +13,105 @@ mkdir -p $OUTPUT_FOLDER
 rm -f $EXP_ROOT_DIR/test_workspace/results/*
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
-SENSITIVE_PROGRAM_L1=sensitive1
-SENSITIVE_PROGRAM_L3=sensitive5
+INTERVAL_US=1000
+DATA_COLLECTION_TIME_S=10
 
-SPY_PROGRAM_L1PP=./spy_l1pp
-SPY_PROGRAM_L3PP=./spy_l3pp
-SPY_PROGRAM_FF=./spy_ff
-SPY_PROGRAM_FR=./spy_fr
+#SPY_PROGRAM=./spy_fr
+#SPs=('sensitive1' 'sensitive4' 'sensitive5')
+#SPcores=('0x8' '0x80' '0x80')
+#SPIDs=('' '' '')
 
-ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
-ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
-ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
+#SPY_PROGRAM=./spy_ff
+#SPs=('sensitive5')
+#SPcores=('0x80')
+#SPIDs=('')
 
-INTERVAL_US=100000
-DATA_COLLECTION_TIME_S=20
+SPY_PROGRAM=./spy_fr
+SPs=('sensitive1' 'sensitive5')
+SPcores=('0x8' '0x80')
+SPIDs=('' '')
 
+clean_env () {
+    sleep 1
+    echo "Killing processes quickhpc, sensitive[1-9], spy, gnupg"
+    ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
+    ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
+    ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
+    ps -ef | grep "zechengh_key1" | awk '{print $2;}' | xargs -r kill
+    ps -ef | grep "encrypt_" | awk '{print $2;}' | xargs -r kill
+    sleep 1
+}
+# Cleanup environment when exit
+trap clean_env EXIT
 
-taskset 0x4 ./$SENSITIVE_PROGRAM_L1 &
-SENSITIVE_PROGRAM_L1_PID=$!
+spawn_sensitive_programs (){
+    for i in "${!SPs[@]}"
+    do
+        sleep 1
+        echo "Spawn" ${SPs[i]} "on core " ${SPcores[i]}
+        taskset ${SPcores[i]} ./${SPs[i]} $GPG &
+        SPIDs[i]=$!
+    done
+    sleep 5
+}
 
-sleep 1
+encrypt_large_file (){
+    taskset 0x8 $GPG -r zechengh_key1 -o /dev/null -e ~/cuda_10.1.105_418.39_linux.run &
+    ENC_PID=$!
+    sleep 1
+}
 
-taskset 0x8 ./$SENSITIVE_PROGRAM_L3 $GPG&
-SENSITIVE_PROGRAM_L3_PID1=$!
+clean_env
 
-sleep 1
+for SPLIT in TRAINING TESTING
+do
+  for HPC_COLLECTION in OLD
+  do
 
-taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL1_TRAINING &
-taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL3_TRAINING &
+    status "Encryption running"
+    encrypt_large_file
+    #./encrypt_rsa.sh &
 
-sleep 10
+    spawn_sensitive_programs
+    for i in ${!SPs[@]}
+    do
+        HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
+        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
+    done
 
-ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
-ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
-ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
+    sleep $DATA_COLLECTION_TIME_S
 
-sleep 1
+    clean_env
 
+    status "Encryption running"
+    encrypt_large_file
+    #./encrypt_rsa.sh &
 
+    status "Spy running"
+    if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
+    then
+        echo "Set" $SPY_PROGRAM "Core 0x8000"
+        taskset 0x8000 $SPY_PROGRAM 1000000000 &
+    else
+        echo "Set" $SPY_PROGRAM "Core 0x2000"
+        if [[ "$SPY_PROGRAM" == *"l3pp"* ]]
+        then
+            taskset 0x2000 $SPY_PROGRAM 1000000000 &
+        else
+            taskset 0x2000 $SPY_PROGRAM $GPG &
+        fi
+    fi
 
+    spawn_sensitive_programs
 
-# Flush reload attack
+    for i in ${!SPs[@]}
+    do
+        HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}_abnormal
+        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
+    done
 
-taskset 0x2000 $SPY_PROGRAM_FR $GPG &
+    sleep $DATA_COLLECTION_TIME_S
+    clean_env
 
-sleep 1
-
-taskset 0x4 ./$SENSITIVE_PROGRAM_L1 &
-SENSITIVE_PROGRAM_L1_PID=$!
-
-sleep 1
-
-taskset 0x8 ./$SENSITIVE_PROGRAM_L3 $GPG&
-SENSITIVE_PROGRAM_L3_PID1=$!
-
-sleep 1
-
-taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_SETL1_TRAINING &
-taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_SETL3_TRAINING &
-
-sleep 10
-
-ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
-ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
-ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
-
-
-
-
-###### Testing
-
-sleep 1
-
-taskset 0x4 ./$SENSITIVE_PROGRAM_L1 &
-SENSITIVE_PROGRAM_L1_PID=$!
-
-sleep 1
-
-taskset 0x8 ./$SENSITIVE_PROGRAM_L3 $GPG&
-SENSITIVE_PROGRAM_L3_PID1=$!
-
-sleep 1
-
-taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL1_TESTING &
-taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_SETL3_TESTING &
-
-sleep 10
-
-ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
-ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
-ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
-
-sleep 1
-
-
-
-
-# Flush reload attack
-
-taskset 0x2000 $SPY_PROGRAM_FR $GPG &
-
-sleep 1
-
-taskset 0x4 ./$SENSITIVE_PROGRAM_L1 &
-SENSITIVE_PROGRAM_L1_PID=$!
-
-sleep 1
-
-taskset 0x8 ./$SENSITIVE_PROGRAM_L3 $GPG&
-SENSITIVE_PROGRAM_L3_PID1=$!
-
-sleep 1
-
-taskset 0x10 $quickhpc -c hpc_config_SETL1 -a $SENSITIVE_PROGRAM_L1_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_SETL1_TESTING &
-taskset 0x10 $quickhpc -c hpc_config_SETL3 -a $SENSITIVE_PROGRAM_L3_PID1 -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_sensiprog_abnormal_SETL3_TESTING &
-
-sleep 10
-
-ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
-ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
-ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
+  done
+done

@@ -44,7 +44,7 @@ clean_env () {
 }
 
 spec_background(){
-    runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 bzip2 &
+    taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 $1 &
     sleep 1
 }
 
@@ -70,20 +70,24 @@ encrypt_large_file (){
 
 clean_env
 
-for SPEC in perlbench bzip2 gcc mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
+for SPEC in none perlbench bzip2 gcc mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
 do
     mkdir -p $OUTPUT_FOLDER/$SPEC
     for SPLIT in TRAINING TESTING
     do
         for HPC_COLLECTION in OLD_L3
         do
-
             status "Encryption running"
             encrypt_large_file
-            spec_background
             #./encrypt_rsa.sh &
 
+            if [[ "$SPEC" != "none" ]]
+            then
+                spec_background $SPEC
+            fi
+
             spawn_sensitive_programs
+
             for i in ${!SPs[@]}
             do
                 HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
@@ -96,8 +100,6 @@ do
 
             status "Encryption running"
             encrypt_large_file
-            spec_background
-            #./encrypt_rsa.sh &
 
             status "Spy running"
             if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
@@ -106,24 +108,30 @@ do
                 taskset 0x8000 $SPY_PROGRAM 1000000000 &
             else
                 echo "Set" $SPY_PROGRAM "Core 0x2000"
-            if [[ "$SPY_PROGRAM" == *"l3pp"* ]]
-            then
-                taskset 0x2000 $SPY_PROGRAM 1000000000 &
-            else
-                taskset 0x2000 $SPY_PROGRAM $GPG &
+                if [[ "$SPY_PROGRAM" == *"l3pp"* ]]
+                then
+                    taskset 0x2000 $SPY_PROGRAM 1000000000 &
+                else
+                    taskset 0x2000 $SPY_PROGRAM $GPG &
+                fi
             fi
-        fi
 
-        spawn_sensitive_programs
+            if [[ "$SPEC" != "none" ]]
+            then
+                spec_background $SPEC
+            fi
 
-        for i in ${!SPs[@]}
-        do
-            HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}_abnormal
-            taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/$SPEC/hpc_$HPC_SUFFIX &
-        done
+            spawn_sensitive_programs
 
-        sleep $DATA_COLLECTION_TIME_S
-        clean_env
+            for i in ${!SPs[@]}
+            do
+                HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
+                taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/$SPEC/hpc_$HPC_SUFFIX &
+            done
+
+            sleep $DATA_COLLECTION_TIME_S
+
+            clean_env
     done
   done
 done

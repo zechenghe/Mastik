@@ -10,7 +10,7 @@ source $EXP_ROOT_DIR/exp_funcs.sh
 
 OUTPUT_FOLDER=$EXP_ROOT_DIR/test_workspace/results
 mkdir -p $OUTPUT_FOLDER
-rm -f $EXP_ROOT_DIR/test_workspace/results/*
+rm -rf $EXP_ROOT_DIR/test_workspace/results/*
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 INTERVAL_US=1000
@@ -42,6 +42,12 @@ clean_env () {
     ps -ef | grep "runspec" | awk '{print $2;}' | xargs -r kill
     sleep 1
 }
+
+spec_background(){
+    taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 $1 &
+    sleep 1
+}
+
 # Cleanup environment when exit
 trap clean_env EXIT
 
@@ -62,55 +68,60 @@ encrypt_large_file (){
     sleep 1
 }
 
-spec_background(){
-    runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 bzip2 &
-    sleep 1
-}
-
 clean_env
 
-for SPLIT in TRAINING TESTING
+for SPEC in none perlbench bzip2 gcc mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
 do
-  for HPC_COLLECTION in OLD
-  do
+    mkdir -p $OUTPUT_FOLDER/$SPEC
+    for SPLIT in TRAINING TESTING
+    do
+        for HPC_COLLECTION in OLD_L3
+        do
+            status "Encryption running"
+            encrypt_large_file
+            #./encrypt_rsa.sh &
 
-    status "Encryption running"
-    spec_background
-    encrypt_large_file
-    #./encrypt_rsa.sh &
+            if [[ "$SPEC" != "none" ]]
+            then
+                spec_background $SPEC
+            fi
 
-    HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}
-    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
+            HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}
+            taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
 
-    sleep $DATA_COLLECTION_TIME_S
+            sleep $DATA_COLLECTION_TIME_S
 
-    clean_env
+            clean_env
 
-    status "Encryption running"
-    spec_background
-    encrypt_large_file
-    #./encrypt_rsa.sh &
+            status "Encryption running"
+            encrypt_large_file
 
-    status "Spy running"
-    if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
-    then
-        echo "Set" $SPY_PROGRAM "Core 0x8000"
-        taskset 0x8000 $SPY_PROGRAM 1000000000 &
-    else
-        echo "Set" $SPY_PROGRAM "Core 0x2000"
-        if [[ "$SPY_PROGRAM" == *"l3pp"* ]]
-        then
-            taskset 0x2000 $SPY_PROGRAM 1000000000 &
-        else
-            taskset 0x2000 $SPY_PROGRAM $GPG &
-        fi
-    fi
+            status "Spy running"
+            if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
+            then
+                echo "Set" $SPY_PROGRAM "Core 0x8000"
+                taskset 0x8000 $SPY_PROGRAM 1000000000 &
+            else
+                echo "Set" $SPY_PROGRAM "Core 0x2000"
+                if [[ "$SPY_PROGRAM" == *"l3pp"* ]]
+                then
+                    taskset 0x2000 $SPY_PROGRAM 1000000000 &
+                else
+                    taskset 0x2000 $SPY_PROGRAM $GPG &
+                fi
+            fi
 
-    HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}_abnormal
-    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
+            if [[ "$SPEC" != "none" ]]
+            then
+                spec_background $SPEC
+            fi
 
-    sleep $DATA_COLLECTION_TIME_S
-    clean_env
+            HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}
+            taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
 
+            sleep $DATA_COLLECTION_TIME_S
+
+            clean_env
+    done
   done
 done
