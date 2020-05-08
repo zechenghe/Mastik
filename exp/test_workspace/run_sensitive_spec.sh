@@ -75,7 +75,7 @@ do
     mkdir -p $OUTPUT_FOLDER/$SPEC
     for SPLIT in TRAINING TESTING
     do
-        for HPC_COLLECTION in OLD_L3
+        for HPC_COLLECTION in OLD OLD_L3
         do
             status "Encryption running"
             encrypt_large_file
