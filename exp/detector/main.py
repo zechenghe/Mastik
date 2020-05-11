@@ -220,6 +220,7 @@ def eval_detector(args):
     results_dir = 'results/'
     np.save(results_dir + 'LSTM-KS' + '_fpr', fpr)
     np.save(results_dir + 'LSTM-KS' + '_tpr', tpr)
+    return roc_auc
 
 if __name__ == '__main__':
     import argparse
@@ -227,59 +228,7 @@ if __name__ == '__main__':
     import traceback
 
     try:
-        parser = argparse.ArgumentParser()
-
-        # Training or Testing?
-        parser.add_argument('--training', dest='training', action='store_true', help='Flag for training')
-        parser.add_argument('--testing', dest='training', action='store_false', help='Flag for testing')
-        parser.set_defaults(training=True)
-
-        # Real data (private) or dummy data?
-        parser.add_argument('--dummy', dest='dummydata', action='store_true', help='If dummy data is used instead of an input file')
-        parser.set_defaults(dummydata=False)
-
-        # LSTM Network config, can use other sequential models
-        parser.add_argument('--Nhidden', type = int, default = 64, help='Number of hidden nodes in a LSTM cell')
-
-        # Training parameters
-        parser.add_argument('--Nbatches', type = int, default = 100, help='Number of batches in training')
-        parser.add_argument('--BatchSize', type = int, default = 32, help='Size of a batch in training')
-        parser.add_argument('--ChunkSize', type = int, default = 50, help='The length of a chunk in training')
-        parser.add_argument('--SubseqLen', type = int, default = 5000, help='The length of the randomly selected sequence for training')
-        parser.add_argument('--LearningRate', type = float, default = 1e-2, help='The initial learning rate of the Adam optimizer')
-        parser.add_argument('--AMSGrad', type = bool, default = True, help='Whether the AMSGrad variant is used')
-        parser.add_argument('--Eps', type = float, default = 1e-3, help='The term added to the denominator to improve numerical stability')
-        parser.add_argument('--LRdecrease', type = int, default = 10, help='The number of batches that are processed each time before the learning rate is divided by 2')
-
-        # Statistic test config
-        parser.add_argument('--RED_collection_len', type = int, default = 20, help='The number of readings whose prediction errors are added as a data point')
-        parser.add_argument('--RED_points', type = int, default = 20, help='The number of data points that are collected at a time on the testing data to form a testing RED')
-        parser.add_argument('--Pvalue_th', type = float, default = 0.0001, help='The threshold of p-value in KS test')
-
-        # Loaddata
-        # Sequential data in the form of (Timeframe, Features)
-        # Training only leverages normal data. Abnormaly data only for testing.
-        parser.add_argument('--normal_data_dir', type = str, default = "data/", help='The directory of normal data')
-        parser.add_argument('--normal_data_name_train', type = str, default = "baseline_train.npy", help='The file name of training normal data')
-        parser.add_argument('--normal_data_name_test', type = str, default = "baseline_test.npy", help='The file name of testing normal data')
-
-        parser.add_argument('--abnormal_data_dir', type = str, default = "data/", help='The directory of abnormal data')
-        parser.add_argument('--abnormal_data_name', type = str, default = "attack1_test.npy", help='The file name of abnormal data')
-
-        # Save and load model. Save after training. Load before testing.
-        parser.add_argument('--save_model_dir', type = str, default = "checkpoints/", help='The directory to save the model')
-        parser.add_argument('--save_model_name', type = str, default = "AnomalyDetector.ckpt", help='The file name of the saved model')
-
-        parser.add_argument('--load_model_dir', type = str, default = "checkpoints/", help='The directory to load the model')
-        parser.add_argument('--load_model_name', type = str, default = "AnomalyDetector.ckpt", help='The file name of the model to be loaded')
-
-        # Debug and GPU config
-        parser.add_argument('--debug', dest='debug', action='store_true', help='Whether debug information will be printed')
-        parser.set_defaults(debug=False)
-        parser.add_argument('--gpu', dest='gpu', action='store_true', help='Whether GPU acceleration is enabled')
-        parser.set_defaults(gpu=False)
-
-        args = parser.parse_args()
+        args = create_parser()
 
         if args.debug:
             print(args)
