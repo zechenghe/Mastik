@@ -71,8 +71,8 @@ encrypt_large_file (){
 
 clean_env
 
-SPEC="perlbench"
-spec_background perlbench
+SPEC=perlbench
+spec_background $SPEC
 
 for SPEC in perlbench none bzip2 gcc mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
 do
