@@ -148,5 +148,5 @@ def create_parser():
     parser.add_argument('--gpu', dest='gpu', action='store_true', help='Whether GPU acceleration is enabled')
     parser.set_defaults(gpu=False)
 
-    args = parser.parse_args()
+    args, unknown = parser.parse_known_args()
     return args
