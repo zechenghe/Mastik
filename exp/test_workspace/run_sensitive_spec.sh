@@ -44,8 +44,8 @@ clean_env () {
 }
 
 spec_background(){
-    taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 $1 &
-    echo taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 $1
+    taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 "$1" &
+    echo taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 "$1"
     sleep 1
 }
 
@@ -86,7 +86,7 @@ do
 
             if [[ "$SPEC" != "none" ]]
             then
-                spec_background $SPEC
+                spec_background "$SPEC"
             fi
 
             spawn_sensitive_programs
@@ -121,7 +121,7 @@ do
 
             if [[ "$SPEC" != "none" ]]
             then
-                spec_background $SPEC
+                spec_background "$SPEC"
             fi
 
             spawn_sensitive_programs
