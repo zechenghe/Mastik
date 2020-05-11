@@ -81,10 +81,10 @@ do
             encrypt_large_file
             #./encrypt_rsa.sh &
 
-            if [[ "$SPEC" != "none" ]]
-            then
-                spec_background $SPEC
-            fi
+            #if [[ "$SPEC" != "none" ]]
+            #then
+            #    spec_background $SPEC
+            #fi
 
             spawn_sensitive_programs
 
