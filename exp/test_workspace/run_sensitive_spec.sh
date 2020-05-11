@@ -45,8 +45,7 @@ clean_env () {
 
 spec_background(){
     taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 $1 &
-    which runspec
-    #echo taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 $1
+    echo taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 $1
     sleep 1
 }
 
@@ -70,7 +69,7 @@ encrypt_large_file (){
     sleep 1
 }
 
-clean_env
+#clean_env
 
 for SPEC in perlbench none bzip2 gcc mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
 do
