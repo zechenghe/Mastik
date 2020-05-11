@@ -71,12 +71,9 @@ encrypt_large_file (){
 
 clean_env
 
-
-spec_background perlbench
-
-for SPEC in perlbench none bzip2 gcc mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
+for SPEC_BG in perlbench none bzip2 gcc mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
 do
-    mkdir -p $OUTPUT_FOLDER/$SPEC
+    mkdir -p $OUTPUT_FOLDER/$SPEC_BG
     for SPLIT in TRAINING TESTING
     do
         for HPC_COLLECTION in OLD OLD_L3
@@ -84,9 +81,9 @@ do
             status "Encryption running"
             encrypt_large_file
 
-            if [[ "$SPEC" != "none" ]]
+            if [[ "$SPEC_BG" != "none" ]]
             then
-                spec_background "$SPEC"
+                spec_background "$SPEC_BG"
             fi
 
             spawn_sensitive_programs
@@ -94,7 +91,7 @@ do
             for i in ${!SPs[@]}
             do
                 HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
-                taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/$SPEC/hpc_$HPC_SUFFIX &
+                taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/$SPEC_BG/hpc_$HPC_SUFFIX &
             done
 
             sleep $DATA_COLLECTION_TIME_S
@@ -119,9 +116,9 @@ do
                 fi
             fi
 
-            if [[ "$SPEC" != "none" ]]
+            if [[ "$SPEC_BG" != "none" ]]
             then
-                spec_background "$SPEC"
+                spec_background "$SPEC_BG"
             fi
 
             spawn_sensitive_programs
@@ -129,7 +126,7 @@ do
             for i in ${!SPs[@]}
             do
                 HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}_abnormal
-                taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/$SPEC/hpc_$HPC_SUFFIX &
+                taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/$SPEC_BG/hpc_$HPC_SUFFIX &
             done
 
             sleep $DATA_COLLECTION_TIME_S
