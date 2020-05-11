@@ -45,6 +45,7 @@ clean_env () {
 
 spec_background(){
     taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 $1 &
+    which runspec
     #echo taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 $1
     sleep 1
 }
