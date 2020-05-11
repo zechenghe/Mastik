@@ -69,7 +69,8 @@ encrypt_large_file (){
     sleep 1
 }
 
-#clean_env
+clean_env
+spec_background $SPEC
 
 for SPEC in perlbench none bzip2 gcc mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
 do
@@ -78,9 +79,8 @@ do
     do
         for HPC_COLLECTION in OLD OLD_L3
         do
-            #status "Encryption running"
-            #encrypt_large_file
-            #./encrypt_rsa.sh &
+            status "Encryption running"
+            encrypt_large_file
 
             if [[ "$SPEC" != "none" ]]
             then
