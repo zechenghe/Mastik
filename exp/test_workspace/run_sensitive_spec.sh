@@ -84,7 +84,7 @@ do
 
             if [[ "$SPEC" != "none" ]]
             then
-                spec_background "$SPEC"
+                spec_background $SPEC
             fi
 
             spawn_sensitive_programs
