@@ -78,8 +78,8 @@ do
     do
         for HPC_COLLECTION in OLD OLD_L3
         do
-            status "Encryption running"
-            encrypt_large_file
+            #status "Encryption running"
+            #encrypt_large_file
             #./encrypt_rsa.sh &
 
             if [[ "$SPEC" != "none" ]]
