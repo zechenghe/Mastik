@@ -80,7 +80,7 @@ do
         do
             status "Encryption running"
             encrypt_large_file
-            ./encrypt_rsa.sh &
+            #./encrypt_rsa.sh &
 
             if [[ "$SPEC" != "none" ]]
             then
