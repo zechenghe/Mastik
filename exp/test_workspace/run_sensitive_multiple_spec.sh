@@ -60,20 +60,20 @@ multi_spec_background(){
 
     sleep 1
 
-    taskset 0x200 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 hmmer &
-    echo taskset 0x200 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 hmmer
+    #taskset 0x200 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 hmmer &
+    #echo taskset 0x200 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 hmmer
 
-    sleep 1
+    #sleep 1
 
-    taskset 0x200 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 astar &
-    echo taskset 0x200 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 astar
+    #taskset 0x200 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 astar &
+    #echo taskset 0x200 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 astar
 
-    sleep 1
+    #sleep 1
 
-    taskset 0x8 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 lbm &
-    echo taskset 0x8 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 lbm
+    #taskset 0x8 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 lbm &
+    #echo taskset 0x8 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 lbm
 
-    sleep 1
+    #sleep 1
 }
 
 # Cleanup environment when exit
