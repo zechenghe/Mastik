@@ -49,6 +49,33 @@ spec_background(){
     sleep 1
 }
 
+multi_spec_background(){
+    taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 perlbench &
+    echo taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 perlbench
+
+    sleep 1
+
+    taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 libquantum &
+    echo taskset 0x20 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 libquantum
+
+    sleep 1
+
+    taskset 0x200 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 hmmer &
+    echo taskset 0x200 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 hmmer
+
+    sleep 1
+
+    taskset 0x200 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 astar &
+    echo taskset 0x200 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 astar
+
+    sleep 1
+
+    taskset 0x8 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 lbm &
+    echo taskset 0x8 runspec --config=test.cfg --size=train --noreportable --tune=base --iterations=1 lbm
+
+    sleep 1
+}
+
 # Cleanup environment when exit
 trap clean_env EXIT
 
@@ -86,8 +113,7 @@ do
 
             if [[ "$SPEC_BG" != "none" ]]
             then
-                spec_background perlbench
-                spec_background libquantum
+                multi_spec_background
             fi
 
             spawn_sensitive_programs
@@ -122,8 +148,7 @@ do
 
             if [[ "$SPEC_BG" != "none" ]]
             then
-                spec_background perlbench
-                spec_background libquantum
+                multi_spec_background
             fi
 
             spawn_sensitive_programs
