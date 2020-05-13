@@ -75,6 +75,7 @@ clean_env
 #do
 
 for SPEC_BG in none multiple
+do
     mkdir -p $OUTPUT_FOLDER/$SPEC_BG
     for SPLIT in TRAINING TESTING
     do
