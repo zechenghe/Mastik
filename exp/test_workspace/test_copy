@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -u
+
+quickhpc="/home/zechengh/quickhpc/quickhpc"
+
+ROOT_DIR="/home/zechengh/Mastik"
+EXP_ROOT_DIR=$ROOT_DIR/exp
+source $EXP_ROOT_DIR/exp_funcs.sh
+
+OUTPUT_FOLDER=$EXP_ROOT_DIR/test_workspace/results
+mkdir -p $OUTPUT_FOLDER
+rm -rf $EXP_ROOT_DIR/test_workspace/results/*
+
+ARCHIVE_ROOT_FOLDER=$EXP_ROOT_DIR/test_workspace/archive
+CURRENT_TIME_SUFFIX=$(date +'%Y%m%d_%H%M%S')
+ARCHIVE_FOLDER=$ARCHIVE_ROOT_FOLDER/$CURRENT_TIME_SUFFIX
+mkdir -p $ARCHIVE_FOLDER
+
+SCRIPT_NAME=$(basename -- "$0")
+cp $SCRIPT_NAME $ARCHIVE_FOLDER/$SCRIPT_NAME
+cp -r $OUTPUT_FOLDER $ARCHIVE_FOLDER/$OUTPUT_FOLDER
