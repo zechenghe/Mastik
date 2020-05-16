@@ -31,7 +31,7 @@ DATA_COLLECTION_TIME_S=10
 #SPcores=('0x80')
 #SPIDs=('')
 
-SPY_PROGRAM=./spy_fr
+SPY_PROGRAM=./spy_ff
 SPs=('sensitive1' 'sensitive5')
 SPcores=('0x8' '0x80')
 SPIDs=('' '')
