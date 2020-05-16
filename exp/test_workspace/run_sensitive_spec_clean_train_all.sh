@@ -75,7 +75,6 @@ encrypt_large_file (){
 
 clean_env
 
-
 for CACHE_ATTACK in fr ff l3pp l1pp
 do
     clean_env
