@@ -19,11 +19,11 @@ for hpc in ['BR_CN', 'BR_INS', 'BR_MSP', 'BR_NTK', 'BR_PRC', 'FP_INS', 'L1_DCM',
         SP = SP,
         hpc = hpc
     )
-    pos1_path = data_dir + '{SP}_{hpc}_flush'.format(
+    pos1_path = data_dir + '{SP}_{hpc}_sim_flush'.format(
         SP = SP,
         hpc = hpc
     )
-    pos2_path = data_dir + '{SP}_{hpc}_l3prime'.format(
+    pos2_path = data_dir + '{SP}_{hpc}_sim_l3prime'.format(
         SP = SP,
         hpc = hpc
     )
