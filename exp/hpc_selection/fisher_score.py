@@ -36,10 +36,10 @@ for hpc in ['BR_CN', 'BR_INS', 'BR_MSP', 'BR_NTK', 'BR_PRC', 'FP_INS', 'L1_DCM',
         hpc = hpc
     )
 
-    neg1 = read_file(neg1_path)
-    neg2 = read_file(neg2_path)
-    pos1 = read_file(pos1_path)
-    pos2 = read_file(pos2_path)
+    neg1 = read_file(neg1_path)[500:600]
+    neg2 = read_file(neg2_path)[500:600]
+    pos1 = read_file(pos1_path)[500:600]
+    pos2 = read_file(pos2_path)[500:600]
 
     f1 = f_score(neg1, pos1)
     f2 = f_score(neg2, pos2)
