@@ -9,7 +9,7 @@ def f_score(pos, neg):
     pos_mean = np.mean(pos)
     pos_var = np.var(pos)
 
-    return ((pos_mean-neg_mean) ** 2) / neg_var+pos_var)
+    return ((pos_mean-neg_mean) ** 2) / (neg_var+pos_var)
 
 
 data_dir = 'results/'
