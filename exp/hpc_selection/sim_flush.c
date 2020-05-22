@@ -23,8 +23,8 @@ int main(int ac, char **av) {
     asm volatile ("clflush 0(%0)": : "r" (buffer + i):);
   }
 
-  asm volatile("mfence");
-  asm volatile("mfence");
+  asm volatile("lfence");
+  asm volatile("lfence");
 
   printf("RAND_MAX %d\n", RAND_MAX);
   printf("Start For Loop\n");
@@ -33,7 +33,7 @@ int main(int ac, char **av) {
       idx = rand() % (NPAGES * PAGE_SIZE);
       temp = buffer[idx];
       temp = temp * 2 + 1024;
-      asm volatile("mfence");
+      asm volatile("lfence");
       idx = rand() % (NPAGES * PAGE_SIZE);
       asm volatile ("clflush 0(%0)": : "r" (buffer + idx):);
   }

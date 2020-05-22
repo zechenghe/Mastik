@@ -23,8 +23,8 @@ int main(int ac, char **av) {
     asm volatile ("clflush 0(%0)": : "r" (buffer + i):);
   }
 
-  asm volatile("mfence");
-  asm volatile("mfence");
+  asm volatile("lfence");
+  asm volatile("lfence");
 
   printf("RAND_MAX %d\n", RAND_MAX);
   printf("Start For Loop\n");
