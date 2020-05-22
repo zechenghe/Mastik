@@ -63,13 +63,13 @@ do
         then
             echo "Set sim_flush Core 0x8000"
             taskset 0x8000 ./sim_flush &
-            sleep 5
+            sleep 10
         else
             if [[ "$INTERFERE" == "sim_l3prime" ]]
             then
                 echo "Set sim_l3prime Core 0x8000"
                 taskset 0x8000 ./sim_l3prime &
-                sleep 5
+                sleep 10
             fi
         fi
 
