@@ -78,7 +78,7 @@ do
         for i in ${!SPs[@]}
         do
             HPC_SUFFIX=${SPs[i]}_"$HPC_SEL"_"$INTERFERE"
-            taskset 0x10 $quickhpc -c hpc_config_$HPC_SEL -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/$HPC_SUFFIX &
+            taskset 0x10 $quickhpc -c ./hpc_config/hpc_config_$HPC_SEL -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/$HPC_SUFFIX &
         done
 
         sleep $DATA_COLLECTION_TIME_S
