@@ -33,4 +33,4 @@ for hpc in ['BR_CN', 'BR_INS', 'BR_MSP', 'BR_NTK', 'BR_PRC', 'FP_INS', 'L1_DCM',
     pos1 = read_file(pos1_path)
     pos2 = read_file(pos2_path)
 
-    print neg1.shape, neg2.shape, pos1.shape, pos2.shapeÓ
+    print neg1.shape, neg2.shape, pos1.shape, pos2.shape
