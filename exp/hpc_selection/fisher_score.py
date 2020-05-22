@@ -1,8 +1,7 @@
 import numpy as np
 
 def read_file(path):
-    f = open(path, 'r')
-    return np.squeeze(np.array(list(f)))
+    return np.loadtxt(path)
 
 data_dir = 'results/'
 SP = 'sensitive5'
