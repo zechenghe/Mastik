@@ -8,6 +8,8 @@ ROOT_DIR="/home/zechengh/Mastik"
 EXP_ROOT_DIR=$ROOT_DIR/exp
 source $EXP_ROOT_DIR/exp_funcs.sh
 
+GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
+
 OUTPUT_FOLDER=$EXP_ROOT_DIR/hpc_selection/results
 mkdir -p $OUTPUT_FOLDER
 rm -rf $EXP_ROOT_DIR/hpc_selection/results/*
