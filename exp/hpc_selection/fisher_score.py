@@ -2,7 +2,7 @@ import numpy as np
 
 def read_file(path):
     f = open(path, 'r')
-    return np.array(list(f))
+    return np.squeeze(np.array(list(f)))
 
 data_dir = 'results/'
 SP = 'sensitive5'
