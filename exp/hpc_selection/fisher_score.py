@@ -32,8 +32,8 @@ for hpc in ['BR_CN', 'BR_INS', 'BR_MSP', 'BR_NTK', 'BR_PRC', 'FP_INS', 'L1_DCM',
     pos1 = read_file(pos1_path)[5000:6000]
     pos2 = read_file(pos2_path)[5000:6000]
 
-    neg = np.concatenate((neg1, neg2), axis=0)
-    pos = np.concatenate((pos1, pos2), axis=0)
+    neg = neg1 #np.concatenate((neg1, neg2), axis=0)
+    pos = pos1 #np.concatenate((pos1, pos2), axis=0)
 
     print neg.shape
     print pos.shape
