@@ -64,13 +64,13 @@ do
         if [[ "$INTERFERE" == "sim_flush" ]]
         then
             echo "Set sim_flush Core 0x8000"
-            taskset 0x8000 ./sim_flush &
+            taskset 0x2000 ./sim_flush &
             sleep 10
         else
             if [[ "$INTERFERE" == "sim_l3prime" ]]
             then
                 echo "Set sim_l3prime Core 0x8000"
-                taskset 0x8000 ./sim_l3prime &
+                taskset 0x2000 ./sim_l3prime &
                 sleep 10
             fi
         fi
