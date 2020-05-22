@@ -11,5 +11,5 @@ print filename
 f = open(filename, "r")
 for line in f:
   words = line.split(' ')
-  if words[7] == 'LSTM+KS':
+  if words[7] == 'LOF':
       print words[-1][:-1]
