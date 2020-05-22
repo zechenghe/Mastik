@@ -32,6 +32,7 @@ int main(int ac, char **av) {
   while(1){
       idx = rand() % (NPAGES * PAGE_SIZE);
       temp = buffer[idx];
+      temp = temp * 2 + 1024;
       asm volatile("mfence");
       asm volatile ("clflush 0(%0)": : "r" (buffer + idx):);
   }
