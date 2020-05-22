@@ -28,7 +28,7 @@ SPIDs=('')
 
 clean_env () {
     sleep 1
-    echo "Killing processes quickhpc, sensitive[1-9], spy, gnupg"
+    echo "Killing processes quickhpc, sensitive[1-9], sim_flush, sim_l3prime"
     ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "sim_flush" | awk '{print $2;}' | xargs -r kill
@@ -77,7 +77,7 @@ do
 
         for i in ${!SPs[@]}
         do
-            HPC_SUFFIX=${SPs[i]}_$HPC_SEL_$INTERFERE
+            HPC_SUFFIX=${SPs[i]}_"$HPC_SEL"_"$INTERFERE"
             taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/$HPC_SUFFIX &
         done
 
