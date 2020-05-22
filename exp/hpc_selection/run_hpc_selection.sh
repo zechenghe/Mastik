@@ -29,10 +29,8 @@ clean_env () {
     echo "Killing processes quickhpc, sensitive[1-9], spy, gnupg"
     ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
-    ps -ef | grep "spy" | awk '{print $2;}' | xargs -r kill
-    ps -ef | grep "zechengh_key1" | awk '{print $2;}' | xargs -r kill
-    ps -ef | grep "encrypt_" | awk '{print $2;}' | xargs -r kill
-    ps -ef | grep "runspec" | awk '{print $2;}' | xargs -r kill
+    ps -ef | grep "sim_flush" | awk '{print $2;}' | xargs -r kill
+    ps -ef | grep "sim_l3prime" | awk '{print $2;}' | xargs -r kill
     sleep 1
 }
 
@@ -52,68 +50,38 @@ spawn_sensitive_programs (){
 
 clean_env
 
-for CACHE_ATTACK in fr ff l3pp l1pp
+for HPC_SEL in BR_CN BR_INS BR_MSP BR_NTK
 do
-    clean_env
-    sleep 5
-    SPY_PROGRAM=./spy_$CACHE_ATTACK
-
-    for SPEC_BG in perlbench none bzip2 gcc mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
+    for INTERFERE in none1 none2 sim_flush sim_l3prime
     do
-        RUN_SAVE_DIR=$OUTPUT_FOLDER/$CACHE_ATTACK/$SPEC_BG
+
+        RUN_SAVE_DIR=$OUTPUT_FOLDER/
         mkdir -p $RUN_SAVE_DIR
-        for SPLIT in TRAINING TESTING
+
+        spawn_sensitive_programs
+        if [[ "$INTERFERE" == "sim_flush" ]]
+        then
+            echo "Set sim_flush Core 0x8000"
+            taskset 0x8000 ./sim_flush &
+            sleep 5
+        else
+            if [[ "$INTERFERE" == "sim_l3prime" ]]
+            then
+                echo "Set sim_l3prime Core 0x8000"
+                taskset 0x8000 ./sim_l3prime &
+                sleep 5
+            fi
+        fi
+
+        for i in ${!SPs[@]}
         do
-            for HPC_COLLECTION in OLD OLD_L3
-            do
-                spawn_sensitive_programs
-
-                for i in ${!SPs[@]}
-                do
-                    HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
-                    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/hpc_$HPC_SUFFIX &
-                done
-
-                sleep $DATA_COLLECTION_TIME_S
-
-                clean_env
-
-                status "Encryption running"
-                encrypt_large_file
-
-                status "Spy running"
-                if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
-                then
-                    echo "Set" $SPY_PROGRAM "Core 0x8000"
-                    taskset 0x8000 $SPY_PROGRAM 1000000000 &
-                else
-                    echo "Set" $SPY_PROGRAM "Core 0x2000"
-                    if [[ "$SPY_PROGRAM" == *"l3pp"* ]]
-                    then
-                        taskset 0x2000 $SPY_PROGRAM 1000000000 &
-                    else
-                        taskset 0x2000 $SPY_PROGRAM $GPG &
-                    fi
-                fi
-
-                if [[ "$SPEC_BG" != "none" ]]
-                then
-                    spec_background "$SPEC_BG"
-                fi
-
-                spawn_sensitive_programs
-
-                for i in ${!SPs[@]}
-                do
-                    HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}_abnormal
-                    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/hpc_$HPC_SUFFIX &
-                done
-
-                sleep $DATA_COLLECTION_TIME_S
-
-                clean_env
-            done
+            HPC_SUFFIX=${SPs[i]}_$HPC_SEL_$INTERFERE
+            taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/$HPC_SUFFIX &
         done
+
+        sleep $DATA_COLLECTION_TIME_S
+
+        clean_env
     done
 done
 
