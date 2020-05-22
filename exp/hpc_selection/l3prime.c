@@ -31,8 +31,8 @@ int main(int ac, char **av) {
 
   while(1){
       for (int i = 0; i < NPAGES * PAGE_SIZE; i++){
-        temp = buffer[i]
-        temp = temp * 2 + 1024
+        temp = buffer[i];
+        temp = temp * 2 + 1024;
       }
   }
 }
