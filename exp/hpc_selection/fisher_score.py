@@ -45,4 +45,4 @@ for hpc in ['BR_CN', 'BR_INS', 'BR_MSP', 'BR_NTK', 'BR_PRC', 'FP_INS', 'L1_DCM',
     f2 = f_score(neg2, pos2)
     fisher_score = (f1+f2) / 2
 
-    print hpc, fisher_score
+    print hpc, f1, f2, fisher_score
