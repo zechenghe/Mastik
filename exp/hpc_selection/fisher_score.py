@@ -12,37 +12,41 @@ def f_score(pos, neg):
     return ((pos_mean-neg_mean) ** 2) / (neg_var+pos_var)
 
 
-data_dir = 'results/'
-SP = 'sensitive5'
+def collect_f_score(data_dir='results/', SP='sensitive5'):
 
-for hpc in ['BR_CN', 'BR_INS', 'BR_MSP', 'BR_NTK', 'BR_PRC', 'FP_INS', 'L1_DCM', 'L1_ICM',
+    for hpc in ['BR_CN', 'BR_INS', 'BR_MSP', 'BR_NTK', 'BR_PRC', 'FP_INS', 'L1_DCM', 'L1_ICM',
             'L1_LDM', 'L1_STM', 'L1_TCM', 'L2_TCA', 'L2_TCM', 'L3_TCA', 'L3_TCM', 'LD_INS',
             'SR_INS', 'STL_ICY', 'TLB_DM', 'TLB_IM', 'TOT_CYC', 'TOT_INS']:
 
-    neg1_path = data_dir + '{SP}_{hpc}_none1'.format(
-        SP = SP,
-        hpc = hpc
-    )
-    neg2_path = data_dir + '{SP}_{hpc}_none2'.format(
-        SP = SP,
-        hpc = hpc
-    )
-    pos1_path = data_dir + '{SP}_{hpc}_sim_flush'.format(
-        SP = SP,
-        hpc = hpc
-    )
-    pos2_path = data_dir + '{SP}_{hpc}_sim_l3prime'.format(
-        SP = SP,
-        hpc = hpc
-    )
+        neg1_path = data_dir + '{SP}_{hpc}_none1'.format(
+            SP = SP,
+            hpc = hpc
+        )
 
-    neg1 = read_file(neg1_path)
-    neg2 = read_file(neg2_path)
-    pos1 = read_file(pos1_path)
-    pos2 = read_file(pos2_path)
+        neg2_path = data_dir + '{SP}_{hpc}_none2'.format(
+            SP = SP,
+            hpc = hpc
+        )
 
-    f1 = f_score(neg1, pos1)
-    f2 = f_score(neg2, pos2)
-    fisher_score = (f1+f2) / 2
+        pos1_path = data_dir + '{SP}_{hpc}_sim_flush'.format(
+            SP = SP,
+            hpc = hpc
+        )
 
-    print hpc, f1, f2, fisher_score
+        pos2_path = data_dir + '{SP}_{hpc}_sim_l3prime'.format(
+            SP = SP,
+            hpc = hpc
+        )
+
+        neg1 = read_file(neg1_path)
+        neg2 = read_file(neg2_path)
+        pos1 = read_file(pos1_path)
+        pos2 = read_file(pos2_path)
+
+        f1 = f_score(neg1, pos1)
+        f2 = f_score(neg2, pos2)
+        fisher_score = (f1+f2) / 2
+
+        print hpc, f1, f2, fisher_score
+
+collect_f_score()
