@@ -40,6 +40,8 @@ def collect_f_score(collection, data_dir='results/', SP='sensitive5'):
             hpc = hpc
         )
 
+        print neg1_path
+
         neg1 = read_file(neg1_path)
         neg2 = read_file(neg2_path)
         pos1 = read_file(pos1_path)
