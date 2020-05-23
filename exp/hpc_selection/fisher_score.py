@@ -1,5 +1,6 @@
 import numpy as np
 import os
+import collections
 
 def read_file(path):
     return np.loadtxt(path)
@@ -13,7 +14,7 @@ def f_score(pos, neg):
     return ((pos_mean-neg_mean) ** 2) / (neg_var+pos_var)
 
 
-def collect_f_score(data_dir='results/', SP='sensitive5'):
+def collect_f_score(collection, data_dir='results/', SP='sensitive5'):
 
     for hpc in ['BR_CN', 'BR_INS', 'BR_MSP', 'BR_NTK', 'BR_PRC', 'FP_INS', 'L1_DCM', 'L1_ICM',
             'L1_LDM', 'L1_STM', 'L1_TCM', 'L2_TCA', 'L2_TCM', 'L3_TCA', 'L3_TCM', 'LD_INS',
@@ -48,17 +49,24 @@ def collect_f_score(data_dir='results/', SP='sensitive5'):
         f2 = f_score(neg2, pos2)
         fisher_score = (f1+f2) / 2
 
-        print hpc, f1, f2, fisher_score
+        #print hpc, f1, f2, fisher_score
+        collection[hpc] += fisher_score
 
 
 data_dirs = os.listdir('archive/')
 data_dir_filtered = []
 for d in data_dirs:
-    if d >= '20200523_020440':
+    if d >= '20200523_020440s':
         data_dir_filtered.append(d)
 
-print len(data_dir_filtered)
-d = data_dir_filtered[0]
-collect_f_score(
-    data_dir = 'archive/' + d + '/results/'
-)
+
+print 'Total', len(data_dir_filtered), 'runs'
+D = collections.defaultdict(lambda:0)
+for d in data_dir_filtered:
+    collect_f_score(
+        collection = D,
+        data_dir = 'archive/' + d + '/results/'
+    )
+
+for k in D.keys():
+    print k, D[k] / len(data_dir_filtered)
