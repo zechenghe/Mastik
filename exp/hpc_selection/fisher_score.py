@@ -54,11 +54,11 @@ def collect_f_score(data_dir='results/', SP='sensitive5'):
 data_dirs = os.listdir('archive/')
 data_dir_filtered = []
 for d in data_dirs:
-    if d >= '20200523_023836/':
+    if d >= '20200523_020440':
         data_dir_filtered.append(d)
 
 print len(data_dir_filtered)
 d = data_dir_filtered[0]
 collect_f_score(
-    data_dir = 'archive/' + d + 'results/'
+    data_dir = 'archive/' + d + '/results/'
 )
