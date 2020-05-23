@@ -56,8 +56,8 @@ int main(int argc, char **argv) {
     asm volatile ("clflush 0(%0)": : "r" (buffer + i):);
   }
 
-  asm volatile("mfence");
-  asm volatile("mfence");
+  asm volatile("lfence");
+  asm volatile("lfence");
 
   printf("RAND_MAX %d\n", RAND_MAX);
   printf("Start For Loop\n");
@@ -66,6 +66,6 @@ int main(int argc, char **argv) {
       //temp = buffer[offset];
       //temp = *p[2];
       temp = buffer[rand() % (NPAGES * PAGE_SIZE)];
-      asm volatile("mfence");
+      asm volatile("lfence");
   }
 }
