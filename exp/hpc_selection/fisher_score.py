@@ -50,8 +50,8 @@ def collect_f_score(collection, data_dir='results/', SP='sensitive5'):
         f1 = f_score(neg1, pos1)
         f2 = f_score(neg2, pos2)
 
-        fisher_score = f1
-        #fisher_score = (f1+f2) / 2
+        #fisher_score = f1
+        fisher_score = (f1+f2) / 2
 
         #print hpc, f1, f2, fisher_score
         collection[hpc] += fisher_score
