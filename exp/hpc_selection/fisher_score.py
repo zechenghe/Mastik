@@ -72,5 +72,5 @@ for d in data_dir_filtered:
         data_dir = 'archive/' + d + '/results/'
     )
 
-for k in D.keys():
+for k in sorted(list(D.keys())):
     print k, D[k] / len(data_dir_filtered)
