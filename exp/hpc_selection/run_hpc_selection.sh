@@ -19,7 +19,7 @@ CURRENT_TIME_SUFFIX=$(date +'%Y%m%d_%H%M%S')
 ARCHIVE_FOLDER=$ARCHIVE_ROOT_FOLDER/$CURRENT_TIME_SUFFIX
 mkdir -p $ARCHIVE_FOLDER
 
-INTERVAL_US=100
+INTERVAL_US=1000
 DATA_COLLECTION_TIME_S=10
 
 SPs=('sensitive5')
@@ -63,13 +63,13 @@ do
         spawn_sensitive_programs
         if [[ "$INTERFERE" == "sim_flush" ]]
         then
-            echo "Set sim_flush Core 0x8000"
+            echo "Set sim_flush Core 0x2000"
             taskset 0x2000 ./sim_flush &
             sleep 10
         else
             if [[ "$INTERFERE" == "sim_l3prime" ]]
             then
-                echo "Set sim_l3prime Core 0x8000"
+                echo "Set sim_l3prime Core 0x2000"
                 taskset 0x2000 ./sim_l3prime &
                 sleep 10
             fi
