@@ -56,7 +56,7 @@ def collect_f_score(collection, data_dir='results/', SP='sensitive5'):
 data_dirs = os.listdir('archive/')
 data_dir_filtered = []
 for d in data_dirs:
-    if d >= '20200523_020440s':
+    if d >= '20200523_020440':
         data_dir_filtered.append(d)
 
 
