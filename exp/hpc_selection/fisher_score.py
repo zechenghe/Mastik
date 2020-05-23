@@ -1,4 +1,5 @@
 import numpy as np
+import os
 
 def read_file(path):
     return np.loadtxt(path)
@@ -49,4 +50,15 @@ def collect_f_score(data_dir='results/', SP='sensitive5'):
 
         print hpc, f1, f2, fisher_score
 
-collect_f_score()
+
+data_dirs = os.listdir('archive/')
+data_dir_filtered = []
+for d in data_dirs:
+    if d >= '20200523_023836/':
+        data_dir_filtered.append(d)
+
+print len(data_dir_filtered)
+d = data_dir_filtered[0]
+collect_f_score(
+    data_dir = 'archive/' + d + 'results/'
+)
