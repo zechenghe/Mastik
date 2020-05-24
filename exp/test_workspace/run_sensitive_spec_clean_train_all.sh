@@ -87,7 +87,7 @@ do
         mkdir -p $RUN_SAVE_DIR
         for SPLIT in TRAINING TESTING
         do
-            for HPC_COLLECTION in OLD OLD_L3
+            for HPC_COLLECTION in SELECTED
             do
                 spawn_sensitive_programs
 
