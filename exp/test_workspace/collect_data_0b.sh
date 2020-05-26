@@ -86,6 +86,7 @@ do
             encrypt_large_file
 
             status "Spy running"
+            SPY_PROGRAM=./spy_$CACHE_ATTACK
             if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
             then
                 echo "Set" $SPY_PROGRAM "Core 0x8000"
