@@ -74,6 +74,7 @@ encrypt_large_file (){
 
 clean_env
 
+mkdir -p $OUTPUT_FOLDER/0a
 for HPC_COLLECTION in SELECTED
 do
     for SPLIT in TRAIN TEST
@@ -83,7 +84,7 @@ do
         encrypt_large_file
 
         HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}
-        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/0a_hpc_$HPC_SUFFIX &
+        taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/0a/0a_hpc_$HPC_SUFFIX &
         sleep $DATA_COLLECTION_TIME_S
     done
 done
