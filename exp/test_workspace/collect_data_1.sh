@@ -74,7 +74,7 @@ encrypt_large_file (){
 
 clean_env
 
-mkdir -p $OUTPUT_FOLDER/0a
+mkdir -p $OUTPUT_FOLDER/1
 for HPC_COLLECTION in SELECTED
 do
     for SPLIT in TRAIN TEST
