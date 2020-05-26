@@ -43,7 +43,6 @@ clean_env () {
     ps -ef | grep "zechengh_key1" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "encrypt_" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "runspec" | awk '{print $2;}' | xargs -r kill
-    mkdir -p $OUTPUT_FOLDER
 }
 
 spec_background(){
@@ -76,11 +75,13 @@ clean_env
 
 for CACHE_ATTACK in fr ff l3pp l1pp
 do
-    mkdir -p $OUTPUT_FOLDER/2/$CACHE_ATTACK
     for HPC_COLLECTION in SELECTED
     do
         for SPLIT in TRAIN TEST
         do
+            RUN_SAVE_DIR=$OUTPUT_FOLDER/2/$CACHE_ATTACK/
+            mkdir -p "$RUN_SAVE_DIR"
+
             clean_env
             status "Encryption running"
             encrypt_large_file
@@ -108,7 +109,7 @@ do
             for i in ${!SPs[@]}
             do
                 HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
-                taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/2/2_hpc_$HPC_SUFFIX &
+                taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/2_hpc_$HPC_SUFFIX &
             done
 
         done

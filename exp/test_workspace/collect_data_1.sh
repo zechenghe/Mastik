@@ -79,6 +79,9 @@ for HPC_COLLECTION in SELECTED
 do
     for SPLIT in TRAIN TEST
     do
+        RUN_SAVE_DIR=$OUTPUT_FOLDER/1
+        mkdir -p "$RUN_SAVE_DIR"
+
         clean_env
         status "Encryption running"
         encrypt_large_file
@@ -88,7 +91,7 @@ do
         for i in ${!SPs[@]}
         do
             HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
-            taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $OUTPUT_FOLDER/1/1_hpc_$HPC_SUFFIX &
+            taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/1_hpc_$HPC_SUFFIX &
         done
 
         sleep $DATA_COLLECTION_TIME_S
