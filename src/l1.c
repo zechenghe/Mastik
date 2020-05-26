@@ -36,10 +36,6 @@
 #define PTR(set, way, ptr) (void *)(((uintptr_t)l1->memory) + ((set) * L1_CACHELINE) + ((way) * L1_STRIDE) + ((ptr)*sizeof(void *)))
 #define LNEXT(p) (*(void **)(p))
 
-
-
-
-
 struct l1pp{
   void *memory;
   void *fwdlist;
@@ -100,8 +96,8 @@ void l1_release(l1pp_t l1) {
 
 
 int l1_monitor(l1pp_t l1, int line) {
-  for (int i = 0;  i < l1->nsets; i++) 
-    if (l1->monitored[i] == line) 
+  for (int i = 0;  i < l1->nsets; i++)
+    if (l1->monitored[i] == line)
       return 0;
   l1->monitored[l1->nsets++] = line;
   rebuild(l1);
@@ -109,7 +105,7 @@ int l1_monitor(l1pp_t l1, int line) {
 }
 
 int l1_unmonitor(l1pp_t l1, int line) {
-  for (int i = 0;  i < l1->nsets; i++) 
+  for (int i = 0;  i < l1->nsets; i++)
     if (l1->monitored[i] == line) {
       l1->monitored[i] = l1->monitored[l1->nsets--];
       rebuild(l1);
@@ -186,4 +182,3 @@ int l1_repeatedprobe(l1pp_t l1, int nrecords, uint16_t *results, int slot) {
   }
   return nrecords;
 }
-
