@@ -31,12 +31,11 @@ DATA_COLLECTION_TIME_S=10
 #SPcores=('0x80')
 #SPIDs=('')
 
-SPs=('sensitive1' 'sensitive5')
-SPcores=('0x8' '0x80')
+SPs=('sensitive5')
+SPcores=('0x80')
 SPIDs=('' '')
 
 clean_env () {
-    sleep 1
     echo "Killing processes quickhpc, sensitive[1-9], spy, gnupg"
     ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
@@ -44,7 +43,7 @@ clean_env () {
     ps -ef | grep "zechengh_key1" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "encrypt_" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "runspec" | awk '{print $2;}' | xargs -r kill
-    sleep 1
+    mkdir -p $OUTPUT_FOLDER
 }
 
 spec_background(){
@@ -75,41 +74,25 @@ encrypt_large_file (){
 
 clean_env
 
-for CACHE_ATTACK in fr ff l3pp l1pp
+mkdir -p $OUTPUT_FOLDER/0a
+for HPC_COLLECTION in SELECTED
 do
-    status "Encryption running"
-    encrypt_large_file
+    for SPLIT in TRAIN TEST
+    do
+        clean_env
+        status "Encryption running"
+        encrypt_large_file
 
-    HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}
-    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
+        spawn_sensitive_programs
 
-    sleep $DATA_COLLECTION_TIME_S
+        for i in ${!SPs[@]}
+        do
+            HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
+            taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/1/1_hpc_$HPC_SUFFIX &
+        done
 
-    clean_env
-
-    status "Encryption running"
-    encrypt_large_file
-
-    status "Spy running"
-    if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
-    then
-        echo "Set" $SPY_PROGRAM "Core 0x8000"
-        taskset 0x8000 $SPY_PROGRAM 1000000000 &
-    else
-        echo "Set" $SPY_PROGRAM "Core 0x2000"
-        if [[ "$SPY_PROGRAM" == *"l3pp"* ]]
-        then
-            taskset 0x2000 $SPY_PROGRAM 1000000000 &
-        else
-            taskset 0x2000 $SPY_PROGRAM $GPG &
-        fi
-    fi
-
-    HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}_abnormal
-    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
-
-    sleep $DATA_COLLECTION_TIME_S
-    clean_env
+        sleep $DATA_COLLECTION_TIME_S
+    done
 done
 
 SCRIPT_NAME=$(basename -- "$0")
