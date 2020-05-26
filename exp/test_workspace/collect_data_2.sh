@@ -31,8 +31,8 @@ DATA_COLLECTION_TIME_S=10
 #SPcores=('0x80')
 #SPIDs=('')
 
-SPs=('sensitive1' 'sensitive5')
-SPcores=('0x8' '0x80')
+SPs=('sensitive5')
+SPcores=('0x80')
 SPIDs=('' '')
 
 clean_env () {
@@ -111,6 +111,7 @@ do
                 HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
                 taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/2_hpc_$HPC_SUFFIX &
             done
+            sleep $DATA_COLLECTION_TIME_S
 
         done
     done
