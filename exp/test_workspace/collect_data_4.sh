@@ -31,12 +31,11 @@ DATA_COLLECTION_TIME_S=10
 #SPcores=('0x80')
 #SPIDs=('')
 
-SPs=('sensitive1' 'sensitive5')
-SPcores=('0x8' '0x80')
+SPs=('sensitive5')
+SPcores=('0x80')
 SPIDs=('' '')
 
 clean_env () {
-    sleep 1
     echo "Killing processes quickhpc, sensitive[1-9], spy, gnupg"
     ps -ef | grep "quickhpc" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "sensitive[1-9]" | awk '{print $2;}' | xargs -r kill
@@ -44,7 +43,7 @@ clean_env () {
     ps -ef | grep "zechengh_key1" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "encrypt_" | awk '{print $2;}' | xargs -r kill
     ps -ef | grep "runspec" | awk '{print $2;}' | xargs -r kill
-    sleep 1
+    mkdir -p $OUTPUT_FOLDER
 }
 
 spec_background(){
@@ -77,39 +76,51 @@ clean_env
 
 for CACHE_ATTACK in fr ff l3pp l1pp
 do
-    status "Encryption running"
-    encrypt_large_file
+    for SPEC_BG in perlbench bzip2 gcc mcf milc namd gobmk soplex povray hmmer sjeng libquantum h264ref lbm omnetpp astar
+    do
+        for HPC_COLLECTION in SELECTED
+        do
+            for SPLIT in TRAIN TEST
+            do
+                RUN_SAVE_DIR=$OUTPUT_FOLDER/3/$CACHE_ATTACK/$SPEC_BG/
+                mkdir -p "$RUN_SAVE_DIR"
 
-    HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}
-    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
+                clean_env
 
-    sleep $DATA_COLLECTION_TIME_S
+                status "Encryption running"
+                encrypt_large_file
 
-    clean_env
+                status "SPEC running" "$SPEC_BG"
+                spec_background "$SPEC_BG"
 
-    status "Encryption running"
-    encrypt_large_file
+                status "Spy running"
+                SPY_PROGRAM=./spy_$CACHE_ATTACK
+                if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
+                then
+                    echo "Set" $SPY_PROGRAM "Core 0x8000"
+                    taskset 0x8000 $SPY_PROGRAM 1000000000 &
+                else
+                    echo "Set" $SPY_PROGRAM "Core 0x2000"
+                    if [[ "$SPY_PROGRAM" == *"l3pp"* ]]
+                    then
+                        taskset 0x2000 $SPY_PROGRAM 1000000000 &
+                    else
+                        taskset 0x2000 $SPY_PROGRAM $GPG &
+                    fi
+                fi
 
-    status "Spy running"
-    if [[ "$SPY_PROGRAM" == *"l1pp"* ]]
-    then
-        echo "Set" $SPY_PROGRAM "Core 0x8000"
-        taskset 0x8000 $SPY_PROGRAM 1000000000 &
-    else
-        echo "Set" $SPY_PROGRAM "Core 0x2000"
-        if [[ "$SPY_PROGRAM" == *"l3pp"* ]]
-        then
-            taskset 0x2000 $SPY_PROGRAM 1000000000 &
-        else
-            taskset 0x2000 $SPY_PROGRAM $GPG &
-        fi
-    fi
+                spawn_sensitive_programs
 
-    HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}_abnormal
-    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $OUTPUT_FOLDER/hpc_$HPC_SUFFIX &
+                for i in ${!SPs[@]}
+                do
+                    HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
+                    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/3_hpc_$HPC_SUFFIX &
+                done
 
-    sleep $DATA_COLLECTION_TIME_S
-    clean_env
+                sleep $DATA_COLLECTION_TIME_S
+            done
+        done
+    done
 done
 
 SCRIPT_NAME=$(basename -- "$0")
