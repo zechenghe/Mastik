@@ -5,13 +5,10 @@ EXP_ROOT_DIR=$ROOT_DIR/exp
 source $EXP_ROOT_DIR/exp_funcs.sh
 
 OUTPUT_FOLDER=$EXP_ROOT_DIR/test_workspace/results
-mkdir -p $OUTPUT_FOLDER
-rm -rf $EXP_ROOT_DIR/test_workspace/results/*
 
 ARCHIVE_ROOT_FOLDER=$EXP_ROOT_DIR/test_workspace/archive
 CURRENT_TIME_SUFFIX=$(date +'%Y%m%d_%H%M%S')
 ARCHIVE_FOLDER=$ARCHIVE_ROOT_FOLDER/$CURRENT_TIME_SUFFIX
-mkdir -p $ARCHIVE_FOLDER
 
 GPG=$ROOT_DIR/gnupg-1.4.13/g10/gpg
 INTERVAL_US=1000

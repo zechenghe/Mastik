@@ -26,7 +26,3 @@ do
         sleep $DATA_COLLECTION_TIME_S
     done
 done
-
-SCRIPT_NAME=$(basename -- "$0")
-cp $SCRIPT_NAME $ARCHIVE_FOLDER/$SCRIPT_NAME
-cp -r $OUTPUT_FOLDER $ARCHIVE_FOLDER/
