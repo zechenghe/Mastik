@@ -17,7 +17,7 @@ do
         do
             for SPLIT in TRAIN TEST
             do
-                RUN_SAVE_DIR=$OUTPUT_FOLDER/3/$CACHE_ATTACK/$SPEC_BG/
+                RUN_SAVE_DIR=$OUTPUT_FOLDER/4/$CACHE_ATTACK/$SPEC_BG/
                 mkdir -p "$RUN_SAVE_DIR"
 
                 clean_env
@@ -49,7 +49,7 @@ do
                 for i in ${!SPs[@]}
                 do
                     HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
-                    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/3_hpc_$HPC_SUFFIX &
+                    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/4_hpc_$HPC_SUFFIX &
                 done
 
                 sleep $DATA_COLLECTION_TIME_S
