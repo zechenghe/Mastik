@@ -15,7 +15,7 @@ do
     do
         for SPLIT in TRAIN TEST
         do
-            RUN_SAVE_DIR=$OUTPUT_FOLDER/2/$CACHE_ATTACK/
+            RUN_SAVE_DIR=$OUTPUT_FOLDER/2/$CACHE_ATTACK/none/
             mkdir -p "$RUN_SAVE_DIR"
 
             clean_env

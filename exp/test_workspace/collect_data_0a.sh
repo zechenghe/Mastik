@@ -14,7 +14,7 @@ for HPC_COLLECTION in SELECTED
 do
     for SPLIT in TRAIN TEST
     do
-        RUN_SAVE_DIR=$OUTPUT_FOLDER/0a
+        RUN_SAVE_DIR=$OUTPUT_FOLDER/none/none/0a
         mkdir -p "$RUN_SAVE_DIR"
 
         clean_env
