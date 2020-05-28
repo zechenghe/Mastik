@@ -41,12 +41,8 @@ do
             sleep 5
 
             HPC_SUFFIX=enc_${HPC_COLLECTION}_${SPLIT}
-            taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $RUN_SAVE_DIR/0b_hpc_$HPC_SUFFIX &
+            taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a $ENC_PID -i $INTERVAL_US > $RUN_SAVE_DIR/hpc_$HPC_SUFFIX &
             sleep $DATA_COLLECTION_TIME_S
         done
     done
 done
-
-SCRIPT_NAME=$(basename -- "$0")
-cp $SCRIPT_NAME $ARCHIVE_FOLDER/$SCRIPT_NAME
-cp -r $OUTPUT_FOLDER $ARCHIVE_FOLDER/

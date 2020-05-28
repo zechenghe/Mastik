@@ -49,7 +49,7 @@ do
                 for i in ${!SPs[@]}
                 do
                     HPC_SUFFIX=${SPs[i]}_${HPC_COLLECTION}_${SPLIT}
-                    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/4_hpc_$HPC_SUFFIX &
+                    taskset 0x10 $quickhpc -c hpc_config_$HPC_COLLECTION -a ${SPIDs[i]} -i $INTERVAL_US > $RUN_SAVE_DIR/hpc_$HPC_SUFFIX &
                 done
 
                 sleep $DATA_COLLECTION_TIME_S
@@ -57,7 +57,3 @@ do
         done
     done
 done
-
-SCRIPT_NAME=$(basename -- "$0")
-cp $SCRIPT_NAME $ARCHIVE_FOLDER/$SCRIPT_NAME
-cp -r $OUTPUT_FOLDER $ARCHIVE_FOLDER/
