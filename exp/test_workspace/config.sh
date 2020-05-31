@@ -57,7 +57,7 @@ spawn_sensitive_programs (){
 }
 
 encrypt_large_file (){
-    taskset 0x8 $GPG -r zechengh_key1 -o /dev/null -e ~/cuda_10.1.105_418.39_linux.run &
+    #taskset 0x8 $GPG -r zechengh_key1 -o /dev/null -e ~/cuda_10.1.105_418.39_linux.run &
+    taskset 0x8 ./encrypt_rsa.sh
     ENC_PID=$!
-    sleep 1
 }
