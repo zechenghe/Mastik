@@ -23,6 +23,7 @@ def run_benchmark(
         testing_normal_data,
         testing_abnormal_data,
         window_size,
+        n_sample_train = None,
         verbose = True
     ):
 
@@ -33,9 +34,7 @@ def run_benchmark(
     training_normal_data = utils.normalize(
         training_normal_data, training_normal_data_mean, training_normal_data_std
     )
-    ref_normal_data = utils.normalize(
-        ref_normal_data, training_normal_data_mean, training_normal_data_std
-    )
+
     val_normal_data = utils.normalize(
         val_normal_data, training_normal_data_mean, training_normal_data_std
     )
@@ -47,13 +46,14 @@ def run_benchmark(
     )
     if verbose:
         print("training_normal_data.shape", training_normal_data.shape)
-        print("ref_normal_data.shape", ref_normal_data.shape)
         print("testing_normal_data.shape", testing_normal_data.shape)
+        print("testing_abnormal_data.shape", testing_abnormal_data.shape)
 
 
     training_normal_data = utils.seq_win_vectorize(
         seq = training_normal_data,
-        window_size = window_size
+        window_size = window_size,
+        n_sample = n_sample_train,
     )
     testing_normal_data = utils.seq_win_vectorize(
         seq = testing_normal_data,
@@ -66,8 +66,8 @@ def run_benchmark(
 
     if verbose:
         print("Vectorized training_normal_data.shape", training_normal_data.shape)
-        print("Vectorized ref_normal_data.shape", ref_normal_data.shape)
         print("Vectorized testing_normal_data.shape", testing_normal_data.shape)
+        print("Vectorized testing_abnormal_data.shape", testing_abnormal_data.shape)
 
     # +1 is normal, -1 is abnormal
     true_label_normal = np.ones(len(testing_normal_data))
