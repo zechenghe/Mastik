@@ -23,7 +23,7 @@ def run_benchmark(
         testing_normal_data,
         testing_abnormal_data,
         window_size,
-        n_sample_train = None,
+        n_samples_train = None,
         verbose = True
     ):
 
@@ -50,7 +50,7 @@ def run_benchmark(
     training_normal_data = utils.seq_win_vectorize(
         seq = training_normal_data,
         window_size = window_size,
-        n_sample = n_sample_train,
+        n_samples = n_samples_train,
     )
     testing_normal_data = utils.seq_win_vectorize(
         seq = testing_normal_data,
