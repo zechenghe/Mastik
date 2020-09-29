@@ -12,6 +12,7 @@
 
 uint64_t INTERVAL;
 int ROUND;
+char* OUTPUT_FILE;
 
 struct event {
 	__u32 event_type;
