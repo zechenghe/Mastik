@@ -35,9 +35,6 @@ def run_benchmark(
         training_normal_data, training_normal_data_mean, training_normal_data_std
     )
 
-    val_normal_data = utils.normalize(
-        val_normal_data, training_normal_data_mean, training_normal_data_std
-    )
     testing_normal_data = utils.normalize(
         testing_normal_data, training_normal_data_mean, training_normal_data_std
     )
