@@ -190,7 +190,7 @@ if __name__=="__main__":
             testing_abnormal_data=test_abnormal,
             window_size = 200,
             n_samples_train = 100,   # Randomly sample 20,000 samples for training
-            verbose = False
+            verbose = args.verbose
         )
 
     print ('model', model, 'ROC_AUC:', roc_auc)
