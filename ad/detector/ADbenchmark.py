@@ -151,7 +151,10 @@ if __name__=="__main__":
 
     # Window size
     parser.add_argument('--window_size', type = int, default = 10, help='Window size for vectorization')
-    parser.add_argument('--verbose', type = boolean, default = False)
+
+    parser.add_argument('--verbose', dest='verbose', action='store_true', help='Whether debug information will be printed')
+    parser.set_defaults(verbose=False)
+
     args = parser.parse_args()
 
     train_normal = np.load(args.data_dir + args.train_normal)
