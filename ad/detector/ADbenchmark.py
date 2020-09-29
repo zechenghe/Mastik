@@ -174,9 +174,9 @@ if __name__=="__main__":
 
     args = parser.parse_args()
 
-    train_normal = np.load(args.data_dir + args.train_normal)
-    test_normal = np.load(args.data_dir + args.test_normal)
-    test_abnormal = np.load(args.data_dir + args.test_abnormal)
+    train_normal = np.load(args.data_dir + args.train_normal)[:, 2:4]
+    test_normal = np.load(args.data_dir + args.test_normal)[:, 2:4]
+    test_abnormal = np.load(args.data_dir + args.test_abnormal)[:, 2:4]
 
     print("train_normal.shape", train_normal.shape)
     print("test_normal.shape", test_normal.shape)
