@@ -151,6 +151,7 @@ if __name__=="__main__":
 
     # Window size
     parser.add_argument('--window_size', type = int, default = 10, help='Window size for vectorization')
+    parser.add_argument('--verbose', type = boolean, default = False)
     args = parser.parse_args()
 
     train_normal = np.load(args.data_dir + args.train_normal)
@@ -167,7 +168,7 @@ if __name__=="__main__":
                 testing_abnormal_data=test_abnormal,
                 window_size = 200,
                 n_samples_train = 100,   # Randomly sample 20,000 samples for training
-                verbose = False
+                verbose = args.verbose
             )
             print ('model', model, 'ROC_AUC:', roc_auc)
             results_dir = 'roc/'
