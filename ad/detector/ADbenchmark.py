@@ -173,8 +173,8 @@ if __name__=="__main__":
                 training_normal_data=train_normal,
                 testing_normal_data=test_normal,
                 testing_abnormal_data=test_abnormal,
-                window_size = 200,
-                n_samples_train = 100,   # Randomly sample 20,000 samples for training
+                window_size=args.window_size,
+                n_samples_train=100,   # Randomly sample 20,000 samples for training
                 verbose = args.verbose
             )
             print ('model', model, 'ROC_AUC:', roc_auc)
@@ -188,9 +188,9 @@ if __name__=="__main__":
             training_normal_data=train_normal,
             testing_normal_data=test_normal,
             testing_abnormal_data=test_abnormal,
-            window_size = 200,
-            n_samples_train = 100,   # Randomly sample 20,000 samples for training
-            verbose = args.verbose
+            window_size=args.window_size,
+            n_samples_train=1000,   # Randomly sample 20,000 samples for training
+            verbose=args.verbose
         )
 
     print ('model', model, 'ROC_AUC:', roc_auc)
