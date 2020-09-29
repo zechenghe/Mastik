@@ -128,7 +128,7 @@ int main(int argc, char **argv) {
 	int cpuid = atoi(argv[1]);
 	INTERVAL = atoi(argv[2])*(uint64_t)1000;
 	ROUND = atoi(argv[3]);
-	OUTPUT_FILE = atoi(argv[4]);
+	OUTPUT_FILE = argv[4];
 
 	int i, j, k;
 
