@@ -109,14 +109,14 @@ def run_benchmark(
     time_train_finish = time.time()
     print("Training takes {time} seconds".format(
         time=time_train_finish-time_start
-        )
+        ))
 
     pred = cls.predict(testing_data_run)
 
     time_eval_finish = time.time()
     print("Evaluation takes {time} seconds".format(
         time=time_eval_finish-time_train_finish
-        )
+        ))
 
     pred_score = cls.decision_function(testing_data_run)
     if need_convert:
