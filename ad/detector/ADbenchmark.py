@@ -182,7 +182,7 @@ if __name__=="__main__":
                 testing_normal_data=test_normal,
                 testing_abnormal_data=test_abnormal,
                 window_size=args.window_size,
-                n_samples_train=50000,   # Randomly sample 50,000 samples for training
+                n_samples_train=10000,   # Randomly sample 50,000 samples for training
                 n_samples_eval=50000,
                 verbose = args.verbose
             )
@@ -198,7 +198,7 @@ if __name__=="__main__":
             testing_normal_data=test_normal,
             testing_abnormal_data=test_abnormal,
             window_size=args.window_size,
-            n_samples_train=50000,   # Randomly sample 50,000 samples for training
+            n_samples_train=10000,   # Randomly sample 50,000 samples for training
             n_samples_eval=50000,
             verbose=args.verbose
         )
