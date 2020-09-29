@@ -119,7 +119,7 @@ int main(int argc, char **argv) {
 	struct perf_event_attr pe[EVENT_NR];
 	int fd[EVENT_NR];
 
-	int pid = atoi(argv[1]);
+	int cpuid = atoi(argv[1]);
 	INTERVAL = atoi(argv[2])*(uint64_t)1000;
 	ROUND = atoi(argv[3]);
 
@@ -154,7 +154,7 @@ int main(int argc, char **argv) {
 		for (i=0; i<(EVENT_NR/EVENT_CUR); i++) {
 			for (k=0; k<EVENT_CUR; k++) {
 				event_index = i*EVENT_CUR+k;
-				fd[event_index] = syscall(__NR_perf_event_open, &pe[event_index], -1, 0, -1, 0);
+				fd[event_index] = syscall(__NR_perf_event_open, &pe[event_index], -1, cpuid, -1, 0);
 				if (fd[event_index] == -1) {
 					fprintf(stderr, "Error opening leader %llx\n", pe[event_index].config);
 					exit(EXIT_FAILURE);
@@ -178,7 +178,7 @@ int main(int argc, char **argv) {
 		i = EVENT_NR/EVENT_CUR;
 		for (k=0; k<EVENT_NR%EVENT_CUR; k++) {
 			event_index = i*EVENT_CUR+k;
-			fd[event_index] = syscall(__NR_perf_event_open, &pe[event_index], -1, 0, -1, 0);
+			fd[event_index] = syscall(__NR_perf_event_open, &pe[event_index], -1, cpuid, -1, 0);
 			if (fd[event_index] == -1) {
 				fprintf(stderr, "Error opening leader %llx\n", pe[event_index].config);
 				exit(EXIT_FAILURE);
