@@ -132,7 +132,8 @@ def run_benchmark(
     pred_score = cls.decision_function(testing_data_run)
 
     if verbose:
-        print "Pred labels", np.unique(pred)
+        print "Raw unique pred labels", np.unique(pred_raw)
+        print "Raw pred labels", pred_raw
         print "pred_score", pred_score
 
     if not pred_score_is_anomaly_score:
@@ -181,25 +182,16 @@ if __name__=="__main__":
     print("test_normal.shape", test_normal.shape)
     print("test_abnormal.shape", test_abnormal.shape)
 
-    if args.model == 'all':
-        for model in ['LOF', 'OCSVM', 'IF', 'PCA']:
-            print("Model: ", model)
-            fpr, tpr, thresholds, roc_auc = run_benchmark(
-                model = model,
-                training_normal_data=train_normal,
-                testing_normal_data=test_normal,
-                testing_abnormal_data=test_abnormal,
-                window_size=args.window_size,
-                n_samples_train=10000,   # Randomly sample 50,000 samples for training
-                n_samples_eval=50000,
-                verbose = args.verbose
-            )
-            print ('model', model, 'ROC_AUC:', roc_auc)
-            results_dir = 'roc/'
-            np.save(results_dir + model + '_fpr', fpr)
-            np.save(results_dir + model + '_tpr', tpr)
-    else:
-        model = args.model
+    model_options = {
+        'all': ['LOF', 'OCSVM', 'IF', 'PCA'],
+        'LOF': ['LOF'],
+        'OCSVM': ['OCSVM'],
+        'IF': ['IF'],
+        'PCA': ['PCA'],
+     }
+
+    for model in model_options[args.model]:
+        print("Model: ", model)
         fpr, tpr, thresholds, roc_auc = run_benchmark(
             model = model,
             training_normal_data=train_normal,
@@ -208,12 +200,11 @@ if __name__=="__main__":
             window_size=args.window_size,
             n_samples_train=1000,   # Randomly sample 50,000 samples for training
             n_samples_eval=1000,
-            verbose=args.verbose
+            verbose = args.verbose
         )
+        print ('model', model, 'ROC_AUC:', roc_auc)
 
-    print ('model', model, 'ROC_AUC:', roc_auc)
-    
     save_roc_dir = 'temp/'
     os.system('mkdir -p {dir}'.format(dir=save_roc_dir))
-    np.save(results_dir + model + '_fpr', fpr)
-    np.save(results_dir + model + '_tpr', tpr)
+    np.save(save_roc_dir + model + '_fpr', fpr)
+    np.save(save_roc_dir + model + '_tpr', tpr)
