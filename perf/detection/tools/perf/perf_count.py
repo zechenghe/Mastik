@@ -7,7 +7,7 @@
 
 import os
 import string
-import sys 
+import sys
 import getopt
 import locale
 import argparse
