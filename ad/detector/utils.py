@@ -172,6 +172,28 @@ def plot_cdf(data, xlabel=None, ylabel=None, title=None):
     plt.show(block = False)
 
 
+def read_csv_file(filename, split=' ', remove_end=True):
+    """
+        Read csv file.
+        Args:
+            split: split of entries in a line.
+            remove_end: remove the '\n' at the end of the line.
+        Returns:
+            A np.array of shape [TimeFrame, Features]
+    """
+
+    with open(filename, 'r') as f:
+        data = []
+        for linenum, line in enumerate(f):
+            line_list = line.split(split)
+            if remove_end:
+                # Remove '\n' at the end
+                line_list = line_list[:-1]
+            data.append(line.split(split)[:-1])
+        data = np.array(data, dtype=np.float32)
+    return data
+
+
 def create_parser():
     import argparse
     parser = argparse.ArgumentParser()
