@@ -161,6 +161,10 @@ if __name__=="__main__":
     test_normal = np.load(args.data_dir + args.test_normal)
     test_abnormal = np.load(args.data_dir + args.test_abnormal)
 
+    print("train_normal.shape", train_normal.shape)
+    print("test_normal.shape", test_normal.shape)
+    print("test_abnormal.shape", test_abnormal.shape)
+
     if args.model == 'all':
         for model in ['LOF', 'OCSVM', 'IF', 'PCA']:
             print("Model: ", model)
