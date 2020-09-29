@@ -199,7 +199,7 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	FILE *output = fopen("data", "a");
+	FILE *output = fopen("data", "w+");
 	for (j=0; j<ROUND; j++) {
 		for (i=0; i<EVENT_NR; i++) {
 			fprintf(output, "%lu ", time[j][i]);
