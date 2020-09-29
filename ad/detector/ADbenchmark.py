@@ -164,7 +164,7 @@ if __name__=="__main__":
             np.save(results_dir + model + '_fpr', fpr)
             np.save(results_dir + model + '_tpr', tpr)
     else:
-        print("Model: ", model)
+        model = args.model
         fpr, tpr, thresholds, roc_auc = ADbenchmark.run_benchmark(
             model = model,
             training_normal_data=train_normal,
@@ -174,7 +174,8 @@ if __name__=="__main__":
             n_samples_train = 10,   # Randomly sample 20,000 samples for training
             verbose = False
         )
-        print ('model', model, 'ROC_AUC:', roc_auc)
-        results_dir = 'roc/'
-        np.save(results_dir + args.model + '_fpr', fpr)
-        np.save(results_dir + args.model + '_tpr', tpr)
+
+    print ('model', model, 'ROC_AUC:', roc_auc)
+    results_dir = 'roc/'
+    np.save(results_dir + model + '_fpr', fpr)
+    np.save(results_dir + model + '_tpr', tpr)
