@@ -1,8 +1,6 @@
-import torch
 import os
 import sys
-import csv
-import glob
+import time
 
 #from collections import Counter
 import argparse
@@ -105,9 +103,21 @@ def run_benchmark(
         print("Model not support")
         exit(1)
 
-
+    time_start = time.time()
     cls.fit(training_data_run)
+
+    time_train_finish = time.time()
+    print("Training takes {time} seconds".format(
+        time=time_train_finish-time_start
+        )
+
     pred = cls.predict(testing_data_run)
+
+    time_eval_finish = time.time()
+    print("Evaluation takes {time} seconds".format(
+        time=time_eval_finish-time_train_finish
+        )
+
     pred_score = cls.decision_function(testing_data_run)
     if need_convert:
         anomaly_score = 1 - pred_score
@@ -150,13 +160,13 @@ if __name__=="__main__":
     if args.model == 'all':
         for model in ['LOF', 'OCSVM', 'IF', 'PCA']:
             print("Model: ", model)
-            fpr, tpr, thresholds, roc_auc = ADbenchmark.run_benchmark(
+            fpr, tpr, thresholds, roc_auc = run_benchmark(
                 model = model,
                 training_normal_data=train_normal,
                 testing_normal_data=test_normal,
                 testing_abnormal_data=test_abnormal,
                 window_size = 200,
-                n_samples_train = 10,   # Randomly sample 20,000 samples for training
+                n_samples_train = 100,   # Randomly sample 20,000 samples for training
                 verbose = False
             )
             print ('model', model, 'ROC_AUC:', roc_auc)
@@ -165,13 +175,13 @@ if __name__=="__main__":
             np.save(results_dir + model + '_tpr', tpr)
     else:
         model = args.model
-        fpr, tpr, thresholds, roc_auc = ADbenchmark.run_benchmark(
+        fpr, tpr, thresholds, roc_auc = run_benchmark(
             model = model,
             training_normal_data=train_normal,
             testing_normal_data=test_normal,
             testing_abnormal_data=test_abnormal,
             window_size = 200,
-            n_samples_train = 10,   # Randomly sample 20,000 samples for training
+            n_samples_train = 100,   # Randomly sample 20,000 samples for training
             verbose = False
         )
 
