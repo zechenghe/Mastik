@@ -87,11 +87,18 @@ def plotsignal(sigs):
     plt.ylim(-2, 2)
     plt.show()
 
-def seq_win_vectorize(seq, window_size):
+def seq_win_vectorize(seq, window_size, n_samples=None):
 
     res = []
-    for i in range(len(seq)-window_size+1):
-        res.append(seq[i: i+window_size,:].reshape((-1)))
+
+    if n_samples is None:
+        for i in range(len(seq)-window_size+1):
+            res.append(seq[i: i+window_size,:].reshape((-1)))
+    else:
+        while len(res) < n_samples:
+            start = np.random.randint(low=0, high=len(seq)-window_size+1)
+            res.append(seq[start: start+window_size,:].reshape((-1)))
+
     return np.array(res)
 
 def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None):

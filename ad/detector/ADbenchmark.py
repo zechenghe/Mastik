@@ -19,30 +19,12 @@ from pyod.models.pca import PCA
 
 def run_benchmark(
         model,
-        normal_data_dir,
-        normal_data_name_train,
-        normal_data_name_test,
-        abnormal_data_dir,
-        abnormal_data_name,
+        training_normal_data,
+        testing_normal_data,
+        testing_abnormal_data,
         window_size,
         verbose = True
     ):
-
-    training_normal_data, ref_normal_data, val_normal_data = loaddata.load_data_split(
-        data_dir = normal_data_dir,
-        file_name = normal_data_name_train,
-        split = (0.9, 0.0, 0.1)
-    )
-
-    testing_normal_data = loaddata.load_data_all(
-        data_dir = normal_data_dir,
-        file_name = normal_data_name_test
-    )
-
-    testing_abnormal_data = loaddata.load_data_all(
-        data_dir = abnormal_data_dir,
-        file_name = abnormal_data_name
-    )
 
     # Normalize training data
     training_normal_data_mean = utils.get_mean(training_normal_data)
