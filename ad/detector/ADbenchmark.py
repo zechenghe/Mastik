@@ -122,6 +122,11 @@ def run_benchmark(
         ))
 
     pred_score = cls.decision_function(testing_data_run)
+
+    if verbose:
+        print "Pred labels", np.unique(pred)
+        print "pred_score", pred_score
+
     if need_convert:
         anomaly_score = 1 - pred_score
     else:
