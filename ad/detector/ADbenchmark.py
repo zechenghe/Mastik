@@ -198,11 +198,10 @@ if __name__=="__main__":
             testing_normal_data=test_normal,
             testing_abnormal_data=test_abnormal,
             window_size=args.window_size,
-            n_samples_train=1000,   # Randomly sample 50,000 samples for training
-            n_samples_eval=1000,
+            n_samples_train=10000,   # Randomly sample 50,000 samples for training
+            n_samples_eval=10000,
             verbose = args.verbose
         )
-        print ('model', model, 'ROC_AUC:', roc_auc)
 
     save_roc_dir = 'temp/'
     os.system('mkdir -p {dir}'.format(dir=save_roc_dir))
