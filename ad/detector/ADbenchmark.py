@@ -94,6 +94,9 @@ def run_benchmark(
 
     elif model == 'OCSVM':
         cls = OCSVM(kernel='linear', nu=0.1, contamination=0.1)
+        pred_score_is_anomaly_score = True
+        normal_label = 0
+        abnormal_label = 1
 
     elif model == 'LOF':
         cls = LOF(contamination=0.1)
@@ -114,7 +117,12 @@ def run_benchmark(
         time=time_train_finish-time_start
         ))
 
-    pred = cls.predict(testing_data_run)
+    # Models may follow different convention, i.e. 0/1 and -1/+1
+    # Convert them to 0: normal and 1: abnormal, respectively
+    pred_raw = cls.predict(testing_data_run)
+    pred = pred_raw[:]
+    pred[pred_raw == normal_label] = 0
+    pred[pred_raw == abnormal_label] = 1
 
     time_eval_finish = time.time()
     print("Evaluation takes {time} seconds".format(
@@ -127,8 +135,8 @@ def run_benchmark(
         print "Pred labels", np.unique(pred)
         print "pred_score", pred_score
 
-    if need_convert:
-        anomaly_score = 1 - pred_score
+    if not pred_score_is_anomaly_score:
+        anomaly_score = -pred_score
     else:
         anomaly_score = pred_score
 
@@ -137,7 +145,7 @@ def run_benchmark(
     utils.eval_metrics(
         truth = true_label,
         pred = pred,
-        anomaly_score = pred_score if not reverse else 1-pred_score,
+        anomaly_score = anomaly_score,
         verbose = verbose
     )
 
@@ -198,8 +206,8 @@ if __name__=="__main__":
             testing_normal_data=test_normal,
             testing_abnormal_data=test_abnormal,
             window_size=args.window_size,
-            n_samples_train=10000,   # Randomly sample 50,000 samples for training
-            n_samples_eval=50000,
+            n_samples_train=1000,   # Randomly sample 50,000 samples for training
+            n_samples_eval=1000,
             verbose=args.verbose
         )
 
