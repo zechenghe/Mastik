@@ -143,9 +143,9 @@ if __name__=="__main__":
     parser.add_argument('--window_size', type = int, default = 10, help='Window size for vectorization')
     args = parser.parse_args()
 
-    train_normal = np.load(args.normal_data_dir + args.train_normal)
-    test_normal = np.load(args.normal_data_dir + args.test_normal)
-    test_abnormal = np.load(args.abnormal_data_dir + args.test_abnormal)
+    train_normal = np.load(args.data_dir + args.train_normal)
+    test_normal = np.load(args.data_dir + args.test_normal)
+    test_abnormal = np.load(args.data_dir + args.test_abnormal)
 
     if args.model == 'all':
         for model in ['LOF', 'OCSVM', 'IF', 'PCA']:
