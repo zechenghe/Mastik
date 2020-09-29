@@ -212,6 +212,8 @@ if __name__=="__main__":
         )
 
     print ('model', model, 'ROC_AUC:', roc_auc)
-    results_dir = 'roc/'
+    
+    save_roc_dir = 'temp/'
+    os.system('mkdir -p {dir}'.format(dir=save_roc_dir))
     np.save(results_dir + model + '_fpr', fpr)
     np.save(results_dir + model + '_tpr', tpr)
