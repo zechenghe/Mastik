@@ -189,7 +189,7 @@ int main(int argc, char **argv) {
 		}
 
 		start_cycle = rdtsc();
-		//while(rdtsc()-start_cycle<INTERVAL);
+		while(rdtsc()-start_cycle<INTERVAL);
 
 		for (k=0; k<EVENT_NR%EVENT_CUR; k++) {
 			event_index = i*EVENT_CUR+k;
