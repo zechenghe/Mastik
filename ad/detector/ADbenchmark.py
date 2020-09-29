@@ -73,7 +73,8 @@ def run_benchmark(
         (
             true_label_normal,
             true_label_abnormal
-        )
+        ),
+        axis=0
     )
 
     training_data_run = training_normal_data
@@ -87,21 +88,19 @@ def run_benchmark(
 
     assert len(testing_data_run) == len(true_label)
 
-    reverse = False
     if model == 'IF':
         cls = IsolationForest(n_estimators=1000, contamination = 0.1)
+
     elif model == 'OCSVM':
-        cls = OCSVM()
-        reverse = True
+        cls = OCSVM(kernel='linear', nu=0.1, contamination=0.1)
+
     elif model == 'LOF':
         cls = LOF(contamination=0.1)
-        reverse = True
     elif model == 'ABOD':
         # Outliers have higher outlier scores
         cls = ABOD(contamination=1e-4)
     elif model == 'PCA':
         cls = PCA()
-        reverse = True
     else:
         print("Model not support")
         exit(1)
@@ -110,13 +109,17 @@ def run_benchmark(
     cls.fit(training_data_run)
     pred = cls.predict(testing_data_run)
     pred_score = cls.decision_function(testing_data_run)
+    if need_convert:
+        anomaly_score = 1 - pred_score
+    else:
+        anomaly_score = pred_score
 
     # Pay special attention here the score is the anomaly score
     tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds, roc_auc = \
     utils.eval_metrics(
         truth = true_label,
         pred = pred,
-        pred_score = pred_score if not reverse else 1-pred_score,
+        anomaly_score = pred_score if not reverse else 1-pred_score,
         verbose = verbose
     )
 
@@ -131,43 +134,47 @@ if __name__=="__main__":
     # Loaddata
     # Sequential data in the form of (Timeframe, Features)
     # Training only leverages normal data. Abnormaly data only for testing.
-    parser.add_argument('--normal_data_dir', type = str, default = "data/", help='The directory of normal data')
-    parser.add_argument('--normal_data_name_train', type = str, default = "baseline_train.npy", help='The file name of training normal data')
-    parser.add_argument('--normal_data_name_test', type = str, default = "baseline_test.npy", help='The file name of testing normal data')
-    parser.add_argument('--abnormal_data_dir', type = str, default = "data/", help='The directory of abnormal data')
-    parser.add_argument('--abnormal_data_name', type = str, default = "attack1_test.npy", help='The file name of abnormal data')
+    parser.add_argument('--data_dir', type = str, default = "../perf/data/core0/100us/", help='The directory of data')
+    parser.add_argument('--train_normal', type = str, default = "train_normal.npy", help='The file name of training normal data')
+    parser.add_argument('--test_normal', type = str, default = "test_normal.npy", help='The file name of testing normal data')
+    parser.add_argument('--test_abnormal', type = str, default = "test_abnormal.npy", help='The file name of testing abnormal data')
 
     # Window size
     parser.add_argument('--window_size', type = int, default = 10, help='Window size for vectorization')
     args = parser.parse_args()
 
+    train_normal = np.load(args.normal_data_dir + args.train_normal)
+    test_normal = np.load(args.normal_data_dir + args.test_normal)
+    test_abnormal = np.load(args.abnormal_data_dir + args.test_abnormal)
+
     if args.model == 'all':
         for model in ['LOF', 'OCSVM', 'IF', 'PCA']:
             print("Model: ", model)
-            fpr, tpr, thresholds, roc_auc = run_benchmark(
+            fpr, tpr, thresholds, roc_auc = ADbenchmark.run_benchmark(
                 model = model,
-                normal_data_dir = args.normal_data_dir,
-                normal_data_name_train = args.normal_data_name_train,
-                normal_data_name_test = args.normal_data_name_test,
-                abnormal_data_dir = args.abnormal_data_dir,
-                abnormal_data_name = args.abnormal_data_name,
-                window_size = args.window_size
+                training_normal_data=train_normal,
+                testing_normal_data=test_normal,
+                testing_abnormal_data=test_abnormal,
+                window_size = 200,
+                n_samples_train = 10,   # Randomly sample 20,000 samples for training
+                verbose = False
             )
-            print(" ")
-            results_dir = 'results/'
+            print ('model', model, 'ROC_AUC:', roc_auc)
+            results_dir = 'roc/'
             np.save(results_dir + model + '_fpr', fpr)
             np.save(results_dir + model + '_tpr', tpr)
     else:
-        fpr, tpr, thresholds, roc_auc = run_benchmark(
-            model = args.model,
-            normal_data_dir = args.normal_data_dir,
-            normal_data_name_train = args.normal_data_name_train,
-            normal_data_name_test = args.normal_data_name_test,
-            abnormal_data_dir = args.abnormal_data_dir,
-            abnormal_data_name = args.abnormal_data_name,
-            window_size = args.window_size
+        print("Model: ", model)
+        fpr, tpr, thresholds, roc_auc = ADbenchmark.run_benchmark(
+            model = model,
+            training_normal_data=train_normal,
+            testing_normal_data=test_normal,
+            testing_abnormal_data=test_abnormal,
+            window_size = 200,
+            n_samples_train = 10,   # Randomly sample 20,000 samples for training
+            verbose = False
         )
-
-        results_dir = 'results/'
+        print ('model', model, 'ROC_AUC:', roc_auc)
+        results_dir = 'roc/'
         np.save(results_dir + args.model + '_fpr', fpr)
         np.save(results_dir + args.model + '_tpr', tpr)
