@@ -119,9 +119,15 @@ int main(int argc, char **argv) {
 	struct perf_event_attr pe[EVENT_NR];
 	int fd[EVENT_NR];
 
+	if (argc < 5){
+		fprintf(stderr, "Invalid number of arguments");
+		exit(1);
+	}
+
 	int cpuid = atoi(argv[1]);
 	INTERVAL = atoi(argv[2])*(uint64_t)1000;
 	ROUND = atoi(argv[3]);
+	OUTPUT_FILE = atoi(argv[4]);
 
 	int i, j, k;
 
@@ -199,7 +205,7 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	FILE *output = fopen("data", "w+");
+	FILE *output = fopen(OUTPUT_FILE, "w+");
 	for (j=0; j<ROUND; j++) {
 		for (i=0; i<EVENT_NR; i++) {
 			fprintf(output, "%lu ", time[j][i]);
