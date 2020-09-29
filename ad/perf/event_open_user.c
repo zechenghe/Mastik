@@ -147,18 +147,6 @@ int main(int argc, char **argv) {
 
 	}
 
-// Raw measurements
-/*
-    pe.type = PERF_TYPE_RAW;
-    pe.config = ((MASK_CODE<<8)|(EVENT_CODE)) & 0xFFFFFF;
-    pe.disabled = 1;
-    pe.exclude_kernel = 0;
-    pe.exclude_hv = 0;
-    pe.exclude_host = 0;
-    pe.exclude_guest = 0;
-    pe.disabled = 0;
-
-*/
 	uint64_t start_cycle;
 
 	int event_index;
@@ -166,7 +154,7 @@ int main(int argc, char **argv) {
 		for (i=0; i<(EVENT_NR/EVENT_CUR); i++) {
 			for (k=0; k<EVENT_CUR; k++) {
 				event_index = i*EVENT_CUR+k;
-				fd[event_index] = syscall(__NR_perf_event_open, &pe[event_index], pid, -1, -1, 0);
+				fd[event_index] = syscall(__NR_perf_event_open, &pe[event_index], -1, 0, -1, 0);
 				if (fd[event_index] == -1) {
 					fprintf(stderr, "Error opening leader %llx\n", pe[event_index].config);
 					exit(EXIT_FAILURE);
