@@ -103,6 +103,10 @@ def run_benchmark(
 
     elif model == 'LOF':
         cls = LOF(contamination=0.1)
+        pred_score_is_anomaly_score = True
+        normal_label = 0
+        abnormal_label = 1
+
     elif model == 'ABOD':
         # Outliers have higher outlier scores
         cls = ABOD(contamination=1e-4)
