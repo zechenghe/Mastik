@@ -198,7 +198,7 @@ int main(int argc, char **argv) {
 			close(fd[event_index]);
 		}
 	}
-
+/*
 	FILE *output = fopen("data", "w+");
 	for (j=0; j<ROUND; j++) {
 		for (i=0; i<EVENT_NR; i++) {
@@ -208,5 +208,5 @@ int main(int argc, char **argv) {
 	}
 
 	fclose(output);
-
+*/
 }
