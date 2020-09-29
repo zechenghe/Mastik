@@ -22,6 +22,7 @@ def run_benchmark(
         testing_abnormal_data,
         window_size,
         n_samples_train = None,
+        n_samples_eval = None,
         verbose = True
     ):
 
@@ -52,11 +53,13 @@ def run_benchmark(
     )
     testing_normal_data = utils.seq_win_vectorize(
         seq = testing_normal_data,
-        window_size = window_size
+        window_size = window_size,
+        n_samples = n_samples_eval,
     )
     testing_abnormal_data = utils.seq_win_vectorize(
         seq = testing_abnormal_data,
-        window_size = window_size
+        window_size = window_size,
+        n_samples = n_samples_eval,
     )
 
     if verbose:
@@ -174,7 +177,8 @@ if __name__=="__main__":
                 testing_normal_data=test_normal,
                 testing_abnormal_data=test_abnormal,
                 window_size=args.window_size,
-                n_samples_train=100,   # Randomly sample 20,000 samples for training
+                n_samples_train=50000,   # Randomly sample 50,000 samples for training
+                n_samples_eval=50000,
                 verbose = args.verbose
             )
             print ('model', model, 'ROC_AUC:', roc_auc)
@@ -189,7 +193,8 @@ if __name__=="__main__":
             testing_normal_data=test_normal,
             testing_abnormal_data=test_abnormal,
             window_size=args.window_size,
-            n_samples_train=1000,   # Randomly sample 20,000 samples for training
+            n_samples_train=50000,   # Randomly sample 50,000 samples for training
+            n_samples_eval=50000,
             verbose=args.verbose
         )
 
