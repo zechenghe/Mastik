@@ -68,8 +68,8 @@ def run_benchmark(
         print("Vectorized testing_abnormal_data.shape", testing_abnormal_data.shape)
 
     # +1 is normal, -1 is abnormal
-    true_label_normal = np.ones(len(testing_normal_data))
-    true_label_abnormal = -np.ones(len(testing_abnormal_data))
+    true_label_normal = np.zeros(len(testing_normal_data))
+    true_label_abnormal = np.ones(len(testing_abnormal_data))
     true_label = np.concatenate(
         (
             true_label_normal,
