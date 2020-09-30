@@ -136,7 +136,7 @@ def run_benchmark(
         time=time_eval_finish-time_train_finish
         ))
 
-    pred_score = cls.decision_function(testing_data_run)
+    pred_score = cls.predict_proba(testing_data_run)
 
     if verbose:
         print "Raw unique pred labels", np.unique(pred_raw)
