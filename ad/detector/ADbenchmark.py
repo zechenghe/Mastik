@@ -91,7 +91,7 @@ def run_benchmark(
 
     if model == 'IF':
         cls = IsolationForest(n_estimators=1000, contamination = 0.1)
-        pred_score_is_anomaly_score = True
+        pred_score_is_anomaly_score = False
         normal_label = 1
         abnormal_label = -1
 
@@ -110,6 +110,10 @@ def run_benchmark(
     elif model == 'ABOD':
         # Outliers have higher outlier scores
         cls = ABOD(contamination=1e-4)
+        pred_score_is_anomaly_score = True
+        normal_label = 0
+        abnormal_label = 1
+
     elif model == 'PCA':
         cls = PCA()
     else:
@@ -181,7 +185,7 @@ if __name__=="__main__":
 
     args = parser.parse_args()
 
-    feature_list = range(27)
+    feature_list = [8, 21, 22] #[0,2,6,8,14,18,20,22]
     train_normal = np.load(args.data_dir + args.train_normal)[:, feature_list]
     test_normal = np.load(args.data_dir + args.test_normal)[:, feature_list]
     test_abnormal = np.load(args.data_dir + args.test_abnormal)[:, feature_list]
