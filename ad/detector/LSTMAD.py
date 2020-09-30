@@ -23,7 +23,11 @@ import SeqGenerator
 import detector
 import loaddata
 
-def train(args):
+def train(
+    training_normal_data,
+    ref_normal_data,
+    val_normal_data,
+    args):
 
     debug = args.debug
     gpu = args.gpu
@@ -42,11 +46,6 @@ def train(args):
     save_model_dir = args.save_model_dir
     save_model_name = args.save_model_name
 
-    normal_data_dir = args.normal_data_dir
-    normal_data_name_train = args.normal_data_name_train
-    normal_data_name_test = args.normal_data_name_test
-    val_and_ref_name = args.normal_data_name_val_and_ref
-
     RED_collection_len = args.RED_collection_len
     RED_points = args.RED_points
     Pvalue_th = args.Pvalue_th
@@ -54,22 +53,6 @@ def train(args):
     if args.dummydata:
         training_normal_data, val_normal_data, ref_normal_data = (
             loaddata.load_normal_dummydata()
-        )
-    else:
-        _, training_normal_data, _ = (
-            loaddata.load_data_split(
-                data_dir = normal_data_dir,
-                file_name = normal_data_name_train,
-                # The first few readings could be unstable, remove it.
-                split = (0.1, 0.8, 0.1)
-                )
-        )
-
-        _, ref_normal_data, val_normal_data = loaddata.load_data_split(
-            data_dir = normal_data_dir,
-            file_name = normal_data_name_test,
-            # The first few readings could be unstable, remove it.
-            split = (0.1, 0.2, 0.7)
         )
 
     training_normal_data_mean = utils.get_mean(training_normal_data)
@@ -357,7 +340,23 @@ if __name__ == '__main__':
             print(args)
 
         if args.training:
-            train(args)
+            _, training_normal_data, _ = loaddata.load_data_all(
+                data_dir = args.normal_data_dir,
+                file_name = args.normal_data_name_train,
+            )
+
+            _, ref_normal_data, val_normal_data = loaddata.load_data_split(
+                data_dir = args.normal_data_dir,
+                file_name = args.normal_data_name_val_and_ref,
+                # The first few readings could be unstable, remove it.
+                split = (0.1, 0.2, 0.7)
+            )
+            train(
+                training_normal_data=training_normal_data,
+                ref_normal_data=ref_normal_data,
+                val_normal_data=val_normal_data,
+                args
+                )
         else:
             eval_detector(args)
 
