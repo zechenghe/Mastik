@@ -102,7 +102,7 @@ def run_benchmark(
         abnormal_label = 1
 
     elif model == 'LOF':
-        cls = LOF(n_neighbors=20, contamination=0.1)
+        cls = LOF(n_neighbors=500, contamination=0.1)
         pred_score_is_anomaly_score = True
         normal_label = 0
         abnormal_label = 1
@@ -181,7 +181,7 @@ if __name__=="__main__":
 
     args = parser.parse_args()
 
-    feature_list = [0,2,6,8,14,18,20,22]
+    feature_list = [0,2,6]#,8,14,18,20,22]
     train_normal = np.load(args.data_dir + args.train_normal)[:, feature_list]
     test_normal = np.load(args.data_dir + args.test_normal)[:, feature_list]
     test_abnormal = np.load(args.data_dir + args.test_abnormal)[:, feature_list]
