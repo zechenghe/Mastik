@@ -364,6 +364,12 @@ if __name__ == '__main__':
             split = (0.1, 0.8, 0.1)
         )
 
+        print("training_normal_data.shape", training_normal_data.shape)
+        print("ref_normal_data.shape", ref_normal_data.shape)
+        print("val_normal_data.shape", val_normal_data.shape)
+        print("testing_normal_data.shape", training_normal_data.shape)
+        print("testing_abnormal_data.shape", testing_abnormal_data.shape)
+
         if args.training:
             train(
                 training_normal_data=training_normal_data,
