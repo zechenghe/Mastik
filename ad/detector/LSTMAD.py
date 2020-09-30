@@ -359,7 +359,7 @@ if __name__ == '__main__':
         )
 
         _, testing_abnormal_data, _, = loaddata.load_data_split(
-            data_dir = args.normal_data_dir,,
+            data_dir = args.normal_data_dir,
             file_name = args.abnormal_data_name,
             split = (0.1, 0.8, 0.1)
         )
