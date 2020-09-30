@@ -364,6 +364,13 @@ if __name__ == '__main__':
             split = (0.1, 0.8, 0.1)
         )
 
+        feature_list = [0,2,6,8,14,18,20,21,22]
+        training_normal_data=training_normal_data[:, feature_list]
+        ref_normal_data=ref_normal_data[:, feature_list]
+        val_normal_data=val_normal_data[:, feature_list]
+        testing_normal_data=testing_normal_data[:, feature_list]
+        testing_abnormal_data=testing_abnormal_data[:, feature_list]
+
         print("training_normal_data.shape", training_normal_data.shape)
         print("ref_normal_data.shape", ref_normal_data.shape)
         print("val_normal_data.shape", val_normal_data.shape)
