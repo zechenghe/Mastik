@@ -101,7 +101,7 @@ def train(
 
             if gpu:
                 init_state = (init_state[0].cuda(), init_state[1].cuda())
-                training_batch = training_batch.cuda()
+                data_batch = data_batch.cuda()
 
             state = init_state
             loss_list = []
