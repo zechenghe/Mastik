@@ -153,7 +153,7 @@ def run_benchmark(
     utils.eval_metrics(
         truth = true_label,
         pred = pred,
-        anomaly_score = anomaly_score,
+        anomaly_score = sorted(anomaly_score),
         verbose = verbose
     )
 
