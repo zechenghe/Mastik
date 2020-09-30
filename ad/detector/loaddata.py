@@ -11,8 +11,7 @@ def load_data_split(split = (0.4, 0.2, 0.4), data_dir = "data/", file_name = 'ba
     normal_data_path = data_dir + file_name
     data = read_npy_data_single_flle(normal_data_path)
 
-    print("Normal data shape ", data.shape)
-    assert len(data.shape) == 2, "Normal data should be in shape (TimeFrame, Features)"
+    assert len(data.shape) == 2, "Data should be in shape (TimeFrame, Features)"
 
     total_length = data.shape[0]
     training_length = int(total_length * split[0])
@@ -31,8 +30,7 @@ def load_data_all(data_dir, file_name):
     abnormal_data_path = data_dir + file_name
     data = read_npy_data_single_flle(abnormal_data_path)
 
-    print("Abormal data shape ", data.shape)
-    assert len(data.shape) == 2, "Normal data should be in shape (TimeFrame, Features)"
+    assert len(data.shape) == 2, "Data should be in shape (TimeFrame, Features)"
 
     return np.float32(data)
 
