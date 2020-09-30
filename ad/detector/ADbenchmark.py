@@ -90,7 +90,7 @@ def run_benchmark(
     assert len(testing_data_run) == len(true_label)
 
     if model == 'IF':
-        cls = IsolationForest(n_estimators=20, contamination = 0.1)
+        cls = IsolationForest(n_estimators=1000, contamination = 0.1)
         pred_score_is_anomaly_score = True
         normal_label = 1
         abnormal_label = -1
@@ -102,7 +102,7 @@ def run_benchmark(
         abnormal_label = 1
 
     elif model == 'LOF':
-        cls = LOF(n_neighbors=500, contamination=0.1)
+        cls = LOF(n_neighbors=20, contamination=0.1)
         pred_score_is_anomaly_score = True
         normal_label = 0
         abnormal_label = 1
