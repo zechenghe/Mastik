@@ -160,7 +160,14 @@ def train(
         )
     print("Model saved")
 
-def eval_detector(args):
+def eval_detector(
+    testing_normal_data,
+    testing_abnormal_data,
+    args,
+    training_normal_data=None,      # For debug only
+    val_normal_data=None,           # For debug only
+    ref_normal_data=None,           # For debug only
+    ):
 
     load_model_dir = args.load_model_dir
     load_model_name = args.load_model_name
@@ -182,13 +189,7 @@ def eval_detector(args):
         _, _, testing_normal_data = loaddata.load_normal_dummydata()
     else:
         if args.debug:
-            _, training_normal_data, _, = (
-                loaddata.load_data_split(
-                    data_dir = normal_data_dir,
-                    file_name = normal_data_name_train,
-                    split = (0.1, 0.8, 0.1)
-                    )
-                    )
+
 
             _, ref_normal_data, val_normal_data = loaddata.load_data_split(
                 data_dir = normal_data_dir,
@@ -339,19 +340,31 @@ if __name__ == '__main__':
         if args.debug:
             print(args)
 
+        training_normal_data = loaddata.load_data_all(
+            data_dir = args.normal_data_dir,
+            file_name = args.normal_data_name_train,
+        )
+
+        _, ref_normal_data, val_normal_data = loaddata.load_data_split(
+            data_dir = args.normal_data_dir,
+            file_name = args.normal_data_name_val_and_ref,
+            # The first few readings could be unstable, remove it.
+            split = (0.1, 0.2, 0.7)
+        )
+
+        _, testing_normal_data, _, = loaddata.load_data_split(
+            data_dir = normal_data_dir,
+            file_name = args.normal_data_name_test,
+            split = (0.1, 0.8, 0.1)
+        )
+
+        _, testing_abnormal_data, _, = loaddata.load_data_split(
+            data_dir = normal_data_dir,
+            file_name = args.abnormal_data_name,
+            split = (0.1, 0.8, 0.1)
+        )
+
         if args.training:
-            training_normal_data = loaddata.load_data_all(
-                data_dir = args.normal_data_dir,
-                file_name = args.normal_data_name_train,
-            )
-
-            _, ref_normal_data, val_normal_data = loaddata.load_data_split(
-                data_dir = args.normal_data_dir,
-                file_name = args.normal_data_name_val_and_ref,
-                # The first few readings could be unstable, remove it.
-                split = (0.1, 0.2, 0.7)
-            )
-
             train(
                 training_normal_data=training_normal_data,
                 ref_normal_data=ref_normal_data,
@@ -359,7 +372,14 @@ if __name__ == '__main__':
                 args=args
             )
         else:
-            eval_detector(args)
+            eval_detector(
+                testing_normal_data=testing_normal_data,
+                testing_abnormal_data=testing_abnormal_data,
+                args=args,
+                training_normal_data=training_normal_data,      # For debug only
+                val_normal_data=val_normal_data,                # For debug only
+                ref_normal_data=ref_normal_data,                # For debug only
+            )
 
     except SystemExit:
         sys.exit(0)
