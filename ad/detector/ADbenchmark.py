@@ -131,7 +131,7 @@ def run_benchmark(
     # Models may follow different convention, i.e. 0/1 and -1/+1
     # Convert them to 0: normal and 1: abnormal, respectively
     pred_raw = cls.predict(testing_data_run)
-    pred = pred_raw[:]
+    pred = np.copy(pred_raw)
     pred[pred_raw == normal_label] = 0
     pred[pred_raw == abnormal_label] = 1
 
