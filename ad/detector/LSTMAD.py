@@ -44,6 +44,7 @@ def train(args):
 
     normal_data_dir = args.normal_data_dir
     normal_data_name_train = args.normal_data_name_train
+    normal_data_name_test = args.normal_data_name_test
     val_and_ref_name = args.normal_data_name_val_and_ref
 
     RED_collection_len = args.RED_collection_len
