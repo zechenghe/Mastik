@@ -340,7 +340,7 @@ if __name__ == '__main__':
             print(args)
 
         if args.training:
-            _, training_normal_data, _ = loaddata.load_data_all(
+            training_normal_data = loaddata.load_data_all(
                 data_dir = args.normal_data_dir,
                 file_name = args.normal_data_name_train,
             )
