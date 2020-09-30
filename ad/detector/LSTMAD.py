@@ -187,39 +187,12 @@ def eval_detector(
 
     if args.dummydata:
         _, _, testing_normal_data = loaddata.load_normal_dummydata()
-    else:
-        if args.debug:
-
-
-            _, ref_normal_data, val_normal_data = loaddata.load_data_split(
-                data_dir = normal_data_dir,
-                file_name = val_and_ref_name,
-                split = (0.1, 0.45, 0.45)
-                )
-
-            training_normal_data = torch.tensor(
-                AnomalyDetector.normalize(training_normal_data))
-            val_normal_data = torch.tensor(
-                AnomalyDetector.normalize(val_normal_data))
-            ref_normal_data = torch.tensor(
-                AnomalyDetector.normalize(ref_normal_data))
-
-
-        testing_normal_data = loaddata.load_data_all(
-            data_dir = normal_data_dir,
-            file_name = normal_data_name_test
-        )
 
     testing_normal_data = torch.tensor(
         AnomalyDetector.normalize(testing_normal_data))
 
     if args.dummydata:
         testing_abnormal_data = loaddata.load_abnormal_dummydata()
-    else:
-        testing_abnormal_data = loaddata.load_data_all(
-            data_dir = abnormal_data_dir,
-            file_name = abnormal_data_name
-        )
 
     testing_abnormal_data = torch.tensor(AnomalyDetector.normalize(testing_abnormal_data))
     print("testing_abnormal_data.shape ", testing_abnormal_data.shape)
