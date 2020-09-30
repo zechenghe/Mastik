@@ -102,7 +102,7 @@ def run_benchmark(
         abnormal_label = 1
 
     elif model == 'LOF':
-        cls = LOF(n_neighbors=500, contamination=1e-4)
+        cls = LOF(n_neighbors=500, contamination=1e-5)
         pred_score_is_anomaly_score = True
         normal_label = 0
         abnormal_label = 1
