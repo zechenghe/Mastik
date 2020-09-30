@@ -223,6 +223,10 @@ def eval_detector(
             testing_normal_data,
             gpu=gpu)
 
+        if gpu:
+            testing_normal_data = testing_normal_data.cpu()
+            debug_pred_normal = debug_pred_normal.cpu()
+
         seq_dict = {
             "truth": testing_normal_data[1:,feature_idx].detach().numpy(),
             "pred": debug_pred_normal[:,0, feature_idx].detach().numpy(),
@@ -236,6 +240,9 @@ def eval_detector(
             gpu=gpu
             )
 
+        if gpu:
+            debug_pred_abnormal = debug_pred_abnormal.cpu()
+
         seq_dict = {
             "truth": testing_abnormal_data[1:,feature_idx].detach().numpy(),
             "pred": debug_pred_abnormal[:,0, feature_idx].detach().numpy(),
@@ -248,12 +255,20 @@ def eval_detector(
             ref_normal_data,
             gpu=gpu)
 
+        if gpu:
+            debug_ref = debug_ref.cpu()
+
         seq_dict = {
             "truth": ref_normal_data[1:,feature_idx].detach().numpy(),
             "pred": debug_ref[:,0, feature_idx].detach().numpy(),
             }
         seq_dict["diff"] = (seq_dict["pred"] - seq_dict["truth"])**2
         utils.plot_seq(seq_dict, title="Train normal ref prediction")
+
+        if gpu:
+            RE_ref = RE_ref.cpu()
+            RE_normal = RE_normal.cpu()
+            RE_abnormal = RE_abnormal.cpu()
 
         RE_seq_dict = {
             "RE_reference": RE_ref,
