@@ -6,6 +6,8 @@ import argparse
 import numpy as np
 import os
 
+import utils
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_dir', type = str, default = "../perf/data/core0/100us/", help='The directory of data')
 parser.add_argument('--file_name', type = str, default = None, help='The directory of data')
