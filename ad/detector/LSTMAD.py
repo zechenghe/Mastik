@@ -16,9 +16,6 @@ import math
 import os
 import numpy as np
 import pickle
-import matplotlib
-matplotlib.use('GTK')
-
 import matplotlib.pyplot as plt
 
 import utils
