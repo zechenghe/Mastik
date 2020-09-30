@@ -351,12 +351,13 @@ if __name__ == '__main__':
                 # The first few readings could be unstable, remove it.
                 split = (0.1, 0.2, 0.7)
             )
+
             train(
                 training_normal_data=training_normal_data,
                 ref_normal_data=ref_normal_data,
                 val_normal_data=val_normal_data,
-                args
-                )
+                args=args
+            )
         else:
             eval_detector(args)
 
