@@ -66,9 +66,9 @@ def train(args):
 
         _, ref_normal_data, val_normal_data = loaddata.load_data_split(
             data_dir = normal_data_dir,
-            file_name = val_and_ref_name,
+            file_name = normal_data_name_test,
             # The first few readings could be unstable, remove it.
-            split = (0.1, 0.45, 0.45)
+            split = (0.1, 0.2, 0.7)
         )
 
     training_normal_data_mean = utils.get_mean(training_normal_data)
