@@ -241,6 +241,7 @@ def eval_detector(
             )
 
         if gpu:
+            testing_abnormal_data = testing_abnormal_data.cpu()
             debug_pred_abnormal = debug_pred_abnormal.cpu()
 
         seq_dict = {
