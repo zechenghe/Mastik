@@ -17,8 +17,9 @@ import os
 import numpy as np
 import pickle
 import matplotlib
-import matplotlib.pyplot as plt
 matplotlib.use('GTK')
+
+import matplotlib.pyplot as plt
 
 import utils
 import SeqGenerator
@@ -314,7 +315,7 @@ def eval_detector(
     )
 
     plt.figure()
-    plt.plot(fpr, tpr, color='darkorange')
+    plt.plot(fpr, tpr, color='darkorange', label='ROC curve')
     plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
     plt.xlim([-0.01, 1.01])
     plt.ylim([-0.01, 1.01])
