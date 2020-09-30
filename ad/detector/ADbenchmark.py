@@ -137,6 +137,8 @@ def run_benchmark(
         ))
 
     pred_score = cls.predict_proba(testing_data_run)
+    print "testing_data_run.shape", testing_data_run.shape
+    print "pred_score.shape", pred_score.shape
 
     if verbose:
         print "Raw unique pred labels", np.unique(pred_raw)
