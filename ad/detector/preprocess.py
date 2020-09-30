@@ -13,7 +13,9 @@ parser.add_argument('--data_dir', type = str, default = "../perf/data/core0/100u
 parser.add_argument('--file_name', type = str, default = None, help='The directory of data')
 args = parser.parse_args()
 
-if args.file_name != None:
+data_dir = args.data_dir
+file_name = args.file_name
+if file_name != None:
     data = utils.read_csv_file(data_dir+file_name)
     np.save(data_dir + "".join(file_name.split('.')[:-1]) + '.npy', data)
 else:
