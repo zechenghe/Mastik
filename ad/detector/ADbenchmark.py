@@ -95,7 +95,7 @@ def run_benchmark(
         abnormal_label = -1
 
     elif model == 'OCSVM':
-        cls = OCSVM(kernel='linear', nu=0.1, contamination=0.1)
+        cls = OCSVM(kernel='rbf', nu=0.1, contamination=0.1)
         pred_score_is_anomaly_score = True
         normal_label = 0
         abnormal_label = 1
