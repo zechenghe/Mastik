@@ -223,6 +223,7 @@ def eval_detector(
             testing_normal_data,
             gpu=gpu)
 
+        # Convert back to cpu for plot
         if gpu:
             testing_normal_data = testing_normal_data.cpu()
             debug_pred_normal = debug_pred_normal.cpu()
@@ -240,6 +241,7 @@ def eval_detector(
             gpu=gpu
             )
 
+        # Convert back to cpu for plot
         if gpu:
             testing_abnormal_data = testing_abnormal_data.cpu()
             debug_pred_abnormal = debug_pred_abnormal.cpu()
@@ -258,6 +260,7 @@ def eval_detector(
             ref_normal_data,
             gpu=gpu)
 
+        # Convert back to cpu for plot
         if gpu:
             debug_ref = debug_ref.cpu()
 
@@ -267,11 +270,6 @@ def eval_detector(
             }
         seq_dict["diff"] = (seq_dict["pred"] - seq_dict["truth"])**2
         utils.plot_seq(seq_dict, title="Train normal ref prediction")
-
-        if gpu:
-            RE_ref = RE_ref.cpu()
-            RE_normal = RE_normal.cpu()
-            RE_abnormal = RE_abnormal.cpu()
 
         RE_seq_dict = {
             "RE_reference": RE_ref,
