@@ -251,6 +251,8 @@ def eval_detector(
         seq_dict["diff"] = (seq_dict["pred"] - seq_dict["truth"])**2
         utils.plot_seq(seq_dict, title="Testing abnormal prediction")
 
+        ref_normal_data = torch.tensor(
+            AnomalyDetector.normalize(ref_normal_data))
         # debug_ref is of size [seq_len-1, batch(=1), features]
         RE_ref, debug_ref = AnomalyDetector._get_reconstruction_error(
             ref_normal_data,
