@@ -344,18 +344,6 @@ if __name__ == '__main__':
             split = (0.1, 0.2, 0.7)
         )
 
-        _, testing_normal_data, _, = loaddata.load_data_split(
-            data_dir = args.normal_data_dir,
-            file_name = args.normal_data_name_test,
-            split = (0.1, 0.8, 0.1)
-        )
-
-        _, testing_abnormal_data, _, = loaddata.load_data_split(
-            data_dir = args.normal_data_dir,
-            file_name = args.abnormal_data_name,
-            split = (0.1, 0.8, 0.1)
-        )
-
         feature_list = [0,2,6,8,14,18,20,21,22]
         training_normal_data=training_normal_data[:, feature_list]
         ref_normal_data=ref_normal_data[:, feature_list]
@@ -377,6 +365,18 @@ if __name__ == '__main__':
                 args=args
             )
         else:
+            _, testing_normal_data, _, = loaddata.load_data_split(
+                data_dir = args.normal_data_dir,
+                file_name = args.normal_data_name_test,
+                split = (0.1, 0.8, 0.1)
+            )
+
+            _, testing_abnormal_data, _, = loaddata.load_data_split(
+                data_dir = args.normal_data_dir,
+                file_name = args.abnormal_data_name,
+                split = (0.1, 0.8, 0.1)
+            )
+            
             eval_detector(
                 testing_normal_data=testing_normal_data,
                 testing_abnormal_data=testing_abnormal_data,
