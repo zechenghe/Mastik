@@ -348,14 +348,11 @@ if __name__ == '__main__':
         training_normal_data=training_normal_data[:, feature_list]
         ref_normal_data=ref_normal_data[:, feature_list]
         val_normal_data=val_normal_data[:, feature_list]
-        testing_normal_data=testing_normal_data[:, feature_list]
-        testing_abnormal_data=testing_abnormal_data[:, feature_list]
 
         print("training_normal_data.shape", training_normal_data.shape)
         print("ref_normal_data.shape", ref_normal_data.shape)
         print("val_normal_data.shape", val_normal_data.shape)
-        print("testing_normal_data.shape", training_normal_data.shape)
-        print("testing_abnormal_data.shape", testing_abnormal_data.shape)
+
 
         if args.training:
             train(
@@ -376,7 +373,12 @@ if __name__ == '__main__':
                 file_name = args.abnormal_data_name,
                 split = (0.1, 0.8, 0.1)
             )
-            
+
+            testing_normal_data=testing_normal_data[:, feature_list]
+            testing_abnormal_data=testing_abnormal_data[:, feature_list]
+            print("testing_normal_data.shape", training_normal_data.shape)
+            print("testing_abnormal_data.shape", testing_abnormal_data.shape)
+
             eval_detector(
                 testing_normal_data=testing_normal_data,
                 testing_abnormal_data=testing_abnormal_data,
