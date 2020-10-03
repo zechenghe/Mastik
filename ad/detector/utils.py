@@ -1,7 +1,7 @@
 import collections
 import numpy as np
 import matplotlib
-matplotlib.use('GTK')
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 from sklearn import metrics
