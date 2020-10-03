@@ -130,7 +130,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None):
         plt.title(title)
 
     plt.legend(loc="lower right")
-    plt.show(block = True)
+    plt.show(block = False)
 
 
 def plot_hist(data, xlabel=None, ylabel=None, title=None):

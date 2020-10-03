@@ -303,7 +303,7 @@ def eval_detector(
     plt.ylabel('True Positive Rate')
     plt.title('ROC of LSTM anomaly detector')
     plt.legend(loc="lower right")
-    plt.show()
+    plt.show(block = True)
 
     return roc_auc
 

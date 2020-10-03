@@ -33,3 +33,4 @@ utils.plot_seq(
         "train_normal": training_normal_data[:, 0],
     }
 )
+plt.show(block = True)
