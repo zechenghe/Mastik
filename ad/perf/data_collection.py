@@ -38,6 +38,6 @@ cmd = 'sudo time ./event_open_user {core} {interval_cycles} {n_readings} {save_d
 
 print(cmd)
 monitor_pid = subprocess.Popen(cmd, shell=True)
-print("PID: {pid}".format(pid=pid))
+print("Monitor PID: {pid}".format(pid=monitor_pid))
 
 monitor_status = monitor_pid.wait()
