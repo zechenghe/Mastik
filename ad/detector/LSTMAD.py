@@ -180,7 +180,6 @@ def eval_detector(
     abnormal_data_dir = args.abnormal_data_dir
     abnormal_data_name = args.abnormal_data_name
     Pvalue_th = args.Pvalue_th
-    val_and_ref_name = args.normal_data_name_val_and_ref
 
     gpu = args.gpu
 
@@ -339,7 +338,7 @@ if __name__ == '__main__':
 
         _, ref_normal_data, val_normal_data = loaddata.load_data_split(
             data_dir = args.normal_data_dir,
-            file_name = args.normal_data_name_val_and_ref,
+            file_name = args.normal_data_name_ref_and_val,
             # The first few readings could be unstable, remove it.
             split = (0.1, 0.2, 0.7)
         )
