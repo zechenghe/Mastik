@@ -17,7 +17,7 @@ import os
 import numpy as np
 import pickle
 import matplotlib
-matplotlib.use('Agg')
+matplotlib.use('GTKAgg')
 import matplotlib.pyplot as plt
 
 import utils
