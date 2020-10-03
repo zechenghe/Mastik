@@ -13,7 +13,7 @@ def monitor_cmd(
     ):
 
     # Collect normal data
-    cmd = 'sudo ./event_open_user {core} {interval_cycles} {n_readings} {save_data_dir}{save_data_name}.csv'.format(
+    cmd = 'sudo ./event_open_user {core} {interval_cycles} {n_readings} {save_data_dir}{save_data_name}'.format(
         core=core,
         interval_cycles=interval_cycles,
         n_readings=n_readings,
@@ -25,7 +25,7 @@ def monitor_cmd(
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--core', type = int, default = 0, help='core index')
-parser.add_argument('--us', type = int, default = 1000, help='interval in us')
+parser.add_argument('--us', type = int, default = 100, help='interval in us')
 parser.add_argument('--n_readings', type = int, default = 300000, help='number of HPC readings')
 parser.add_argument('--bg_program', type = str, default = 'webserver', help='background program')
 
@@ -55,8 +55,12 @@ monitor_cmd_fn=functools.partial(
     save_data_dir=save_data_dir,
 )
 
+# Normal data collection
 cmd = monitor_cmd_fn(save_data_name='train_normal.csv')
 
 print(cmd)
 monitor_process = subprocess.Popen(cmd, shell=True)
+attack_process = subprocess.Popen(attacks['l1pp'], shell=True)
+
 monitor_status = monitor_process.wait()
+attack_process.kill()
