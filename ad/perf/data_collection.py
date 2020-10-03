@@ -50,6 +50,7 @@ os.system('mkdir -p {save_data_dir}'.format(save_data_dir=save_data_dir))
 monitor_cmd_fn=functools.partial(
     monitor_cmd,
     core=args.core,
+    interval_cycles=interval_cycles,
     n_readings=args.n_readings,
     save_data_dir=save_data_dir,
 )
