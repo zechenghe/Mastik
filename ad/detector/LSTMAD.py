@@ -174,11 +174,6 @@ def eval_detector(
 
     load_model_dir = args.load_model_dir
     load_model_name = args.load_model_name
-    normal_data_dir = args.normal_data_dir
-    normal_data_name_train = args.normal_data_name_train
-    normal_data_name_test = args.normal_data_name_test
-    abnormal_data_dir = args.abnormal_data_dir
-    abnormal_data_name = args.abnormal_data_name
     Pvalue_th = args.Pvalue_th
 
     gpu = args.gpu
