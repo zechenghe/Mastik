@@ -20,18 +20,18 @@ attacks = {
     'ff': 'taskset 0x1 /home/zechengh/Mastik/exp/test_workspace/spy_ff /home/zechengh/Mastik/gnupg-1.4.13/g10/gpg &'
 }
 
-save_data_dir = 'data/{bg_program}/{us}us/'.format{
+save_data_dir = 'data/{bg_program}/{us}us/'.format(
     bg_program=args.bg_program,
     us=args.us
-}
+)
 
 # Collect normal data
-cmd = 'sudo time ./event_open_user {core} {interval_cycles} {n_readings} {save_data_dir}train_normal.csv'.format{
+cmd = 'sudo time ./event_open_user {core} {interval_cycles} {n_readings} {save_data_dir}train_normal.csv'.format(
     core=args.core,
     interval_cycles=interval_cycles,
     n_readings=args.n_readings,
     save_data_dir=save_data_dir
-}
+)
 
 print cmd
 p = subprocess.Popen(cmd)
