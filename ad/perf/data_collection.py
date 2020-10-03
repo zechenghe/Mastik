@@ -8,15 +8,17 @@ def monitor_cmd(
     core,
     interval_cycles,
     n_readings,
-    save_data_dir
+    save_data_dir,
+    save_data_name
     ):
 
     # Collect normal data
-    cmd = 'sudo ./event_open_user {core} {interval_cycles} {n_readings} {save_data_dir}train_normal.csv'.format(
+    cmd = 'sudo ./event_open_user {core} {interval_cycles} {n_readings} {save_data_dir}{save_data_name}.csv'.format(
         core=core,
         interval_cycles=interval_cycles,
         n_readings=n_readings,
-        save_data_dir=save_data_dir
+        save_data_dir=save_data_dir,
+        save_data_name=save_data_name,
     )
     return cmd
 
@@ -49,7 +51,7 @@ monitor_cmd_fn=functools.partial(
     monitor_cmd,
     core=args.core,
     n_readings=args.n_readings,
-    save_data_dir=args.save_data_dir,
+    save_data_dir=save_data_dir,
 )
 
 cmd = monitor_cmd_fn(save_data_name='train_normal.csv')
