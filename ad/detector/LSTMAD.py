@@ -207,11 +207,11 @@ def eval_detector(
         )
 
     if args.debug:
-        feature_idx = 0
+        feature_idx = 1
 
         # debug_pred_normal is of size [seq_len-1, batch(=1), features]
         RE_normal, debug_pred_normal = AnomalyDetector._get_reconstruction_error(
-            testing_normal_data,
+            testing_normal_data[:200,:],
             gpu=gpu)
 
         # Convert back to cpu for plot
@@ -228,7 +228,7 @@ def eval_detector(
 
         # debug_pred_normal is of size [seq_len-1, batch(=1), features]
         RE_abnormal, debug_pred_abnormal = AnomalyDetector._get_reconstruction_error(
-            testing_abnormal_data,
+            testing_abnormal_data[:200,:],
             gpu=gpu
             )
 
@@ -248,7 +248,7 @@ def eval_detector(
             AnomalyDetector.normalize(ref_normal_data))
         # debug_ref is of size [seq_len-1, batch(=1), features]
         RE_ref, debug_ref = AnomalyDetector._get_reconstruction_error(
-            ref_normal_data,
+            ref_normal_data[:200,:],
             gpu=gpu)
 
         # Convert back to cpu for plot
