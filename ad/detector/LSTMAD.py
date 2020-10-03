@@ -223,7 +223,7 @@ def eval_detector(
             "truth": testing_normal_data[1:,feature_idx].detach().numpy()[:100],
             "pred": debug_pred_normal[:,0, feature_idx].detach().numpy()[:100],
         }
-        seq_dict["diff"] = (seq_dict["pred"] - seq_dict["truth"])**2
+        #seq_dict["diff"] = (seq_dict["pred"] - seq_dict["truth"])**2
         utils.plot_seq(seq_dict, title="Testing normal prediction")
 
         # debug_pred_normal is of size [seq_len-1, batch(=1), features]
@@ -241,7 +241,7 @@ def eval_detector(
             "truth": testing_abnormal_data[1:,feature_idx].detach().numpy()[:100],
             "pred": debug_pred_abnormal[:,0, feature_idx].detach().numpy()[:100],
         }
-        seq_dict["diff"] = (seq_dict["pred"] - seq_dict["truth"])**2
+        #seq_dict["diff"] = (seq_dict["pred"] - seq_dict["truth"])**2
         utils.plot_seq(seq_dict, title="Testing abnormal prediction")
 
         ref_normal_data = torch.tensor(
@@ -259,7 +259,7 @@ def eval_detector(
             "truth": ref_normal_data[1:,feature_idx].detach().numpy()[:100],
             "pred": debug_ref[:,0, feature_idx].detach().numpy()[:100],
             }
-        seq_dict["diff"] = (seq_dict["pred"] - seq_dict["truth"])**2
+        #seq_dict["diff"] = (seq_dict["pred"] - seq_dict["truth"])**2
         utils.plot_seq(seq_dict, title="Train normal ref prediction")
 
         RE_seq_dict = {
