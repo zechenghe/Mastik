@@ -59,6 +59,4 @@ cmd = monitor_cmd_fn(save_data_name='train_normal.csv')
 
 print(cmd)
 monitor_process = subprocess.Popen(cmd, shell=True)
-print("Monitor PID: {pid}".format(pid=monitor_pid))
-
 monitor_status = monitor_process.wait()
