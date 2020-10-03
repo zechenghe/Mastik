@@ -59,8 +59,8 @@ monitor_cmd_fn=functools.partial(
 cmd = monitor_cmd_fn(save_data_name='train_normal.csv')
 
 print(cmd)
-monitor_process = subprocess.Popen(cmd, shell=True)
-attack_process = subprocess.Popen(attacks['l1pp'], shell=True)
+monitor_process = subprocess.Popen(cmd.split())
+attack_process = subprocess.Popen(attacks['l1pp'].split())
 
 monitor_status = monitor_process.wait()
 attack_process.terminate()
