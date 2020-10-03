@@ -37,4 +37,4 @@ cmd = 'sudo time ./event_open_user {core} {interval_cycles} {n_readings} {save_d
 )
 
 print(cmd)
-p = subprocess.Popen(cmd)
+p = subprocess.Popen(cmd, shell=True)
