@@ -57,10 +57,33 @@ monitor_cmd_fn=functools.partial(
 
 # Normal data collection
 cmd = monitor_cmd_fn(save_data_name='train_normal.csv')
-
 print(cmd)
 monitor_process = subprocess.Popen(cmd.split())
-attack_process = subprocess.Popen(attacks['l1pp'].split())
-
 monitor_status = monitor_process.wait()
-attack_process.terminate()
+
+'''
+# Ref and val data collection
+cmd = monitor_cmd_fn(save_data_name='ref_and_val.csv')
+print(cmd)
+monitor_process = subprocess.Popen(cmd.split())
+monitor_status = monitor_process.wait()
+
+# Ref and val data collection
+cmd = monitor_cmd_fn(save_data_name='test_normal.csv')
+print(cmd)
+monitor_process = subprocess.Popen(cmd.split())
+monitor_status = monitor_process.wait()
+'''
+
+for k in attacks.keys():
+    attack_process = subprocess.Popen(attacks[k].split())
+    time.sleep(5)
+
+    cmd = monitor_cmd_fn(save_data_name='test_abnormal_{attack}.csv'.format(
+                attack=k
+            )
+        )
+    print(cmd)
+    monitor_process = subprocess.Popen(cmd.split())
+    monitor_status = monitor_process.wait()
+    attack_process.terminate()
