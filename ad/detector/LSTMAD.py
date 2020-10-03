@@ -197,7 +197,6 @@ def eval_detector(
         testing_abnormal_data = loaddata.load_abnormal_dummydata()
 
     testing_abnormal_data = torch.tensor(AnomalyDetector.normalize(testing_abnormal_data))
-    print("testing_abnormal_data.shape ", testing_abnormal_data.shape)
 
     if gpu:
         AnomalyDetector = AnomalyDetector.cuda()
@@ -332,12 +331,12 @@ if __name__ == '__main__':
             print(args)
 
         training_normal_data = loaddata.load_data_all(
-            data_dir = args.normal_data_dir,
+            data_dir = args.data_dir,
             file_name = args.normal_data_name_train,
         )
 
         _, ref_normal_data, val_normal_data = loaddata.load_data_split(
-            data_dir = args.normal_data_dir,
+            data_dir = args.data_dir,
             file_name = args.normal_data_name_ref_and_val,
             # The first few readings could be unstable, remove it.
             split = (0.1, 0.2, 0.7)
@@ -352,7 +351,6 @@ if __name__ == '__main__':
         print("ref_normal_data.shape", ref_normal_data.shape)
         print("val_normal_data.shape", val_normal_data.shape)
 
-
         if args.training:
             train(
                 training_normal_data=training_normal_data,
@@ -362,20 +360,20 @@ if __name__ == '__main__':
             )
         else:
             _, testing_normal_data, _, = loaddata.load_data_split(
-                data_dir = args.normal_data_dir,
+                data_dir = args.data_dir,
                 file_name = args.normal_data_name_test,
                 split = (0.1, 0.8, 0.1)
             )
 
             _, testing_abnormal_data, _, = loaddata.load_data_split(
-                data_dir = args.normal_data_dir,
+                data_dir = args.data_dir,
                 file_name = args.abnormal_data_name,
                 split = (0.1, 0.8, 0.1)
             )
 
-            testing_normal_data=testing_normal_data[:, feature_list]
-            testing_abnormal_data=testing_abnormal_data[:, feature_list]
-            print("testing_normal_data.shape", training_normal_data.shape)
+            testing_normal_data=testing_normal_data[:300000, feature_list]
+            testing_abnormal_data=testing_abnormal_data[:300000, feature_list]
+            print("testing_normal_data.shape", testing_normal_data.shape)
             print("testing_abnormal_data.shape", testing_abnormal_data.shape)
 
             eval_detector(

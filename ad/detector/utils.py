@@ -235,12 +235,10 @@ def create_parser():
     # Loaddata
     # Sequential data in the form of (Timeframe, Features)
     # Training only leverages normal data. Abnormaly data only for testing.
-    parser.add_argument('--normal_data_dir', type = str, default = "data/", help='The directory of normal data')
+    parser.add_argument('--data_dir', type = str, default = "data/", help='Data directory')
     parser.add_argument('--normal_data_name_train', type = str, default = "train_normal.npy", help='The file name of training normal data')
     parser.add_argument('--normal_data_name_test', type = str, default = "test_normal.npy", help='The file name of testing normal data')
     parser.add_argument('--normal_data_name_ref_and_val', type = str, default = "ref_and_val.npy", help='The file name of testing normal data')
-
-    parser.add_argument('--abnormal_data_dir', type = str, default = "data/", help='The directory of abnormal data')
     parser.add_argument('--abnormal_data_name', type = str, default = "test_abnormal.npy", help='The file name of abnormal data')
 
     # Save and load model. Save after training. Load before testing.
