@@ -33,5 +33,5 @@ cmd = 'sudo time ./event_open_user {core} {interval_cycles} {n_readings} {save_d
     save_data_dir=save_data_dir
 )
 
-print cmd
+print(cmd)
 p = subprocess.Popen(cmd)
