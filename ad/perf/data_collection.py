@@ -63,4 +63,4 @@ monitor_process = subprocess.Popen(cmd, shell=True)
 attack_process = subprocess.Popen(attacks['l1pp'], shell=True)
 
 monitor_status = monitor_process.wait()
-attack_process.kill()
+attack_process.terminate()
