@@ -17,7 +17,6 @@ import os
 import numpy as np
 import pickle
 import matplotlib
-
 import matplotlib.pyplot as plt
 
 import utils
