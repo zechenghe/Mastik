@@ -17,6 +17,7 @@ import os
 import numpy as np
 import pickle
 import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 import utils
