@@ -25,6 +25,8 @@ save_data_dir = 'data/{bg_program}/{us}us/'.format(
     us=args.us
 )
 
+os.system('mkdir -p {save_data_dir}'.format(save_data_dir=save_data_dir))
+
 # Collect normal data
 cmd = 'sudo time ./event_open_user {core} {interval_cycles} {n_readings} {save_data_dir}train_normal.csv'.format(
     core=args.core,
