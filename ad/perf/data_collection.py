@@ -9,7 +9,7 @@ parser.add_argument('--us', type = int, default = 1000, help='interval in us')
 parser.add_argument('--n_readings', type = int, default = 300000, help='number of HPC readings')
 parser.add_argument('--bg_program', type = str, default = 'webserver', help='background program')
 
-parser.set_defaults(training=True)
+args = parser.parse_args()
 
 interval_cycles = int(args.us * 1.2)
 
