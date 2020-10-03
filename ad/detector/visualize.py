@@ -31,7 +31,7 @@ training_normal_data = loaddata.load_data_all(
 )
 
 utils.plot_seq(
-    seq={
+    seqs={
         "train_normal": training_normal_data[:, 0],
     }
 )
