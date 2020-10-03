@@ -2,6 +2,23 @@ import os
 import subprocess
 import time
 import argparse
+import function_tools
+
+def monitor_cmd(
+    core,
+    interval_cycles,
+    n_readings,
+    save_data_dir
+    ):
+
+    # Collect normal data
+    cmd = 'sudo ./event_open_user {core} {interval_cycles} {n_readings} {save_data_dir}train_normal.csv'.format(
+        core=core,
+        interval_cycles=interval_cycles,
+        n_readings=n_readings,
+        save_data_dir=save_data_dir
+    )
+    return cmd
 
 parser = argparse.ArgumentParser()
 
@@ -28,16 +45,17 @@ save_data_dir = 'data/{bg_program}/{us}us/'.format(
 
 os.system('mkdir -p {save_data_dir}'.format(save_data_dir=save_data_dir))
 
-# Collect normal data
-cmd = 'sudo time ./event_open_user {core} {interval_cycles} {n_readings} {save_data_dir}train_normal.csv'.format(
+monitor_cmd_fn=function_tools.partial(
+    monitor_cmd,
     core=args.core,
-    interval_cycles=interval_cycles,
     n_readings=args.n_readings,
-    save_data_dir=save_data_dir
+    save_data_dir=args.save_data_dir,
 )
 
+cmd = monitor_cmd_fn(save_data_name='train_normal.csv')
+
 print(cmd)
-monitor_pid = subprocess.Popen(cmd, shell=True)
+monitor_process = subprocess.Popen(cmd, shell=True)
 print("Monitor PID: {pid}".format(pid=monitor_pid))
 
-monitor_status = monitor_pid.wait()
+monitor_status = monitor_process.wait()
