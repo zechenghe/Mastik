@@ -1,7 +1,8 @@
 import collections
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib
 matplotlib.use('GTK')
+import matplotlib.pyplot as plt
 
 from sklearn import metrics
 
