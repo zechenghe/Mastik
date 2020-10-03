@@ -22,6 +22,8 @@ import SeqGenerator
 import detector
 import loaddata
 
+import matplotlib.pyplot as plt
+
 args = utils.create_parser()
 training_normal_data = loaddata.load_data_all(
     data_dir = args.data_dir,
@@ -33,4 +35,5 @@ utils.plot_seq(
         "train_normal": training_normal_data[:, 0],
     }
 )
-plt.show(block = True)
+
+plt.show(block=True)
