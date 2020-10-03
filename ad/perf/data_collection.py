@@ -2,7 +2,7 @@ import os
 import subprocess
 import time
 import argparse
-import function_tools
+import functools
 
 def monitor_cmd(
     core,
@@ -45,7 +45,7 @@ save_data_dir = 'data/{bg_program}/{us}us/'.format(
 
 os.system('mkdir -p {save_data_dir}'.format(save_data_dir=save_data_dir))
 
-monitor_cmd_fn=function_tools.partial(
+monitor_cmd_fn=functools.partial(
     monitor_cmd,
     core=args.core,
     n_readings=args.n_readings,
