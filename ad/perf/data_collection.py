@@ -76,8 +76,8 @@ monitor_status = monitor_process.wait()
 
 for k in attacks.keys():
     attack_process = subprocess.Popen(attacks[k].split())
-    time.sleep(5)
-
+    # To make the attack actually run
+    time.sleep(10)
     cmd = monitor_cmd_fn(save_data_name='test_abnormal_{attack}.csv'.format(
                 attack=k
             )
