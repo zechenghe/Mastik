@@ -168,9 +168,9 @@ if __name__=="__main__":
     # Sequential data in the form of (Timeframe, Features)
     # Training only leverages normal data. Abnormaly data only for testing.
     parser.add_argument('--data_dir', type = str, default = "../perf/data/core0/100us/", help='The directory of data')
-    parser.add_argument('--train_normal', type = str, default = "train_normal.npy", help='The file name of training normal data')
-    parser.add_argument('--test_normal', type = str, default = "test_normal.npy", help='The file name of testing normal data')
-    parser.add_argument('--test_abnormal', type = str, default = "test_abnormal.npy", help='The file name of testing abnormal data')
+    parser.add_argument('--normal_data_name_train', type = str, default = "train_normal.npy", help='The file name of training normal data')
+    parser.add_argument('--normal_data_name_test', type = str, default = "test_normal.npy", help='The file name of testing normal data')
+    parser.add_argument('--abnormal_data_name', type = str, default = "test_abnormal.npy", help='The file name of testing abnormal data')
 
     # Window size
     parser.add_argument('--window_size', type = int, default = 10, help='Window size for vectorization')
