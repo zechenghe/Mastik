@@ -364,8 +364,8 @@ if __name__ == '__main__':
                 split = (0.1, 0.8, 0.1)
             )
 
-            testing_normal_data=testing_normal_data[:10000, feature_list]
-            testing_abnormal_data=testing_abnormal_data[:10000, feature_list]
+            testing_normal_data=testing_normal_data[:, feature_list]
+            testing_abnormal_data=testing_abnormal_data[:, feature_list]
             print("testing_normal_data.shape", testing_normal_data.shape)
             print("testing_abnormal_data.shape", testing_abnormal_data.shape)
 
