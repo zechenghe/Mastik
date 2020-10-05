@@ -176,7 +176,7 @@ if __name__=="__main__":
     parser.add_argument('--window_size', type = int, default = 10, help='Window size for vectorization')
 
     parser.add_argument('--verbose', dest='verbose', action='store_true', help='Whether debug information will be printed')
-    parser.set_defaults(verbose=False)
+    parser.set_defaults(verbose=True)
 
     args = parser.parse_args()
 
