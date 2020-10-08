@@ -256,9 +256,7 @@ int probecount(void *pp) {
     if (s > L3_THRESHOLD)
       rv++;
   } while (p != (void *) pp);
-  #ifdef ZCHE_DEBUG
-    printf("Total= %d rv= %d\n", total, rv);
-  #endif
+  printf("Total= %d rv= %d\n", total, rv);
   return rv;
 }
 
