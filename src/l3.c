@@ -255,9 +255,9 @@ int probecount(void *pp) {
     s = rdtscp() - s;
     if (s > L3_THRESHOLD)
       rv++;
-    printf("p");
+    //printf("p");
   } while (p != (void *) pp);
-  printf("Total= %d rv= %d\n", total, rv);
+  //printf("Total= %d rv= %d\n", total, rv);
   return rv;
 }
 
