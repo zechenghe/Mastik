@@ -70,9 +70,9 @@ int main(int ac, char **av) {
 
   int loops = 0;
   while(1){
-    if (loops % 1000 == 0){
+    //if (loops % 1000 == 0){
       printf("Probe loops %d \n", loops);
-    }
+    //}
     l3_repeatedprobecount(l3, samples, res, 0);
     loops += 1;
   }
