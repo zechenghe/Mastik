@@ -88,14 +88,14 @@ for k in attacks.keys():
     attack_process.terminate()
 
 # Clean up
-
-cmd = 'sudo python ../detector/preprocess.py --data_dir {save_data_dir}'.format(
-    save_data_dir=save_data_dir)
+cmd = 'sudo chown zechengh ../ -R'
 print(cmd)
 monitor_process = subprocess.Popen(cmd.split())
 monitor_status = monitor_process.wait()
 
-cmd = 'sudo chown zechengh ../ -R'
+cmd = 'python ../detector/preprocess.py --data_dir {save_data_dir}'.format(
+    save_data_dir=save_data_dir
+    )
 print(cmd)
 monitor_process = subprocess.Popen(cmd.split())
 monitor_status = monitor_process.wait()
