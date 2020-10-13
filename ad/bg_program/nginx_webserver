@@ -1,0 +1,5 @@
+Server:
+sudo taskset 0x1 /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+
+Client:
+while true; do curl -X GET -v -i http://nebula1-ee.princeton.edu/?[1-1000]; done
