@@ -1,3 +1,4 @@
+from __future__ import print_function
 import collections
 import numpy as np
 import matplotlib
@@ -45,25 +46,25 @@ def eval_metrics(truth, pred, anomaly_score=None, verbose=True ):
     f1 = 2. * prec * rec / ( prec + rec + eps )
 
     if verbose:
-        print '----------------Detection Results------------------'
-        print 'False positives: ', fp
-        print 'False negatives: ', fn
-        print 'True positives: ', tp
-        print 'True negatives: ', tn
-        print 'False Positive Rate: ', fpr
-        print 'False Negative Rate: ', fnr
-        print 'Accuracy: ', acc
-        print 'Precision: ', prec
-        print 'Recall: ', rec
-        print 'F1: ', f1
-        print '---------------------------------------------------'
+        print('----------------Detection Results------------------')
+        print('False positives: ', fp)
+        print('False negatives: ', fn)
+        print('True positives: ', tp)
+        print('True negatives: ', tn)
+        print('False Positive Rate: ', fpr)
+        print('False Negative Rate: ', fnr)
+        print('Accuracy: ', acc)
+        print('Precision: ', prec)
+        print('Recall: ', rec)
+        print('F1: ', f1)
+        print('---------------------------------------------------')
 
     roc, roc_auc = None, None
     if anomaly_score is not None:
         fpr, tpr, thresholds = metrics.roc_curve(truth, anomaly_score)
         roc_auc = metrics.roc_auc_score(truth, anomaly_score)
         if verbose:
-            print "ROC AUC: ", roc_auc
+            print("ROC AUC: ", roc_auc)
 
     return tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds, roc_auc
 

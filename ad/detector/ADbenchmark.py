@@ -138,9 +138,9 @@ def run_benchmark(
     pred_score = cls.decision_function(testing_data_run)
 
     if verbose:
-        print "Raw unique pred labels", np.unique(pred_raw)
-        print "Raw pred labels", pred_raw
-        print "pred_score", pred_score
+        print ("Raw unique pred labels", np.unique(pred_raw))
+        print ("Raw pred labels", pred_raw)
+        print ("pred_score", pred_score)
 
     if not pred_score_is_anomaly_score:
         anomaly_score = -pred_score
