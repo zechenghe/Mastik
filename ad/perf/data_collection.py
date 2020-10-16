@@ -40,7 +40,7 @@ attacks = {
     'ff': 'taskset 0x1 /home/zechengh/Mastik/exp/test_workspace/spy_ff /home/zechengh/Mastik/gnupg-1.4.13/g10/gpg &'
 }
 
-gpg_command = 'taskset 0x1 gpg --batch -r zechengh_key1 -o /dev/null -e /home/zechengh/sample.txt'
+gpg_command = 'taskset 0x1 /home/zechengh/Mastik/ad/bg_program/run_gpg.sh'
 
 save_data_dir = 'data/{bg_program}/{us}us/'.format(
     bg_program=args.bg_program,
