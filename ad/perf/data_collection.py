@@ -75,6 +75,12 @@ print(cmd)
 monitor_process = subprocess.Popen(cmd.split())
 monitor_status = monitor_process.wait()
 
+# Test normal with gpg running
+gpg_process = subprocess.Popen(gpg_command.split())
+time.sleep(10)
+cmd = monitor_cmd_fn(save_data_name='test_normal_with_gpg.csv')
+monitor_status = monitor_process.wait()
+gpg_process.terminate()
 
 for k in attacks.keys():
     attack_process = subprocess.Popen(attacks[k].split())
@@ -87,7 +93,20 @@ for k in attacks.keys():
     print(cmd)
     monitor_process = subprocess.Popen(cmd.split())
     monitor_status = monitor_process.wait()
+
+    # Test abnormal with gpg running
+    gpg_process = subprocess.Popen(gpg_command.split())
+    time.sleep(10)
+    cmd = monitor_cmd_fn(save_data_name='test_abnormal_{attack}_with_gpg.csv'.format(
+            attack=k
+        )
+    )
+    print(cmd)
+    monitor_status = monitor_process.wait()
+    gpg_process.terminate()
+
     attack_process.terminate()
+
 
 # Clean up
 cmd = 'sudo chown zechengh ../ -R'
