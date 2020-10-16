@@ -40,6 +40,8 @@ attacks = {
     'ff': 'taskset 0x1 /home/zechengh/Mastik/exp/test_workspace/spy_ff /home/zechengh/Mastik/gnupg-1.4.13/g10/gpg &'
 }
 
+gpg_command = 'taskset 0x1 gpg --batch -r zechengh_key1 -o /dev/null -e /home/zechengh/sample.txt'
+
 save_data_dir = 'data/{bg_program}/{us}us/'.format(
     bg_program=args.bg_program,
     us=args.us
@@ -93,7 +95,7 @@ print(cmd)
 monitor_process = subprocess.Popen(cmd.split())
 monitor_status = monitor_process.wait()
 
-cmd = 'python ../detector/preprocess.py --data_dir {save_data_dir}'.format(
+cmd = 'python2 ../detector/preprocess.py --data_dir {save_data_dir}'.format(
     save_data_dir=save_data_dir
     )
 print(cmd)
