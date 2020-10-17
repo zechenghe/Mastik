@@ -14,6 +14,7 @@ while True:
     'gobmk', 'soplex', 'povray', 'hmmer', 'sjeng', 'libquantum',
     'h264ref', 'lbm', 'omnetpp', 'astar'):
         cmd = spec_cmd(spec_prog)
+        print(cmd)
         spec_process = subprocess.Popen(cmd.split())
         spec_status = spec_process.wait()
         time.sleep(1)
