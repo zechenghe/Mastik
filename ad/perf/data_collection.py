@@ -24,7 +24,7 @@ def monitor_cmd(
 
 def clean_spec():
 
-    spec_clean_cmd="ps -ef '|' grep runspec '|' awk '{print $2;}' '|' xargs -r kill"
+    spec_clean_cmd="/home/zechengh/Mastik/ad/bg_program/clean_spec.sh"
     print(spec_clean_cmd)
     spec_clean_process=subprocess.Popen(spec_clean_cmd.split())
     spec_clean_process.wait()
