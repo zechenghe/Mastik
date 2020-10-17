@@ -25,6 +25,7 @@ def monitor_cmd(
 def clean_spec():
 
     spec_clean_cmd="ps -ef | grep runspec | awk '{print $2;}' | xargs -r kill"
+    print(spec_clean_cmd)
     spec_clean_process=subprocess.Popen(spec_clean_cmd.split())
     spec_clean_process.wait()
     return
