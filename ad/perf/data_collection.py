@@ -22,6 +22,13 @@ def monitor_cmd(
     )
     return cmd
 
+def clean_spec():
+
+    spec_clean_cmd="ps -ef | grep runspec | awk '{print $2;}' | xargs -r kill"
+    spec_clean_process=subprocess.Popen(spec_clean_cmd.split())
+    spec_clean_process.wait()
+    return
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--core', type = int, default = 0, help='core index')
@@ -41,6 +48,7 @@ attacks = {
 }
 
 gpg_command = 'taskset 0x1 /home/zechengh/Mastik/ad/bg_program/run_gpg.sh'
+spec_command = '/home/zechengh/Mastik/ad/bg_program/run_spec.py'
 
 save_data_dir = 'data/{bg_program}/{us}us/'.format(
     bg_program=args.bg_program,
@@ -83,6 +91,14 @@ monitor_process = subprocess.Popen(cmd.split())
 monitor_status = monitor_process.wait()
 gpg_process.terminate()
 
+# Test normal with spec running
+spec_process = subprocess.Popen(spec_command.split())
+cmd = monitor_cmd_fn(save_data_name='test_normal_with_spec.csv')
+monitor_process = subprocess.Popen(cmd.split())
+monitor_status = monitor_process.wait()
+spec_process.terminate()
+clean_spec()
+
 for k in attacks.keys():
     attack_process = subprocess.Popen(attacks[k].split())
     # To make the attack actually run
@@ -106,6 +122,18 @@ for k in attacks.keys():
     monitor_process = subprocess.Popen(cmd.split())
     monitor_status = monitor_process.wait()
     gpg_process.terminate()
+
+    # Test abnormal with spec running
+    spec_process = subprocess.Popen(spec_command.split())
+    cmd = monitor_cmd_fn(save_data_name='test_abnormal_{attack}_with_spec.csv'.format(
+            attack=k
+        )
+    )
+    print(cmd)
+    monitor_process = subprocess.Popen(cmd.split())
+    monitor_status = monitor_process.wait()
+    spec_process.terminate()
+    clean_spec()
 
     attack_process.terminate()
 
