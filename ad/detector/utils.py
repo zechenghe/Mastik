@@ -114,7 +114,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None):
             whole sequence.
     """
     plt.figure()
-    for k, v in seqs.items():
+    for k, v in sorted(seqs.items()):
         end = T if T is not None else len(v)
         t = np.arange(start, end, 1.0)
 
