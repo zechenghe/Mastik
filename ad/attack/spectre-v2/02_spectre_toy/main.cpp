@@ -103,7 +103,7 @@ void branch_target_injection(const void *target_address) {
       //  printf("% 6llu\n", tat[i]);
       // else
       // printf("% 6llu", tat[i]);
-      }
+      //}
       break;
     }
   }
