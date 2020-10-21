@@ -146,7 +146,7 @@ void readMemoryByte(size_t malicious_x, uint8_t value[2], int score[2], int resu
     score[0] = results[j];
     value[1] = (uint8_t) k;
     score[1] = results[k];
-    printf("%d %d %d %d %d\n", tries, value[0], score[0], value[1], score[1]);
+    //printf("%d %d %d %d %d\n", tries, value[0], score[0], value[1], score[1]);
     //if (results[j] >= (2 * results[k] + 5) ||
     //   (results[j] == 4 && results[k] == 0))
     //  break; /* Clear success if best is > 2*runner-up + 5 or 2/0) */
