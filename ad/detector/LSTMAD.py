@@ -335,7 +335,7 @@ if __name__ == '__main__':
             split = (0.1, 0.2, 0.7)
         )
 
-        feature_list = [0,2,6,8,14,18,20,21,22]
+        feature_list = [2,6,8,14,18,20,21,22]
         training_normal_data=training_normal_data[:, feature_list]
         ref_normal_data=ref_normal_data[:, feature_list]
         val_normal_data=val_normal_data[:, feature_list]
