@@ -108,13 +108,13 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None):
     """
         Plot squences for visualization and debug.
         Args:
-            Seqs: a dictionary of sequences (key, value). Key is squence label,
-            value is the sequence to plot.
+            Seqs: a (ordered) dictionary of sequences (key, value). Key is
+            squence label, value is the sequence to plot.
             T: plot partial sequence, i.e., seq[:T]. If None, plot the
             whole sequence.
     """
     plt.figure()
-    for k, v in sorted(seqs.items()):
+    for k, v in seqs.items():
         end = T if T is not None else len(v)
         t = np.arange(start, end, 1.0)
 
