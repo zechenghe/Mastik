@@ -135,7 +135,7 @@ void readMemoryByte(size_t malicious_x, uint8_t value[2], int score[2], int resu
     /* Locate highest & second-highest results results tallies in j/k */
     j = k = -1;
     for (i = 0; i < 256; i++) {
-      if (j < 0 || results[i] >= results[j]) {
+      if (j < 0 || results [i] >= results[j]) {
         k = j;
         j = i;
       } else if (k < 0 || results[i] >= results[k]) {
@@ -159,7 +159,7 @@ int main(int argc,
   const char * * argv) {
   /* default for malicious_x */
   size_t malicious_x = (size_t)(secret - (char * ) array1);
-  int i, j, score[2], len = 1;
+  int i, j, score[2], len = 10;
   uint8_t value[2];
   static int results[256];
 
