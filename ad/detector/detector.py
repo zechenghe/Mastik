@@ -92,7 +92,8 @@ class Detector(nn.Module):
 
         RE = np.squeeze(
             np.sum(
-                np.maximum(truth_array - pred_array, 0)**2,     # Only consider the positive errors, i.e. truth > pred
+                # Only consider the positive errors, i.e. truth > pred
+                np.maximum(truth_array - pred_array, 0)**2,
                 axis=-1
                 )
             )
