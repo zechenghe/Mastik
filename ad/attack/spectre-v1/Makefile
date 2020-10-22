@@ -4,11 +4,11 @@ FLAGS = -static -std=c99 -g
 FLAGS44 = -static -std=c99 -msse2
 
 spectre: spectre.c
-	$(CC) $(FLAGS) spectre.c -o spectre_v1
+	$(CC) $(FLAGS) spectre.c -o spectrev1
 hello:   hello.c
 	$(CC) $(FLAGS) hello.c -o hello_static
 spectre44: spectre44.c
 	$(CC44) $(FLAGS44) spectre44.c -o spectre44_static
 
 clean:
-	rm spectre_v1 spectre_static spectre_static44
+	rm spectrev1 spectre_static spectre_static44
