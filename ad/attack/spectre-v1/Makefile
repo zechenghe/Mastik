@@ -11,4 +11,4 @@ spectre44: spectre44.c
 	$(CC44) $(FLAGS44) spectre44.c -o spectre44_static
 
 clean:
-	rm spectre_static spectre_static44
+	rm spectre_v1 spectre_static spectre_static44
