@@ -174,7 +174,7 @@ int main(int argc,
   FILE* resfile = fopen("spectre_result.csv", "w");
   FILE* timefile = fopen("spectre_time.csv", "w");
 
-  int offset = 0
+  int offset = 0;
   //printf("Reading %d bytes:\n", len);
   while (1) {
     offset += 1;
