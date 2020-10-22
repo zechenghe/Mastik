@@ -7,4 +7,4 @@ ssb: ssb.c
 	$(CC) -o spectrev4 ssb.c $(CFLAGS)
 
 clean:
-	rm ssb_*
+	rm spectrev4 ssb_*

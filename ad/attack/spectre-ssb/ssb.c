@@ -154,6 +154,7 @@ while(1){
     //        "%c: %s in %ld cycles (hitrate: %f%%)\n",
     //        secret_read_area[idx], results, cycles, 100*hits/(double)cycles);
   }
+  printf("\n");
 }
 //  printf("%s", out);
   pipeline_flush();
