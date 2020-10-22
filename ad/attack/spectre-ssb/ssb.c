@@ -131,7 +131,7 @@ int main(void) {
     long cycles = 0;
     int hits = 0;
     char results[33] = {0};
-    while(1){
+//    while(1){
     /* if we don't break the loop after some time when it doesn't work,
     in NO_INTERRUPTS mode with SMP disabled, the machine will lock up */
     while (hits < 32 && cycles < 1000000) {
@@ -146,7 +146,7 @@ int main(void) {
       pipeline_flush();
     }
     pipeline_flush();
-  }
+ //}
 #ifdef NO_INTERRUPTS
     asm volatile("sti");
 #endif
