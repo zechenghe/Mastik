@@ -114,7 +114,7 @@ int testfun(int idx) {
 }
 
 int main(void) {
-  char out[100000];
+  //char out[100000];
   //char *out_ = out;
   int idx;
 
