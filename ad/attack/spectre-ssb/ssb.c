@@ -131,7 +131,7 @@ int main(void) {
     long cycles = 0;
     int hits = 0;
     char results[33] = {0};
-    /* if we don't break the loop after some time when it doesn't work, 
+    /* if we don't break the loop after some time when it doesn't work,
     in NO_INTERRUPTS mode with SMP disabled, the machine will lock up */
     while (hits < 32 && cycles < 1000000) {
       pipeline_flush();
@@ -149,7 +149,7 @@ int main(void) {
     asm volatile("sti");
 #endif
     out_ += sprintf(out_,
-        "%c: %s in %ld cycles (hitrate: %f%%)\n",
+        "%c: %ld in %ld cycles (hitrate: %f%%)\n",
         secret_read_area[idx], results, cycles, 100*hits/(double)cycles);
   }
   printf("%s", out);
