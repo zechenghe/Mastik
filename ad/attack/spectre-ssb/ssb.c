@@ -115,7 +115,7 @@ int testfun(int idx) {
 
 int main(void) {
   char out[100000];
-  char *out_ = out;
+  //char *out_ = out;
   int idx;
 
 #ifdef NO_INTERRUPTS
@@ -149,7 +149,7 @@ while(1){
         asm volatile("sti");
     #endif
     printf("%c: %s in %ld cycles (hitrate: %f%%)\n",
-    secret_read_area[idx], results, cycles, 100*hits/(double)cycles)
+        secret_read_area[idx], results, cycles, 100*hits/(double)cycles);
     //    out_ += sprintf(out_,
     //        "%c: %s in %ld cycles (hitrate: %f%%)\n",
     //        secret_read_area[idx], results, cycles, 100*hits/(double)cycles);
