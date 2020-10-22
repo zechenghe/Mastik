@@ -90,7 +90,12 @@ class Detector(nn.Module):
             pred_array = pred.detach().numpy()
             truth_array = truth.detach().numpy()
 
-        RE = np.squeeze(np.sum((pred_array - truth_array)**2, axis=-1))
+        RE = np.squeeze(
+            np.sum(
+                np.maximum(truth_array - pred_array, 0)**2,     # Only consider the positive errors, i.e. truth > pred
+                axis=-1
+                )
+            )
 
         return RE, pred
 
