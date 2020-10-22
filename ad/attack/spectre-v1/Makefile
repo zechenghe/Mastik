@@ -4,7 +4,7 @@ FLAGS = -static -std=c99 -g
 FLAGS44 = -static -std=c99 -msse2
 
 spectre: spectre.c
-	$(CC) $(FLAGS) spectre.c -o spectre_static
+	$(CC) $(FLAGS) spectre.c -o spectre_v1
 hello:   hello.c
 	$(CC) $(FLAGS) hello.c -o hello_static
 spectre44: spectre44.c
