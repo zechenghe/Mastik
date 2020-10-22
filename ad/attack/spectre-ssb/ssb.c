@@ -122,7 +122,7 @@ int main(void) {
   if (mlockall(MCL_CURRENT|MCL_FUTURE) || iopl(3))
     err(1, "iopl(3)");
 #endif
-
+while(1){
   for (idx = 0; idx < 16; idx++) {
 #ifdef NO_INTERRUPTS
     asm volatile("cli");
@@ -131,7 +131,6 @@ int main(void) {
     long cycles = 0;
     int hits = 0;
     char results[33] = {0};
-//    while(1){
     /* if we don't break the loop after some time when it doesn't work,
     in NO_INTERRUPTS mode with SMP disabled, the machine will lock up */
     while (hits < 32 && cycles < 1000000) {
@@ -146,15 +145,17 @@ int main(void) {
       pipeline_flush();
     }
     pipeline_flush();
- //}
-#ifdef NO_INTERRUPTS
-    asm volatile("sti");
-#endif
-    out_ += sprintf(out_,
-        "%c: %s in %ld cycles (hitrate: %f%%)\n",
-        secret_read_area[idx], results, cycles, 100*hits/(double)cycles);
+    #ifdef NO_INTERRUPTS
+        asm volatile("sti");
+    #endif
+    printf("%c: %s in %ld cycles (hitrate: %f%%)\n",
+    secret_read_area[idx], results, cycles, 100*hits/(double)cycles)
+    //    out_ += sprintf(out_,
+    //        "%c: %s in %ld cycles (hitrate: %f%%)\n",
+    //        secret_read_area[idx], results, cycles, 100*hits/(double)cycles);
   }
-  printf("%s", out);
+}
+//  printf("%s", out);
   pipeline_flush();
   return 0;
 }
