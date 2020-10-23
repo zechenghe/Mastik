@@ -58,11 +58,10 @@ def calculate_eval_metrics(truth, pred, verbose=True):
         print('Recall: ', rec)
         print('F1: ', f1)
         print('---------------------------------------------------')
-    return tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr
+    return tp, fp, fn, tn, acc, prec, rec, f1, fpr, fnr
 
 def eval_metrics(truth, pred, anomaly_score=None, verbose=True):
-    print('----------------At threshold------------------')
-    tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr = calculate_eval_metrics(
+    tp, fp, fn, tn, acc, prec, rec, f1, fpr, fnr = calculate_eval_metrics(
         truth, pred, verbose=verbose)
     roc, roc_auc, thresholds = None, None, None
 
