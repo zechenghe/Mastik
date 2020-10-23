@@ -31,7 +31,7 @@ def normalize(data, mean, std):
     eps = 1e-8
     return (data - mean) / (std + eps)
 
-def eval_metrics(truth, pred, anomaly_score=None, verbose=True ):
+def eval_metrics(truth, pred, anomaly_score=None, verbose=True):
     eps = 1e-12
     tp = np.sum( np.multiply((pred == 1) , (truth == 1)), axis=0 , dtype=np.float32)
     fp = np.sum( np.multiply((pred == 1) , (truth == 0)), axis=0 , dtype=np.float32)
@@ -63,7 +63,13 @@ def eval_metrics(truth, pred, anomaly_score=None, verbose=True ):
     if anomaly_score is not None:
         fpr, tpr, thresholds = metrics.roc_curve(truth, anomaly_score)
         roc_auc = metrics.roc_auc_score(truth, anomaly_score)
+        fnr = 1 - tpr
         if verbose:
+            idx = np.argmin(np.abs(fpr-fnr))
+            print("Approx EER:", (fpr[idx]+fnr[idx])/2)
+            print("FPR at approx EER:", fpr[idx])
+            print("FNR at approx EER:", fnr[idx])
+            print("Threshold at approx EER:", thresholds[idx])
             print("ROC AUC: ", roc_auc)
 
     return tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds, roc_auc
