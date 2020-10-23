@@ -31,7 +31,7 @@ def normalize(data, mean, std):
     eps = 1e-8
     return (data - mean) / (std + eps)
 
-def eval_metrics(truth, pred, anomaly_score=None, verbose=True):
+def calculate_eval_metrics(truth, pred):
     eps = 1e-12
     tp = np.sum( np.multiply((pred == 1) , (truth == 1)), axis=0 , dtype=np.float32)
     fp = np.sum( np.multiply((pred == 1) , (truth == 0)), axis=0 , dtype=np.float32)
@@ -58,18 +58,26 @@ def eval_metrics(truth, pred, anomaly_score=None, verbose=True):
         print('Recall: ', rec)
         print('F1: ', f1)
         print('---------------------------------------------------')
+    return tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr
 
-    roc, roc_auc = None, None
+def eval_metrics(truth, pred, anomaly_score=None, verbose=True):
+    print('----------------At threshold------------------')
+    tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr = calculate_eval_metrics(truth, pred)
+    roc, roc_auc, thresholds = None, None, None
+
     if anomaly_score is not None:
         fpr, tpr, thresholds = metrics.roc_curve(truth, anomaly_score)
         roc_auc = metrics.roc_auc_score(truth, anomaly_score)
         fnr = 1 - tpr
         if verbose:
             idx = np.argmin(np.abs(fpr-fnr))
-            print("Approx EER:", (fpr[idx]+fnr[idx])/2)
-            print("FPR at approx EER:", fpr[idx])
-            print("FNR at approx EER:", fnr[idx])
-            print("Threshold at approx EER:", thresholds[idx])
+            eer_th = threshold[idx]
+            eer_pred = np.zeros(truth.shape)
+            eer_pred[anomaly_score > eer_th] = 1
+            print('\n')
+            print('----------------At EER------------------')
+            print("Threshold at approx EER:", eer_th)
+            calculate_eval_metrics(truth, eer_pred)
             print("ROC AUC: ", roc_auc)
 
     return tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds, roc_auc
