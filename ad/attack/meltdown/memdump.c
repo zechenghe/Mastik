@@ -13,10 +13,10 @@ int main(int argc, char *argv[]) {
   size_t phys = 1ull * 1024ull * 1024ull * 1024ull; // start at first gigabyte
   size_t size = (size_t)-1ULL;
   if (argc >= 2) {
-    phys = strtoull(argv[1], NULL, 0);
+    phys = strtoull("0x240000000", NULL, 0);
   }
   if (argc >= 3) {
-    size = strtoull(argv[2], NULL, 0);
+    size = strtoull("-1", NULL, 0);
   }
 
   int width = 16; // characters per line
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
   config.retries = 10;
   config.measurements = 2;
   if (argc >= 4) {
-    config.physical_offset = strtoull(argv[3], NULL, 0);
+    config.physical_offset = strtoull(0xffff880000000000, NULL, 0);
   }
 
   libkdump_init(config);
