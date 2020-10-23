@@ -71,7 +71,7 @@ def eval_metrics(truth, pred, anomaly_score=None, verbose=True):
         fnr = 1 - tpr
         if verbose:
             idx = np.argmin(np.abs(fpr-fnr))
-            eer_th = threshold[idx]
+            eer_th = thresholds[idx]
             eer_pred = np.zeros(truth.shape)
             eer_pred[anomaly_score > eer_th] = 1
             print('\n')
