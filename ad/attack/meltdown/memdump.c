@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
   config.retries = 10;
   config.measurements = 2;
   if (argc >= 4) {
-    config.physical_offset = strtoull(0xffff880000000000, NULL, 0);
+    config.physical_offset = strtoull("0xffff880000000000", NULL, 0);
   }
 
   libkdump_init(config);
