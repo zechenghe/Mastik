@@ -160,11 +160,11 @@ class Detector(nn.Module):
                         "Testing": accumulate_RED
                     },
                     title="p_value {p}".format(
-                        p=stats.ks_2samp(self.RED[0], accumulate_RED)[1]
+                        p=stats.ks_2samp(accumulate_RED, self.RED[0], alternative='less')[1]
                     )
                 )
 
-            p_values.append(stats.ks_2samp(self.RED[0], accumulate_RED)[1])
+            p_values.append(stats.ks_2samp(accumulate_RED, self.RED[0], alternative='less')[1])
             t += 1
 
         T_KS_end = time.clock()
