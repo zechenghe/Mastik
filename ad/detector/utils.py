@@ -75,7 +75,7 @@ def eval_metrics(truth, pred, anomaly_score=None, verbose=True):
             eer_pred = np.zeros(truth.shape)
             eer_pred[anomaly_score > eer_th] = 1
             print('\n')
-            print('----------------At EER------------------')
+            print('-------------------At EER---------------------')
             print("Threshold at approx EER:", eer_th)
             calculate_eval_metrics(truth, eer_pred, verbose=verbose)
             print("ROC AUC: ", roc_auc)
