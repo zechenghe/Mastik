@@ -108,8 +108,6 @@ def main(argv):
 	cmd = "rm -rf output"
 	os.popen(cmd)
 
-	print 
-
 	for event_name in event_name_list:
 		execute_cmd(event_name, "output")
 
