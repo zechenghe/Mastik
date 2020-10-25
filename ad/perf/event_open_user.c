@@ -7,7 +7,7 @@
 #include <linux/perf_event.h>
 #include <asm/unistd.h>
 
-#define EVENT_NR 27
+#define EVENT_NR 31
 #define EVENT_CUR 4
 
 uint64_t INTERVAL;
@@ -104,17 +104,17 @@ void event_initialize() {
 	event_monitor[26].event_type = PERF_TYPE_HW_CACHE;
 	event_monitor[26].event_config = (PERF_COUNT_HW_CACHE_NODE)|(PERF_COUNT_HW_CACHE_OP_PREFETCH << 8)|(PERF_COUNT_HW_CACHE_RESULT_MISS << 16);
 
-//	event_monitor[27].event_type = PERF_TYPE_HARDWARE;
-//	event_monitor[27].event_config = PERF_COUNT_HW_CPU_CYCLES;
+	event_monitor[27].event_type = PERF_TYPE_HARDWARE;
+	event_monitor[27].event_config = PERF_COUNT_HW_CPU_CYCLES;
 
-//	event_monitor[28].event_type = PERF_TYPE_HARDWARE;
-//	event_monitor[28].event_config = PERF_COUNT_HW_BRANCH_INSTRUCTIONS;
+	event_monitor[28].event_type = PERF_TYPE_HARDWARE;
+	event_monitor[28].event_config = PERF_COUNT_HW_BRANCH_INSTRUCTIONS;
 
-//	event_monitor[29].event_type = PERF_TYPE_HARDWARE;
-//	event_monitor[29].event_config = PERF_COUNT_HW_BRANCH_MISSES;
+	event_monitor[29].event_type = PERF_TYPE_HARDWARE;
+	event_monitor[29].event_config = PERF_COUNT_HW_BRANCH_MISSES;
 
-//	event_monitor[30].event_type = PERF_TYPE_SOFTWARE;
-//	event_monitor[30].event_config = PERF_COUNT_SW_PAGE_FAULTS;
+	event_monitor[30].event_type = PERF_TYPE_SOFTWARE;
+	event_monitor[30].event_config = PERF_COUNT_SW_PAGE_FAULTS;
 
 };
 
