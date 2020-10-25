@@ -7,7 +7,7 @@
 #include <linux/perf_event.h>
 #include <asm/unistd.h>
 
-#define EVENT_NR 27
+#define EVENT_NR 30
 #define EVENT_CUR 4
 
 uint64_t INTERVAL;
