@@ -78,32 +78,40 @@ if __name__ == '__main__':
     monitor_status = monitor_process.wait()
 
     # Ref and val data collection
-    cmd = monitor_cmd_fn(save_data_name='ref_and_val.csv')
+    cmd = monitor_cmd_fn(save_data_name='ref_and_val_normal.csv')
     print(cmd)
     monitor_process = subprocess.Popen(cmd.split())
     monitor_status = monitor_process.wait()
 
-    # Ref and val data collection
+    # Test data collection
     cmd = monitor_cmd_fn(save_data_name='test_normal.csv')
     print(cmd)
     monitor_process = subprocess.Popen(cmd.split())
     monitor_status = monitor_process.wait()
 
-    # Test normal with gpg running
-    gpg_process = subprocess.Popen(gpg_command.split())
-    time.sleep(10)
-    cmd = monitor_cmd_fn(save_data_name='test_normal_with_gpg.csv')
-    monitor_process = subprocess.Popen(cmd.split())
-    monitor_status = monitor_process.wait()
-    gpg_process.terminate()
+    # With gpg running
+    for split in ['train', 'ref_and_val', 'test']:
+        gpg_process = subprocess.Popen(gpg_command.split())
+        time.sleep(10)
+        cmd = monitor_cmd_fn(save_data_name='{split}_normal_with_gpg.csv'.format(
+            split=split,
+            )
+        )
+        monitor_process = subprocess.Popen(cmd.split())
+        monitor_status = monitor_process.wait()
+        gpg_process.terminate()
 
-    # Test normal with spec running
-    spec_process = subprocess.Popen(spec_command.split())
-    cmd = monitor_cmd_fn(save_data_name='test_normal_with_spec.csv')
-    monitor_process = subprocess.Popen(cmd.split())
-    monitor_status = monitor_process.wait()
-    spec_process.terminate()
-    clean_spec()
+    # With SPEC running
+    for split in ['train', 'ref_and_val', 'test']:
+        spec_process = subprocess.Popen(spec_command.split())
+        cmd = monitor_cmd_fn(save_data_name='{split}_normal_with_spec.csv'.format(
+            split=split,
+            )
+        )
+        monitor_process = subprocess.Popen(cmd.split())
+        monitor_status = monitor_process.wait()
+        spec_process.terminate()
+        clean_spec()
 
     for k in attacks.keys():
         attack_process = subprocess.Popen(attacks[k].split())

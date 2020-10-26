@@ -226,7 +226,7 @@ def create_parser():
     parser.add_argument('--training', dest='training', action='store_true', help='Flag for training')
     parser.add_argument('--testing', dest='training', action='store_false', help='Flag for testing')
     parser.set_defaults(training=True)
-    
+
     parser.add_argument('--finetune', dest='finetune', action='store_true', help='Flag for fine tune')
     parser.add_argument('--nofinetune', dest='finetune', action='store_false', help='Flag for fine tune')
     parser.set_defaults(finetune=False)
@@ -259,7 +259,7 @@ def create_parser():
     parser.add_argument('--data_dir', type = str, default = "data/", help='Data directory')
     parser.add_argument('--normal_data_name_train', type = str, default = "train_normal.npy", help='The file name of training normal data')
     parser.add_argument('--normal_data_name_test', type = str, default = "test_normal.npy", help='The file name of testing normal data')
-    parser.add_argument('--normal_data_name_ref_and_val', type = str, default = "ref_and_val.npy", help='The file name of testing normal data')
+    parser.add_argument('--normal_data_name_ref_and_val', type = str, default = "ref_and_val_normal.npy", help='The file name of testing normal data')
     parser.add_argument('--abnormal_data_name', type = str, default = "test_abnormal.npy", help='The file name of abnormal data')
 
     # Save and load model. Save after training. Load before testing.
