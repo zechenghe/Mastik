@@ -226,6 +226,10 @@ def create_parser():
     parser.add_argument('--training', dest='training', action='store_true', help='Flag for training')
     parser.add_argument('--testing', dest='training', action='store_false', help='Flag for testing')
     parser.set_defaults(training=True)
+    
+    parser.add_argument('--finetune', dest='finetune', action='store_true', help='Flag for fine tune')
+    parser.add_argument('--nofinetune', dest='finetune', action='store_false', help='Flag for fine tune')
+    parser.set_defaults(finetune=False)
 
     # Real data (private) or dummy data?
     parser.add_argument('--dummy', dest='dummydata', action='store_true', help='If dummy data is used instead of an input file')
