@@ -71,7 +71,7 @@ def train(
 
     if finetune:
         AnomalyDetector = torch.load(args.load_model_dir + args.load_model_name)
-        AnomalyDetector.eval()
+        AnomalyDetector.train()
 
     training_normal_data = AnomalyDetector.normalize(training_normal_data)
     val_normal_data = AnomalyDetector.normalize(val_normal_data)
