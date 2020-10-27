@@ -39,7 +39,7 @@ class Detector(nn.Module):
         # Parameters for collecting reference RED
         self.RED_collection_len = None
         self.RED_points = None
-        self.RED = None
+        self.RED = []
 
         self.stat_test = stats.ks_2samp
         self.th = th
@@ -127,7 +127,7 @@ class Detector(nn.Module):
         #    np.reshape(np.array(ref_RED), (-1)),
         #    size=[self.RED_points]
         #    )]
-        self.RED = ref_RED[:]
+        self.RED += ref_RED[:]
 
 
     def predict(self, seq, gpu, debug=False):
@@ -153,18 +153,25 @@ class Detector(nn.Module):
             for l in range(self.RED_collection_len):
                 accumulate_RED += RE[accumulate_idx + l]
 
+            max_p = 0.0
+            for idx, modality in enumerate(self.RED):
+                p = stats.ks_2samp(accumulate_RED, modality, alternative='less')[1]
+                if p > max_p:
+                    max_p = p
+                    max_p_idx = idx
+
             if t == 0 and debug:
                 utils.plot_cdf(
                     {
-                        "Reference": self.RED[0],
+                        "Reference": self.RED[max_p_idx],
                         "Testing": accumulate_RED
                     },
                     title="p_value {p}".format(
-                        p=stats.ks_2samp(accumulate_RED, self.RED[0], alternative='less')[1]
+                        p=max_p
                     )
                 )
 
-            p_values.append(stats.ks_2samp(accumulate_RED, self.RED[0], alternative='less')[1])
+            p_values.append(max_p)
             t += 1
 
         T_KS_end = time.clock()
