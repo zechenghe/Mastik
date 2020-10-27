@@ -156,7 +156,7 @@ class Detector(nn.Module):
 
             max_p = 0.0
             for idx, modality in enumerate(self.RED):
-                p = stats.ks_2samp(accumulate_RED, modality, alternative='less')[1]
+                p = stats.ks_2samp(accumulate_RED, modality)[1]
                 if p > max_p:
                     max_p = p
                     max_p_idx = idx
