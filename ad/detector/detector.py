@@ -93,7 +93,8 @@ class Detector(nn.Module):
         RE = np.squeeze(
             np.sum(
                 # Only consider the positive errors, i.e. truth > pred
-                np.maximum(truth_array - pred_array, 0)**2,
+                #np.maximum(truth_array - pred_array, 0)**2,
+                (truth_array - pred_array)**2,
                 axis=-1
                 )
             )
@@ -111,7 +112,7 @@ class Detector(nn.Module):
 
         t = 0
         ref_RED = []
-        while t + self.RED_collection_len * self.RED_points < len(RE):
+        while (t + self.RED_collection_len * self.RED_points < len(RE)) and len(ref_RED) < 5:
 
             accumulate_idx = np.array(range(t, t + self.RED_collection_len * self.RED_points, self.RED_collection_len))
             accumulate_RED = np.zeros(self.RED_points)
