@@ -1,6 +1,6 @@
 server:
-sudo ffserver -f doc/ffserver.conf
-sudo ffmpeg -stream_loop -1 -r 25 -i ~/test.mpg http://localhost:8090/feed1.ffm
+sudo taskset 0x1 ffserver -f doc/ffserver.conf
+sudo taskset 0x1 ffmpeg -stream_loop -1 -r 25 -i ~/test.mpg http://localhost:8090/feed1.ffm
 
 client:
 http://nebula1-ee.princeton.edu:8090/feed1.ffm
