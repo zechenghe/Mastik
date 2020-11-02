@@ -392,7 +392,7 @@ if __name__ == '__main__':
             # Evaluate
             if args.allanomalyscores:
                 for f in os.listdir(args.data_dir):
-                    if f.endswith('.npy'):
+                    if f.endswith('.npy') and not (f.startswith("anomaly_score_")):
                         _, data, _, = loaddata.load_data_split(
                             data_dir = args.data_dir,
                             file_name = f,
@@ -401,6 +401,17 @@ if __name__ == '__main__':
                         data = data[:, feature_list]
                         anomaly_scores = get_anomaly_score(data, args)
                         print("anomaly_scores.shape", anomaly_scores.shape)
+                        print(
+                            "Mean: ", np.mean(anomaly_scores),
+                            "Median: ", np.median(anomaly_scores),
+                            "Min: ", np.min(anomaly_scores),
+                            "Max: ", np.max(anomaly_scores),
+                            "Std: ", np.std(anomaly_scores),
+                            )
+                        np.save(
+                            file=os.path.join(args.data_dir, "anomaly_score_" + f),
+                            arr=anomaly_scores
+                        )
             else:
                 _, testing_normal_data, _, = loaddata.load_data_split(
                     data_dir = args.data_dir,
