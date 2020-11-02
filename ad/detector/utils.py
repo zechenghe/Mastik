@@ -217,6 +217,8 @@ def read_csv_file(filename, split=' ', remove_end=True):
         data = np.array(data, dtype=np.float32)
     return data
 
+def p_to_anomaly_score(p_value):
+    return -np.log10(p_value+1e-300)
 
 def create_parser():
     import argparse
@@ -230,6 +232,9 @@ def create_parser():
     parser.add_argument('--finetune', dest='finetune', action='store_true', help='Flag for fine tune')
     parser.add_argument('--nofinetune', dest='finetune', action='store_false', help='Flag for fine tune')
     parser.set_defaults(finetune=False)
+
+    parser.add_argument('--allanomalyscores', dest='allanomalyscores', action='store_true', help='Eval anomaly scores for all scenarios')
+    parser.set_defaults(allanomalyscores=False)
 
     # Real data (private) or dummy data?
     parser.add_argument('--dummy', dest='dummydata', action='store_true', help='If dummy data is used instead of an input file')

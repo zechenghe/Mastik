@@ -312,6 +312,32 @@ def eval_detector(
 
     return roc_auc
 
+def get_anomaly_score(
+    data,
+    args,
+    ):
+    load_model_dir = args.load_model_dir
+    load_model_name = args.load_model_name
+    Pvalue_th = args.Pvalue_th
+
+    gpu = args.gpu
+
+    AnomalyDetector = torch.load(load_model_dir + load_model_name)
+    AnomalyDetector.eval()
+
+    data = torch.tensor(AnomalyDetector.normalize(data))
+
+    if gpu:
+        AnomalyDetector = AnomalyDetector.cuda()
+        data = data.cuda()
+
+    pred, p_values = AnomalyDetector.predict(
+        data,
+        gpu,
+        debug=args.debug
+        )
+    return utils.p_to_anomaly_score(p_values)
+
 if __name__ == '__main__':
     import argparse
     import sys
@@ -358,31 +384,41 @@ if __name__ == '__main__':
                 finetune=args.finetune,
             )
         else:
-            _, testing_normal_data, _, = loaddata.load_data_split(
-                data_dir = args.data_dir,
-                file_name = args.normal_data_name_test,
-                split = (0.1, 0.8, 0.1)
-            )
+            if args.allanomalyscores:
+                for f in os.listdir():
+                    if f.endswith('.npy'):
+                        _, data, _, = loaddata.load_data_split(
+                            data_dir = args.data_dir,
+                            file_name = f,
+                            split = (0.1, 0.8, 0.1)
+                        )
+                        print("Filename:", f, "shape:", data.shape)
+            else:
+                _, testing_normal_data, _, = loaddata.load_data_split(
+                    data_dir = args.data_dir,
+                    file_name = args.normal_data_name_test,
+                    split = (0.1, 0.8, 0.1)
+                )
 
-            _, testing_abnormal_data, _, = loaddata.load_data_split(
-                data_dir = args.data_dir,
-                file_name = args.abnormal_data_name,
-                split = (0.1, 0.8, 0.1)
-            )
+                _, testing_abnormal_data, _, = loaddata.load_data_split(
+                    data_dir = args.data_dir,
+                    file_name = args.abnormal_data_name,
+                    split = (0.1, 0.8, 0.1)
+                )
 
-            testing_normal_data=testing_normal_data[:, feature_list]
-            testing_abnormal_data=testing_abnormal_data[:, feature_list]
-            print("testing_normal_data.shape", testing_normal_data.shape)
-            print("testing_abnormal_data.shape", testing_abnormal_data.shape)
+                testing_normal_data=testing_normal_data[:, feature_list]
+                testing_abnormal_data=testing_abnormal_data[:, feature_list]
+                print("testing_normal_data.shape", testing_normal_data.shape)
+                print("testing_abnormal_data.shape", testing_abnormal_data.shape)
 
-            eval_detector(
-                testing_normal_data=testing_normal_data,
-                testing_abnormal_data=testing_abnormal_data,
-                args=args,
-                training_normal_data=training_normal_data,      # For debug only
-                val_normal_data=val_normal_data,                # For debug only
-                ref_normal_data=ref_normal_data,                # For debug only
-            )
+                eval_detector(
+                    testing_normal_data=testing_normal_data,
+                    testing_abnormal_data=testing_abnormal_data,
+                    args=args,
+                    training_normal_data=training_normal_data,      # For debug only
+                    val_normal_data=val_normal_data,                # For debug only
+                    ref_normal_data=ref_normal_data,                # For debug only
+                )
 
     except SystemExit:
         sys.exit(0)
