@@ -400,7 +400,10 @@ if __name__ == '__main__':
                         )
                         data = data[:, feature_list]
                         anomaly_scores = get_anomaly_score(data, args)
-                        print("anomaly_scores.shape", anomaly_scores.shape)
+                        color = (utils.bcolors.WARNING.OKGREEN
+                            if 'abnormal' not in f else utils.bcolors.WARNING)
+
+                        print(color+"anomaly_scores.shape", anomaly_scores.shape, bcolors.ENDC)
                         print(
                             "Mean: ", np.mean(anomaly_scores),
                             "Median: ", np.median(anomaly_scores),
