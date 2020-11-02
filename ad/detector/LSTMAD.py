@@ -325,7 +325,6 @@ def get_anomaly_score(
     AnomalyDetector = torch.load(load_model_dir + load_model_name)
     AnomalyDetector.eval()
 
-    print("len(AnomalyDetector.RED)", len(AnomalyDetector.RED))
     data = torch.tensor(AnomalyDetector.normalize(data))
 
     if gpu:
@@ -392,7 +391,7 @@ if __name__ == '__main__':
         else:
             # Evaluate
             if args.allanomalyscores:
-                for f in os.listdir(args.data_dir):
+                for f in sorted(list(os.listdir(args.data_dir))):
                     if f.endswith('.npy') and not (f.startswith("anomaly_score_")):
                         _, data, _, = loaddata.load_data_split(
                             data_dir = args.data_dir,
