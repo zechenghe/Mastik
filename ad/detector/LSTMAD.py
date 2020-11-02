@@ -403,7 +403,7 @@ if __name__ == '__main__':
                         color = (utils.bcolors.OKGREEN
                             if 'abnormal' not in f else utils.bcolors.WARNING)
 
-                        print(color+"anomaly_scores.shape", anomaly_scores.shape, bcolors.ENDC)
+                        print(color+"anomaly_scores.shape", anomaly_scores.shape, utils.bcolors.ENDC)
                         print(
                             "Mean: ", np.mean(anomaly_scores),
                             "Median: ", np.median(anomaly_scores),
