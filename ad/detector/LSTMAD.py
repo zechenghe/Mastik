@@ -354,26 +354,30 @@ if __name__ == '__main__':
         if args.debug:
             print(args)
 
-        training_normal_data = loaddata.load_data_all(
-            data_dir = args.data_dir,
-            file_name = args.normal_data_name_train,
-        )
-
-        _, ref_normal_data, val_normal_data = loaddata.load_data_split(
-            data_dir = args.data_dir,
-            file_name = args.normal_data_name_ref_and_val,
-            # The first few readings could be unstable, remove it.
-            split = (0.1, 0.2, 0.7)
-        )
-
         feature_list = [0,1,2,3,6,8,14,18,20,28,30]#14,18]#,20,21,22]
-        training_normal_data=training_normal_data[:, feature_list]
-        ref_normal_data=ref_normal_data[:, feature_list]
-        val_normal_data=val_normal_data[:, feature_list]
 
-        print("training_normal_data.shape", training_normal_data.shape)
-        print("ref_normal_data.shape", ref_normal_data.shape)
-        print("val_normal_data.shape", val_normal_data.shape)
+        # Read train/ref/val data for debug if not eval a specific scenario
+        if not args.allanomalyscores:
+            training_normal_data = loaddata.load_data_all(
+                data_dir = args.data_dir,
+                file_name = args.normal_data_name_train,
+            )
+
+            _, ref_normal_data, val_normal_data = loaddata.load_data_split(
+                data_dir = args.data_dir,
+                file_name = args.normal_data_name_ref_and_val,
+                # The first few readings could be unstable, remove it.
+                split = (0.1, 0.2, 0.7)
+            )
+
+            training_normal_data=training_normal_data[:, feature_list]
+            ref_normal_data=ref_normal_data[:, feature_list]
+            val_normal_data=val_normal_data[:, feature_list]
+
+            print("training_normal_data.shape", training_normal_data.shape)
+            print("ref_normal_data.shape", ref_normal_data.shape)
+            print("val_normal_data.shape", val_normal_data.shape)
+
 
         if args.training:
             # Train
@@ -395,7 +399,8 @@ if __name__ == '__main__':
                             split = (0.1, 0.8, 0.1)
                         )
                         data = data[:, feature_list]
-                        print("Eval file:", f, "shape:", data.shape)
+                    anomaly_scores = get_anomaly_score(data, args)
+                    print("anomaly_scores.shape", anomaly_scores.shape)
             else:
                 _, testing_normal_data, _, = loaddata.load_data_split(
                     data_dir = args.data_dir,
