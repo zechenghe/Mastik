@@ -376,6 +376,7 @@ if __name__ == '__main__':
         print("val_normal_data.shape", val_normal_data.shape)
 
         if args.training:
+            # Train
             train(
                 training_normal_data=training_normal_data,
                 ref_normal_data=ref_normal_data,
@@ -384,15 +385,17 @@ if __name__ == '__main__':
                 finetune=args.finetune,
             )
         else:
+            # Evaluate
             if args.allanomalyscores:
-                for f in os.listdir():
+                for f in os.listdir(args.data_dir):
                     if f.endswith('.npy'):
                         _, data, _, = loaddata.load_data_split(
                             data_dir = args.data_dir,
                             file_name = f,
                             split = (0.1, 0.8, 0.1)
                         )
-                        print("Filename:", f, "shape:", data.shape)
+                        data = data[:, feature_list]
+                        print("Eval file:", f, "shape:", data.shape)
             else:
                 _, testing_normal_data, _, = loaddata.load_data_split(
                     data_dir = args.data_dir,
