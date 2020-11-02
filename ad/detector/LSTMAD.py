@@ -403,13 +403,14 @@ if __name__ == '__main__':
                         color = (utils.bcolors.OKGREEN
                             if 'abnormal' not in f else utils.bcolors.WARNING)
 
-                        print(color+"anomaly_scores.shape", anomaly_scores.shape, utils.bcolors.ENDC)
-                        print(
+                        print("Scores.shape", anomaly_scores.shape)
+                        print(color,
                             "Mean: ", np.mean(anomaly_scores),
                             "Median: ", np.median(anomaly_scores),
                             "Min: ", np.min(anomaly_scores),
                             "Max: ", np.max(anomaly_scores),
                             "Std: ", np.std(anomaly_scores),
+                            utils.bcolors.ENDC
                             )
                         np.save(
                             file=os.path.join(args.data_dir, "anomaly_score_" + f),
