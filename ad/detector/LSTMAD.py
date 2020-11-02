@@ -325,6 +325,7 @@ def get_anomaly_score(
     AnomalyDetector = torch.load(load_model_dir + load_model_name)
     AnomalyDetector.eval()
 
+    print("len(AnomalyDetector.RED)", len(AnomalyDetector.RED))
     data = torch.tensor(AnomalyDetector.normalize(data))
 
     if gpu:
