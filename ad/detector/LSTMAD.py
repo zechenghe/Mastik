@@ -400,7 +400,7 @@ if __name__ == '__main__':
                         )
                         data = data[:, feature_list]
                         anomaly_scores = get_anomaly_score(data, args)
-                        color = (utils.bcolors.WARNING.OKGREEN
+                        color = (utils.bcolors.OKGREEN
                             if 'abnormal' not in f else utils.bcolors.WARNING)
 
                         print(color+"anomaly_scores.shape", anomaly_scores.shape, bcolors.ENDC)
