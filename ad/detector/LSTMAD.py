@@ -156,7 +156,8 @@ def train(
         RED_collection_len=RED_collection_len,
         RED_points=RED_points
         )
-    AnomalyDetector.collect_ref_RED(ref_normal_data, gpu)
+    AnomalyDetector.add_reference_sequence(ref_normal_data)
+    AnomalyDetector.update_ref_RED(gpu)
 
     if not os.path.exists(save_model_dir):
         os.makedirs(save_model_dir)

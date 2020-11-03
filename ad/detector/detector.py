@@ -37,6 +37,7 @@ class Detector(nn.Module):
         self.hidden2pred = nn.Linear(hidden_size, input_size)
 
         # Parameters for collecting reference RED
+        self.reference_sequences = []
         self.RED_collection_len = None
         self.RED_points = None
         self.RED = []
@@ -63,6 +64,8 @@ class Detector(nn.Module):
 
         return (data - self.mean) / (self.std + self.eps)
 
+    def add_reference_sequence(self, data):
+        self.reference_sequences.append(data)
 
     def _get_reconstruction_error(self, seq, gpu=False):
         """
@@ -100,6 +103,12 @@ class Detector(nn.Module):
             )
 
         return RE, pred
+
+    def update_ref_RED(self, gpu):
+        # Update RED if the model is fine-tuned
+        self.RED = []
+        for seq in self.reference_sequences:
+            self.collect_ref_RED(seq, gpu)
 
 
     def collect_ref_RED(self, seq, gpu):
