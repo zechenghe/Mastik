@@ -412,6 +412,14 @@ if __name__ == '__main__':
                             "Std: ", np.std(anomaly_scores),
                             utils.bcolors.ENDC
                             )
+
+                        th = utils.p_to_anomaly_score(args.Pvalue_th)
+                        print(color,
+                            "Pred normal:",  np.sum(anomaly_scores<=th) / float(len(anomaly_scores)),
+                            "Pred abnormal:", np.sum(anomaly_scores>th) / float(len(anomaly_scores)),
+                            utils.bcolors.ENDC
+                        )
+
                         np.save(
                             file=os.path.join(args.data_dir, "anomaly_score_" + f),
                             arr=anomaly_scores
