@@ -63,6 +63,7 @@ if __name__ == '__main__':
         attack_process.terminate()
         schedule[k]['end'] = int(time.time()*1000000)
 
+
         time.sleep(random.randint(1,10))
 
     monitor_process.wait()
@@ -81,4 +82,4 @@ if __name__ == '__main__':
     p_status = p.wait()
 
     print(schedule)
-    json.dump(schedule, os.path.join(save_data_dir, 'schedule'))
+    json.dump(dict(schedule), os.path.join(save_data_dir, 'schedule'))
