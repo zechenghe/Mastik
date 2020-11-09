@@ -6,5 +6,5 @@
 int main(void) {
     struct timeval t;
     gettimeofday(&t, NULL);
-    printf("%f \n", t.tv_sec + t.tv_usec);
+    printf("%f \n", t.tv_sec + float(t.tv_usec));
 }
