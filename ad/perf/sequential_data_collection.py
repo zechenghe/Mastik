@@ -56,12 +56,12 @@ if __name__ == '__main__':
 
     for k in attacks.keys():
         attack_process = subprocess.Popen(attacks[k].split())
-        schedule[k]['start'] = int(time.time()*1000000
+        schedule[k]['start'] = int(time.time()*1000000)
 
         # To make the attack actually run
         time.sleep(2)
         attack_process.terminate()
-        schedule[k]['end'] = int(time.time()*1000000
+        schedule[k]['end'] = int(time.time()*1000000)
 
         time.sleep(random.randint(1,10))
 
