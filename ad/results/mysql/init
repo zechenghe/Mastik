@@ -1,0 +1,199 @@
+zechengh@nebula1:~/Mastik/ad/detector$ python3 LSTMAD.py --testing --allanomalyscores --data_dir ../perf/data/mysql_same_core/10000us/ --load_model_name AnomalyDetectorMysql.ckpt  --gpu --Pvalue_th 0.01
+Reading Data: ../perf/data/mysql_same_core/10000us/ref_and_val_normal.npy
+Prediction takes  0.1209340000000001 seconds
+Statistical test takes  10.503876000000002 seconds
+Scores.shape (7499,)
+ Mean:  0.09922091185668744 Median:  0.04446078086542851 Min:  -0.0 Max:  0.7630690803358888 Std:  0.13353146849659162
+ Pred normal: 1.0 Pred abnormal: 0.0
+Reading Data: ../perf/data/mysql_same_core/10000us/ref_and_val_normal_with_gpg.npy
+Prediction takes  0.12046499999999938 seconds
+Statistical test takes  13.184179 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/ref_and_val_normal_with_spec.npy
+Prediction takes  0.11906899999999965 seconds
+Statistical test takes  13.088731 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_ff.npy
+Prediction takes  0.12010799999999477 seconds
+Statistical test takes  12.16749 seconds
+Scores.shape (7499,)
+ Mean:  193.03804754510256 Median:  299.07574615215736 Min:  8.611668558745583 Max:  299.07574615215736 Std:  136.86060454174142
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_ff_with_gpg.npy
+Prediction takes  0.1303350000000023 seconds
+Statistical test takes  13.216893999999996 seconds
+Scores.shape (7499,)
+ Mean:  295.9508160167137 Median:  296.1307384678196 Min:  293.4322615461356 Max:  296.1307384678196 Std:  0.6731600802110734
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_ff_with_spec.npy
+Prediction takes  0.12027499999999236 seconds
+Statistical test takes  12.689509000000001 seconds
+Scores.shape (7499,)
+ Mean:  249.90946137981226 Median:  296.1307384678196 Min:  33.22779076725922 Max:  299.07574615215736 Std:  85.03269097150249
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_fr.npy
+Prediction takes  0.11863599999999508 seconds
+Statistical test takes  13.100472999999994 seconds
+Scores.shape (7499,)
+ Mean:  296.157050711432 Median:  296.1307384678196 Min:  296.1307384678196 Max:  299.07574615215736 Std:  0.2771234841496605
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_fr_with_gpg.npy
+Prediction takes  0.11969799999999964 seconds
+Statistical test takes  13.109070000000003 seconds
+Scores.shape (7499,)
+ Mean:  296.13073846781947 Median:  296.1307384678196 Min:  296.1307384678196 Max:  296.1307384678196 Std:  1.1368683772161603e-13
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_fr_with_spec.npy
+Prediction takes  0.11908900000000244 seconds
+Statistical test takes  13.097394000000008 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_l1pp.npy
+Prediction takes  0.11882199999999443 seconds
+Statistical test takes  13.113713999999987 seconds
+Scores.shape (7499,)
+ Mean:  296.8812264908585 Median:  296.1307384678196 Min:  296.1307384678196 Max:  299.07574615215736 Std:  1.28333967527243
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_l1pp_with_gpg.npy
+Prediction takes  0.11770699999999579 seconds
+Statistical test takes  13.116556000000003 seconds
+Scores.shape (7499,)
+ Mean:  296.13073846781947 Median:  296.1307384678196 Min:  296.1307384678196 Max:  296.1307384678196 Std:  1.1368683772161603e-13
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_l1pp_with_spec.npy
+Prediction takes  0.1180259999999862 seconds
+Statistical test takes  13.110576000000009 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_l3pp.npy
+Prediction takes  0.11988500000001068 seconds
+Statistical test takes  13.112027000000012 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_l3pp_with_gpg.npy
+Prediction takes  0.11765399999998749 seconds
+Statistical test takes  13.104770000000002 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_l3pp_with_spec.npy
+Prediction takes  0.11834399999997913 seconds
+Statistical test takes  13.101699999999994 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_spectrev1.npy
+Prediction takes  0.11989800000000628 seconds
+Statistical test takes  13.097192000000007 seconds
+Scores.shape (7499,)
+ Mean:  296.13073846781947 Median:  296.1307384678196 Min:  296.1307384678196 Max:  296.1307384678196 Std:  1.1368683772161603e-13
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_spectrev1_with_gpg.npy
+Prediction takes  0.11823700000002191 seconds
+Statistical test takes  13.106045000000023 seconds
+Scores.shape (7499,)
+ Mean:  296.713927747889 Median:  296.1307384678196 Min:  296.1307384678196 Max:  299.07574615215736 Std:  1.173621393312262
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_spectrev1_with_spec.npy
+Prediction takes  0.11835200000001578 seconds
+Statistical test takes  13.08586200000002 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_spectrev2.npy
+Prediction takes  0.11878400000000511 seconds
+Statistical test takes  13.089308999999986 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_spectrev2_with_gpg.npy
+Prediction takes  0.1193630000000212 seconds
+Statistical test takes  13.104353000000032 seconds
+Scores.shape (7499,)
+ Mean:  296.2697613669068 Median:  296.1307384678196 Min:  296.1307384678196 Max:  299.07574615215736 Std:  0.6245767684122949
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_spectrev2_with_spec.npy
+Prediction takes  0.11859299999997575 seconds
+Statistical test takes  13.100022999999965 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_spectrev3.npy
+Prediction takes  0.11798399999997855 seconds
+Statistical test takes  13.09514200000001 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_spectrev3_with_gpg.npy
+Prediction takes  0.11980399999998781 seconds
+Statistical test takes  13.084941000000015 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_spectrev3_with_spec.npy
+Prediction takes  0.11915199999998549 seconds
+Statistical test takes  13.111843000000022 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_spectrev4.npy
+Prediction takes  0.11822399999999789 seconds
+Statistical test takes  13.114128999999991 seconds
+Scores.shape (7499,)
+ Mean:  296.4009298649157 Median:  296.1307384678196 Min:  296.1307384678196 Max:  299.07574615215736 Std:  0.8501249023675699
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_spectrev4_with_gpg.npy
+Prediction takes  0.11932799999999588 seconds
+Statistical test takes  13.110540999999955 seconds
+Scores.shape (7499,)
+ Mean:  296.13073846781947 Median:  296.1307384678196 Min:  296.1307384678196 Max:  296.1307384678196 Std:  1.1368683772161603e-13
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_abnormal_spectrev4_with_spec.npy
+Prediction takes  0.11930500000005395 seconds
+Statistical test takes  13.085824000000002 seconds
+Scores.shape (7499,)
+ Mean:  298.5718863229794 Median:  299.07574615215736 Min:  296.1307384678196 Max:  299.07574615215736 Std:  1.1090520011698877
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_normal.npy
+Prediction takes  0.11820399999999154 seconds
+Statistical test takes  10.384428000000014 seconds
+Scores.shape (7499,)
+ Mean:  0.20905264517680244 Median:  0.11326312935037645 Min:  0.0001128506289728534 Max:  1.3053718871631226 Std:  0.2387783989201826
+ Pred normal: 1.0 Pred abnormal: 0.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_normal_with_gpg.npy
+Prediction takes  0.11750200000000177 seconds
+Statistical test takes  13.098574000000042 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/test_normal_with_spec.npy
+Prediction takes  0.11997700000000577 seconds
+Statistical test takes  13.094479999999976 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/train_normal.npy
+Prediction takes  0.11916899999999941 seconds
+Statistical test takes  10.392753999999968 seconds
+Scores.shape (7499,)
+ Mean:  0.22368192378731316 Median:  0.11326312935037645 Min:  0.0001128506289728534 Max:  1.6185934339383623 Std:  0.27469127437467994
+ Pred normal: 1.0 Pred abnormal: 0.0
+Reading Data: ../perf/data/mysql_same_core/10000us/train_normal_with_gpg.npy
+Prediction takes  0.11870199999998476 seconds
+Statistical test takes  13.111879999999985 seconds
+Scores.shape (7499,)
+ Mean:  298.5030707719811 Median:  299.07574615215736 Min:  293.4322615461356 Max:  299.07574615215736 Std:  1.54010879749357
+ Pred normal: 0.0 Pred abnormal: 1.0
+Reading Data: ../perf/data/mysql_same_core/10000us/train_normal_with_spec.npy
+Prediction takes  0.11876999999998361 seconds
+Statistical test takes  13.090837999999962 seconds
+Scores.shape (7499,)
+ Mean:  299.0757461521574 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0 
