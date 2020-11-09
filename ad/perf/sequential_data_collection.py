@@ -5,6 +5,8 @@ import argparse
 import functools
 import utils
 import random
+import json
+import collections
 
 
 if __name__ == '__main__':
@@ -18,7 +20,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     interval_cycles = int(args.us / 3)
-    schedule = []
+    schedule = collections.defaultdict(lambda: collections.defaultdict())
 
     attacks = {
         'l1pp': 'taskset 0x1 /home/zechengh/Mastik/exp/test_workspace/spy_l1pp 1000 &',
@@ -54,13 +56,12 @@ if __name__ == '__main__':
 
     for k in attacks.keys():
         attack_process = subprocess.Popen(attacks[k].split())
-        schedule.append("{attack} starts at {t}".format(
-            attack=k,
-            t=int(time.time()*1000000)
-        ))
+        schedule[k]['start'] = int(time.time()*1000000
+
         # To make the attack actually run
         time.sleep(2)
         attack_process.terminate()
+        schedule[k]['end'] = int(time.time()*1000000
 
         time.sleep(random.randint(1,10))
 
@@ -80,3 +81,4 @@ if __name__ == '__main__':
     p_status = p.wait()
 
     print(schedule)
+    json.dump(schedule, os.path.join(save_data_dir, 'schedule'))
