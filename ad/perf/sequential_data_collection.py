@@ -4,6 +4,7 @@ import time
 import argparse
 import functools
 import utils
+import random
 
 
 if __name__ == '__main__':
@@ -47,47 +48,30 @@ if __name__ == '__main__':
         save_data_dir=save_data_dir,
     )
 
-    # With SPEC running
-    for split in ['train', 'ref_and_val', 'test']:
-        spec_process = subprocess.Popen(spec_command.split())
-        cmd = monitor_cmd_fn(save_data_name='{split}_normal_with_fixed_spec.csv'.format(
-            split=split,
-            )
-        )
-        monitor_process = subprocess.Popen(cmd.split())
-        monitor_status = monitor_process.wait()
-        spec_process.terminate()
-        utils.clean_spec()
+    cmd = monitor_cmd_fn(save_data_name='eval_sequece.csv')
+    monitor_process = subprocess.Popen(cmd.split())
 
     for k in attacks.keys():
         attack_process = subprocess.Popen(attacks[k].split())
+        print(k, "starts", time.time())
         # To make the attack actually run
-        time.sleep(10)
-
-        # Test abnormal with spec running
-        spec_process = subprocess.Popen(spec_command.split())
-        cmd = monitor_cmd_fn(save_data_name='test_abnormal_{attack}_with_fixed_spec.csv'.format(
-            attack=k
-            )
-        )
-        print(cmd)
-        monitor_process = subprocess.Popen(cmd.split())
-        monitor_status = monitor_process.wait()
-        spec_process.terminate()
-        utils.clean_spec()
-
+        time.sleep(2)
         attack_process.terminate()
+        print(k, "ends", time.time())
 
+        time.sleep(random.randint(1,10))
+
+    monitor_process.terminate()
 
     # Clean up
     cmd = 'sudo chown zechengh ../ -R'
     print(cmd)
-    monitor_process = subprocess.Popen(cmd.split())
-    monitor_status = monitor_process.wait()
+    p = subprocess.Popen(cmd.split())
+    p_status = p.wait()
 
     cmd = 'python2 ../detector/preprocess.py --data_dir {save_data_dir}'.format(
         save_data_dir=save_data_dir
     )
     print(cmd)
-    monitor_process = subprocess.Popen(cmd.split())
-    monitor_status = monitor_process.wait()
+    p = subprocess.Popen(cmd.split())
+    p_status = p.wait()

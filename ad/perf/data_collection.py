@@ -3,32 +3,8 @@ import subprocess
 import time
 import argparse
 import functools
+import utils
 
-def monitor_cmd(
-    core,
-    interval_cycles,
-    n_readings,
-    save_data_dir,
-    save_data_name
-    ):
-
-    # Collect normal data
-    cmd = 'sudo ./event_open_user {core} {interval_cycles} {n_readings} {save_data_dir}{save_data_name}'.format(
-        core=core,
-        interval_cycles=interval_cycles,
-        n_readings=n_readings,
-        save_data_dir=save_data_dir,
-        save_data_name=save_data_name,
-    )
-    return cmd
-
-def clean_spec():
-
-    spec_clean_cmd="/home/zechengh/Mastik/ad/bg_program/clean_spec.sh"
-    print(spec_clean_cmd)
-    spec_clean_process=subprocess.Popen(spec_clean_cmd.split())
-    spec_clean_process.wait()
-    return
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -40,7 +16,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    interval_cycles = int(args.us * 1.2)
+    interval_cycles = int(args.us / 3)
 
     attacks = {
         'l1pp': 'taskset 0x1 /home/zechengh/Mastik/exp/test_workspace/spy_l1pp 1000 &',
@@ -64,7 +40,7 @@ if __name__ == '__main__':
     os.system('mkdir -p {save_data_dir}'.format(save_data_dir=save_data_dir))
 
     monitor_cmd_fn=functools.partial(
-        monitor_cmd,
+        utils.monitor_cmd,
         core=args.core,
         interval_cycles=interval_cycles,
         n_readings=args.n_readings,
@@ -111,7 +87,7 @@ if __name__ == '__main__':
         monitor_process = subprocess.Popen(cmd.split())
         monitor_status = monitor_process.wait()
         spec_process.terminate()
-        clean_spec()
+        utils.clean_spec()
 
     for k in attacks.keys():
         attack_process = subprocess.Popen(attacks[k].split())
@@ -147,7 +123,7 @@ if __name__ == '__main__':
         monitor_process = subprocess.Popen(cmd.split())
         monitor_status = monitor_process.wait()
         spec_process.terminate()
-        clean_spec()
+        utils.clean_spec()
 
         attack_process.terminate()
 
