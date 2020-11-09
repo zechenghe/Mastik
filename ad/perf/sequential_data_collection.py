@@ -18,6 +18,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     interval_cycles = int(args.us / 3)
+    schedule = []
 
     attacks = {
         'l1pp': 'taskset 0x1 /home/zechengh/Mastik/exp/test_workspace/spy_l1pp 1000 &',
@@ -53,11 +54,13 @@ if __name__ == '__main__':
 
     for k in attacks.keys():
         attack_process = subprocess.Popen(attacks[k].split())
-        print(k, "starts", time.time())
+        schedule.append("{attack} starts at {t}".format(
+            attack=k,
+            t=int(time.time()*1000000)
+        ))
         # To make the attack actually run
         time.sleep(2)
         attack_process.terminate()
-        print(k, "ends", time.time())
 
         time.sleep(random.randint(1,10))
 
@@ -75,3 +78,5 @@ if __name__ == '__main__':
     print(cmd)
     p = subprocess.Popen(cmd.split())
     p_status = p.wait()
+
+    print(schedule)
