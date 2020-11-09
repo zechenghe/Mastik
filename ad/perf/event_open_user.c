@@ -5,6 +5,7 @@
 #include <string.h>
 #include <sys/ioctl.h>
 #include <linux/perf_event.h>
+#include <sys/time.h>
 #include <asm/unistd.h>
 
 #define EVENT_NR 31
@@ -19,7 +20,9 @@ struct event {
 	__u64 event_config;
 };
 
-struct event event_monitor[EVENT_NR];
+struct timeval global_time;
+
+struct event event_monitor[EVENT_NR+1];
 
 void event_initialize() {
 
@@ -145,7 +148,7 @@ int main(int argc, char **argv) {
 
 	time = (uint64_t**)malloc(ROUND*sizeof(uint64_t*));
 	for (j=0; j<ROUND; j++)
-		time[j] = (uint64_t*)malloc(EVENT_NR*sizeof(uint64_t));
+		time[j] = (uint64_t*)malloc((EVENT_NR+1)*sizeof(uint64_t));
 
 	event_initialize();
 
@@ -191,6 +194,10 @@ int main(int argc, char **argv) {
 				read(fd[event_index], &time[j][event_index], sizeof(long long));
 				close(fd[event_index]);
 			}
+
+			// Get time stamp
+			gettimeofday(&global_time, NULL);
+			time[j][EVENT_NR] = global_time.tv_sec * 1000000 + global_time.tv_usec;
 		}
 
 		i = EVENT_NR/EVENT_CUR;
@@ -219,7 +226,7 @@ int main(int argc, char **argv) {
 
 	FILE *output = fopen(OUTPUT_FILE, "w+");
 	for (j=0; j<ROUND; j++) {
-		for (i=0; i<EVENT_NR; i++) {
+		for (i=0; i<EVENT_NR+1; i++) {
 			fprintf(output, "%lu ", time[j][i]);
 		}
 		fprintf(output, "\n");
