@@ -1,4 +1,6 @@
 #include <sys/time.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 struct timeval stop, start;
 gettimeofday(&start, NULL);
