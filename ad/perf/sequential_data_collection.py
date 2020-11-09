@@ -64,7 +64,7 @@ if __name__ == '__main__':
 
         time.sleep(random.randint(1,10))
 
-    monitor_process.terminate()
+    monitor_process.wait()
 
     # Clean up
     cmd = 'sudo chown zechengh ../ -R'
