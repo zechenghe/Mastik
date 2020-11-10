@@ -54,6 +54,8 @@ if __name__ == '__main__':
     cmd = monitor_cmd_fn(save_data_name='eval_sequence.csv')
     monitor_process = subprocess.Popen(cmd.split())
 
+    time.sleep(4)
+
     for k in attacks.keys():
         attack_process = subprocess.Popen(attacks[k].split())
         schedule[k]['start'] = int(time.time()*1000000)
