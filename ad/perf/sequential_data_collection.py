@@ -81,7 +81,5 @@ if __name__ == '__main__':
     p = subprocess.Popen(cmd.split())
     p_status = p.wait()
 
-    print(schedule)
-
     with open(os.path.join(save_data_dir, 'schedule'), 'w+') as f:
         json.dump(dict(schedule), f)
