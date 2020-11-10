@@ -95,7 +95,7 @@ if __name__ == '__main__':
         schedule[k]['end'].append(utils.get_time())
         time.sleep(random.randint(1,10))
 
-    for p in attack_processes:
+    for p in attack_processes.items():
         p.terminate()
 
     monitor_process.wait()
