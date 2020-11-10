@@ -66,10 +66,10 @@ if __name__ == '__main__':
 
     # Run flush-reload attack 5 times, sleep 1s
     for _ in range(5):
-        os.kill(attack_processes['fr'], signal.SIGCONT)
+        os.kill(attack_processes['fr'].pid, signal.SIGCONT)
         schedule['fr']['start'].append(utils.get_time())
         time.sleep(1)
-        os.kill(attack_processes['fr'], signal.SIGSTOP)
+        os.kill(attack_processes['fr'].pid, signal.SIGSTOP)
         schedule['fr']['end'].append(utils.get_time())
         time.sleep(1)
 
@@ -77,10 +77,10 @@ if __name__ == '__main__':
 
     # Run Spectre attack 5 times, sleep random time between 1-10s
     for _ in range(5):
-        os.kill(attack_processes['spectrev1'], signal.SIGCONT)
+        os.kill(attack_processes['spectrev1'].pid, signal.SIGCONT)
         schedule['spectrev1']['start'].append(utils.get_time())
         time.sleep(1)
-        os.kill(attack_processes['spectrev1'], signal.SIGSTOP)
+        os.kill(attack_processes['spectrev1'].pid, signal.SIGSTOP)
         schedule['spectrev1']['end'].append(utils.get_time())
         time.sleep(random.randint(1,10))
 
@@ -88,10 +88,10 @@ if __name__ == '__main__':
 
     # Randomly run multiple attacks
     for k in attacks.keys():
-        os.kill(attack_processes[k], signal.SIGCONT)
+        os.kill(attack_processes[k].pid, signal.SIGCONT)
         schedule[k]['start'].append(utils.get_time())
         time.sleep(2)
-        os.kill(attack_processes[k], signal.SIGSTOP)
+        os.kill(attack_processes[k].pid, signal.SIGSTOP)
         schedule[k]['end'].append(utils.get_time())
         time.sleep(random.randint(1,10))
 
