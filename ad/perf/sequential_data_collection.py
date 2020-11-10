@@ -20,7 +20,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     interval_cycles = int(args.us / 3)
-    schedule = collections.defaultdict(lambda: collections.defaultdict())
+    schedule = collections.defaultdict(lambda: collections.defaultdict(lambda: list()))
 
     attacks = {
         'l1pp': 'taskset 0x1 /home/zechengh/Mastik/exp/test_workspace/spy_l1pp 1000 &',
@@ -51,22 +51,50 @@ if __name__ == '__main__':
         save_data_dir=save_data_dir,
     )
 
+    for k in attacks.keys():
+        attack_processes[k] = subprocess.Popen(attacks[k].split())
+        os.kill(attack_processes[k].pid, signal.SIGSTOP)
+
     cmd = monitor_cmd_fn(save_data_name='eval_sequence.csv')
     monitor_process = subprocess.Popen(cmd.split())
 
-    time.sleep(4)
+    attack_processes = {}
 
-    for k in attacks.keys():
-        attack_process = subprocess.Popen(attacks[k].split())
-        schedule[k]['start'] = int(time.time()*1000000)
+    time.sleep(20)
 
-        # To make the attack actually run
-        time.sleep(2)
-        attack_process.terminate()
-        schedule[k]['end'] = int(time.time()*1000000)
+    # Run flush-reload attack 5 times, sleep 1s
+    for _ in range(5):
+        os.kill(attack_processes['fr'], signal.SIGCONT)
+        schedule['fr']['start'].append(utils.get_time())
+        time.sleep(1)
+        os.kill(attack_processes['fr'], signal.SIGSTOP)
+        schedule['fr']['end'].append(utils.get_time())
+        time.sleep(1)
 
+    time.sleep(20)
 
+    # Run Spectre attack 5 times, sleep random time between 1-10s
+    for _ in range(5):
+        os.kill(attack_processes['spectrev1'], signal.SIGCONT)
+        schedule['spectrev1']['start'].append(utils.get_time())
+        time.sleep(1)
+        os.kill(attack_processes['spectrev1'], signal.SIGSTOP)
+        schedule['spectrev1']['end'].append(utils.get_time())
         time.sleep(random.randint(1,10))
+
+    time.sleep(20)
+
+    # Randomly run multiple attacks
+    for k in attacks.keys():
+        os.kill(attack_processes[k], signal.SIGCONT)
+        schedule[k]['start'].append(utils.get_time())
+        time.sleep(2)
+        os.kill(attack_processes[k], signal.SIGSTOP)
+        schedule[k]['end'].append(utils.get_time())
+        time.sleep(random.randint(1,10))
+
+    for p in attack_processes:
+        p.terminate()
 
     monitor_process.wait()
 

@@ -1,4 +1,5 @@
 import subprocess
+import time
 
 def monitor_cmd(
     core,
@@ -25,3 +26,6 @@ def clean_spec():
     spec_clean_process=subprocess.Popen(spec_clean_cmd.split())
     spec_clean_process.wait()
     return
+
+def get_time():
+    return int(time.time()*1000000)
