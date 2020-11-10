@@ -82,4 +82,6 @@ if __name__ == '__main__':
     p_status = p.wait()
 
     print(schedule)
-    json.dump(dict(schedule), os.path.join(save_data_dir, 'schedule'))
+
+    with open(os.path.join(save_data_dir, 'schedule')) as f:
+        json.dump(dict(schedule), f)
