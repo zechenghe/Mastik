@@ -83,5 +83,5 @@ if __name__ == '__main__':
 
     print(schedule)
 
-    with open(os.path.join(save_data_dir, 'schedule')) as f:
+    with open(os.path.join(save_data_dir, 'schedule'), 'w+') as f:
         json.dump(dict(schedule), f)
