@@ -49,7 +49,9 @@ if __name__ == '__main__':
         interval_cycles=interval_cycles,
         n_readings=args.n_readings,
         save_data_dir=save_data_dir,
-    )
+    }
+
+    attack_processes = {}
 
     for k in attacks.keys():
         attack_processes[k] = subprocess.Popen(attacks[k].split())
@@ -58,8 +60,7 @@ if __name__ == '__main__':
     cmd = monitor_cmd_fn(save_data_name='eval_sequence.csv')
     monitor_process = subprocess.Popen(cmd.split())
 
-    attack_processes = {}
-
+    # Start of HPC collection
     time.sleep(20)
 
     # Run flush-reload attack 5 times, sleep 1s
