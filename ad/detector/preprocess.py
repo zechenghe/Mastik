@@ -24,14 +24,14 @@ args = parser.parse_args()
 data_dir = args.data_dir
 file_name = args.file_name
 if file_name != None:
-    data = utils.read_csv_file(data_dir+file_name)
+    data = utils.read_csv_file(data_dir+file_name, dtype=np.float128)
     data = remove_outlier(data)
     np.save(data_dir + "".join(file_name.split('.')[:-1]) + '.npy', data)
 else:
     for f in os.listdir(data_dir):
         extension = f.split('.')[-1]
         if extension == 'csv':
-            data = utils.read_csv_file(data_dir+f)
+            data = utils.read_csv_file(data_dir+f, dtype=np.float128)
             print(data)
             time_stamp = np.expand_dims(data[:, -1], axis=1)
             data = remove_outlier(data[:, :-1])

@@ -207,7 +207,7 @@ def plot_cdf(data, xlabel=None, ylabel=None, title=None):
     plt.show(block = False)
 
 
-def read_csv_file(filename, split=' ', remove_end=True):
+def read_csv_file(filename, split=' ', remove_end=True, dtype=np.float32):
     """
         Read csv file.
         Args:
@@ -225,7 +225,7 @@ def read_csv_file(filename, split=' ', remove_end=True):
                 # Remove '\n' at the end
                 line_list = line_list[:-1]
             data.append(line.split(split)[:-1])
-        data = np.array(data, dtype=np.float128)
+        data = np.array(data, dtype=dtype)
     return data
 
 def p_to_anomaly_score(p_value):
