@@ -49,7 +49,7 @@ if __name__ == '__main__':
         interval_cycles=interval_cycles,
         n_readings=args.n_readings,
         save_data_dir=save_data_dir,
-    }
+    )
 
     attack_processes = {}
 
