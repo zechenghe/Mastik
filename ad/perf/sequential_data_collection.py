@@ -51,7 +51,7 @@ if __name__ == '__main__':
         save_data_dir=save_data_dir,
     )
 
-    cmd = monitor_cmd_fn(save_data_name='eval_sequece.csv')
+    cmd = monitor_cmd_fn(save_data_name='eval_sequence.csv')
     monitor_process = subprocess.Popen(cmd.split())
 
     for k in attacks.keys():

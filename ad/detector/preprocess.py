@@ -32,7 +32,9 @@ else:
         extension = f.split('.')[-1]
         if extension == 'csv':
             data = utils.read_csv_file(data_dir+f)
-            data = remove_outlier(data)
+            time_stamp = data[:, -1]
+            data = remove_outlier(data[:, :-1])
+            data = np.concatenate((data, time_stamp), axis=-1)
             #n_ins_average = np.mean(data[:, 0])
             #data = data / n_ins_average
             np.save(data_dir + "".join(f.split('.')[:-1]) + '.npy', data)
