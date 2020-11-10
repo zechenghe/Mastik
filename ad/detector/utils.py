@@ -225,7 +225,7 @@ def read_csv_file(filename, split=' ', remove_end=True):
                 # Remove '\n' at the end
                 line_list = line_list[:-1]
             data.append(line.split(split)[:-1])
-        data = np.array(data, dtype=object)
+        data = np.array(data, dtype=np.float64)
     return data
 
 def p_to_anomaly_score(p_value):
