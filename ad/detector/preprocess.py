@@ -32,6 +32,7 @@ else:
         extension = f.split('.')[-1]
         if extension == 'csv':
             data = utils.read_csv_file(data_dir+f)
+            print(data)
             time_stamp = np.expand_dims(data[:, -1], axis=1)
             data = remove_outlier(data[:, :-1])
             data = np.concatenate((data, time_stamp), axis=-1)
