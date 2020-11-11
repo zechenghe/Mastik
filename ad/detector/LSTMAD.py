@@ -337,7 +337,9 @@ def get_anomaly_score(
         gpu,
         debug=args.debug
         )
-    return utils.p_to_anomaly_score(p_values)
+
+    RE = AnomalyDetector._get_reconstruction_error(data, gpu)
+    return utils.p_to_anomaly_score(p_values), RE
 
 if __name__ == '__main__':
     import argparse
@@ -400,7 +402,7 @@ if __name__ == '__main__':
                             split = (0.1, 0.8, 0.1)
                         )
                         data = data[:, feature_list]
-                        anomaly_scores = get_anomaly_score(data, args)
+                        anomaly_scores, RE = get_anomaly_score(data, args)
                         color = (utils.bcolors.OKGREEN
                             if 'abnormal' not in f else utils.bcolors.WARNING)
 
@@ -421,9 +423,16 @@ if __name__ == '__main__':
                             utils.bcolors.ENDC
                         )
 
+                        data_write_dir = os.path.join(args.data_dir, args.load_model_name)
+                        os.system('mkdir -p {dir}'.format(dir=data_write_dir))
                         np.save(
-                            file=os.path.join(args.data_dir, "anomaly_score_" + f),
+                            file=os.path.join(data_write_dir, "anomaly_score_" + f),
                             arr=anomaly_scores
+                        )
+
+                        np.save(
+                            file=os.path.join(data_write_dir, "RE_" + f),
+                            arr=RE
                         )
             else:
                 _, testing_normal_data, _, = loaddata.load_data_split(
