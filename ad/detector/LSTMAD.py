@@ -342,9 +342,9 @@ def get_anomaly_score(
     pred = np.squeeze(pred.detach().cpu().numpy())
     truth = data[1:, :]
 
-    assert pred.shape == .shape
+    assert pred.shape == truth.shape
     RE_per_feature = (pred - truth) ** 2
-    
+
     return utils.p_to_anomaly_score(p_values), RE, RE_per_feature
 
 if __name__ == '__main__':
