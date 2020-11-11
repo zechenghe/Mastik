@@ -332,13 +332,19 @@ def get_anomaly_score(
         AnomalyDetector = AnomalyDetector.cuda()
         data = data.cuda()
 
-    pred, p_values = AnomalyDetector.predict(
+    pred_label, p_values = AnomalyDetector.predict(
         data,
         gpu,
         debug=args.debug
         )
 
-    RE, RE_per_feature = AnomalyDetector._get_reconstruction_error(data, gpu)
+    RE, pred = AnomalyDetector._get_reconstruction_error(data, gpu)
+    pred = np.squeeze(pred.detach().cpu().numpy())
+    truth = data[1:, :]
+
+    assert pred.shape == .shape
+    RE_per_feature = (pred - truth) ** 2
+    
     return utils.p_to_anomaly_score(p_values), RE, RE_per_feature
 
 if __name__ == '__main__':
