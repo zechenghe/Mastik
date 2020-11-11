@@ -440,7 +440,7 @@ if __name__ == '__main__':
                             arr=RE
                         )
                         np.save(
-                            file=os.path.join(data_write_dir, "RE_per_feature" + f),
+                            file=os.path.join(data_write_dir, "RE_per_feature_" + f),
                             arr=RE_per_feature
                             )
             else:
