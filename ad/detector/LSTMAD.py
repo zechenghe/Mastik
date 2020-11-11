@@ -339,9 +339,8 @@ def get_anomaly_score(
         )
 
     RE, pred = AnomalyDetector._get_reconstruction_error(data, gpu)
-    RE = np.squeeze(RE.detach().cpu().numpy())
     pred = np.squeeze(pred.detach().cpu().numpy())
-    truth = data[1:, :]
+    truth = data[1:, :].detach().cpu().numpy()
 
     assert pred.shape == truth.shape
     RE_per_feature = (pred - truth) ** 2
