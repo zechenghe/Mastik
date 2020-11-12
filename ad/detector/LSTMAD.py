@@ -363,7 +363,8 @@ if __name__ == '__main__':
         if args.debug:
             print(args)
 
-        feature_list = [0,1,2,3,6,8,20,28,30]#14,18]#,20,21,22]
+        feature_list = range(31)
+        #feature_list = [0,1,2,3,6,8,20,28,30]#14,18]#,20,21,22]
 
         # Read train/ref/val data for debug if not eval a specific scenario
         if not args.allanomalyscores:
