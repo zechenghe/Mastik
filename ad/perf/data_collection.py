@@ -14,6 +14,9 @@ if __name__ == '__main__':
     parser.add_argument('--n_readings', type = int, default = 300000, help='number of HPC readings')
     parser.add_argument('--bg_program', type = str, default = 'webserver', help='background program')
 
+    parser.add_argument('--dryrun', dest='dryrun', action='store_true', help='Dry run')
+    parser.set_defaults(dryrun=False)
+
     args = parser.parse_args()
 
     interval_cycles = int(args.us / 3)
@@ -46,6 +49,23 @@ if __name__ == '__main__':
         n_readings=args.n_readings,
         save_data_dir=save_data_dir,
     )
+
+    # Dry run to test the commands
+    if args.dryrun:
+        dryrun_commands = [
+            monitor_cmd_fn(save_data_name='train_normal.csv'),
+            gpg_command,
+            spec_command
+        ] + [v for k, v in attacks.items()]
+
+        for dryrun_command in dryrun_commands:
+            print(dryrun_command)
+            dryrun_process = subprocess.Popen(dryrun_command.split())
+            time.sleep(10)
+            dryrun_process.terminate()
+            utils.clean_spec()
+            time.sleep(1)
+        exit(0)
 
     # Normal data collection
     cmd = monitor_cmd_fn(save_data_name='train_normal.csv')
