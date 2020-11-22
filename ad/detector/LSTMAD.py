@@ -365,7 +365,7 @@ if __name__ == '__main__':
 
         #feature_list = range(31)
         #feature_list = [0,1,2,3,6,8,20,28,30]#14,18]#,20,21,22]
-        feature_list = [0, 1, 3, 13, 15, 6, 2, 28, 5, 27]
+        feature_list = [0, 1, 27, 13, 28, 3, 19, 6, 15, 2]
 
         # Read train/ref/val data for debug if not eval a specific scenario
         if not args.allanomalyscores:
