@@ -216,7 +216,7 @@ class WeightClipper(object):
 
     def __call__(self, updated_model):
         for net_name, para in self.net.named_parameters():
-            for update_net_name, update_para in updated_model():
+            for update_net_name, update_para in updated_model.named_parameters():
                 # TODO: this is not efficient
                 if net_name == update_net_name:
                     #print(name, para)
