@@ -217,3 +217,4 @@ class WeightClipper(object):
     def __call__(self, updated_model):
         for name, para in self.net.named_parameters():
             print(name, para)
+            print(para.data)
