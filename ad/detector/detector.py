@@ -215,5 +215,5 @@ class WeightClipper(object):
         self.constraint = constraint
 
     def __call__(self, updated_model):
-        for name, para in self.named_parameters():
+        for name, para in self.net.named_parameters():
             print(name, para)
