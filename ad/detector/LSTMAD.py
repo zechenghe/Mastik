@@ -99,7 +99,6 @@ def train(
             print(name, para.size())
 
     WeightClipper = detector.WeightClipper(AnomalyDetector.net)
-    WeightClipper(AnomalyDetector.net)
 
     for batch in range(Nbatches):
 
@@ -130,6 +129,8 @@ def train(
                 if is_train:
                     loss.backward()
                     optimizer.step()
+                    if finetune:
+                        AnomalyDetector.net.apply(WeightClipper)
 
                 if gpu:
                     loss_list.append(loss.detach().cpu().numpy())
