@@ -407,7 +407,7 @@ if __name__ == '__main__':
                         _, data, _, = loaddata.load_data_split(
                             data_dir = args.data_dir,
                             file_name = f,
-                            split = (0.1, 0.8, 0.1)
+                            split = (0.001, 0.998, 0.001)
                         )
                         data = data[:, feature_list]
                         anomaly_scores, RE, RE_per_feature = get_anomaly_score(data, args)
