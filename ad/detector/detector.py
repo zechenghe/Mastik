@@ -215,6 +215,5 @@ class WeightClipper(object):
         self.constraint = constraint
 
     def __call__(self, updated_model):
-        if hasattr(updated_model, 'weight'):
-            w = module.weight.data
-            print(w)
+        for name, para in self.named_parameters():
+            print(name, para)
