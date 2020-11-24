@@ -129,8 +129,8 @@ def train(
                 if is_train:
                     loss.backward()
                     optimizer.step()
-                    if finetune:
-                        AnomalyDetector.net.apply(WeightClipper)
+                    #if finetune:
+                    #    AnomalyDetector.net.apply(WeightClipper)
 
                 if gpu:
                     loss_list.append(loss.detach().cpu().numpy())
