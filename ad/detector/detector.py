@@ -215,6 +215,11 @@ class WeightClipper(object):
         self.constraint = constraint
 
     def __call__(self, updated_model):
-        for name, para in self.net.named_parameters():
-            print(name, para)
-            print(para.data)
+        for net_name, para in self.net.named_parameters():
+            for update_net_name, update_para in updated_model():
+                # TODO: this is not efficient
+                if net_name == update_net_name:
+                    #print(name, para)
+                    diff = update_para.data - para.data
+                    diff = diff.clamp(-self.constraint, self.constraint)
+                    update_para.data = diff + para.data
