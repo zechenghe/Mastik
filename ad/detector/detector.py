@@ -11,6 +11,7 @@ import math
 import os
 import numpy as np
 import utils
+import copy
 
 from scipy import stats
 
@@ -201,3 +202,19 @@ class Detector(nn.Module):
         hiddens, state = self.net(seq, state)
         pred = self.hidden2pred(hiddens)
         return pred, state
+
+
+class WeightClipper(object):
+    """
+        A weight clipper to constrain the update of weights within a threshold.
+        It is equivalent to |w'-w|_p < th.
+    """
+
+    def __init__(self, net, constraint=0.1):
+        self.net = copy.deepcopy(net)
+        self.constraint = constraint
+
+    def __call__(self, updated_model):
+        if hasattr(updated_model, 'weight'):
+            w = module.weight.data
+            print(w)

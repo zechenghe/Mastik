@@ -98,6 +98,9 @@ def train(
         for name, para in AnomalyDetector.named_parameters():
             print(name, para.size())
 
+    WeightClipper = detector.WeightClipper(AnomalyDetector.net)
+    WeightClipper(AnomalyDetector.net)
+
     for batch in range(Nbatches):
 
         def step_fn(data_batch, is_train=True):
