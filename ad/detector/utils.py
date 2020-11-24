@@ -129,7 +129,7 @@ def seq_win_vectorize(seq, window_size, n_samples=None):
 
     return np.array(res)
 
-def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None):
+def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsize=None):
     """
         Plot squences for visualization and debug.
         Args:
@@ -138,7 +138,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None):
             T: plot partial sequence, i.e., seq[:T]. If None, plot the
             whole sequence.
     """
-    plt.figure()
+    plt.figure(figsize=figsize)
     for k, v in seqs.items():
         end = T if T is not None else len(v)
         t = np.arange(start, end, 1.0)
