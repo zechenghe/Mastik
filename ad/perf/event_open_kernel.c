@@ -34,7 +34,7 @@ static int __init kernel_syscall_init(void)
     kernel_call_read = kernel_call_sys_call_table[__NR_read];
 
 
-    fs = get_fs();     
+    fs = get_fs();
     set_fs (get_ds());
     fd = kernel_call_perf_event_open(&pe, 15796, -1, -1, 0);
     set_fs(fs);
@@ -65,7 +65,7 @@ static int __init kernel_syscall_init(void)
         return -1;
     }
 
-    fs = get_fs();     
+    fs = get_fs();
     set_fs (get_ds());
     ret = kernel_call_read(fd, &count, sizeof(long long));
     set_fs(fs);
@@ -89,7 +89,7 @@ static void __exit kernel_syscall_exit(void)
     printk("Leaving the example module\n");
 }
 
-module_init(kernel_syscall_init); 
+module_init(kernel_syscall_init);
 module_exit(kernel_syscall_exit);
 
 MODULE_LICENSE("GPL");
