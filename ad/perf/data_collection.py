@@ -19,6 +19,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    # Adjust to CPU frequency
     interval_cycles = int(args.us / 3)
 
     attacks = {
