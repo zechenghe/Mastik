@@ -180,11 +180,13 @@ if __name__=="__main__":
 
     args = parser.parse_args()
 
-    feature_list = [0,2,6,8,14,18,20,21,22]
+    #feature_list = [0,2,6,8,14,18,20,21,22]
+    feature_list = [0,2,6,8,14,18,20,21,22,31]
     train_normal = np.load(args.data_dir + args.normal_data_name_train)[:, feature_list]
     test_normal = np.load(args.data_dir + args.normal_data_name_test)[:, feature_list]
     test_abnormal = np.load(args.data_dir + args.abnormal_data_name)[:, feature_list]
 
+    print("feature_list", feature_list)
     print("train_normal.shape", train_normal.shape)
     print("test_normal.shape", test_normal.shape)
     print("test_abnormal.shape", test_abnormal.shape)
