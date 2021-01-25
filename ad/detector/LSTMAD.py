@@ -374,7 +374,7 @@ if __name__ == '__main__':
 
         print("Use features:")
         for i in feature_list:
-            print(i + ': ', utils.id_to_feature[i])
+            print('{id}: {feature}'.format(id=i, feature=utils.id_to_feature[i]))
 
         # Read train/ref/val data for debug if not eval a specific scenario
         if not args.allanomalyscores:
