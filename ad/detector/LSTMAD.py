@@ -458,7 +458,9 @@ if __name__ == '__main__':
                     # args.useexistinganomalyscores:
                     else:
                         if f.endswith('.npy') and (f.startswith("anomaly_score_")):
-                            anomaly_scores = np.load(f)
+                            data_dir = os.path.join(args.data_dir, args.load_model_name)
+                            anomaly_scores = np.load(os.path.join(data_write_dir, "anomaly_score_" + f))
+                            
                             color = (utils.bcolors.OKGREEN
                                 if 'abnormal' not in f else utils.bcolors.WARNING)
 
