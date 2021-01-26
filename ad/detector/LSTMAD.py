@@ -463,7 +463,7 @@ if __name__ == '__main__':
                         if f.endswith('.npy') and (f.startswith("anomaly_score_")):
                             print(f)
 
-                            anomaly_scores = np.load(os.path.join(data_dir, f))
+                            anomaly_scores = np.load(os.path.join(anomaly_score_data_dir, f))
 
                             color = (utils.bcolors.OKGREEN
                                 if 'abnormal' not in f else utils.bcolors.WARNING)
