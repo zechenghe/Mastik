@@ -246,6 +246,8 @@ def create_parser():
 
     parser.add_argument('--allanomalyscores', dest='allanomalyscores', action='store_true', help='Eval anomaly scores for all scenarios')
     parser.set_defaults(allanomalyscores=False)
+    parser.add_argument('--useexistinganomalyscores', dest='useexistinganomalyscores', action='store_true', help='use existing anomaly scores')
+    parser.set_defaults(useexistinganomalyscores=False)
 
     # Real data (private) or dummy data?
     parser.add_argument('--dummy', dest='dummydata', action='store_true', help='If dummy data is used instead of an input file')
@@ -295,7 +297,7 @@ def create_parser():
     return args
 
 id_to_feature = {
-    0: '# Ins',
+    0: 'Ins',
     1: 'L1D read access (# load)',
     2: 'L1D read miss',
     3: 'L1D write access (# store)',
@@ -322,10 +324,10 @@ id_to_feature = {
     24: 'Cache node write miss',
     25: 'Cache node prefetch access',
     26: 'Cache node prefetch miss',
-    27: '# cycles',
-    28: '# branch instructions',
-    29: '# branch prediction miss',
-    30: '# page faults',
-    31: '# context switch',
+    27: 'cycles',
+    28: 'branch instructions',
+    29: 'branch prediction miss',
+    30: 'page faults',
+    31: 'context switch',
     32: 'Time stamp',
 }

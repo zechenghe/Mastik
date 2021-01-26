@@ -412,47 +412,71 @@ if __name__ == '__main__':
             # Evaluate
             if args.allanomalyscores:
                 for f in sorted(list(os.listdir(args.data_dir))):
-                    if f.endswith('.npy') and not (f.startswith("anomaly_score_")):
-                        _, data, _, = loaddata.load_data_split(
-                            data_dir = args.data_dir,
-                            file_name = f,
-                            split = (0.001, 0.998, 0.001)
-                        )
-                        data = data[:, feature_list]
-                        anomaly_scores, RE, RE_per_feature = get_anomaly_score(data, args)
-                        color = (utils.bcolors.OKGREEN
-                            if 'abnormal' not in f else utils.bcolors.WARNING)
+                    if not args.useexistinganomalyscores:
+                        if f.endswith('.npy') and not (f.startswith("anomaly_score_")):
+                            _, data, _, = loaddata.load_data_split(
+                                data_dir = args.data_dir,
+                                file_name = f,
+                                split = (0.001, 0.998, 0.001)
+                            )
+                            data = data[:, feature_list]
+                            anomaly_scores, RE, RE_per_feature = get_anomaly_score(data, args)
+                            color = (utils.bcolors.OKGREEN
+                                if 'abnormal' not in f else utils.bcolors.WARNING)
 
-                        print("Scores.shape", anomaly_scores.shape)
-                        print(color,
-                            "Mean: ", np.mean(anomaly_scores),
-                            "Median: ", np.median(anomaly_scores),
-                            "Min: ", np.min(anomaly_scores),
-                            "Max: ", np.max(anomaly_scores),
-                            "Std: ", np.std(anomaly_scores),
-                            utils.bcolors.ENDC
+                            print("Scores.shape", anomaly_scores.shape)
+                            print(color,
+                                "Mean: ", np.mean(anomaly_scores),
+                                "Median: ", np.median(anomaly_scores),
+                                "Min: ", np.min(anomaly_scores),
+                                "Max: ", np.max(anomaly_scores),
+                                "Std: ", np.std(anomaly_scores),
+                                utils.bcolors.ENDC
                             )
 
-                        th = utils.p_to_anomaly_score(args.Pvalue_th)
-                        print(color,
-                            "Pred normal:",  np.sum(anomaly_scores<=th) / float(len(anomaly_scores)),
-                            "Pred abnormal:", np.sum(anomaly_scores>th) / float(len(anomaly_scores)),
-                            utils.bcolors.ENDC
-                        )
+                            th = utils.p_to_anomaly_score(args.Pvalue_th)
+                            print(color,
+                                "Pred normal:",  np.sum(anomaly_scores<=th) / float(len(anomaly_scores)),
+                                "Pred abnormal:", np.sum(anomaly_scores>th) / float(len(anomaly_scores)),
+                                utils.bcolors.ENDC
+                            )
 
-                        data_write_dir = os.path.join(args.data_dir, args.load_model_name)
-                        os.system('mkdir -p {dir}'.format(dir=data_write_dir))
-                        np.save(
-                            file=os.path.join(data_write_dir, "anomaly_score_" + f),
-                            arr=anomaly_scores
-                        )
-                        np.save(
-                            file=os.path.join(data_write_dir, "RE_" + f),
-                            arr=RE
-                        )
-                        np.save(
-                            file=os.path.join(data_write_dir, "RE_per_feature_" + f),
-                            arr=RE_per_feature
+                            data_write_dir = os.path.join(args.data_dir, args.load_model_name)
+                            os.system('mkdir -p {dir}'.format(dir=data_write_dir))
+                            np.save(
+                                file=os.path.join(data_write_dir, "anomaly_score_" + f),
+                                arr=anomaly_scores
+                            )
+                            np.save(
+                                file=os.path.join(data_write_dir, "RE_" + f),
+                                arr=RE
+                            )
+                            np.save(
+                                file=os.path.join(data_write_dir, "RE_per_feature_" + f),
+                                arr=RE_per_feature
+                            )
+                    # args.useexistinganomalyscores:
+                    else:
+                        if f.endswith('.npy') and (f.startswith("anomaly_score_")):
+                            anomaly_scores = np.load(f)
+                            color = (utils.bcolors.OKGREEN
+                                if 'abnormal' not in f else utils.bcolors.WARNING)
+
+                            print("Scores.shape", anomaly_scores.shape)
+                            print(color,
+                                "Mean: ", np.mean(anomaly_scores),
+                                "Median: ", np.median(anomaly_scores),
+                                "Min: ", np.min(anomaly_scores),
+                                "Max: ", np.max(anomaly_scores),
+                                "Std: ", np.std(anomaly_scores),
+                                utils.bcolors.ENDC
+                            )
+
+                            th = utils.p_to_anomaly_score(args.Pvalue_th)
+                            print(color,
+                                "Pred normal:",  np.sum(anomaly_scores<=th) / float(len(anomaly_scores)),
+                                "Pred abnormal:", np.sum(anomaly_scores>th) / float(len(anomaly_scores)),
+                                utils.bcolors.ENDC
                             )
             else:
                 _, testing_normal_data, _, = loaddata.load_data_split(
