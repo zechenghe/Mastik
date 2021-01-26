@@ -411,8 +411,8 @@ if __name__ == '__main__':
         else:
             # Evaluate
             if args.allanomalyscores:
-                for f in sorted(list(os.listdir(args.data_dir))):
-                    if not args.useexistinganomalyscores:
+                if not args.useexistinganomalyscores:
+                    for f in sorted(list(os.listdir(args.data_dir))):
                         if f.endswith('.npy') and not (f.startswith("anomaly_score_")):
                             _, data, _, = loaddata.load_data_split(
                                 data_dir = args.data_dir,
@@ -455,11 +455,15 @@ if __name__ == '__main__':
                                 file=os.path.join(data_write_dir, "RE_per_feature_" + f),
                                 arr=RE_per_feature
                             )
-                    # args.useexistinganomalyscores:
-                    else:
+
+                # args.useexistinganomalyscores:
+                else:
+                    anomaly_score_data_dir = os.path.join(args.data_dir, args.load_model_name)
+                    for f in sorted(list(os.listdir(anomaly_score_data_dir))):
                         if f.endswith('.npy') and (f.startswith("anomaly_score_")):
-                            data_dir = os.path.join(args.data_dir, args.load_model_name)
-                            anomaly_scores = np.load(os.path.join(data_dir, "anomaly_score_" + f))
+                            print(f)
+
+                            anomaly_scores = np.load(os.path.join(data_dir, f))
 
                             color = (utils.bcolors.OKGREEN
                                 if 'abnormal' not in f else utils.bcolors.WARNING)
