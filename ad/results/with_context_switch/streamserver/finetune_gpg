@@ -1,0 +1,149 @@
+zechengh@nebula1:~/Mastik/ad/detector$ python3 LSTMAD.py --testing --allanomalyscores --data_dir ../perf/data/streamserver_same_core/10000us/ --load_model_name AnomalyDetectorSS002.ckpt  --gpu --Pvalue_th 1e-30 --useexistinganomalyscores
+Use features:
+0: Ins
+1: L1D read access (# load)
+27: cycles
+13: DTLB read access
+28: branch instructions
+3: L1D write access (# store)
+19: BPU read access
+6: L1I read miss
+15: DTLB write access
+2: L1D read miss
+31: context switch
+anomaly_score_eval_sequence.npy
+Scores.shape (59379,)
+ Mean:  299.0757461521573 Median:  299.07574615215736 Min:  299.07574615215736 Max:  299.07574615215736 Std:  5.684341886080802e-14
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_ref_and_val_normal.npy
+Scores.shape (11475,)
+ Mean:  0.22457647999895794 Median:  0.08663596513127696 Min:  -0.0 Max:  9.337033014968096 Std:  0.5765865610139687
+ Pred normal: 1.0 Pred abnormal: 0.0
+anomaly_score_ref_and_val_normal_with_gpg.npy
+Scores.shape (11475,)
+ Mean:  0.12571701737337276 Median:  0.08663596513127696 Min:  -0.0 Max:  0.8880785782791467 Std:  0.13094310686693006
+ Pred normal: 1.0 Pred abnormal: 0.0
+anomaly_score_ref_and_val_normal_with_spec.npy
+Scores.shape (11475,)
+ Mean:  94.36491810552474 Median:  96.5501198008448 Min:  56.44749426667917 Max:  136.07880133522914 Std:  19.574341654418884
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_ff.npy
+Scores.shape (11475,)
+ Mean:  75.9183754105632 Median:  78.58598234060096 Min:  55.028244371161946 Max:  99.8899556450135 Std:  9.747074716623288
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_ff_with_gpg.npy
+Scores.shape (11475,)
+ Mean:  110.04357125067736 Median:  109.64811732997678 Min:  95.23491387131413 Max:  130.29592588574377 Std:  6.126832835887777
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_ff_with_spec.npy
+Scores.shape (11475,)
+ Mean:  81.19384802907422 Median:  80.3375422582133 Min:  69.10068657496006 Max:  117.00266555930234 Std:  6.369662804571918
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_fr.npy
+Scores.shape (11475,)
+ Mean:  111.75685128213651 Median:  112.55032159218472 Min:  90.72311632051903 Max:  129.48501158663237 Std:  6.38593937838561
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_fr_with_gpg.npy
+Scores.shape (11475,)
+ Mean:  100.50749682139455 Median:  97.21213858740495 Min:  83.31012581174177 Max:  123.91177845944476 Std:  9.332153922148287
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_fr_with_spec.npy
+Scores.shape (11475,)
+ Mean:  88.80101148056147 Median:  90.72311632051903 Min:  31.823123185598345 Max:  119.27444450245824 Std:  18.022320601233908
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_l1pp.npy
+Scores.shape (11475,)
+ Mean:  98.95678590873115 Median:  95.89104914882867 Min:  79.16719219295581 Max:  123.91177845944476 Std:  12.042549574424081
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_l1pp_with_gpg.npy
+Scores.shape (11475,)
+ Mean:  105.76195693210869 Median:  105.39117822882015 Min:  86.35042961065189 Max:  125.48593291380837 Std:  8.590064585291822
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_l1pp_with_spec.npy
+Scores.shape (11475,)
+ Mean:  100.82280084076518 Median:  103.30515630797201 Min:  62.33432036242077 Max:  114.76145505714292 Std:  9.35797923668304
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_l3pp.npy
+Scores.shape (11475,)
+ Mean:  115.45446055823098 Median:  116.25222358088122 Min:  103.30515630797201 Max:  127.87435026401545 Std:  5.0480952213436545
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_l3pp_with_gpg.npy
+Scores.shape (11475,)
+ Mean:  106.0550388526983 Median:  101.92992222358227 Min:  85.7368898016405 Max:  136.9204388431339 Std:  13.78796574319016
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_l3pp_with_spec.npy
+Scores.shape (11475,)
+ Mean:  115.63003904232548 Median:  115.50515947858204 Min:  88.83230319056184 Max:  136.9204388431339 Std:  8.783736670961238
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_spectrev1.npy
+Scores.shape (11475,)
+ Mean:  93.24456102028559 Median:  91.9978318152021 Min:  71.81410032474247 Max:  122.35192238961292 Std:  13.597852967306178
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_spectrev1_with_gpg.npy
+Scores.shape (11475,)
+ Mean:  106.91603339292604 Median:  106.7974789494888 Min:  80.92670146489522 Max:  122.35192238961292 Std:  6.817272505879292
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_spectrev1_with_spec.npy
+Scores.shape (11475,)
+ Mean:  77.59299501288002 Median:  78.00740344512253 Min:  57.405212688507206 Max:  97.87711842030834 Std:  6.692841042955867
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_spectrev2.npy
+Scores.shape (11475,)
+ Mean:  83.74180802939205 Median:  85.7368898016405 Min:  57.88755598388169 Max:  99.21601364637942 Std:  9.519959082204318
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_spectrev2_with_gpg.npy
+Scores.shape (11475,)
+ Mean:  95.33597672861966 Median:  95.23491387131413 Min:  81.51852961886543 Max:  113.28405370277994 Std:  6.256901682101467
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_spectrev2_with_spec.npy
+Scores.shape (11475,)
+ Mean:  94.1175591373435 Median:  93.28399491007502 Min:  65.92654645588397 Max:  119.27444450245824 Std:  10.201703048778842
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_spectrev3.npy
+Scores.shape (11475,)
+ Mean:  114.04843860983954 Median:  114.02109236764868 Min:  97.21213858740495 Max:  131.1105939699532 Std:  6.640612091220602
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_spectrev3_with_gpg.npy
+Scores.shape (11475,)
+ Mean:  98.66635791931013 Median:  98.54507236564365 Min:  85.7368898016405 Max:  112.55032159218472 Std:  5.672965833399194
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_spectrev3_with_spec.npy
+Scores.shape (11475,)
+ Mean:  118.37074227927216 Median:  122.35192238961292 Min:  80.92670146489522 Max:  141.18852659519717 Std:  14.335586207666035
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_spectrev4.npy
+Scores.shape (11475,)
+ Mean:  108.88954632652572 Median:  108.93066391994675 Min:  89.45975484219277 Max:  126.27842537937899 Std:  6.212681142419717
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_spectrev4_with_gpg.npy
+Scores.shape (11475,)
+ Mean:  101.3682691418246 Median:  102.61600420556618 Min:  78.00740344512253 Max:  123.91177845944476 Std:  9.876644954515983
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_abnormal_spectrev4_with_spec.npy
+Scores.shape (11475,)
+ Mean:  105.64609607895817 Median:  107.50536055943437 Min:  65.92654645588397 Max:  128.67782746311005 Std:  10.619388291438803
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_test_normal.npy
+Scores.shape (11475,)
+ Mean:  6.964584840359546 Median:  0.534728888539327 Min:  0.0001128506289728534 Max:  38.78833646473258 Std:  10.46983147405145
+ Pred normal: 0.9905010893246188 Pred abnormal: 0.009498910675381264
+anomaly_score_test_normal_with_gpg.npy
+Scores.shape (11475,)
+ Mean:  0.24077734904948023 Median:  0.21280591442385624 Min:  0.001761262040310424 Max:  0.8880785782791467 Std:  0.1724271640342207
+ Pred normal: 1.0 Pred abnormal: 0.0
+anomaly_score_test_normal_with_spec.npy
+Scores.shape (11475,)
+ Mean:  103.81625490355502 Median:  103.99739292964907 Min:  75.15365290502466 Max:  122.35192238961292 Std:  9.813586306018465
+ Pred normal: 0.0 Pred abnormal: 1.0
+anomaly_score_train_normal.npy
+Scores.shape (11475,)
+ Mean:  15.74222770631083 Median:  8.434854078070806 Min:  0.029136282752224074 Max:  42.35081593062184 Std:  14.16854133221184
+ Pred normal: 0.745272331154684 Pred abnormal: 0.2547276688453159
+anomaly_score_train_normal_with_gpg.npy
+Scores.shape (11475,)
+ Mean:  6.003594510186511 Median:  5.7044044195854875 Min:  0.0001128506289728534 Max:  12.745165536723656 Std:  3.6663591772948934
+ Pred normal: 1.0 Pred abnormal: 0.0
+anomaly_score_train_normal_with_spec.npy
+Scores.shape (11475,)
+ Mean:  72.37843269926911 Median:  76.28736047808535 Min:  0.001761262040310424 Max:  118.51375718668568 Std:  25.658828265154785
+ Pred normal: 0.09333333333333334 Pred abnormal: 0.9066666666666666 
