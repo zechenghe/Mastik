@@ -6,7 +6,7 @@ import time
 import random
 
 def spec_cmd(spec_prog):
-    return "taskset 0x1 runspec --config=test.cfg --size=train" \
+    return "taskset 0x8 runspec --config=test.cfg --size=train" \
     " --noreportable --tune=base --iterations=1 {spec_prog}".format(
         spec_prog=spec_prog)
 

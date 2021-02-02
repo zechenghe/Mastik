@@ -1,5 +1,5 @@
 Server:
-sudo taskset 0x1 /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+sudo taskset 0x8 /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
 
 Client:
 while loop:

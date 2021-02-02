@@ -1,6 +1,6 @@
 server:
-sudo taskset 0x1 ffserver -f doc/ffserver.conf
-sudo taskset 0x1 ffmpeg -stream_loop -1 -r 25 -i ~/test.mpg http://localhost:8090/feed1.ffm
+sudo taskset 0x8 ffserver -f doc/ffserver.conf
+sudo taskset 0x8 ffmpeg -stream_loop -1 -r 25 -i ~/test.mpg http://localhost:8090/feed1.ffm
 
 (need princeton vpn)
 client:
