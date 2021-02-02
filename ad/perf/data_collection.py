@@ -148,7 +148,6 @@ if __name__ == '__main__':
 
         attack_process.terminate()
 
-
     # Clean up
     cmd = 'sudo chown zechengh ../ -R'
     print(cmd)
