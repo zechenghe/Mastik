@@ -14,6 +14,7 @@ def remove_outlier(data):
 
     th = 3 * std
     data = (np.abs(data-mu) > th) * mu + (np.abs(data-mu) <= th) * data
+    print(data.shape)
 
     window_size = 20
     kernel = np.ones(window_size) / np.float32(window_size)
