@@ -19,6 +19,8 @@ def remove_outlier(data):
     kernel = np.ones(window_size) / np.float32(window_size)
     data = [np.convolve(data[:, i], kernel, mode='valid') for i in range(data.shape[-1])]
     data = np.array(data)
+
+    print(data.shape)
     return data
 
 parser = argparse.ArgumentParser()
