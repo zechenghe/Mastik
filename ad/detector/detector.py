@@ -65,6 +65,10 @@ class Detector(nn.Module):
 
         return (data - self.mean) / (self.std + self.eps)
 
+    def denormalize(self, data):
+
+        return data * (self.std + self.eps) + self.mean
+
     def add_reference_sequence(self, data):
         self.reference_sequences.append(data)
 
