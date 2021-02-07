@@ -8,7 +8,7 @@
 #include <sys/time.h>
 #include <asm/unistd.h>
 
-#define EVENT_NR 32
+#define EVENT_NR 34
 #define EVENT_CUR 4
 
 uint64_t INTERVAL;
@@ -122,6 +122,11 @@ void event_initialize() {
 	event_monitor[31].event_type = PERF_COUNT_SW_CONTEXT_SWITCHES;
 	event_monitor[31].event_config = PERF_COUNT_SW_PAGE_FAULTS;
 
+	event_monitor[32].event_type = PERF_TYPE_HARDWARE;
+	event_monitor[32].event_config = PERF_COUNT_HW_STALLED_CYCLES_FRONTEND;
+
+	event_monitor[33].event_type = PERF_TYPE_HARDWARE;
+	event_monitor[33].event_config = PERF_COUNT_HW_STALLED_CYCLES_BACKEND;
 };
 
 
