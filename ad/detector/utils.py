@@ -329,5 +329,7 @@ id_to_feature = {
     29: 'branch prediction miss',
     30: 'page faults',
     31: 'context switch',
-    32: 'Time stamp',
+    32: 'stall_during_issue',
+    33: 'stall_during_retirement',
+    34: 'Time stamp',
 }
