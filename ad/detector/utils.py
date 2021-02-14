@@ -333,3 +333,11 @@ id_to_feature = {
     33: 'stall_during_retirement',
     34: 'Time stamp',
 }
+
+def f_score(pos, neg):
+    neg_mean = np.mean(neg)
+    neg_var = np.var(neg)
+    pos_mean = np.mean(pos)
+    pos_var = np.var(pos)
+
+    return ((pos_mean-neg_mean) ** 2) / (neg_var+pos_var)
