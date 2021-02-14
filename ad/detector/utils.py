@@ -74,7 +74,7 @@ def calculate_eval_metrics(truth, pred, verbose=True):
 def eval_metrics(truth, pred, anomaly_score=None, verbose=True):
     tp, fp, fn, tn, acc, prec, rec, f1, fpr, fnr = calculate_eval_metrics(
         truth, pred, verbose=verbose)
-    roc, roc_auc, thresholds = None, None, None
+    roc, roc_auc, tpr, thresholds = None, None, None, None
 
     if anomaly_score is not None:
         fpr, tpr, thresholds = metrics.roc_curve(truth, anomaly_score)
