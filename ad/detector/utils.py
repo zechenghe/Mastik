@@ -340,4 +340,5 @@ def f_score(pos, neg):
     pos_mean = np.mean(pos)
     pos_var = np.var(pos)
 
-    return ((pos_mean-neg_mean) ** 2) / (neg_var+pos_var)
+    eps = 1e-8
+    return ((pos_mean-neg_mean) ** 2) / (neg_var+pos_var+eps)
