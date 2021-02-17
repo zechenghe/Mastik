@@ -15,7 +15,7 @@ def remove_outlier(data):
     th = 3 * std
     data = (np.abs(data-mu) > th) * mu + (np.abs(data-mu) <= th) * data
 
-    window_size = 20
+    window_size = 500
     kernel = np.ones(window_size) / np.float32(window_size)
     data = [np.convolve(data[:, i], kernel, mode='same') for i in range(data.shape[-1])]
     data = np.array(data).T
