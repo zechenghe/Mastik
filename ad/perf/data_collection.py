@@ -68,6 +68,8 @@ if __name__ == '__main__':
             time.sleep(1)
         exit(0)
 
+    time.sleep(20)
+
     # Normal data collection
     cmd = monitor_cmd_fn(save_data_name='train_normal.csv')
     print(cmd)
