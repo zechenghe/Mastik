@@ -20,7 +20,7 @@ def remove_outlier(data):
     data = [np.convolve(data[:, i], kernel, mode='same') for i in range(data.shape[-1])]
     data = np.array(data).T
 
-    return data
+    return data[window_size: -window_size, :]
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_dir', type = str, default = "../perf/data/core0/100us/", help='The directory of data')
