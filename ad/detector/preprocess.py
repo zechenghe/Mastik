@@ -8,6 +8,8 @@ import os
 
 import utils
 
+window_size = 500
+
 def remove_outlier(data):
     mu = np.mean(data, axis=0)
     std = np.mean(data, axis=0)
@@ -15,12 +17,12 @@ def remove_outlier(data):
     th = 3 * std
     data = (np.abs(data-mu) > th) * mu + (np.abs(data-mu) <= th) * data
 
-    window_size = 500
+
     kernel = np.ones(window_size) / np.float32(window_size)
     data = [np.convolve(data[:, i], kernel, mode='same') for i in range(data.shape[-1])]
     data = np.array(data).T
 
-    return data[window_size: -window_size, :]
+    return data
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_dir', type = str, default = "../perf/data/core0/100us/", help='The directory of data')
@@ -41,7 +43,7 @@ else:
             #print(data)
             time_stamp = np.expand_dims(data[:, -1], axis=1)
             data = remove_outlier(data[:, :-1])
-            data = np.concatenate((data, time_stamp), axis=-1)
+            data = np.concatenate((data, time_stamp), axis=-1)[window_size : -window_size]
             #n_ins_average = np.mean(data[:, 0])
             #data = data / n_ins_average
             np.save(data_dir + "".join(f.split('.')[:-1]) + '.npy', data)
