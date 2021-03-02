@@ -18,6 +18,14 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+class FeatureSelect:
+    #feature_list = range(31)
+    feature_list = range(31)
+    #feature_list = [0,1,2,3,6,8,20,28,30]#14,18]#,20,21,22]
+    #feature_list = [0, 1, 27, 13, 3] #, 3, 19, 6, 15, 2, 31]
+    #feature_list = [0, 1, 27, 13, 28, 3, 19, 6, 15, 2]
+    feature_list = [0, 1, 27, 13, 28, 3, 19, 6, 15, 2, 31]
+
 def read_npy_data_single_flle(filename):
     print("Reading Data: " + filename)
     data = np.load(filename)

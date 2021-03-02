@@ -1,0 +1,664 @@
+mysql ref_and_val_normal_with_gpg
+[3.62619448 7.02103401 7.05510027 ... 7.40751398 7.40830399 7.40599919]
+Predict normal 1.0
+Predict abnormal 0.0
+mysql test_abnormal_spectrev4
+[-14.4903959  -11.52157947 -11.30810919 ... -29.59095286 -29.68583885
+ -29.65244515]
+Predict normal 0.1109191744704064
+Predict abnormal 0.8890808255295936
+mysql test_abnormal_spectrev1_with_gpg
+[-23.69045956 -19.97342649 -18.69890733 ... -28.22859384 -28.25262361
+ -28.24104328]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_fr_with_spec
+[-29.42506746 -27.96050125 -27.32625605 ...  -1.23377293  -1.27002232
+  -1.25429271]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_spectrev3_with_gpg
+[-26.5243216  -25.45634767 -26.03663975 ... -21.44421987 -21.49119973
+ -21.5182906 ]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql ref_and_val_normal
+[2.23876688 6.81393819 7.10779624 ... 7.51984018 7.52043714 7.5199011 ]
+Predict normal 1.0
+Predict abnormal 0.0
+mysql ref_and_val_normal_with_spec
+[-310.285967   -292.77537477 -284.80264322 ...   -2.65733993   -2.6618436
+   -2.64637956]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_normal_with_spec
+[-31.87419089 -29.17668061 -29.32181864 ... -39.89250757 -39.96541668
+ -40.18550344]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql train_normal
+[2.20236508 6.86671176 7.13822858 ... 7.50556153 7.50567717 7.50585015]
+Predict normal 1.0
+Predict abnormal 0.0
+mysql test_abnormal_spectrev4_with_gpg
+[-63.93944655 -50.37758581 -53.66398237 ... -20.17920665 -20.28258919
+ -20.37623193]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_l3pp_with_gpg
+[-22.69716937 -20.6991603  -20.50161486 ... -22.81468542 -22.83446369
+ -22.79597816]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_ff_with_spec
+[-11.2564386  -10.66498155 -10.85737204 ... -45.70190471 -45.34924078
+ -45.48400184]
+Predict normal 0.04318574415855987
+Predict abnormal 0.9568142558414401
+mysql test_abnormal_ff_with_gpg
+[-1.85541092 -1.00214558 -0.54170794 ... -0.58551283 -0.51897331
+ -0.46937671]
+Predict normal 0.19592690244567687
+Predict abnormal 0.8040730975543231
+mysql test_abnormal_spectrev1_with_spec
+[-11.83780877 -10.14399443  -9.4821394  ... -18.66888523 -18.63583356
+ -18.62881415]
+Predict normal 0.12764796799709063
+Predict abnormal 0.8723520320029093
+mysql test_abnormal_l1pp_with_gpg
+[-172.859189   -155.20233523 -150.52011225 ...   -6.79487487   -6.79760791
+   -6.838034  ]
+Predict normal 0.11355577779798164
+Predict abnormal 0.8864442222020184
+mysql train_normal_with_gpg
+[3.81071655 6.97297609 6.97258102 ... 7.38639627 7.3881667  7.38581356]
+Predict normal 1.0
+Predict abnormal 0.0
+mysql test_abnormal_spectrev3_with_spec
+[-12.29543994 -12.00944203 -13.11477065 ... -14.54069416 -14.55950723
+ -14.48768161]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_spectrev1
+[-21.19583105 -18.24481555 -17.09180821 ... -42.58213336 -42.55678193
+ -42.54706106]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_spectrev3
+[-45.84243272 -42.72715902 -42.20762289 ... -33.48486939 -33.56035491
+ -33.48637932]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_normal_with_gpg
+[3.76637987 7.01501303 7.04745872 ... 7.42455223 7.4243901  7.4248142 ]
+Predict normal 1.0
+Predict abnormal 0.0
+mysql test_abnormal_spectrev2
+[-14.33425395 -11.12709208 -10.88487562 ... -15.92031896 -15.9065641
+ -15.93359388]
+Predict normal 0.07573415765069552
+Predict abnormal 0.9242658423493045
+mysql test_abnormal_l1pp
+[ -53.62624447  -46.50643144  -44.28248966 ... -262.79459646 -263.94333489
+ -265.3827807 ]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_ff
+[-3.09163915 -2.33902719 -2.03842189 ... -3.71199021 -3.70041237
+ -3.70095747]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_normal
+[2.38782614 6.88065952 7.15383372 ... 7.52398564 7.52346992 7.52350988]
+Predict normal 1.0
+Predict abnormal 0.0
+mysql test_abnormal_spectrev2_with_gpg
+[-12.70558215  -9.92868821  -9.64110102 ... -24.85909983 -24.91676514
+ -24.90387043]
+Predict normal 0.06309664514955905
+Predict abnormal 0.936903354850441
+mysql train_normal_with_spec
+[ -13.93075285  -13.28218432  -12.95357097 ... -117.26151883 -117.16083053
+  -88.06350174]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_l1pp_with_spec
+[-25.14514073 -23.14187566 -22.58017611 ... -40.63111204 -40.69677854
+ -40.66984869]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_fr
+[-41.18430841 -37.81384038 -36.08849787 ... -29.25911407 -29.10252725
+ -29.29482742]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_l3pp_with_spec
+[-18.9625103  -17.27973114 -16.86269128 ...  -7.80179334  -7.88896744
+  -8.0515663 ]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_l3pp
+[-41.35503516 -37.46803677 -36.38095508 ... -22.85610204 -22.81292164
+ -22.74343385]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_spectrev2_with_spec
+[-38.0486441  -35.01856171 -34.95056418 ... -51.78468874 -51.32686791
+ -51.96280724]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_fr_with_gpg
+[-10.2486744   -8.54881071  -8.23335325 ...  -7.67661152  -7.67782786
+  -7.67575341]
+Predict normal 0.0
+Predict abnormal 1.0
+mysql test_abnormal_spectrev4_with_spec
+[-63.47595613 -51.54461929 -57.27152792 ... -47.42028163 -47.98015672
+ -47.80168159]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver ref_and_val_normal_with_gpg
+[-1.74454199  6.53302061  7.16857065 ...  7.34625443  7.3541117
+  7.36818174]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+webserver test_abnormal_spectrev4
+[ -38.7476075   -30.89950434  -28.02883914 ... -110.0729201   -86.0854773
+ -111.34871586]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_spectrev1_with_gpg
+[ -8.15337058  -7.19194682  -6.7392072  ... -11.91467863 -11.94560077
+ -11.94516177]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_fr_with_spec
+[-18.84108328 -17.37037008 -16.46771487 ... -17.50545707 -17.25883543
+ -17.05420668]
+Predict normal 0.021911082825711428
+Predict abnormal 0.9780889171742886
+webserver test_abnormal_spectrev3_with_gpg
+[-4.716157   -3.93880251 -3.45881876 ... -6.44627504 -6.46556051
+ -6.48716506]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver ref_and_val_normal
+[-2.42079289  6.41997507  7.39457379 ...  7.52329415  7.52378052
+  7.52210645]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+webserver ref_and_val_normal_with_spec
+[-42.75645604 -38.94945704 -39.2640292  ... -28.67705408 -28.176928
+ -28.10176826]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_normal_with_spec
+[-50.12603995 -40.89094605 -39.08254031 ...  -2.40292254  -2.4512161
+  -2.45652805]
+Predict normal 0.028820801891081008
+Predict abnormal 0.971179198108919
+webserver train_normal
+[-1.91348593  6.45178904  7.18675251 ...  7.47798253  7.48454464
+  7.48804234]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+webserver test_abnormal_spectrev4_with_gpg
+[-32.72851059 -29.52229701 -27.98346979 ... -24.13313963 -24.19425371
+ -24.21077235]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_l3pp_with_gpg
+[ -20.63483837  -19.15642953  -18.57871332 ... -158.87759215 -159.04499985
+ -159.37548838]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_ff_with_spec
+[-21.98986007 -20.90489784 -20.43288899 ... -13.50258924 -13.58748248
+ -13.59113063]
+Predict normal 0.018910810073643057
+Predict abnormal 0.981089189926357
+webserver test_abnormal_ff_with_gpg
+[-23.29286535 -18.87873236 -18.9029869  ... -25.03016139 -25.06987098
+ -25.10930133]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_spectrev1_with_spec
+[-268.25475677 -254.03814589 -245.27641398 ...  -72.95168472  -74.83134743
+  -74.2203393 ]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_l1pp_with_gpg
+[-11.08864057  -8.66101775  -7.56885091 ...  -7.64999851  -7.60493921
+  -7.45443956]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver train_normal_with_gpg
+[-1.46859036  6.63386535  7.20802564 ...  7.15414648  7.156003
+  7.15804925]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+webserver test_abnormal_spectrev3_with_spec
+[-10.24386085  -8.42906505  -7.94287999 ... -16.98170674 -17.5879754
+ -17.5156447 ]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_spectrev1
+[-17.69853209 -12.65601833 -11.88000024 ... -14.62911694 -14.71802106
+ -14.70297306]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_spectrev3
+[-21.66972321 -18.80613798 -17.91040889 ... -12.43299586 -12.50796685
+ -12.90001941]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_normal_with_gpg
+[-2.3282365   6.61727663  7.44117085 ...  7.2299741   7.21835528
+  7.21008833]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+webserver test_abnormal_spectrev2
+[-13.94837521 -11.87686807 -11.56323113 ... -21.14065532 -21.07316372
+ -21.02937979]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_l1pp
+[-14.69635341 -10.94953461  -9.22438714 ... -17.81635788 -17.69444125
+ -17.44868647]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_ff
+[ -9.28984302  -3.94114172  -2.04665312 ... -27.56354392 -27.33709071
+ -27.38941061]
+Predict normal 0.0030911901081916537
+Predict abnormal 0.9969088098918083
+webserver test_normal
+[-2.94049411  6.21719588  7.34455272 ...  7.48565914  7.48413441
+  7.48693903]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+webserver test_abnormal_spectrev2_with_gpg
+[-13.70995342 -13.39641638 -13.79742891 ... -20.35976452 -20.30505142
+ -20.45826824]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver train_normal_with_spec
+[-20.08352479 -17.99425306 -17.62366432 ... -55.67152739 -57.23077709
+ -56.9154114 ]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_l1pp_with_spec
+[-15.00628291 -13.41354361 -12.55593897 ... -48.91911379 -48.4392553
+ -48.46462253]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_fr
+[-85.76981029 -69.86017614 -59.92160605 ... -46.76091453 -46.88748049
+ -47.05735908]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_l3pp_with_spec
+[-54.91633301 -50.31922447 -50.75807046 ... -59.56014768 -68.22364102
+ -68.0162189 ]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_l3pp
+[-73.00667713 -64.92943501 -55.07334057 ... -19.44071313 -19.39018718
+ -19.32861795]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_spectrev2_with_spec
+[-23.47644638 -22.14875723 -21.97074447 ... -16.80038124 -16.85725492
+ -16.74859987]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_fr_with_gpg
+[-64.32743666 -54.66784338 -50.74680457 ... -20.03945071 -19.95141504
+ -20.00132157]
+Predict normal 0.0
+Predict abnormal 1.0
+webserver test_abnormal_spectrev4_with_spec
+[-19.67345428 -18.54970678 -17.87212507 ... -15.02188703 -14.91289877
+ -14.85539629]
+Predict normal 0.0
+Predict abnormal 1.0
+streamserver ref_and_val_normal_with_gpg
+[-12.10605756  -3.4700127    5.93937856 ...   7.33540221   7.33514295
+   7.33726155]
+Predict normal 0.9998181652877535
+Predict abnormal 0.00018183471224656787
+streamserver test_abnormal_spectrev4
+[-17.07673767  -5.30915711  -1.55653231 ...   5.35595752   5.37614486
+   5.38283377]
+Predict normal 0.9475406855168652
+Predict abnormal 0.05245931448313483
+streamserver test_abnormal_spectrev1_with_gpg
+[-13.77247534  -3.48514908  -0.42152572 ...   0.23126555   0.22463767
+   0.21099938]
+Predict normal 0.6850622783889444
+Predict abnormal 0.31493772161105554
+streamserver test_abnormal_fr_with_spec
+[ -8.79645649   0.53852255   2.79786526 ... -21.78191689 -21.80705482
+ -21.56913346]
+Predict normal 0.4911355577779798
+Predict abnormal 0.5088644422220202
+streamserver test_abnormal_spectrev3_with_gpg
+[-15.04887973  -9.60256491  -7.57398871 ... -12.82435947 -12.96428606
+ -12.90733472]
+Predict normal 0.0798254386762433
+Predict abnormal 0.9201745613237567
+streamserver ref_and_val_normal
+[-3.09636079  1.85084715  5.59963998 ...  7.44019758  7.43967774
+  7.43880236]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+streamserver ref_and_val_normal_with_spec
+[-11.06657059  -1.14962862   1.07874637 ...  -4.97302577  -5.07892326
+  -5.15415476]
+Predict normal 0.5334121283753068
+Predict abnormal 0.4665878716246932
+streamserver test_normal_with_spec
+[-8.46430267  1.09853994  3.34553566 ...  0.92873461  0.86326101
+  0.81203187]
+Predict normal 0.827711610146377
+Predict abnormal 0.17228838985362305
+streamserver train_normal
+[-4.12619236  2.54484503  6.1958349  ...  7.14524849  7.14618696
+  7.14464668]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+streamserver test_abnormal_spectrev4_with_gpg
+[-7.85486721 -1.28349407  1.4127491  ... -2.96284348 -2.95459946
+ -2.83952364]
+Predict normal 0.8557141558323484
+Predict abnormal 0.1442858441676516
+streamserver test_abnormal_l3pp_with_gpg
+[-15.37597492  -2.44643559   0.01916369 ...   4.12903256   4.06029821
+   4.01966657]
+Predict normal 0.3900354577688881
+Predict abnormal 0.609964542231112
+streamserver test_abnormal_ff_with_spec
+[ -8.90121151   0.39192396   1.93140723 ... -33.92224071 -34.64382651
+ -34.72717352]
+Predict normal 0.09937267024274934
+Predict abnormal 0.9006273297572507
+streamserver test_abnormal_ff_with_gpg
+[-12.48728062  -4.17143192  -1.07461923 ...   1.95055833   1.89746196
+   1.90370326]
+Predict normal 0.46940630966451496
+Predict abnormal 0.5305936903354851
+streamserver test_abnormal_spectrev1_with_spec
+[ -7.26084817  -0.5122838    1.49137484 ... -27.28661913 -27.10544717
+ -27.09597624]
+Predict normal 0.3491226475134103
+Predict abnormal 0.6508773524865897
+streamserver test_abnormal_l1pp_with_gpg
+[-16.69427575  -3.83897874  -0.65274877 ...  -5.48348258  -5.49249697
+  -5.52438913]
+Predict normal 0.6005091371942904
+Predict abnormal 0.3994908628057096
+streamserver train_normal_with_gpg
+[-4.18067055  2.8123012   5.6475637  ...  7.43771732  7.43781516
+  7.43878502]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+streamserver test_abnormal_spectrev3_with_spec
+[-16.11094857  -5.81195014  -3.92277155 ...  -6.27022582  -6.27339474
+  -6.23841519]
+Predict normal 0.04318574415855987
+Predict abnormal 0.9568142558414401
+streamserver test_abnormal_spectrev1
+[-19.63833037  -6.5996028   -2.46306676 ...  -7.58567544  -7.67405515
+  -7.72615401]
+Predict normal 0.5628693517592508
+Predict abnormal 0.43713064824074915
+streamserver test_abnormal_spectrev3
+[-20.03819097 -13.50168108 -11.21931098 ...  -2.12030366  -2.12144757
+  -1.9180458 ]
+Predict normal 0.04482225656877898
+Predict abnormal 0.955177743431221
+streamserver test_normal_with_gpg
+[-8.70366622  3.26709262  5.56324456 ...  7.28058469  7.27809071
+  7.27898925]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+streamserver test_abnormal_spectrev2
+[-13.0260122   -8.48412594  -6.16820523 ...   1.22974607   1.23403558
+   1.24530871]
+Predict normal 0.8781707427947996
+Predict abnormal 0.12182925720520048
+streamserver test_abnormal_l1pp
+[-14.69272369  -5.45059695  -1.92914937 ...   1.93484363   1.91416441
+   1.89044099]
+Predict normal 0.5951450131830166
+Predict abnormal 0.40485498681698334
+streamserver test_abnormal_ff
+[-12.95140427  -0.79802622   2.09165303 ...  -1.00412405  -0.99981815
+  -1.0312144 ]
+Predict normal 0.5188653513955814
+Predict abnormal 0.48113464860441857
+streamserver test_normal
+[-3.27163549  1.46673995  5.79501806 ...  7.42383761  7.42336249
+  7.42346547]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+streamserver eval_sequence
+[-7.40323885e+23 -7.40323885e+23 -7.40323885e+23 ... -7.40324383e+23
+ -7.40324383e+23 -7.40324383e+23]
+Predict normal 0.0
+Predict abnormal 1.0
+streamserver test_abnormal_spectrev2_with_gpg
+[-7.07455089 -1.59346599  0.69092108 ...  4.497212    4.50193762
+  4.51206617]
+Predict normal 0.9992726611510138
+Predict abnormal 0.0007273388489862715
+streamserver train_normal_with_spec
+[ -7.22299793   1.78759461   3.98638163 ... -13.99227003 -14.04290069
+ -14.09854011]
+Predict normal 0.39885444131284664
+Predict abnormal 0.6011455586871534
+streamserver test_abnormal_l1pp_with_spec
+[-12.76919765  -4.3928768   -0.43954738 ...  -0.52285318  -0.53798204
+  -0.57062779]
+Predict normal 0.8858078007091553
+Predict abnormal 0.11419219929084462
+streamserver test_abnormal_fr
+[-9.12019103  0.48079399  3.53931269 ...  5.86765569  5.86434138
+  5.82579353]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+streamserver test_abnormal_l3pp_with_spec
+[-10.24553026   0.21688443   1.93092606 ... -22.51374588 -22.55312027
+ -22.5394279 ]
+Predict normal 0.4046731521047368
+Predict abnormal 0.5953268478952632
+streamserver test_abnormal_l3pp
+[-24.88556024 -11.93119124  -8.26276533 ...   4.68794644   4.67000394
+   4.66097369]
+Predict normal 0.6616056005091372
+Predict abnormal 0.3383943994908628
+streamserver test_abnormal_spectrev2_with_spec
+[ -4.33683051   1.76879147   3.65273784 ... -12.741908   -12.75363781
+ -12.84387567]
+Predict normal 0.10228202563869443
+Predict abnormal 0.8977179743613056
+streamserver test_abnormal_fr_with_gpg
+[-8.27320543 -2.26340622  0.29914051 ...  3.01530419  3.01320144
+  2.95863252]
+Predict normal 0.9389035366851533
+Predict abnormal 0.061096463314846805
+streamserver test_abnormal_spectrev4_with_spec
+[-7.20170053  1.37280835  2.9201035  ...  4.77667811  4.80812718
+  4.80554353]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+mltrain ref_and_val_normal_with_gpg
+[-3.69329472  2.62624327  6.18761762 ...  7.06055968  7.10984278
+  7.15713121]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+mltrain test_abnormal_spectrev4
+[-36.7984245  -30.07697178 -26.01199241 ... -22.29816865 -22.59837471
+ -22.53668362]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_spectrev1_with_gpg
+[-48.94140528 -38.73333148 -34.78035904 ... -17.52129882 -17.574177
+ -17.47489034]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_fr_with_spec
+[-11.72203371  -7.68954958  -6.38729451 ...  -6.81900192  -6.91690835
+  -6.92929629]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_spectrev3_with_gpg
+[-58.12057834 -54.40879396 -50.36357355 ... -64.32046953 -59.60788811
+ -59.97071836]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain ref_and_val_normal
+[-3.09633263  2.49862774  6.26979049 ...  7.50308555  7.49865813
+  7.50051319]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+mltrain ref_and_val_normal_with_spec
+[ -9.45621074   0.17614947   0.55131912 ... -17.34815956 -17.0053054
+ -16.64832297]
+Predict normal 0.07000636421492863
+Predict abnormal 0.9299936357850713
+mltrain test_normal_with_spec
+[-11.86646937  -5.6706283   -6.46377852 ...   0.09025038   0.16127654
+   0.16587585]
+Predict normal 0.268024365851441
+Predict abnormal 0.7319756341485589
+mltrain train_normal
+[-3.49673295  1.91263854  5.80897924 ...  7.51011877  7.50870077
+  7.50835366]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+mltrain test_abnormal_spectrev4_with_gpg
+[-37.92136871 -31.31041734 -26.92691721 ... -18.98337775 -18.81669851
+ -18.98864583]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_l3pp_with_gpg
+[-8.38441511 -4.50223477 -3.57275596 ... -5.76697    -5.70328354
+ -5.78017327]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_ff_with_spec
+[-30.55305666 -24.17100389 -21.78217767 ... -46.74679323 -46.69716661
+ -46.48013192]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_ff_with_gpg
+[-24.03498151 -22.14034708 -21.91700898 ... -64.57253999 -63.8071289
+ -64.11221927]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_spectrev1_with_spec
+[-14.59607211  -4.97119787  -3.21276004 ... -15.88381139 -15.68422307
+ -15.75569085]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_l1pp_with_gpg
+[-10.97883053  -3.43799625  -2.61346277 ... -15.90182442 -15.7349583
+ -15.64746268]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain train_normal_with_gpg
+[-3.18700143  2.77952378  6.5286939  ...  7.05072565  7.04732489
+  7.0217706 ]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+mltrain test_abnormal_spectrev3_with_spec
+[-59.40437493 -52.65901284 -53.94949678 ... -55.04838142 -57.08984
+ -57.12702139]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_spectrev1
+[-11.13926847  -8.2594623   -7.56516756 ... -41.18930832 -41.44768371
+ -41.83382967]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_spectrev3
+[-46.00220506 -43.12231686 -40.36980295 ... -35.06108322 -35.25000032
+ -35.42730936]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_normal_with_gpg
+[ -3.35099182   2.69540793   6.46731045 ... -56.01995978 -56.82975811
+ -51.03135594]
+Predict normal 0.69324484044004
+Predict abnormal 0.30675515955996
+mltrain test_abnormal_spectrev2
+[-39.47530398 -32.92330327 -30.0800005  ... -22.46372953 -22.4457972
+ -22.4820827 ]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_l1pp
+[-4.8006713   0.40721926 -0.05601657 ... -2.97617922 -2.9949035
+ -3.02237078]
+Predict normal 0.10737339758159832
+Predict abnormal 0.8926266024184016
+mltrain test_abnormal_ff
+[-19.98140436 -18.19317889 -17.84257107 ... -25.35281054 -25.19529548
+ -25.1531387 ]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_normal
+[-3.23367782  2.38657515  6.31555743 ...  7.42666181  7.42715668
+  7.42510989]
+Predict normal 0.9999090826438767
+Predict abnormal 9.091735612328394e-05
+mltrain eval_sequence
+[-7.39279389e+23 -7.39279389e+23 -7.39279389e+23 ... -7.39279488e+23
+ -7.39279488e+23 -7.39279488e+23]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_spectrev2_with_gpg
+[-29.47393958 -23.33791006 -21.05599087 ... -44.53492069 -44.62295649
+ -44.91322205]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain train_normal_with_spec
+[-12.56110846   0.56764001   2.03062991 ...  -9.90450406  -9.99282638
+  -9.97445831]
+Predict normal 0.17610691881080098
+Predict abnormal 0.823893081189199
+mltrain test_abnormal_l1pp_with_spec
+[-16.25147408  -6.88155005  -4.75255383 ... -15.17687062 -15.22455864
+ -15.29917236]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_fr
+[-5.60480285 -4.64112197 -4.42796034 ... -2.38824237 -2.35300018
+ -2.36968258]
+Predict normal 0.028820801891081008
+Predict abnormal 0.971179198108919
+mltrain test_abnormal_l3pp_with_spec
+[-5.68573415 -3.66355351 -3.20099248 ... -4.81036405 -4.82832624
+ -4.84662406]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_l3pp
+[-19.11968352  -8.30343905  -6.02789781 ...  -3.6604405   -3.51481148
+  -3.48704741]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_spectrev2_with_spec
+[-16.02801649 -12.9058144  -12.08068046 ... -12.94420676 -12.85275096
+ -13.12285046]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_fr_with_gpg
+[-10.63390586  -7.60890634  -6.5844944  ...  -8.25414819  -8.27209873
+  -8.25788282]
+Predict normal 0.0
+Predict abnormal 1.0
+mltrain test_abnormal_spectrev4_with_spec
+[-20.86533985 -13.64174455 -10.48353221 ... -18.25481921 -18.27610392
+ -18.20715976]
+Predict normal 0.0
+Predict abnormal 1.0

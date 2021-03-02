@@ -351,6 +351,7 @@ def get_anomaly_score(
 
     return utils.p_to_anomaly_score(p_values), RE, RE_per_feature
 
+
 if __name__ == '__main__':
     import argparse
     import sys
@@ -367,11 +368,7 @@ if __name__ == '__main__':
         if args.debug:
             print(args)
 
-        #feature_list = range(31)
-        #feature_list = [0,1,2,3,6,8,20,28,30]#14,18]#,20,21,22]
-        #feature_list = [0, 1, 27, 13, 3] #, 3, 19, 6, 15, 2, 31]
-        #feature_list = [0, 1, 27, 13, 28, 3, 19, 6, 15, 2]
-        feature_list = [0, 1, 27, 13, 28, 3, 19, 6, 15, 2, 31]
+        feature_list = utils.FeatureSelect.feature_list
 
         print("Use features:")
         for i in feature_list:
