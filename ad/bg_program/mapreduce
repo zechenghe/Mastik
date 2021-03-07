@@ -1,0 +1,2 @@
+$HADOOP_HOME/bin/hadoop dfsadmin -safemode leave
+./mapreduce.sh
