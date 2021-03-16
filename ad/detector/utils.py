@@ -25,7 +25,9 @@ class FeatureSelect:
     #feature_list = [0, 1, 27, 13, 3] #, 3, 19, 6, 15, 2, 31]
     #feature_list = [0, 1, 27, 13, 28, 3, 19, 6, 15, 2]
     #feature_list = [0, 1, 27, 13, 28, 3, 19, 6, 15, 2, 31]
-    feature_list = [0, 1, 27, 13, 28, 3, 19, 6, 15, 2, 31]
+    #feature_list = [0, 1, 27, 13, 28, 3, 19, 6, 15, 2, 31]
+
+    feature_list = [0, 32, 33, 27, 1, 13, 3, 19, 15, 28, 2, 6, 31]
 
 def read_npy_data_single_flle(filename):
     print("Reading Data: " + filename)
