@@ -60,7 +60,10 @@ if __name__ == '__main__':
     if args.dryrun:
         dryrun_commands = [
             monitor_cmd_fn(save_data_name='train_normal.csv'),
-        ] + [v for k, v in attacks.items()]
+        ] + [
+            spec_cmd(spec_benchmarks[0]),
+            spec_cmd(spec_benchmarks[1])
+        ]
 
         for dryrun_command in dryrun_commands:
             print(dryrun_command)
