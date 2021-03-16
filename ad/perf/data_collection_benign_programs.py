@@ -61,8 +61,8 @@ if __name__ == '__main__':
         dryrun_commands = [
             monitor_cmd_fn(save_data_name='train_normal.csv'),
         ] + [
-            spec_cmd(spec_benchmarks[0]),
-            spec_cmd(spec_benchmarks[1])
+            utils.spec_cmd(spec_benchmarks[0]),
+            utils.spec_cmd(spec_benchmarks[1])
         ]
 
         for dryrun_command in dryrun_commands:
@@ -80,7 +80,7 @@ if __name__ == '__main__':
     # With SPEC running
     for split in ['train', 'test']:
         for spec_prog in spec_benchmarks:
-            cmd = spec_cmd(spec_prog)
+            cmd = utils.spec_cmd(spec_prog)
             print(cmd)
             spec_process = subprocess.Popen(cmd.split())
             running_processes.append(spec_process)
