@@ -84,7 +84,6 @@ if __name__ == '__main__':
             print(cmd)
             spec_process = subprocess.Popen(cmd.split())
 
-            spec_process = subprocess.Popen(spec_command.split())
             cmd = monitor_cmd_fn(save_data_name=f'{split}_normal_with_{spec_prog}.csv')
             monitor_process = subprocess.Popen(cmd.split())
             monitor_status = monitor_process.wait()
