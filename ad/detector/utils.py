@@ -345,6 +345,10 @@ id_to_feature = {
     34: 'Time stamp',
 }
 
+spec_benchmarks = ('perlbench', 'bzip2', 'gcc', 'mcf', 'milc', 'namd',
+    'gobmk', 'soplex', 'povray', 'hmmer', 'sjeng', 'libquantum',
+    'h264ref', 'lbm', 'omnetpp', 'astar')
+
 def f_score(pos, neg):
     neg_mean = np.mean(neg)
     neg_var = np.var(neg)
