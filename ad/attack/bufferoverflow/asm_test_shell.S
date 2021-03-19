@@ -9,7 +9,7 @@
 #define ARGV    (STRLEN+1)
 #define ENVP    (ARGV+8)
 
-#define FILETORUN 0x400521
+#define FILETORUN 0x400518
 
 .globl main
         .type   main, @function
