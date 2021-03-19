@@ -8,5 +8,5 @@
 
 int main(int argc, char **argv)
 {
-    execv("/bin/sh", "/bin/sh", NULL);
+    execv("/bin/sh", NULL, NULL);
 }
