@@ -9,9 +9,6 @@
 #define ARGV    (STRLEN+1)
 #define ENVP    (ARGV+8)
 
-.section .data
-file_to_run:
-.ascii          STRING
 
 .globl main
         .type   main, @function
@@ -38,3 +35,8 @@ file_to_run:
 
  calladdr:
         call    popladdr
+
+
+.section .data
+file_to_run:
+    .ascii          STRING
