@@ -19,7 +19,7 @@ main:
 
 payload:
 
-        movq    $file_to_run, %rcx
+        movq    file_to_run, %rcx
         //movq    %rcx, (ARGV)(%rcx)       /* set up argv pointer to pathname */
 
         xorq    %rax, %rax               /* get a 64-bit zero value */
