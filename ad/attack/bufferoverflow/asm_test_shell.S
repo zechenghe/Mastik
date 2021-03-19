@@ -41,7 +41,8 @@ payload:
 callptr:
     call    payload                      /* push STRING ptr to stack */
 
-.section .text
+.section .data
+    .ascii  "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
 file_to_run:
     .ascii  STRING
     .ascii  "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
