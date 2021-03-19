@@ -21,7 +21,7 @@ main:
 
         movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
         movq    $0, %rdi                 /* syscall arg 2: 0 */
-        //syscall                        /* invoke syscall */
+        syscall                        /* invoke syscall */
 
         pop %rdi
         pop %rax
