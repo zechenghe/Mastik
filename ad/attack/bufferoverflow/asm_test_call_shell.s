@@ -34,4 +34,4 @@
 
  calladdr:
         call    popladdr
-        "/bin/sh"
+        /bin/sh
