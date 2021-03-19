@@ -1,4 +1,4 @@
-override CFLAGS += -fno-stack-protector -z execstack -mpreferred-stack-boundary=4 -static
+override CFLAGS += -fno-stack-protector -z execstack -mpreferred-stack-boundary=4
 CC=gcc
 
 SOURCES := $(wildcard *.c)
