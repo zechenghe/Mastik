@@ -15,8 +15,8 @@
 main:
         push    %rbp
         movq    %rsp, %rbp
-        movq    60, %rax                  /* syscall arg 1: SYS_exit (60) */
-        movq    0, %rdi                   /* syscall arg 2: 0 */
+        movq    %rax, 60                  /* syscall arg 1: SYS_exit (60) */
+        movq    %rdi, 0                   /* syscall arg 2: 0 */
         syscall                           /* invoke syscall */
 //        jmp     calladdr
 
