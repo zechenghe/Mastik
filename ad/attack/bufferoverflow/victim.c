@@ -13,7 +13,7 @@ int vulnerable_func(char *str)
 
 	/* The following strcpy function has a buffer overflow problem */
 	strcpy(buffer, str);
-	return 1;
+	return 0;
 }
 
 int main(int argc, char **argv)

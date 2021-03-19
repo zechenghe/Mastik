@@ -26,16 +26,6 @@ int main(int argc, char **argv)
         ".ascii  \"/bin/sh\\0\"\n"
         ".quad   file_to_run\n"
         ".quad   0x0\n"
-
-        //"leaq    8(%rcx), %rsi\n"            /* syscall arg 2: argv ptr to ['/bin/sh']*/
-        //"movq    $0, %rdx"                 /* syscall arg 4: envp (NULL) */
-        //"syscall"                          /* Call execve("/bin/sh", ["/bin/sh"], []) */
-
-        //"movq    $60, %rax"                /* syscall arg 1: SYS_exit (60) */
-        //"xorq    %rdi,%rdi"                /* syscall arg 2: 0 */
-        //"syscall"                          /* invoke syscall */
-
-
     );
 
     //execv("/bin/sh", NULL, NULL);
