@@ -11,7 +11,7 @@
 int main(int argc, char **argv)
 {
     __asm(
-        "movq    $1, %rcx\n"
+        "movq    $file_to_run, %rcx\n"
         "movq    $59, %rax\n"                /* syscall arg 1: syscall number execve(59) */
         "movq    %rcx, %rdi\n"               /* syscall arg 2: string pathname */
         "file_to_run:\n"
