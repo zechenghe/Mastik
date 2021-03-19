@@ -38,7 +38,7 @@ payload:
 file_to_run:
         .ascii  "/bin/sh\0"
 argv:
-        .word   file_to_run
+        .dword   file_to_run
 envp:
         .ascii  "\0\0\0\0\0\0\0\0"
 
