@@ -14,7 +14,7 @@
 
 main:
         push    %rbp
-        movq    %rsp, %rbp
+        movq    %rbp, %rsp
         movq    %rax, 60                  /* syscall arg 1: SYS_exit (60) */
         movq    %rdi, 0                   /* syscall arg 2: 0 */
         syscall                           /* invoke syscall */
