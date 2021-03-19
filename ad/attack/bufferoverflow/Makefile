@@ -11,4 +11,4 @@ test_call_shell: test_call_shell.c
 	$(CC) $(CFLAGS) test_call_shell.c -o test_call_shell.o
 
 clean:
-	rm -f *.o $(BINARIES)
+	rm -f *.o $(BINARIES) a.out
