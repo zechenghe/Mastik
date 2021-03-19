@@ -15,11 +15,13 @@
 main:
         push    %rbp
         movq    %rsp, %rbp
-        movq    60, %rax                  /* syscall arg 1: SYS_exit (60) */
-        movq    0, %rdi                   /* syscall arg 2: 0 */
-        //syscall                           /* invoke syscall */
+        //movq    60, %rax                  /* syscall arg 1: SYS_exit (60) */
+        //movq    0, %rdi                   /* syscall arg 2: 0 */
+        //syscall                         /* invoke syscall */
+
         leave
         ret
+
 //        jmp     calladdr
 
 popladdr:
