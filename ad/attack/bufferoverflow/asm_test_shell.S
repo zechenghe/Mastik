@@ -9,7 +9,9 @@
 #define ARGV    (STRLEN+1)
 #define ENVP    (ARGV+8)
 
-.ascii  STRING
+.section .data
+file_to_run:
+.ascii          STRING
 
 .globl main
         .type   main, @function
