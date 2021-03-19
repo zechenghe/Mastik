@@ -44,3 +44,4 @@ callptr:
 .section .text
 file_to_run:
     .ascii  STRING
+    .ascii  "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
