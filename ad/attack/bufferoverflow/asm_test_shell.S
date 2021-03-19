@@ -17,9 +17,9 @@ main:
         mov     %rsp, %rbp
 
         movq    $SYS_exit, %rax           /* syscall arg 1: SYS_exit (60) */
-        movq    0, %rdi                 /* syscall arg 2: 0 */
-        syscall                         /* invoke syscall */
-        jmp     calladdr
+        movq    0, %rdi                   /* syscall arg 2: 0 */
+        syscall                           /* invoke syscall */
+//        jmp     calladdr
 
 popladdr:
 //        popq    %rcx
