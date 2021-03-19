@@ -16,11 +16,9 @@ main:
         push    %rbp
         movq    %rsp, %rbp
 
-        movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
-        movq    $0, %rdi                 /* syscall arg 2: 0 */
-        syscall                        /* invoke syscall */
-
-//        jmp     calladdr
+        // movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
+        // movq    $0, %rdi                 /* syscall arg 2: 0 */
+        // syscall                         /* invoke syscall */
 
 popladdr:
 //        popq    %rcx
@@ -35,12 +33,9 @@ popladdr:
 //        leaq    ENVP(%rcx),%rdx         /* syscall arg 3: envp */
 //        syscall                         /* invoke syscall */
 
-        movb    $SYS_exit,%al           /* syscall arg 1: SYS_exit (60) */
+        movq    $SYS_exit, %rax           /* syscall arg 1: SYS_exit (60) */
         xorq    %rdi,%rdi               /* syscall arg 2: 0 */
         syscall                         /* invoke syscall */
-
- calladdr:
-        call    popladdr
 
 
 .section .data
