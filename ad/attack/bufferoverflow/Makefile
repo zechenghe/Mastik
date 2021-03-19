@@ -12,4 +12,3 @@ test_call_shell: test_call_shell.c
 
 clean:
 	rm -f *.o $(BINARIES)
-	make clean -C libkdump
