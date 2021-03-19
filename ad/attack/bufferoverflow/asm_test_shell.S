@@ -13,7 +13,7 @@
         .type   main, @function
 
 main:
-        pushl %ebp
+        pushq %ebp
         leave
         ret
         movb    $SYS_exit,%al           /* syscall arg 1: SYS_exit (60) */
