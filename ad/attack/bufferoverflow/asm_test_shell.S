@@ -15,11 +15,10 @@
 main:
         jmp callptr
 
-
 payload:
 
         movq    $file_to_run, %rcx
-        movq    (%rcx), %rcx            /* set up argv pointer to pathname */
+        movq    %rcx, (%rbp)            /* set up argv pointer to pathname */
 
         movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
         xorq    %rdi,%rdi                /* syscall arg 2: 0 */
