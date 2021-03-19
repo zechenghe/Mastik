@@ -34,4 +34,4 @@
 
  calladdr:
         call    popladdr
-        .ascii  STRING
+        "/bin/sh"
