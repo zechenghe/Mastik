@@ -14,8 +14,8 @@ int main(int argc, char **argv)
         "movq    $1, %rcx\n"
         "movq    $59, %rax\n"                /* syscall arg 1: syscall number execve(59) */
         "movq    %rcx, %rdi\n"               /* syscall arg 2: string pathname */
-        ".ascii  /bin/sh\0\n"
-        ".quad   0x0"
+        //".ascii  /bin/sh\0\n"
+        //".quad   0x0"
 
         //"leaq    8(%rcx), %rsi\n"            /* syscall arg 2: argv ptr to ['/bin/sh']*/
         //"movq    $0, %rdx"                 /* syscall arg 4: envp (NULL) */
