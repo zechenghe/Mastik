@@ -11,8 +11,8 @@
 int main(int argc, char **argv)
 {
     __asm(
-        "movq    $1, %rcx\n"
-        "movq    $59, %rax\n"                /* syscall arg 1: syscall number execve(59) */
+        "movq    $1, %rcx"
+        "movq    $59, %rax"                /* syscall arg 1: syscall number execve(59) */
 //        "movq    %rcx, %rdi"               /* syscall arg 2: string pathname */
 //        "leaq    8(%rcx), %rsi"            /* syscall arg 2: argv ptr to ['/bin/sh']*/
 //        "movq    $0, %rdx"                 /* syscall arg 4: envp (NULL) */
