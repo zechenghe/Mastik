@@ -19,7 +19,7 @@ main:
         push    %rax
         push    %rdi
 
-        movq    60, %rax                  /* syscall arg 1: SYS_exit (60) */
+        movq    $60, %rax                  /* syscall arg 1: SYS_exit (60) */
         //movq    0, %rdi                 /* syscall arg 2: 0 */
         //syscall                         /* invoke syscall */
 
