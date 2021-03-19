@@ -19,14 +19,11 @@ main:
 payload:
 
         movq    $file_to_run, %rcx
+        movq    %rcx, $8(%rcx)            /* set up argv pointer to pathname */
 
         movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
         xorq    %rdi,%rdi                /* syscall arg 2: 0 */
         syscall                          /* invoke syscall */
-
-        movq    %rcx, 8(%rcx)            /* set up argv pointer to pathname */
-
-
 
         xorq    %rax, %rax               /* get a 64-bit zero value */
         movq    %rax, (STRLEN)(%rcx)     /* null-terminate our string */
