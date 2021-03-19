@@ -4,11 +4,6 @@
 
 #include <sys/syscall.h>
 
-#define STRING  "/bin/sh\0"
-#define STRLEN  7
-#define ARGV    (STRLEN+1)
-#define ENVP    (ARGV+8)
-
 .globl main
         .type   main, @function
 
