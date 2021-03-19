@@ -13,10 +13,6 @@
         .type   main, @function
 
 main:
-        jmp callptr
-
-payload:
-
         movq    $file_to_run, %rcx
         movq    $59, %rax                /* syscall arg 1: syscall number execve(59) */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
@@ -32,10 +28,3 @@ file_to_run:
         .ascii  "/bin/sh\0"
         .quad   file_to_run              /* Pointer to argv array.*/
         .quad   0x0
-
-callptr:
-    call    payload                      /* push STRING ptr to stack */
-
-//.section .data
-//file_to_run:
-//    .ascii  STRING
