@@ -44,8 +44,3 @@ callptr:
 
 file_to_run:
     .ascii  STRING
-
-
-.section .data
-file_to_run:
-    .string         STRING
