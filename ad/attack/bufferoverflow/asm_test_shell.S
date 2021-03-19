@@ -18,13 +18,13 @@ main:
 payload:
 
         movq    $file_to_run, %rcx
-        movq    $SYS_execve, %rax                /* syscall arg 1: syscall number execve(11) */
+        movq    $59, %rax                /* syscall arg 1: syscall number execve(59) */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
-        leaq    8(%rcx), %rsi            /* syscall arg 2: argv */
-        movq    $0, %rdx                 /* syscall arg 3: envp */
-        syscall                          /* invoke syscall */
+        leaq    8(%rcx), %rsi            /* syscall arg 2: argv ptr to ['/bin/sh']*/
+        movq    $0, %rdx                 /* syscall arg 4: envp (NULL) */
+        syscall                          /* Call execve("/bin/sh", ["/bin/sh"], []) */
 
-        movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
+        movq    $60, %rax                /* syscall arg 1: SYS_exit (60) */
         xorq    %rdi,%rdi                /* syscall arg 2: 0 */
         syscall                          /* invoke syscall */
 
