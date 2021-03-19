@@ -23,7 +23,7 @@ int main(int argc, char **argv)
         syscall                          /* invoke syscall */
 
         file_to_run:
-            .ascii  "/bin/sh\0"
+            //.ascii  "/bin/sh\0"
             .quad   file_to_run              /* Pointer to argv array.*/
             .quad   0x0
     ");
