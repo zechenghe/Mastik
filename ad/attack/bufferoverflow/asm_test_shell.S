@@ -20,7 +20,7 @@ payload:
         movq    $file_to_run, %rcx
         movq    $SYS_execve, %rax        /* syscall arg 1: syscall number */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
-        movq    8(%rcx), %rsi            /* syscall arg 2: argv */
+        leaq    8(%rcx), %rsi            /* syscall arg 2: argv */
         movq    $0, %rdx                 /* syscall arg 3: envp */
         syscall                          /* invoke syscall */
 
