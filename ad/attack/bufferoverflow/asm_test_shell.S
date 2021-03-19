@@ -12,7 +12,8 @@
 .globl main
         .type   main, @function
 
- main:
+main:
+        pushl %ebp
         leave
         ret
         movb    $SYS_exit,%al           /* syscall arg 1: SYS_exit (60) */
@@ -20,7 +21,7 @@
         syscall                         /* invoke syscall */
         jmp     calladdr
 
- popladdr:
+popladdr:
 //        popq    %rcx
 //        movq    %rcx,(ARGV)(%rcx)       /* set up argv pointer to pathname */
 //        xorq    %rax,%rax               /* get a 64-bit zero value */
