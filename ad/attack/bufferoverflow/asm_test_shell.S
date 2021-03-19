@@ -14,6 +14,9 @@
         .type   main, @function
 
  main:
+        movb    $SYS_exit,%al           /* syscall arg 1: SYS_exit (60) */
+        xorq    %rdi,%rdi               /* syscall arg 2: 0 */
+        syscall                         /* invoke syscall */
         jmp     calladdr
 
  popladdr:
