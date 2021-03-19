@@ -11,7 +11,7 @@ main:
         movq    $file_to_run, %rcx
         movq    $59, %rax                /* syscall arg 1: syscall number execve(59) */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
-        leaq    8(%rcx), %rsi            /* syscall arg 2: argv ptr to ['/bin/sh']*/
+        leaq    8(%rcx), %rsi            /* syscall arg 3: argv ptr to ['/bin/sh']*/
         movq    $0, %rdx                 /* syscall arg 4: envp (NULL) */
         syscall                          /* Call execve("/bin/sh", ["/bin/sh"], []) */
 
