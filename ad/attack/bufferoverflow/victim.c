@@ -7,12 +7,25 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
+unsigned long get_sp(void)
+{
+    /* This function (suggested in alephOne's paper) prints the
+       stack pointer using assembly code. */
+    __asm__("movl %esp,%eax");
+}
+
+
 int vulnerable_func(char *str)
 {
 	char buffer[72];
+    char *addr;
 
+    addr = get_sp();
+    printf("%p", addr);
 	/* The following strcpy function has a buffer overflow problem */
-	strcpy(buffer, str);
+
+    strcpy(buffer, str);
 	return 0;
 }
 
