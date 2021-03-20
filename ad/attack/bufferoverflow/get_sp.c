@@ -13,7 +13,7 @@ unsigned long get_sp(void)
 {
     /* This function (suggested in alephOne's paper) prints the
        stack pointer using assembly code. */
-    __asm__("movl %esp,%eax");
+    __asm__("movl %rsp,%rax");
 }
 
 int main(int argc, char **argv)
