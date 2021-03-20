@@ -9,10 +9,10 @@
 .globl main
         .type   main, @function
 
-.text
-
 main:
-        .ascii  "aaaa"
+        nop
+        nop
+        nop
         movq    $file_to_run, %rcx
         movq    $59, %rax                /* syscall arg 1: syscall number execve(59) */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
