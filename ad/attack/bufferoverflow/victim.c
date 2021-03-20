@@ -9,7 +9,7 @@
 #include <string.h>
 int vulnerable_func(char *str)
 {
-	char buffer[24];
+	char buffer[72];
 
 	/* The following strcpy function has a buffer overflow problem */
 	strcpy(buffer, str);
