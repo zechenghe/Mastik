@@ -19,7 +19,7 @@ unsigned long get_sp(void)
 int main(int argc, char **argv)
 {
     char *addr;
-    addr = get_sp()
-    print("\x", addr)
+    addr = get_sp();
+    print("\x", addr);
 	return 0;
 }
