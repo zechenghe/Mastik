@@ -25,7 +25,7 @@ int vulnerable_func(char *str)
 
     /* The following strcpy function has a buffer overflow problem */
 
-    strcpy(buffer, str);
+    //strcpy(buffer, str);
 	return 0;
 }
 
