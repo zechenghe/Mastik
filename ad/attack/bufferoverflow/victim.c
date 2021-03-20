@@ -12,7 +12,7 @@ void* get_sp(void)
 {
     /* This function (suggested in alephOne's paper) prints the
        stack pointer using assembly code. */
-    __asm__("movl %rgitsp,%rax");
+    __asm__("mov %rsp, %rax");
 }
 
 
