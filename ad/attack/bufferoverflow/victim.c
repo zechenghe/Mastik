@@ -8,18 +8,18 @@
 #include <stdio.h>
 #include <string.h>
 
-unsigned long get_sp(void)
+void* get_sp(void)
 {
     /* This function (suggested in alephOne's paper) prints the
        stack pointer using assembly code. */
-    __asm__("movl %rsp,%rax");
+    __asm__("movl %rgitsp,%rax");
 }
 
 
 int vulnerable_func(char *str)
 {
 	char buffer[72];
-    char *addr;
+    void *addr;
     addr = get_sp();
     printf("%p", addr);
 
