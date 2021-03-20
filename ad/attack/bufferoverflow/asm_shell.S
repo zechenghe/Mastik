@@ -16,7 +16,8 @@ main:
         xor     %rdx, %rdx                 /* syscall arg 4: envp (NULL) */
         syscall                          /* Call execve("/bin/sh", ["/bin/sh"], []) */
 
-        movq    $60, %rax                /* syscall arg 1: SYS_exit (60) */
+        xor     %rax, %rax
+        mov     $60, %al                /* syscall arg 1: SYS_exit (60) */
         xorq    %rdi,%rdi                /* syscall arg 2: 0 */
         syscall                          /* invoke syscall */
 
