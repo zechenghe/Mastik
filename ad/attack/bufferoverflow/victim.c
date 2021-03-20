@@ -19,13 +19,13 @@ void* get_sp(void)
 int vulnerable_func(char *str)
 {
 	char buffer[72];
-    void *addr;
-    addr = get_sp();
-    printf("%p", addr);
+    //void *addr;
+    //addr = get_sp();
+    //printf("%p", addr);
 
     /* The following strcpy function has a buffer overflow problem */
 
-    //strcpy(buffer, str);
+    strcpy(buffer, str);
 	return 0;
 }
 
