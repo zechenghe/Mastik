@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	FILE *badfile;
 	badfile = fopen("badfile", "r");
 	fread(str, sizeof(char), 1024, badfile);
-    print("%c%c%c%c", str[0], str[1], str[2], str[3]);
+    printf("%c%c%c%c", str[0], str[1], str[2], str[3]);
 
 	vulnerable_func(str);
 	printf("If you see this, the program returned correctly\n");
