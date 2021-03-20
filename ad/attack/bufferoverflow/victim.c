@@ -21,11 +21,11 @@ int vulnerable_func(char *str)
 	char buffer[72];
     //void *addr;
     //addr = get_sp();
-    //printf("%p", addr);
+    printf("%p", buffer);
 
     /* The following strcpy function has a buffer overflow problem */
 
-    strcpy(buffer, str);
+    //strcpy(buffer, str);
 	return 0;
 }
 
