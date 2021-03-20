@@ -19,13 +19,13 @@ unsigned long get_sp(void)
 int vulnerable_func(char *str)
 {
 	char buffer[72];
-    char *addr;
+    //char *addr;
+    //addr = get_sp();
+    //printf("%p", addr);
 
-    addr = get_sp();
-    printf("%p", addr);
-	/* The following strcpy function has a buffer overflow problem */
+    /* The following strcpy function has a buffer overflow problem */
 
-    //strcpy(buffer, str);
+    strcpy(buffer, str);
 	return 0;
 }
 
@@ -36,6 +36,6 @@ int main(int argc, char **argv)
 	badfile = fopen("badfile", "r");
 	fread(str, sizeof(char), 1024, badfile);
 	vulnerable_func(str);
-	//printf("If you see this, the program returned correctly\n");
+	printf("If you see this, the program returned correctly\n");
 	return 0;
 }
