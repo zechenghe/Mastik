@@ -1,6 +1,6 @@
 /* victim.c */
 /* Author: Zecheng He @ Princeton University */
-/Payload (write to stack) to invoke a shell in victim.c/
+/* Payload (write to stack) to invoke a shell in victim.c */
 
 #include <sys/syscall.h>
 
