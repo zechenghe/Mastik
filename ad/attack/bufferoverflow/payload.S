@@ -9,6 +9,8 @@
 .globl main
         .type   main, @function
 
+.text
+
 main:
         .ascii  "aaaa"
         movq    $file_to_run, %rcx
