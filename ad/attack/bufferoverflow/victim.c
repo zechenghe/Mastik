@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 {
 	char str[1024];
 	FILE *badfile;
-	badfile = fopen("badfile", "rb");
+	badfile = fopen("badfile", "r");
 	fread(str, sizeof(char), 1024, badfile);
     printf("%c%c%c%c", str[0], str[1], str[2], str[3]);
 
