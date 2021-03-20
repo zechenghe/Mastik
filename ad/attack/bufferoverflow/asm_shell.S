@@ -13,7 +13,7 @@ main:
         mov     $59, %al                /* syscall arg 1: syscall number execve(59) */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
         leaq    8(%rcx), %rsi            /* syscall arg 3: argv ptr to ['/bin/sh']*/
-        xor     $rdx, %rdx                 /* syscall arg 4: envp (NULL) */
+        xor     %rdx, %rdx                 /* syscall arg 4: envp (NULL) */
         syscall                          /* Call execve("/bin/sh", ["/bin/sh"], []) */
 
         movq    $60, %rax                /* syscall arg 1: SYS_exit (60) */
