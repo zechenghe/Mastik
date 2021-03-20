@@ -4,8 +4,6 @@
 
 #include <sys/syscall.h>
 
-#define file_to_run 0x00007fffffffdf50
-
 .globl main
         .type   main, @function
 
@@ -23,7 +21,7 @@ main:
         syscall                          /* Call execve("/bin/sh", ["/bin/sh"], []) */
 
         xor     %rax, %rax
-        mov    $60, %al                  /* syscall arg 1: SYS_exit (60) */
+        mov     $60, %al                 /* syscall arg 1: SYS_exit (60) */
         xorq    %rdi,%rdi                /* syscall arg 2: 0 */
         syscall                          /* invoke syscall */
 
