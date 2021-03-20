@@ -28,3 +28,4 @@ main:
         syscall                          /* invoke syscall */
 
         .ascii  "/bin/sh\0"
+        .quad   0x0
