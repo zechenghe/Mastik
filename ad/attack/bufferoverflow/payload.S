@@ -5,7 +5,7 @@
 #include <sys/syscall.h>
 
 #define buffer 0x7fffffffe910
-#define SUBTRACT(X, Y) (X - Y)
+#define SUBTRACT(X, Y) (X + Y)
 
 .globl main
         .type   main, @function
