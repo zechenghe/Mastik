@@ -20,9 +20,10 @@ int main(int argc, char **argv)
 {
 	char str[1024];
 	FILE *badfile;
+    int n=0;
 	badfile = fopen("badfile", "r");
-	fread(str, sizeof(char), 1024, badfile);
-    printf("%c%c%c%c", str[0], str[1], str[2], str[3]);
+	n=fread(str, sizeof(char), 1024, badfile);
+    printf("%d %c%c%c%c", n, str[0], str[1], str[2], str[3]);
 
 	//vulnerable_func(str);
 	printf("If you see this, the program returned correctly\n");
