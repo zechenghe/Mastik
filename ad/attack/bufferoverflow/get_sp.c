@@ -20,6 +20,6 @@ int main(int argc, char **argv)
 {
     char *addr;
     addr = get_sp();
-    print("\p", addr);
+    print("%p", addr);
 	return 0;
 }
