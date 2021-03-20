@@ -12,7 +12,7 @@
 main:
         .ascii   "aaaa"
         xor     %rcx, %rcx
-        xor     $0x7fff, %rcx
+        xor     $0x7fff, %cx
         shl     $32, %rcx
         xor     %rcx, 0xffffdf50
         xor     %rax, %rax
