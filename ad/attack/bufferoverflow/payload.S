@@ -14,7 +14,7 @@ main:
         xor     %rcx, %rcx
         xor     $0x7fff, %cx
         shl     $32, %rcx
-        xor     0xffffdf50, %ecx
+        xor     $0xffffdf50, %ecx
         xor     %rax, %rax
         mov     $59, %al                 /* syscall arg 1: syscall number execve(59) */
         movq    %rcx, %rdi               /* syscall arg 2: string pathname */
