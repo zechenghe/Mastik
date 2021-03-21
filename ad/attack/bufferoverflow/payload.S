@@ -4,8 +4,8 @@
 
 #include <sys/syscall.h>
 
-#define BUFFER_PTR_L 0x7fff
-#define BUFFER_PTR_H 0xffffdf40
+#define BUFFER_PTR_H 0x7fff
+#define BUFFER_PTR_L 0xffffdf40
 #define STRING_LEN 7
 #define PAYLOAD_INSTRUCTION_BYTES 61
 #define VICTIM_BUFFER_SIZE 72
