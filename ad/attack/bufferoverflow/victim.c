@@ -36,6 +36,6 @@ int main(int argc, char **argv)
 	badfile = fopen("badfile", "r");
 	fread(str, sizeof(char), 1024, badfile);
 	vulnerable_func(str);
-	printf("If you see this, the program returned correctly\n");
+	printf("If you see this, payload is NOT executed. Attack fails.\n");
 	return 0;
 }
