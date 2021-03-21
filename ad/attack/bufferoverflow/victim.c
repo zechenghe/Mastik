@@ -18,7 +18,7 @@ void* get_sp(void)
 
 int vulnerable_func(char *str)
 {
-	char buffer[72];
+	char buffer[128];
     //void *addr;
     //addr = get_sp();
     printf("%p\n", buffer);
