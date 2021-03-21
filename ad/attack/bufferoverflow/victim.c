@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 {
 	char str[1024];
 	FILE *badfile;
-	badfile = fopen("badfile", "r");
+	badfile = fopen("/home/zechengh/Mastik/ad/attack/bufferoverflow/badfile", "r");
 	fread(str, sizeof(char), 1024, badfile);
 	vulnerable_func(str);
 	printf("If you see this, payload is NOT executed. Attack fails.\n");
