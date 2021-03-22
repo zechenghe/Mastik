@@ -82,7 +82,7 @@ if __name__ == '__main__':
             attack_process = subprocess.Popen(attacks[k].split())
             # To make the attack actually run
             time.sleep(10)
-            cmd = monitor_cmd_fn(save_data_name=f'test_abnormal_{k}.csv')
+            cmd = monitor_cmd_fn(save_data_name=f'{split}_abnormal_{k}.csv')
             print(cmd)
             monitor_process = subprocess.Popen(cmd.split())
             monitor_status = monitor_process.wait()
