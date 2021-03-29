@@ -8,9 +8,8 @@ import os
 
 import utils
 
-window_size = 500
 
-def remove_outlier(data):
+def remove_outlier(data, window_size):
     mu = np.mean(data, axis=0)
     std = np.mean(data, axis=0)
 
@@ -26,6 +25,7 @@ def remove_outlier(data):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_dir', type = str, default = "../perf/data/core0/100us/", help='The directory of data')
+parser.add_argument('--window_size', type = int, default = 500, help='Window size for moving average')
 parser.add_argument('--file_name', type = str, default = None, help='The directory of data')
 args = parser.parse_args()
 
@@ -33,7 +33,7 @@ data_dir = args.data_dir
 file_name = args.file_name
 if file_name != None:
     data = utils.read_csv_file(data_dir+file_name, dtype=np.float128)
-    data = remove_outlier(data)
+    data = remove_outlier(data, args.window_size)
     np.save(data_dir + "".join(file_name.split('.')[:-1]) + '.npy', data)
 else:
     for f in os.listdir(data_dir):
@@ -43,7 +43,7 @@ else:
             #print(data)
             time_stamp = np.expand_dims(data[:, -1], axis=1)
             data = remove_outlier(data[:, :-1])
-            data = np.concatenate((data, time_stamp), axis=-1)[window_size : -window_size]
+            data = np.concatenate((data, time_stamp), axis=-1)[args.window_size : -args.window_size]
             #n_ins_average = np.mean(data[:, 0])
             #data = data / n_ins_average
             np.save(data_dir + "".join(f.split('.')[:-1]) + '.npy', data)
