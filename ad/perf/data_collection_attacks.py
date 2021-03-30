@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
     gpg_command = 'taskset 0x8 /home/zechengh/Mastik/ad/bg_program/run_gpg.sh'
 
-    spec_benchmarks = ('bzip2', 'gcc', 'mcf', 'milc', 'namd', 'gobmk', 'soplex', 'hmmer', 'libquantum', 'h264ref')
+    spec_benchmarks = ('gcc', 'libquantum') # 'bzip2', 'mcf', 'milc', 'namd', 'gobmk', 'soplex', 'hmmer', 'h264ref'
 
     save_data_dir = 'data/{bg_program}/{us}us/'.format(
         bg_program=args.bg_program,
