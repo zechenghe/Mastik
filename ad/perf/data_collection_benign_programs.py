@@ -37,7 +37,7 @@ if __name__ == '__main__':
     gpg_command = 'taskset 0x8 /home/zechengh/Mastik/ad/bg_program/run_gpg.sh'
     """
 
-    spec_benchmarks = ('gcc', 'bzip2', 'mcf', 'libquantum', 'h264')
+    spec_benchmarks = ('gcc', 'bzip2', 'mcf', 'libquantum', 'h264ref')
     #('perlbench', 'bzip2', 'gcc', 'mcf', 'milc', 'namd',
     #'gobmk', 'soplex', 'povray', 'hmmer', 'sjeng', 'libquantum',
     #'h264ref', 'lbm', 'omnetpp', 'astar')
