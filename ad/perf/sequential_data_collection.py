@@ -32,10 +32,8 @@ if __name__ == '__main__':
         'spectrev2': 'taskset 0x3 /home/zechengh/Mastik/ad/attack/spectre-v2/spectrev2 &',
         'spectrev3': 'taskset 0x3 /home/zechengh/Mastik/ad/attack/meltdown/memdump &',
         'spectrev4': 'taskset 0x3 /home/zechengh/Mastik/ad/attack/spectre-ssb/spectrev4 &',
+        'bufferoverflow': 'taskset 0x8 /home/zechengh/Mastik/ad/bg_program/run_bufferoverflow.sh &',
         }
-
-    gpg_command = 'taskset 0x3 /home/zechengh/Mastik/ad/bg_program/run_gpg.sh'
-    spec_command = '/home/zechengh/Mastik/ad/bg_program/run_fixed_spec.py'
 
     save_data_dir = 'data/{bg_program}/{us}us/'.format(
         bg_program=args.bg_program,
@@ -68,32 +66,32 @@ if __name__ == '__main__':
     for _ in range(5):
         os.kill(attack_processes['fr'].pid, signal.SIGCONT)
         schedule['fr']['start'].append(utils.get_time())
-        time.sleep(1)
+        time.sleep(2)
         os.kill(attack_processes['fr'].pid, signal.SIGSTOP)
         schedule['fr']['end'].append(utils.get_time())
         time.sleep(1)
 
-    time.sleep(20)
+    time.sleep(30)
 
     # Run Spectre attack 5 times, sleep random time between 1-10s
     for _ in range(5):
         os.kill(attack_processes['spectrev1'].pid, signal.SIGCONT)
         schedule['spectrev1']['start'].append(utils.get_time())
-        time.sleep(1)
+        time.sleep(2)
         os.kill(attack_processes['spectrev1'].pid, signal.SIGSTOP)
         schedule['spectrev1']['end'].append(utils.get_time())
         time.sleep(random.randint(1,10))
 
-    time.sleep(20)
+    time.sleep(30)
 
     # Randomly run multiple attacks
-    for k in attacks.keys():
+    for k in ['l1pp', 'spectrev4', 'spectrev1', 'ff', 'l3pp', 'bufferoverflow', 'spectrev2', 'spectrev3', 'fr']:
         os.kill(attack_processes[k].pid, signal.SIGCONT)
         schedule[k]['start'].append(utils.get_time())
-        time.sleep(2)
+        time.sleep(4)
         os.kill(attack_processes[k].pid, signal.SIGSTOP)
         schedule[k]['end'].append(utils.get_time())
-        time.sleep(random.randint(1,10))
+        time.sleep(random.randint(5,15))
 
     for k, p in attack_processes.items():
         p.terminate()
