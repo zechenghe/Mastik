@@ -98,12 +98,16 @@ if __name__ == '__main__':
         p.terminate()
 
     time.sleep(30)
-    # Attack with gpg running
-    gpg_process = subprocess.Popen(gpg_command.split())
+
+    # GCC running
+    cmd = utils.spec_cmd(spec_prog)
+    print(cmd)
+    spec_process = subprocess.Popen(cmd.split())
+
     schedule[k]['start'].append(utils.get_time())
     time.sleep(30)
     schedule[k]['end'].append(utils.get_time())
-    gpg_process.terminate()
+    spec_process.terminate()
 
     monitor_process.wait()
 
