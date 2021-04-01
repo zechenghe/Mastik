@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
     attacks = {
         'l1pp': 'taskset 0x8 /home/zechengh/Mastik/exp/test_workspace/spy_l1pp 1000 &',
-        'l3pp': 'taskset 0x8 /home/zechengh/Mastik/exp/test_workspace/spy_l3pp 1000 &',
+        'l3pp': 'taskset 0x8 /home/zechengh/Mastik/ex\p/test_workspace/spy_l3pp 1000 &',
         'fr': 'taskset 0x8 /home/zechengh/Mastik/exp/test_workspace/spy_fr /home/zechengh/Mastik/gnupg-1.4.13/g10/gpg &',
         'ff': 'taskset 0x8 /home/zechengh/Mastik/exp/test_workspace/spy_ff /home/zechengh/Mastik/gnupg-1.4.13/g10/gpg &',
         'spectrev1': 'taskset 0x8 /home/zechengh/Mastik/ad/attack/spectre-v1/spectrev1 &',
@@ -34,6 +34,7 @@ if __name__ == '__main__':
         'spectrev4': 'taskset 0x8 /home/zechengh/Mastik/ad/attack/spectre-ssb/spectrev4 &',
         'bufferoverflow': 'taskset 0x8 /home/zechengh/Mastik/ad/bg_program/run_bufferoverflow.sh &',
         }
+    gpg_command = 'taskset 0x8 /home/zechengh/Mastik/ad/bg_program/run_gpg.sh'
 
     save_data_dir = 'data/{bg_program}/{us}us/'.format(
         bg_program=args.bg_program,
@@ -62,11 +63,11 @@ if __name__ == '__main__':
     # Start of HPC collection
     time.sleep(20)
 
-    # Run flush-reload attack 5 times, sleep 1s
-    for _ in range(5):
+    # Run flush-reload attack 2 times, sleep 1s
+    for _ in range(2):
         os.kill(attack_processes['fr'].pid, signal.SIGCONT)
         schedule['fr']['start'].append(utils.get_time())
-        time.sleep(2)
+        time.sleep(5)
         os.kill(attack_processes['fr'].pid, signal.SIGSTOP)
         schedule['fr']['end'].append(utils.get_time())
         time.sleep(1)
@@ -95,6 +96,12 @@ if __name__ == '__main__':
 
     for k, p in attack_processes.items():
         p.terminate()
+
+    time.sleep(30)
+    # Attack with gpg running
+    gpg_process = subprocess.Popen(gpg_command.split())
+    time.sleep(30)
+    gpg_process.terminate()
 
     monitor_process.wait()
 
