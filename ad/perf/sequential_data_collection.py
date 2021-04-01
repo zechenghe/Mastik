@@ -100,7 +100,9 @@ if __name__ == '__main__':
     time.sleep(30)
     # Attack with gpg running
     gpg_process = subprocess.Popen(gpg_command.split())
+    schedule[k]['start'].append(utils.get_time())
     time.sleep(30)
+    schedule[k]['end'].append(utils.get_time())
     gpg_process.terminate()
 
     monitor_process.wait()
@@ -111,7 +113,7 @@ if __name__ == '__main__':
     p = subprocess.Popen(cmd.split())
     p_status = p.wait()
 
-    cmd = 'python2 ../detector/preprocess.py --data_dir {save_data_dir}'.format(
+    cmd = 'python2 ../detector/preprocess.py --data_dir {save_data_dir} --window_size 100'.format(
         save_data_dir=save_data_dir
     )
     print(cmd)
