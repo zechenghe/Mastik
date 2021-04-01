@@ -100,7 +100,7 @@ if __name__ == '__main__':
     time.sleep(30)
 
     # GCC running
-    cmd = utils.spec_cmd(spec_prog)
+    cmd = utils.spec_cmd('gcc')
     print(cmd)
     spec_process = subprocess.Popen(cmd.split())
 
