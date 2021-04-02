@@ -97,8 +97,6 @@ if __name__ == '__main__':
         schedule[k]['end'].append(utils.get_time())
         time.sleep(random.randint(0,20))
 
-    for k, p in attack_processes.items():
-        p.terminate()
 
     time.sleep(30)
 
@@ -150,6 +148,9 @@ if __name__ == '__main__':
 
 
     monitor_process.wait()
+
+    for k, p in attack_processes.items():
+        p.terminate()
 
     # Clean up
     cmd = 'sudo chown zechengh ../ -R'
