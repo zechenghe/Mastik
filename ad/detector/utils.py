@@ -169,11 +169,11 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
 
     if include_label:
         plt.legend(loc="lower right")
-    plt.show(block = False)
 
     if fname is not None:
         plt.savefig(fname=fname)
-
+    
+    plt.show(block = False)
 
 def plot_hist(data, xlabel=None, ylabel=None, title=None):
     """
