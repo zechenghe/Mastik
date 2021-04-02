@@ -141,7 +141,7 @@ def seq_win_vectorize(seq, window_size, n_samples=None):
     return np.array(res)
 
 def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsize=None,
-    include_label=True, fname=None):
+    include_legend=True, fname=None, **kwargs):
     """
         Plot squences for visualization and debug.
         Args:
@@ -167,12 +167,15 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
     if title is not None:
         plt.title(title)
 
-    if include_label:
-        plt.legend(loc="lower right")
+    if include_legend:
+        plt.legend(loc="top right")
+
+    if 'xlabels' in kwargs.keys():
+        plt.xticks(range(len(kwargs['xlabels'])), kwargs['xlabels'])
 
     if fname is not None:
         plt.savefig(fname=fname)
-    
+
     plt.show(block = False)
 
 def plot_hist(data, xlabel=None, ylabel=None, title=None):
