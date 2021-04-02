@@ -155,8 +155,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
         t = np.arange(start, end, 1.0)
 
         seq_plot, = plt.plot(t, v[start:end])
-        if include_label:
-            seq_plot.set_label(k)
+        seq_plot.set_label(k)
 
     if xlabel is not None:
         plt.xlabel(xlabel)
@@ -167,7 +166,8 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
     if title is not None:
         plt.title(title)
 
-    plt.legend(loc="lower right")
+    if include_label:
+        plt.legend(loc="lower right")
     plt.show(block = False)
 
 
