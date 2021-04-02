@@ -171,7 +171,10 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
         plt.legend(loc="upper right")
 
     if 'xticks' in kwargs.keys():
-        plt.xticks(range(len(kwargs['xticks'])), kwargs['xticks'])
+        if 'xticks_locations' in kwargs.keys():
+            plt.xticks(kwargs['xticks_locations'], kwargs['xticksg'])
+        else:
+            plt.xticks(range(len(kwargs['xticks'])), kwargs['xticksg'])
 
     if fname is not None:
         plt.savefig(fname=fname)
