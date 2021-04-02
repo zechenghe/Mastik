@@ -63,6 +63,7 @@ if __name__ == '__main__':
     # Start of HPC collection
     time.sleep(20)
 
+    """
     # Run flush-reload attack 2 times, sleep 1s
     for _ in range(2):
         os.kill(attack_processes['fr'].pid, signal.SIGCONT)
@@ -84,15 +85,16 @@ if __name__ == '__main__':
         time.sleep(random.randint(1,10))
 
     time.sleep(30)
+    """
 
     # Randomly run multiple attacks
     for k in ['l1pp', 'spectrev4', 'spectrev1', 'ff', 'l3pp', 'bufferoverflow', 'spectrev2', 'spectrev3', 'fr']:
         os.kill(attack_processes[k].pid, signal.SIGCONT)
         schedule[k]['start'].append(utils.get_time())
-        time.sleep(4)
+        time.sleep(10)
         os.kill(attack_processes[k].pid, signal.SIGSTOP)
         schedule[k]['end'].append(utils.get_time())
-        time.sleep(random.randint(5,15))
+        time.sleep(random.randint(10,30))
 
     for k, p in attack_processes.items():
         p.terminate()
