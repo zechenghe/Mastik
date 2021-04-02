@@ -95,7 +95,7 @@ if __name__ == '__main__':
         time.sleep(10)
         os.kill(attack_processes[k].pid, signal.SIGSTOP)
         schedule[k]['end'].append(utils.get_time())
-        time.sleep(random.randint(0,20))
+        time.sleep(random.randint(20,40))
 
 
     time.sleep(30)
