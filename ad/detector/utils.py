@@ -168,7 +168,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
         plt.title(title)
 
     if include_legend:
-        plt.legend(loc="top right")
+        plt.legend(loc="upper right")
 
     if 'xlabels' in kwargs.keys():
         plt.xticks(range(len(kwargs['xlabels'])), kwargs['xlabels'])
