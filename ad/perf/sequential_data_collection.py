@@ -102,25 +102,25 @@ if __name__ == '__main__':
 
 
     # Run flush reload attack and gpg concurrently
-    # First, run flush reload attack for 30s
+    # First, run flush_reload attack for 30s
     os.kill(attack_processes['fr'].pid, signal.SIGCONT)
     schedule[k]['start'].append(utils.get_time())
     time.sleep(30)
     os.kill(attack_processes['fr'].pid, signal.SIGSTOP)
     schedule[k]['end'].append(utils.get_time())
-    time.sleep(20)
+    time.sleep(30)
 
     # Second, run gpg for 45s
     gpg_process = subprocess.Popen(gpg_command.split())
     schedule[k]['start'].append(utils.get_time())
     time.sleep(45)
 
-    # Third, run fr+gpg for 15s
+    # Third, run flush_reload+gpg for 15s
     os.kill(attack_processes['fr'].pid, signal.SIGCONT)
     time.sleep(15)
     gpg_process.terminate()
 
-    # Fourth, run fr for 15s
+    # Fourth, run flush_reload for 15s
     time.sleep(15)
     os.kill(attack_processes['fr'].pid, signal.SIGSTOP)
     schedule[k]['end'].append(utils.get_time())
