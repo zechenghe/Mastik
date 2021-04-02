@@ -53,6 +53,7 @@ if __name__ == '__main__':
 
     attack_processes = {}
 
+    # Start attack processes and pause them
     for k in attacks.keys():
         attack_processes[k] = subprocess.Popen(attacks[k].split())
         os.kill(attack_processes[k].pid, signal.SIGSTOP)
@@ -94,22 +95,59 @@ if __name__ == '__main__':
         time.sleep(10)
         os.kill(attack_processes[k].pid, signal.SIGSTOP)
         schedule[k]['end'].append(utils.get_time())
-        time.sleep(random.randint(10,30))
+        time.sleep(random.randint(0,20))
 
     for k, p in attack_processes.items():
         p.terminate()
 
     time.sleep(30)
 
-    # GCC running
+
+    # Run flush reload attack and gpg
+    os.kill(attack_processes['fr'].pid, signal.SIGCONT)
+    schedule[k]['start'].append(utils.get_time())
+    time.sleep(10)
+    os.kill(attack_processes['fr'].pid, signal.SIGSTOP)
+    schedule[k]['end'].append(utils.get_time())
+    time.sleep(20)
+
+    gpg_process = subprocess.Popen(gpg_command.split())
+    schedule[k]['start'].append(utils.get_time())
+    time.sleep(60)
+    schedule[k]['end'].append(utils.get_time())
+    gpg_process.terminate()
+
+    os.kill(attack_processes['fr'].pid, signal.SIGCONT)
+    schedule[k]['start'].append(utils.get_time())
+    time.sleep(10)
+    os.kill(attack_processes['fr'].pid, signal.SIGSTOP)
+    schedule[k]['end'].append(utils.get_time())
+    time.sleep(20)
+
+
+    # Run spectrev3 attack and gpg
+    os.kill(attack_processes['spectrev3'].pid, signal.SIGCONT)
+    schedule[k]['start'].append(utils.get_time())
+    time.sleep(10)
+    os.kill(attack_processes['spectrev3'].pid, signal.SIGSTOP)
+    schedule[k]['end'].append(utils.get_time())
+    time.sleep(20)
+
     cmd = utils.spec_cmd('gcc')
     print(cmd)
     spec_process = subprocess.Popen(cmd.split())
-
     schedule[k]['start'].append(utils.get_time())
     time.sleep(60)
     schedule[k]['end'].append(utils.get_time())
     spec_process.terminate()
+
+    os.kill(attack_processes['spectrev3'].pid, signal.SIGCONT)
+    schedule[k]['start'].append(utils.get_time())
+    time.sleep(10)
+    os.kill(attack_processes['spectrev3'].pid, signal.SIGSTOP)
+    schedule[k]['end'].append(utils.get_time())
+    time.sleep(20)
+
 
     monitor_process.wait()
 
