@@ -168,7 +168,10 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
         plt.title(title)
 
     if include_legend:
-        plt.legend(loc="upper right")
+        if 'legend_location' in kwargs:
+            plt.legend(loc=kwargs['legend_location'])
+        else:
+            plt.legend(loc='upper right')
 
     if 'xticks' in kwargs.keys():
         if 'xticks_locations' in kwargs.keys():
