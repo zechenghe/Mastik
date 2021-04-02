@@ -107,7 +107,7 @@ if __name__ == '__main__':
     spec_process = subprocess.Popen(cmd.split())
 
     schedule[k]['start'].append(utils.get_time())
-    time.sleep(30)
+    time.sleep(60)
     schedule[k]['end'].append(utils.get_time())
     spec_process.terminate()
 
