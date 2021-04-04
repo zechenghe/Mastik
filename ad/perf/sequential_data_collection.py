@@ -127,7 +127,7 @@ if __name__ == '__main__':
     time.sleep(20)
 
 
-    # Run spectrev3 attack and gpg
+    # Run spectrev3 attack and gcc
     os.kill(attack_processes['spectrev3'].pid, signal.SIGCONT)
     schedule[k]['start'].append(utils.get_time())
     time.sleep(10)
@@ -135,7 +135,7 @@ if __name__ == '__main__':
     schedule[k]['end'].append(utils.get_time())
     time.sleep(20)
 
-    cmd = utils.spec_cmd('gcc')
+    cmd = utils.spec_cmd('gcc', iterations=20)
     print(cmd)
     spec_process = subprocess.Popen(cmd.split())
     schedule[k]['start'].append(utils.get_time())

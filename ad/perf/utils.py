@@ -30,7 +30,6 @@ def clean_spec():
 def get_time():
     return int(time.time()*1000000)
 
-def spec_cmd(spec_prog):
-    return "taskset 0x8 runspec --config=test.cfg --size=train" \
-    " --noreportable --tune=base --iterations=1 {spec_prog}".format(
-        spec_prog=spec_prog)
+def spec_cmd(spec_prog, iterations=1):
+    return f"taskset 0x8 runspec --config=test.cfg --size=train" \
+    " --noreportable --tune=base --iterations={iterations} {spec_prog}"
