@@ -29,7 +29,7 @@ if __name__ == '__main__':
     )
     os.system('mkdir -p {save_data_dir}'.format(save_data_dir=save_data_dir))
 
-    attack = utils.attacks
+    attacks = utils.attacks
     gpg_command = utils.gpg_command
 
     monitor_cmd_fn=functools.partial(
