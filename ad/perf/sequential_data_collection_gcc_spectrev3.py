@@ -62,7 +62,7 @@ if __name__ == '__main__':
     schedule[k]['end'].append(utils.get_time())
     time.sleep(20)
 
-    cmd = utils.spec_cmd('gcc', iterations=20)
+    cmd = utils.spec_cmd('gcc')
     print(cmd)
     spec_process = subprocess.Popen(cmd.split())
     schedule[k]['start'].append(utils.get_time())
