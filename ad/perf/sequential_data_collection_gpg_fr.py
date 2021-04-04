@@ -54,17 +54,7 @@ if __name__ == '__main__':
     # Start of HPC collection
     time.sleep(20)
 
-    # Randomly run multiple attacks
-    for k in ['l1pp', 'spectrev4', 'spectrev1', 'ff', 'l3pp', 'bufferoverflow', 'spectrev2', 'spectrev3', 'fr']:
-        os.kill(attack_processes[k].pid, signal.SIGCONT)
-        schedule[k]['start'].append(utils.get_time())
-        time.sleep(10)
-        os.kill(attack_processes[k].pid, signal.SIGSTOP)
-        schedule[k]['end'].append(utils.get_time())
-        time.sleep(random.randint(10,40))
 
-
-    """
     # Run flush reload attack and gpg concurrently
     # First, run flush_reload attack for 30s
     os.kill(attack_processes['fr'].pid, signal.SIGCONT)
@@ -90,33 +80,6 @@ if __name__ == '__main__':
     schedule[k]['end'].append(utils.get_time())
     time.sleep(20)
 
-
-    # Run spectrev3 attack and gcc
-    os.kill(attack_processes['spectrev3'].pid, signal.SIGCONT)
-    schedule[k]['start'].append(utils.get_time())
-    time.sleep(10)
-    os.kill(attack_processes['spectrev3'].pid, signal.SIGSTOP)
-    schedule[k]['end'].append(utils.get_time())
-    time.sleep(20)
-
-    cmd = utils.spec_cmd('gcc', iterations=20)
-    print(cmd)
-    spec_process = subprocess.Popen(cmd.split())
-    schedule[k]['start'].append(utils.get_time())
-    time.sleep(60)
-    schedule[k]['end'].append(utils.get_time())
-    spec_process.terminate()
-
-    time.sleep(20)
-
-    os.kill(attack_processes['spectrev3'].pid, signal.SIGCONT)
-    schedule[k]['start'].append(utils.get_time())
-    time.sleep(10)
-    os.kill(attack_processes['spectrev3'].pid, signal.SIGSTOP)
-    schedule[k]['end'].append(utils.get_time())
-    time.sleep(20)
-    """
-
     monitor_process.wait()
 
     for k, p in attack_processes.items():
@@ -135,5 +98,5 @@ if __name__ == '__main__':
     p = subprocess.Popen(cmd.split())
     p_status = p.wait()
 
-    with open(os.path.join(save_data_dir, 'schedule'), 'w+') as f:
+    with open(os.path.join(save_data_dir, 'schedule_gpg_fr'), 'w+') as f:
         json.dump(dict(schedule), f)

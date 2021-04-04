@@ -32,7 +32,7 @@ def get_time():
 
 def spec_cmd(spec_prog, iterations=1):
     return f"taskset 0x8 runspec --config=test.cfg --size=train" \
-    " --noreportable --tune=base --iterations={iterations} {spec_prog}"
+    f" --noreportable --tune=base --iterations={iterations} {spec_prog}"
 
 attacks = {
         'l1pp': 'taskset 0x8 /home/zechengh/Mastik/exp/test_workspace/spy_l1pp 1000 &',
