@@ -60,6 +60,7 @@ for i in feature_list:
 model_name = 'merged'
 model = models[model_name]
 
+n = 0
 while True:
 
     data_in = model.normalize(np.float32(data['none']['test_normal'][:, feature_list]))
@@ -73,3 +74,6 @@ while True:
     pred = pred[:, 0, :].detach().cpu().numpy()
     pred_error = data_in[1:, :]-pred
     kde_result = kde.score_samples(pred_error)
+
+    n += 1
+    print(f"Run loop {n}")
