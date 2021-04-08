@@ -4,6 +4,7 @@ import torch
 import os
 import utils
 import collections
+import subprocess
 
 from sklearn.neighbors import KernelDensity
 import concurrent
@@ -60,10 +61,16 @@ for i in feature_list:
 model_name = 'merged'
 model = models[model_name]
 
-#n = 0
-while True:
 
-    data_in = model.normalize(np.float32(data['none']['test_normal'][:, feature_list]))
+# Collect normal data
+hpc_cmd = "sudo ../perf/event_open_user 3 3333 100 ../perf/data/overhead/10000us/overhead.csv"
+
+n = 0
+while True:
+    monitor_process = subprocess.Popen(hpc_cmd.split())
+    monitor_status = monitor_process.wait()
+
+    data_in = model.normalize(np.float32(data['none']['test_normal'][:100, feature_list]))
     data_in_tensor = torch.tensor(data_in)
 
     _, pred = model._get_reconstruction_error(
@@ -75,5 +82,5 @@ while True:
     pred_error = data_in[1:, :]-pred
     kde_result = kde.score_samples(pred_error)
 
-    #n += 1
-    #print(f"Run loop {n}")
+    n += 1
+    print(f"Run loop {n}")
