@@ -2,6 +2,7 @@ import argparse
 import numpy as np
 import os
 import utils
+import collections
 
 from sklearn.neighbors import KernelDensity
 import concurrent
