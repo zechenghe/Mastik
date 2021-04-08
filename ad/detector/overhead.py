@@ -51,7 +51,7 @@ th = 5.0
 
 
 models = {}
-models['merged'] = torch.load("detector/checkpoints/AnomalyDetectorMerged.ckpt")
+models['merged'] = torch.load("checkpoints/AnomalyDetectorMerged.ckpt")
 
 print("Used features:")
 for i in feature_list:
