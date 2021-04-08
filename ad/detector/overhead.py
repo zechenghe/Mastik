@@ -3,6 +3,7 @@ import numpy as np
 import os
 import utils
 import collections
+import torch
 
 from sklearn.neighbors import KernelDensity
 import concurrent
