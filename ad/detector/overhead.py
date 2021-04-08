@@ -13,7 +13,7 @@ feature_list = utils.FeatureSelect.feature_list
 data = collections.defaultdict(collections.defaultdict)
 
 for bg_program in ['none', 'mysql', 'webserver', 'streamserver', 'mltrain', 'mapreduce']:
-    data_dir = 'perf/data/{bg_program}_same_core/10000us/'.format(bg_program=bg_program)
+    data_dir = '../perf/data/{bg_program}_same_core/10000us/'.format(bg_program=bg_program)
     for f in os.listdir(data_dir):
         if f.endswith('.npy'):
             file_name = f.split('.')[0]
@@ -23,7 +23,7 @@ pred_errors = collections.defaultdict(collections.defaultdict)
 model_name = 'merged'
 
 for bg_program in ['none', 'mysql', 'webserver', 'streamserver', 'mltrain', 'mapreduce']:
-    data_dir = f'detector/preprocessed/pred_errors/{model_name}/{bg_program}/'
+    data_dir = f'preprocessed/pred_errors/{model_name}/{bg_program}/'
     for f in os.listdir(data_dir):
         if f.endswith('.npy'):
             file_name = f.split('.')[0]
