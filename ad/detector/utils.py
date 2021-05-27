@@ -151,11 +151,17 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
             whole sequence.
     """
     plt.figure(figsize=figsize)
-    for k, v in seqs.items():
+    for i, item in seqs.items():
+        k, v = item
         end = T if T is not None else len(v)
         t = np.arange(start, end, 1.0)
 
-        seq_plot, = plt.plot(t, v[start:end])
+        if 'markers' in kwargs:
+            seq_plot, = plt.plot(t, v[start:end], kwargs['markers'][i])
+
+        else:
+            seq_plot, = plt.plot(t, v[start:end])
+
         seq_plot.set_label(k)
 
     if xlabel is not None:
