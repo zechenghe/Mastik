@@ -152,10 +152,10 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
     """
     plt.figure(figsize=figsize)
 
-    if 'markersizes' in kwargs:
-        markersizes = kwargs['markersizes']
+    if 'linewidths' in kwargs:
+        linewidths = kwargs['linewidths']
     else:
-        markersizes = [20]*len(seqs.items())
+        linewidths = [2]*len(seqs.items())
 
 
     for i, item in enumerate(seqs.items()):
@@ -164,7 +164,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
         t = np.arange(start, end, 1.0)
 
         if 'markers' in kwargs:
-            seq_plot, = plt.plot(t, v[start:end], kwargs['markers'][i], linewidth=markersizes[i])
+            seq_plot, = plt.plot(t, v[start:end], kwargs['markers'][i], linewidth=linewidths[i])
 
         else:
             seq_plot, = plt.plot(t, v[start:end])
