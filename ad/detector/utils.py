@@ -151,7 +151,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
             whole sequence.
     """
     plt.figure(figsize=figsize)
-    for i, item in seqs.items():
+    for i, item in enumerate(seqs.items()):
         k, v = item
         end = T if T is not None else len(v)
         t = np.arange(start, end, 1.0)
