@@ -164,7 +164,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
         t = np.arange(start, end, 1.0)
 
         if 'markers' in kwargs:
-            seq_plot, = plt.plot(t, v[start:end], kwargs['markers'][i], markersize=12)
+            seq_plot, = plt.plot(t, v[start:end], kwargs['markers'][i], markersize=markersizes[i])
 
         else:
             seq_plot, = plt.plot(t, v[start:end])
