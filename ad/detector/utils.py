@@ -155,7 +155,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
     if 'markersizes' in kwargs:
         markersizes = kwargs['markersizes']
     else:
-        markersizes = [12]*len(seqs.items())
+        markersizes = [20]*len(seqs.items())
 
 
     for i, item in enumerate(seqs.items()):
