@@ -152,7 +152,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
     """
     plt.figure(figsize=figsize)
 
-    if 'markersizes' not in kwargs:
+    if 'markersizes' in kwargs:
         markersizes = kwargs['markersizes']
     else:
         markersizes = [12]*len(seqs.items())
