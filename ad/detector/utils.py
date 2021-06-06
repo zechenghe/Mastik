@@ -165,9 +165,11 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
 
         if 'markers' in kwargs:
             seq_plot, = plt.plot(t, v[start:end], kwargs['markers'][i], linewidth=linewidths[i])
-
         else:
             seq_plot, = plt.plot(t, v[start:end])
+
+        if 'ylims' in kwargs:
+            plt.ylim(kwargs['ylims'][i][0], kwargs['ylims'][i][1])
 
         seq_plot.set_label(k)
 
@@ -337,6 +339,7 @@ def create_parser():
     args = parser.parse_args()
     return args
 
+# [0, 32, 33, 27, 1, 13, 3, 19, 15, 28, 2, 6, 31]
 id_to_feature = {
     0: 'Ins',
     1: 'L1D read access (# load)',
