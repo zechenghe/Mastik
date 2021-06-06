@@ -141,7 +141,7 @@ def seq_win_vectorize(seq, window_size, n_samples=None):
     return np.array(res)
 
 def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsize=None,
-    include_legend=True, fname=None, **kwargs):
+    include_legend=True, fname=None, sci_notation=True, **kwargs):
     """
         Plot squences for visualization and debug.
         Args:
@@ -194,6 +194,9 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
 
     if fname is not None:
         plt.savefig(fname=fname)
+
+    if not sci_notation:
+        ax.ticklabel_format(style='plain')
 
     plt.show(block = False)
 
