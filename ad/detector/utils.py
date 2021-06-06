@@ -168,10 +168,12 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
         else:
             seq_plot, = plt.plot(t, v[start:end])
 
-        if 'ylims' in kwargs:
-            plt.ylim(kwargs['ylims'][i][0], kwargs['ylims'][i][1])
-
         seq_plot.set_label(k)
+
+
+    if 'ylims' in kwargs:
+        plt.ylim(kwargs['ylims'][0], kwargs['ylims'][1])
+
 
     if xlabel is not None:
         plt.xlabel(xlabel)
