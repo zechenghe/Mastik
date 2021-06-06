@@ -164,10 +164,10 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
         t = np.arange(start, end, 1.0)
 
         if 'markers' in kwargs:
-            seq_plot, ax = plt.plot(t, v[start:end], kwargs['markers'][i], linewidth=linewidths[i])
+            seq_plot = plt.plot(t, v[start:end], kwargs['markers'][i], linewidth=linewidths[i])
 
         else:
-            seq_plot, ax = plt.plot(t, v[start:end])
+            seq_plot = plt.plot(t, v[start:end])
 
         seq_plot.set_label(k)
 
@@ -196,7 +196,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
         plt.savefig(fname=fname)
 
     if not sci_notation:
-        ax.ticklabel_format(style='plain')
+        plt.ticklabel_format(style='plain')
 
     plt.show(block = False)
 
