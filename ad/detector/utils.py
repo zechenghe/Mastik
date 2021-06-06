@@ -150,7 +150,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
             T: plot partial sequence, i.e., seq[:T]. If None, plot the
             whole sequence.
     """
-    plt.figure(figsize=figsize)
+    fig = plt.figure(figsize=figsize)
 
     if 'linewidths' in kwargs:
         linewidths = kwargs['linewidths']
@@ -196,7 +196,7 @@ def plot_seq(seqs, T=None, start=0, xlabel=None, ylabel=None, title=None, figsiz
             plt.xticks(range(len(kwargs['xticks'])), kwargs['xticks'])
 
     if fname is not None:
-        plt.savefig(fname=fname)
+        plt.savefig(fname=fname, dpi=fig.dpi)
 
     if not sci_notation:
         plt.ticklabel_format(style='plain')
