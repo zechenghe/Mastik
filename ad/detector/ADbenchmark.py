@@ -22,6 +22,7 @@ def run_benchmark(
         window_size,
         n_samples_train = None,
         n_samples_eval = None,
+        percentile_th_on_training = None,
         verbose = True
     ):
 
@@ -136,6 +137,7 @@ def run_benchmark(
         ))
 
     pred_score = cls.decision_function(testing_data_run)
+    pred_score_train = cls.decision_function(training_data_run)
 
     if verbose:
         print ("Raw unique pred labels", np.unique(pred_raw))
@@ -144,8 +146,17 @@ def run_benchmark(
 
     if not pred_score_is_anomaly_score:
         anomaly_score = -pred_score
+        anomaly_score_train = -pred_score_train
     else:
         anomaly_score = pred_score
+        anomaly_score_train = pred_score_train
+
+    if percentile_th_on_training is not None:
+        # Use percentile threshold on training data
+        preset_th = np.percentile(anomaly_score_train, percentile_th_on_training)
+    else:
+        # Use EER threshold on testing data
+        preset_th = None
 
     # Pay special attention here the score is the anomaly score
     tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds, roc_auc = \
@@ -153,6 +164,7 @@ def run_benchmark(
         truth = true_label,
         pred = pred,
         anomaly_score = anomaly_score,
+        preset_th = preset_th,
         verbose = verbose
     )
 

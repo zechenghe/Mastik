@@ -82,7 +82,7 @@ def calculate_eval_metrics(truth, pred, verbose=True):
         print('---------------------------------------------------')
     return tp, fp, fn, tn, acc, prec, rec, f1, fpr, fnr
 
-def eval_metrics(truth, pred, anomaly_score=None, verbose=True):
+def eval_metrics(truth, pred, anomaly_score=None, preset_th=None, verbose=True):
     tp, fp, fn, tn, acc, prec, rec, f1, fpr, fnr = calculate_eval_metrics(
         truth, pred, verbose=verbose)
     roc, roc_auc, tpr, thresholds = None, None, None, None
@@ -92,13 +92,28 @@ def eval_metrics(truth, pred, anomaly_score=None, verbose=True):
         roc_auc = metrics.roc_auc_score(truth, anomaly_score)
         fnr = 1 - tpr
         if verbose:
-            idx = np.argmin(np.abs(fpr-fnr))
-            eer_th = thresholds[idx]
+
+            if preset_th is None:
+                # EER
+                use_eer = True
+                idx = np.argmin(np.abs(fpr-fnr))
+                preset_th = thresholds[idx]
+            else:
+                use_eer = False
+                preset_th = preset_th
+
             eer_pred = np.zeros(truth.shape)
-            eer_pred[anomaly_score > eer_th] = 1
-            print('\n')
-            print('----------------------At EER-----------------------')
-            print("Threshold at approx EER:", eer_th)
+            eer_pred[anomaly_score > preset_th] = 1
+
+            if use_eer:
+                print('\n')
+                print('----------------------At EER-----------------------')
+                print("Threshold at approx EER:", eer_th)
+            else:
+                print('\n')
+                print(f'----------------------At threshold {anomaly_score_th}-----------------------')
+                print(f"Threshold at threshold {anomaly_score_th}:", eer_th)
+
             calculate_eval_metrics(truth, eer_pred, verbose=verbose)
             print("ROC AUC: ", roc_auc)
 
