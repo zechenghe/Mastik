@@ -102,19 +102,19 @@ def eval_metrics(truth, pred, anomaly_score=None, preset_th=None, verbose=True):
                 use_eer = False
                 preset_th = preset_th
 
-            eer_pred = np.zeros(truth.shape)
-            eer_pred[anomaly_score > preset_th] = 1
+            pred_on_th = np.zeros(truth.shape)
+            pred_on_th[anomaly_score > preset_th] = 1
 
             if use_eer:
                 print('\n')
                 print('----------------------At EER-----------------------')
-                print("Threshold at approx EER:", eer_th)
+                print("Threshold at approx EER:", preset_th)
             else:
                 print('\n')
-                print(f'----------------------At threshold {anomaly_score_th}-----------------------')
-                print(f"Threshold at threshold {anomaly_score_th}:", eer_th)
+                print(f'----------------------At threshold {preset_th}-----------------------')
+                print(f"Threshold at threshold {preset_th}:", preset_th)
 
-            calculate_eval_metrics(truth, eer_pred, verbose=verbose)
+            calculate_eval_metrics(truth, pred_on_th, verbose=verbose)
             print("ROC AUC: ", roc_auc)
 
     return tp, fp, fn, tn, acc, prec, rec, f1, fpr, tpr, thresholds, roc_auc
