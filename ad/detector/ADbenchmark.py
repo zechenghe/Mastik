@@ -167,11 +167,13 @@ def run_benchmark(
     if not pred_score_is_anomaly_score:
         anomaly_score = -pred_score
         anomaly_score_train = -pred_score_train
-        anomaly_score_val = -pred_score_val
+        if validation_normal_data is not None:
+            anomaly_score_val = -pred_score_val
     else:
         anomaly_score = pred_score
         anomaly_score_train = pred_score_train
-        anomaly_score_val = pred_score_val
+        if validation_normal_data is not None:
+            anomaly_score_val = pred_score_val
 
     if percentile_th_on_validation is not None:
         # Use percentile threshold on training data
