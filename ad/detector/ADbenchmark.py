@@ -175,7 +175,7 @@ def run_benchmark(
 
     if percentile_th_on_validation is not None:
         # Use percentile threshold on training data
-        preset_th = np.percentile(pred_score_val, percentile_th_on_validation)
+        preset_th = np.percentile(anomaly_score_val, percentile_th_on_validation)
     else:
         # Use EER threshold on testing data
         preset_th = None

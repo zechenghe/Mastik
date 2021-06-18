@@ -112,7 +112,7 @@ def eval_metrics(truth, pred, anomaly_score=None, preset_th=None, verbose=True):
             else:
                 print('\n')
                 print(f'----------------------At threshold {preset_th}-----------------------')
-                print(f"Threshold at threshold {preset_th}:", preset_th)
+                print(f"Threshold at threshold :", preset_th)
 
             calculate_eval_metrics(truth, pred_on_th, verbose=verbose)
             print("ROC AUC: ", roc_auc)
