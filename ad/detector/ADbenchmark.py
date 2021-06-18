@@ -193,7 +193,7 @@ def run_benchmark(
         verbose = verbose
     )
 
-    return fpr, tpr, thresholds, roc_auc
+    return fpr, tpr, thresholds, roc_auc, anomaly_score, true_label
 
 if __name__=="__main__":
 
