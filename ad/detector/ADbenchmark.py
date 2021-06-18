@@ -22,7 +22,8 @@ def run_benchmark(
         window_size,
         n_samples_train = None,
         n_samples_eval = None,
-        percentile_th_on_training = None,
+        percentile_th_on_validation = None,
+        validation_normal_data = None,
         verbose = True
     ):
 
@@ -40,6 +41,12 @@ def run_benchmark(
     testing_abnormal_data = utils.normalize(
         testing_abnormal_data, training_normal_data_mean, training_normal_data_std
     )
+
+    if validation_normal_data is not None:
+        validation_normal_data = utils.normalize(
+            validation_normal_data, training_normal_data_mean, training_normal_data_std
+        )
+
     if verbose:
         print("training_normal_data.shape", training_normal_data.shape)
         print("testing_normal_data.shape", testing_normal_data.shape)
@@ -62,10 +69,19 @@ def run_benchmark(
         n_samples = n_samples_eval,
     )
 
+    if validation_normal_data is not None:
+        validation_normal_data = utils.seq_win_vectorize(
+            seq = validation_normal_data,
+            window_size = window_size,
+            n_samples = n_samples_eval,
+        )
+
     if verbose:
         print("Vectorized training_normal_data.shape", training_normal_data.shape)
         print("Vectorized testing_normal_data.shape", testing_normal_data.shape)
         print("Vectorized testing_abnormal_data.shape", testing_abnormal_data.shape)
+        if validation_normal_data is not None:
+            print("Vectorized validation_normal_data.shape", validation_normal_data.shape)
 
     # +1 is normal, -1 is abnormal
     true_label_normal = np.zeros(len(testing_normal_data))
@@ -86,6 +102,8 @@ def run_benchmark(
         ),
         axis=0
     )
+    if validation_normal_data is not None:
+        validation_normal_data_run = validation_normal_data
 
     assert len(testing_data_run) == len(true_label)
 
@@ -138,6 +156,8 @@ def run_benchmark(
 
     pred_score = cls.decision_function(testing_data_run)
     pred_score_train = cls.decision_function(training_data_run)
+    if validation_normal_data is not None:
+        pred_score_val = cls.decision_function(validation_normal_data_run)
 
     if verbose:
         print ("Raw unique pred labels", np.unique(pred_raw))
@@ -147,13 +167,15 @@ def run_benchmark(
     if not pred_score_is_anomaly_score:
         anomaly_score = -pred_score
         anomaly_score_train = -pred_score_train
+        anomaly_score_val = -pred_score_val
     else:
         anomaly_score = pred_score
         anomaly_score_train = pred_score_train
+        anomaly_score_val = pred_score_val
 
     if percentile_th_on_training is not None:
         # Use percentile threshold on training data
-        preset_th = np.percentile(anomaly_score_train, percentile_th_on_training)
+        preset_th = np.percentile(pred_score_val, percentile_th_on_training)
     else:
         # Use EER threshold on testing data
         preset_th = None
